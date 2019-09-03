@@ -3,6 +3,7 @@ subtitle: SVG即Scalable Vector Graphics可缩放矢量图形，使用XML格式�
 date: 2015-11-20 11:30:45
 cover: //img.aotu.io/Newcandy/svgCover.png
 categories: Web开发
+excerpt: true
 tags: 
   - svg
 author:
