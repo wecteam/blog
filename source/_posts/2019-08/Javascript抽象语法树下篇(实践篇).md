@@ -18,6 +18,7 @@ author:
 1. 需要一个解析器，将代码转换为AST
 2. 需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作
 3. 需要一个代码生成器，能够将AST转换为代码
+<!--more-->
 
 ## esprima与babel
 常用的满足上述3个要点的工具包有两个，一个是`esprima`，一个是`babel `
@@ -54,7 +55,7 @@ const transformCode = escodegen.generate(ast);
 ```
 
 目前babel不管是从生态上还是文档上比esprima要好很多，因此推荐大家使用babel工具，本文示例也使用babel来做演示。
-<!--more-->
+
 ## 使用babel工具操作AST
 如上一章节所示
 - `@babel/parser`用于将代码转换为AST
