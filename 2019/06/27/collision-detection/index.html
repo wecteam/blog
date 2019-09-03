@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>碰撞检测的向量实现 - wecTeam</title>
+
+
+    <meta name="description" content="注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现 前言2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在">
+<meta name="keywords" content="碰撞检测,向量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="碰撞检测的向量实现">
+<meta property="og:url" content="http://yoursite.com/2019/06/27/collision-detection/index.html">
+<meta property="og:site_name" content="wecTeam">
+<meta property="og:description" content="注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现 前言2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在">
+<meta property="og:locale" content="zh_cn">
+<meta property="og:image" content="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg">
+<meta property="og:updated_time" content="2019-09-03T14:21:05.212Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="碰撞检测的向量实现">
+<meta name="twitter:description" content="注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现 前言2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在">
+<meta name="twitter:image" content="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="碰撞检测的向量实现" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    24 分钟 read (About 3612 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                碰撞检测的向量实现
+            
+        </h1>
+        <div class="content">
+            <hr>
+<p><em>注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现</em></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在于，AABB中的矩形的其中一条边和坐标轴平行，OBB的计算复杂度要高于AABB。根据不同的使用场景，可以用不同的方案。</p>
+<a id="more"></a>
+<p><img src="//img11.360buyimg.com/jdphoto/s620x560_jfs/t1/80783/1/8376/38236/5d65e598Edf614f1c/bf61dd8f367c1fe3.jpg" alt="rect_circle"></p>
+<p>如上图，明显皮卡超适合用包围盒，精灵球适合用包围球。</p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p>向量作为一种数学工具，在碰撞检测中发挥很大作用，后面的计算都是通过向量来完成，所以先来复习一下向量。</p>
+<h3 id="向量的代数表示"><a href="#向量的代数表示" class="headerlink" title="向量的代数表示"></a>向量的代数表示</h3><p>向量的代数表示指在指定了一个坐标系之后，用一个向量在该坐标系下的坐标来表示该向量，兼具了符号的抽象性和几何形象性，因而具有最高的实用性，被广泛采用于需要定量分析的情形。 对于自由向量，将向量的起点平移到坐标原点后，向量就可以用一个坐标系下的一个点来表示，该点的坐标值即向量的终点坐标。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 二维平面向量</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vector2d</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(vx=1,vy=1)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.vx = vx;</span><br><span class="line">    <span class="hljs-keyword">this</span>.vy = vy;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> vecA = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> vecB = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="//img11.360buyimg.com/jdphoto/s1290x1154_jfs/t1/68885/38/8539/71859/5d65e55bE2b5751b3/2b647f5612032dd9.jpg" alt="act1"></p>
+<h3 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h3><p>加法：向量的加法满足平行四边形法则和三角形法则。具体的，两向量相加还是一个向量，分别是x与y两个分量的相加。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s250x132_jfs/t1/54796/4/9046/3551/5d65e55cEac8a13ef/3885604423efb468.png" alt="act2"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 向量的加法运算</span></span><br><span class="line"><span class="hljs-keyword">static</span> add(vec,vec2)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> vx = vec.vx + vec2.vx;</span><br><span class="line">  <span class="hljs-keyword">const</span> vy = vec.vy + vec2.vy;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(vx,vy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>减法：两个向量a和b的相减得到的向量可以表示为a和b的起点重合后，从b的终点指向a的终点的向量：</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s125x90_jfs/t1/60329/32/8319/1814/5d65e55cE5334d839/6fcddfee0544366b.png" alt="act3"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 向量的减法运算</span></span><br><span class="line"><span class="hljs-keyword">static</span> sub(vec,vec2)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> vx = vec.vx - vec2.vx;</span><br><span class="line">  <span class="hljs-keyword">const</span> vy = vec.vy - vec2.vy;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(vx,vy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大小：向量的大小，是其各个分量的平方和开方。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 获取向量长度</span></span><br><span class="line">length()&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-keyword">this</span>.vx * <span class="hljs-keyword">this</span>.vx + <span class="hljs-keyword">this</span>.vy * <span class="hljs-keyword">this</span>.vy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>点积：从代数角度看，先对两个数字序列中的每组对应元素求积，再对所有积求和，结果即为点积。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 向量的数量积</span></span><br><span class="line"><span class="hljs-keyword">static</span> dot(vec,vec2)&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> vec.vx * vec2.vx + vec.vy * vec2.vy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>旋转：向量的旋转可以用旋转矩阵求解</p>
+<p><img src="//wq.360buyimg.com/data/ppms/movie/act4.svg" alt="act4"></p>
+<p><img src="//wq.360buyimg.com/data/ppms/picture/act5.svg" alt="act5"></p>
+<p><img src="//wq.360buyimg.com/data/ppms/picture/act6.svg" alt="act6"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//向量的旋转 </span></span><br><span class="line"><span class="hljs-keyword">static</span> rotate(vec,angle)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> cosVal = <span class="hljs-built_in">Math</span>.cos(angle);</span><br><span class="line">  <span class="hljs-keyword">const</span> sinVal = <span class="hljs-built_in">Math</span>.sin(angle);</span><br><span class="line">  <span class="hljs-keyword">const</span> vx = vec.vx * cosVal - vec.vy * sinVal;</span><br><span class="line">  <span class="hljs-keyword">const</span> vy = vec.vx * sinVal + vec.vy * cosVal;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(vx,vy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="圆"><a href="#圆" class="headerlink" title="圆"></a>圆</h2><p>圆形比较简单，只要确认圆心x,y和半径r就行了,然后推导出圆心向量。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Circle</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是圆的圆心 r是半径</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,r=1)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.r = r;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> P()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x,<span class="hljs-keyword">this</span>.y) &#125; <span class="hljs-comment">// 圆心向量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h2><p>矩形就较为复杂，定义一个矩形需要中心坐标的x,y、两边长w和h，还有根据中心的旋转角度rotation</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rect</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是矩形中心的坐标 w是宽 h是高 rotation是角度单位deg</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,w=1,h=1,rotation=0)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.w = w;</span><br><span class="line">    <span class="hljs-keyword">this</span>.h = h;</span><br><span class="line">    <span class="hljs-keyword">this</span>.rotation = rotation;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="两圆相交"><a href="#两圆相交" class="headerlink" title="两圆相交"></a>两圆相交</h2><p><img src="//img11.360buyimg.com/jdphoto/s300x200_jfs/t1/57163/39/9099/14858/5d65e55fEffdcb176/57c25cf570a4ee9e.jpg" alt="cb1"></p>
+<p>两圆相交比较简单，只需判断两圆心之间的距离小于两圆的半径之和。</p>
+<p>两圆心距离可以用圆心向量相减，然后求相减向量的长度。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s1278x1158_jfs/t1/78788/22/8433/100490/5d65e55cE23cd6e1f/35ccb0c8d410dd21.jpg" alt="act7"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">circleCircleIntersect(circle1,circle2)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> P1 = circle1.P;</span><br><span class="line">  <span class="hljs-keyword">const</span> P2 = circle2.P;</span><br><span class="line">  <span class="hljs-keyword">const</span> r1 = circle1.r;</span><br><span class="line">  <span class="hljs-keyword">const</span> r2 = circle2.r;</span><br><span class="line">  <span class="hljs-keyword">const</span> u = Vector2d.sub(P1,P2);</span><br><span class="line">  <span class="hljs-keyword">return</span> u.length() &lt;= r1  + r2 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="圆和矩形相交"><a href="#圆和矩形相交" class="headerlink" title="圆和矩形相交"></a>圆和矩形相交</h2><p>涉及到矩形的相交问题都先要判断是否轴对称。</p>
+<h3 id="矩形轴对称"><a href="#矩形轴对称" class="headerlink" title="矩形轴对称"></a>矩形轴对称</h3><p><img src="//img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="cb2"></p>
+<p>先看轴对称的情况，下面是来自知乎问题<a href="https://www.zhihu.com/question/24251545" target="_blank" rel="noopener">怎样判断平面上一个矩形和一个圆形是否有重叠？</a>「Milo Yip」的回答搬运：</p>
+<p>设c为矩形中心，h为矩形半長，p为圆心，r为半径。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s318x262_jfs/t1/72838/27/8482/5018/5d65e55dE659a7987/abf537a49489e6ea.jpg" alt="act8"></p>
+<p>方法是计算圆心与矩形的最短距离 u，若 u 的长度小于 r 则两者相交。</p>
+<ol>
+<li>首先利用绝对值把 p - c 转移到第一象限，下图显示不同象限的圆心也能映射至第一象限，这不影响相交测试的结果：</li>
+</ol>
+<p><img src="//img11.360buyimg.com/jdphoto/s454x360_jfs/t1/66277/16/8649/13651/5d65e55dEdfa2dc2a/c9dc0c312235e28f.jpg" alt="act9"></p>
+<ol start="2">
+<li>然后，把 v 减去 h，负数的分量设置为0，就得到圆心与矩形最短距离的矢量 u。下图展示了4种情况，红色的u是结果。</li>
+</ol>
+<p><img src="//img11.360buyimg.com/jdphoto/s485x413_jfs/t1/69046/31/8461/17083/5d65e55dE8cc4fab4/68cdc49cff29310b.jpg" alt="act10"></p>
+<ol start="3">
+<li>最后要比较 u 和 r 的长度，若距离少于 r，则两者相交。可以只求 u 的长度平方是否小于 r 的平方。</li>
+</ol>
+<p>下面我用js实现一下：</p>
+<p>其中矩形的四个顶点命名为A1，A2，A3，A4，矩形在第一象限的半長h等于CA3</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rect</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是矩形中心的坐标 w是宽 h是高 rotation是角度单位deg</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,w=1,h=1,rotation=0)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.w = w;</span><br><span class="line">    <span class="hljs-keyword">this</span>.h = h;</span><br><span class="line">    <span class="hljs-keyword">this</span>.rotation = rotation;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> C()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x,<span class="hljs-keyword">this</span>.y); &#125; <span class="hljs-comment">// 矩形中心向量</span></span><br><span class="line">  <span class="hljs-keyword">get</span> A3()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y+<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125; <span class="hljs-comment">// 顶点A3向量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rectCircleIntersect(rect,circle)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> C = rect.C;</span><br><span class="line">  <span class="hljs-keyword">const</span> r = circle.r;</span><br><span class="line">  <span class="hljs-keyword">const</span> A3 = rect.A3;</span><br><span class="line">  <span class="hljs-keyword">const</span> P = circle.P;</span><br><span class="line">  <span class="hljs-keyword">const</span> h = Vector2d.sub(A3,C); <span class="hljs-comment">// 矩形半长</span></span><br><span class="line">  <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.abs(P.vx - C.vx),<span class="hljs-built_in">Math</span>.abs(P.vy - C.vy));</span><br><span class="line">  <span class="hljs-keyword">const</span> u = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.max(v.vx - h.vx,<span class="hljs-number">0</span>),<span class="hljs-built_in">Math</span>.max(v.vy - h.vy,<span class="hljs-number">0</span>));</span><br><span class="line">  <span class="hljs-keyword">return</span> u.lengthSquared() &lt;= r * r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩形非轴对称"><a href="#矩形非轴对称" class="headerlink" title="矩形非轴对称"></a>矩形非轴对称</h3><p><img src="//img11.360buyimg.com/jdphoto/s300x300_jfs/t1/79031/4/8501/19188/5d65e55fE833f1b75/d99274f73505b044.jpg" alt="cb3"></p>
+<p>这个问题其实也很好解决，将矩形中心视为旋转中心，将矩形和圆形一起反向旋转将矩形转为轴对称，然后就可以套用上面的解法。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s1450x1264_jfs/t1/44508/26/9498/85357/5d65e55dEff734bc5/5abd584e382cf7e3.jpg" alt="act11"></p>
+<p>矩形中心到圆心向量为是CP</p>
+<p>反向旋转θ度得向量CP’</p>
+<p>然后根据向量得三角形定律得OP’ = OC + CP’</p>
+<p>后面就代入矩形是轴对称的公式进行计算</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rect</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是矩形中心的坐标 w是宽 h是高 rotation是角度单位deg</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,w=1,h=1,rotation=0)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.w = w;</span><br><span class="line">    <span class="hljs-keyword">this</span>.h = h;</span><br><span class="line">    <span class="hljs-keyword">this</span>.rotation = rotation;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> C()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x,<span class="hljs-keyword">this</span>.y); &#125; <span class="hljs-comment">// 矩形中心向量</span></span><br><span class="line">  <span class="hljs-keyword">get</span> A3()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y+<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125; <span class="hljs-comment">// 顶点A3向量</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _rotation()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation / <span class="hljs-number">180</span> * <span class="hljs-built_in">Math</span>.PI; &#125;  <span class="hljs-comment">// 角度单位转换</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p(rect,circle)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> rotation = rect.rotation;</span><br><span class="line">  <span class="hljs-keyword">const</span> C = rect.C;</span><br><span class="line">  <span class="hljs-keyword">let</span> P;</span><br><span class="line">  <span class="hljs-keyword">if</span> (rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span>) &#123;</span><br><span class="line">    P = circle.P; <span class="hljs-comment">// 轴对称直接输出P</span></span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    P = Vector2d.add(C,Vector2d.rotate(Vector2d.sub(circle.P,C),rect._rotation*<span class="hljs-number">-1</span>)); <span class="hljs-comment">// 非轴对称，计算P‘</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">return</span> P;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rectCircleIntersect(rect,circle)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> rotation = rect.rotation;</span><br><span class="line">  <span class="hljs-keyword">const</span> C = rect.C;</span><br><span class="line">  <span class="hljs-keyword">const</span> r = circle.r;</span><br><span class="line">  <span class="hljs-keyword">const</span> A3 = rect.A3;</span><br><span class="line">  <span class="hljs-keyword">const</span> P = p(rect,circle);</span><br><span class="line">  <span class="hljs-keyword">const</span> h = Vector2d.sub(A3,C);</span><br><span class="line">  <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.abs(P.vx - C.vx),<span class="hljs-built_in">Math</span>.abs(P.vy - C.vy));</span><br><span class="line">  <span class="hljs-keyword">const</span> u = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.max(v.vx - h.vx,<span class="hljs-number">0</span>),<span class="hljs-built_in">Math</span>.max(v.vy - h.vy,<span class="hljs-number">0</span>));</span><br><span class="line">  <span class="hljs-keyword">return</span> u.lengthSquared() &lt;= r * r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看Demo1 <a href="//rococolate.github.io/blog/gom/test1.html">https://rococolate.github.io/blog/gom/test1.html</a></p>
+<p><img src="//wq.360buyimg.com/data/ppms/picture/demo1.gif" alt="demo1"></p>
+<h2 id="两矩形相交"><a href="#两矩形相交" class="headerlink" title="两矩形相交"></a>两矩形相交</h2><h3 id="两矩形都轴对称AABB"><a href="#两矩形都轴对称AABB" class="headerlink" title="两矩形都轴对称AABB"></a>两矩形都轴对称AABB</h3><p><img src="//img11.360buyimg.com/jdphoto/s300x200_jfs/t1/64807/28/8452/16218/5d65e560Efab78661/dd246daf8b975413.jpg" alt="cb4"></p>
+<p>想象一下两个矩形A和B，B贴着A的边走了一圈，B的矩形中心的轨迹是一个新的矩形，这样就简化成新矩形与B中心点这一点的相交问题，又因为点可以看成是半径为0的圆，所以问题又转换为圆形和矩形相交。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s1536x1296_jfs/t1/59961/5/8554/88838/5d65e55eE92504fe4/bb22a626d8cd50f2.jpg" alt="act12"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rect</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是矩形中心的坐标 w是宽 h是高 rotation是角度单位deg</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,w=1,h=1,rotation=0)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.w = w;</span><br><span class="line">    <span class="hljs-keyword">this</span>.h = h;</span><br><span class="line">    <span class="hljs-keyword">this</span>.rotation = rotation;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> C()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x,<span class="hljs-keyword">this</span>.y); &#125; <span class="hljs-comment">// 矩形中心向量</span></span><br><span class="line">  <span class="hljs-keyword">get</span> A3()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y+<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125; <span class="hljs-comment">// 顶点A3向量</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _rotation()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation / <span class="hljs-number">180</span> * <span class="hljs-built_in">Math</span>.PI; &#125;  <span class="hljs-comment">// 角度单位转换</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AABBrectRectIntersect(rect1,rect2)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> P = rect2.C;</span><br><span class="line">  <span class="hljs-keyword">const</span> w2 = rect2.w; </span><br><span class="line">  <span class="hljs-keyword">const</span> h2 = rect2.h; </span><br><span class="line">  <span class="hljs-keyword">const</span> &#123;w,h,x,y&#125; = rect1;</span><br><span class="line">  <span class="hljs-keyword">const</span> C = rect1.C;</span><br><span class="line">  <span class="hljs-keyword">const</span> A3 = <span class="hljs-keyword">new</span> Vector2d(x+w/<span class="hljs-number">2</span>+w2/<span class="hljs-number">2</span>,y+h/<span class="hljs-number">2</span>+h2/<span class="hljs-number">2</span>); <span class="hljs-comment">// 新矩形的半长</span></span><br><span class="line">  <span class="hljs-keyword">const</span> H = Vector2d.sub(A3,C);</span><br><span class="line">  <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.abs(P.vx - C.vx),<span class="hljs-built_in">Math</span>.abs(P.vy - C.vy));</span><br><span class="line">  <span class="hljs-keyword">const</span> u = <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-built_in">Math</span>.max(v.vx - H.vx,<span class="hljs-number">0</span>),<span class="hljs-built_in">Math</span>.max(v.vy - H.vy,<span class="hljs-number">0</span>));</span><br><span class="line">  <span class="hljs-keyword">return</span> u.lengthSquared() === <span class="hljs-number">0</span>; <span class="hljs-comment">// 点可以看成是半径为0的圆</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="两矩形相交非轴对称OBB"><a href="#两矩形相交非轴对称OBB" class="headerlink" title="两矩形相交非轴对称OBB"></a>两矩形相交非轴对称OBB</h3><p><img src="//img11.360buyimg.com/jdphoto/s500x200_jfs/t1/61010/26/8345/34564/5d65e560Ec24d9ad7/e2bf9a264c5020ba.jpg" alt="cb5"></p>
+<p>两个矩形的OBB检测使用分离轴定理（Separating Axis Theorem）</p>
+<p>分离轴定理：通过判断任意两个矩形 在任意角度下的投影是否均存在重叠，来判断是否发生碰撞。若在某一角度光源下，两物体的投影存在间隙，则为不碰撞，否则为发生碰撞。</p>
+<p>因为矩形的对边平行，所以只要判断四条对称轴上的投影即可。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s1178x1136_jfs/t1/75083/14/8469/28383/5d65e55eE3f0e3baf/39d9e49cf74cc0a2.jpg" alt="act13"></p>
+<p>如何投影？这里补充一下向量点积的几何意义。</p>
+<p><img src="//wq.360buyimg.com/data/ppms/picture/act15.gif" alt="act15"></p>
+<p>在欧几里得空间中，点积可以直观地定义为 A·B = |A||B|cosθ ,其中|A|cosθ是A到B的投影，如果B是单位向量，那么A·B就是A到单位向量B的投影</p>
+<p>回到矩形，将矩形4个顶点都投影到对称轴上，我们分别将其点乘即可。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s1460x1344_jfs/t1/39666/16/15585/46915/5d65e55fE6c8ca323/8933478064477889.jpg" alt="act14"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rect</span></span>&#123;</span><br><span class="line">  <span class="hljs-comment">// x,y是矩形中心的坐标 w是宽 h是高 rotation是角度单位deg</span></span><br><span class="line">  <span class="hljs-keyword">constructor</span>(x=0,y=0,w=1,h=1,rotation=0)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.x = x;</span><br><span class="line">    <span class="hljs-keyword">this</span>.y = y;</span><br><span class="line">    <span class="hljs-keyword">this</span>.w = w;</span><br><span class="line">    <span class="hljs-keyword">this</span>.h = h;</span><br><span class="line">    <span class="hljs-keyword">this</span>.rotation = rotation;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> C()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x,<span class="hljs-keyword">this</span>.y); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _A1()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x-<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y-<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125;  <span class="hljs-comment">// 4角顶点</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _A2()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y-<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _A3()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y+<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _A4()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-keyword">this</span>.x-<span class="hljs-keyword">this</span>.w/<span class="hljs-number">2</span>,<span class="hljs-keyword">this</span>.y+<span class="hljs-keyword">this</span>.h/<span class="hljs-number">2</span>); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _axisX()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>); &#125; <span class="hljs-comment">// 未旋转时的对称轴X</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _axisY()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>); &#125; <span class="hljs-comment">// 未旋转时的对称轴Y</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _CA1()&#123; <span class="hljs-keyword">return</span> Vector2d.sub(<span class="hljs-keyword">this</span>._A1,<span class="hljs-keyword">this</span>.C); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _CA2()&#123; <span class="hljs-keyword">return</span> Vector2d.sub(<span class="hljs-keyword">this</span>._A2,<span class="hljs-keyword">this</span>.C); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _CA3()&#123; <span class="hljs-keyword">return</span> Vector2d.sub(<span class="hljs-keyword">this</span>._A3,<span class="hljs-keyword">this</span>.C); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _CA4()&#123; <span class="hljs-keyword">return</span> Vector2d.sub(<span class="hljs-keyword">this</span>._A4,<span class="hljs-keyword">this</span>.C); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> _rotation()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation / <span class="hljs-number">180</span> * <span class="hljs-built_in">Math</span>.PI; &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> A1()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._A1 :  Vector2d.add(<span class="hljs-keyword">this</span>.C,Vector2d.rotate(<span class="hljs-keyword">this</span>._CA1,<span class="hljs-keyword">this</span>._rotation)); &#125; <span class="hljs-comment">// 计算上旋转后4角顶点</span></span><br><span class="line">  <span class="hljs-keyword">get</span> A2()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._A2 :  Vector2d.add(<span class="hljs-keyword">this</span>.C,Vector2d.rotate(<span class="hljs-keyword">this</span>._CA2,<span class="hljs-keyword">this</span>._rotation)); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> A3()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._A3 :  Vector2d.add(<span class="hljs-keyword">this</span>.C,Vector2d.rotate(<span class="hljs-keyword">this</span>._CA3,<span class="hljs-keyword">this</span>._rotation)); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> A4()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._A4 :  Vector2d.add(<span class="hljs-keyword">this</span>.C,Vector2d.rotate(<span class="hljs-keyword">this</span>._CA4,<span class="hljs-keyword">this</span>._rotation)); &#125;</span><br><span class="line">  <span class="hljs-keyword">get</span> axisX()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._axisX :  Vector2d.rotate(<span class="hljs-keyword">this</span>._axisX,<span class="hljs-keyword">this</span>._rotation); &#125; <span class="hljs-comment">// 计算上旋转后的对称轴X</span></span><br><span class="line">  <span class="hljs-keyword">get</span> axisY()&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.rotation % <span class="hljs-number">360</span> === <span class="hljs-number">0</span> ?  <span class="hljs-keyword">this</span>._axisY :  Vector2d.rotate(<span class="hljs-keyword">this</span>._axisY,<span class="hljs-keyword">this</span>._rotation); &#125; <span class="hljs-comment">// 计算上旋转后的对称轴Y</span></span><br><span class="line">  <span class="hljs-keyword">get</span> _vertexs()&#123; <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>._A1,<span class="hljs-keyword">this</span>._A2,<span class="hljs-keyword">this</span>._A3,<span class="hljs-keyword">this</span>._A4]; &#125; </span><br><span class="line">  <span class="hljs-keyword">get</span> vertexs()&#123; <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.A1,<span class="hljs-keyword">this</span>.A2,<span class="hljs-keyword">this</span>.A3,<span class="hljs-keyword">this</span>.A4]; &#125; <span class="hljs-comment">// 4角顶点数组</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">OBBrectRectIntersect(rect1,rect2)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> rect1AxisX = rect1.axisX;</span><br><span class="line">  <span class="hljs-keyword">const</span> rect1AxisY = rect1.axisY;</span><br><span class="line">  <span class="hljs-keyword">const</span> rect2AxisX = rect2.axisX;</span><br><span class="line">  <span class="hljs-keyword">const</span> rect2AxisY = rect2.axisY;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!cross(rect1,rect2,rect1AxisX)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <span class="hljs-comment">// 一旦有不相交的轴就可以return false</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (!cross(rect1,rect2,rect1AxisY)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!cross(rect1,rect2,rect2AxisX)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (!cross(rect1,rect2,rect2AxisY)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 4轴投影都相交 return true</span></span><br><span class="line">&#125;</span><br><span class="line">cross(rect1,rect2,axis)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> vertexs1ScalarProjection = rect1.vertexs.map(<span class="hljs-function"><span class="hljs-params">vex</span> =&gt;</span> Vector2d.dot(vex,axis)).sort(<span class="hljs-function">(<span class="hljs-params">a,b</span>)=&gt;</span>a-b); <span class="hljs-comment">// 矩形1的4个顶点投影并排序</span></span><br><span class="line">  <span class="hljs-keyword">const</span> vertexs2ScalarProjection = rect2.vertexs.map(<span class="hljs-function"><span class="hljs-params">vex</span> =&gt;</span> Vector2d.dot(vex,axis)).sort(<span class="hljs-function">(<span class="hljs-params">a,b</span>)=&gt;</span>a-b); <span class="hljs-comment">// 矩形2的4个顶点投影并排序</span></span><br><span class="line">  <span class="hljs-keyword">const</span> rect1Min = vertexs1ScalarProjection[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 矩形1最小长度</span></span><br><span class="line">  <span class="hljs-keyword">const</span> rect1Max = vertexs1ScalarProjection[vertexs1ScalarProjection.length - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 矩形1最大长度</span></span><br><span class="line">  <span class="hljs-keyword">const</span> rect2Min = vertexs2ScalarProjection[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 矩形2最小长度</span></span><br><span class="line">  <span class="hljs-keyword">const</span> rect2Max = vertexs2ScalarProjection[vertexs1ScalarProjection.length - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 矩形2最大长度</span></span><br><span class="line">  <span class="hljs-keyword">return</span> rect1Max &gt;= rect2Min &amp;&amp; rect2Max &gt;= rect1Min;  <span class="hljs-comment">// 相交判断 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后放上一个相交的应用Demo <a href="//rococolate.github.io/blog/gom/test2.html">https://rococolate.github.io/blog/gom/test2.html</a>,Demo里的形状都可以拖拽，当碰到其他形状时会变透明。</p>
+<p><img src="//wq.360buyimg.com/data/ppms/movie/demo2.gif" alt="demo2"></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://blog.jmecn.net/chapter-15-collision-detection/" target="_blank" rel="noopener">第十五章：碰撞检测 http://blog.jmecn.net/chapter-15-collision-detection/</a></p>
+<p><a href="http://daily.zhihu.com/story/4761397" target="_blank" rel="noopener">方块的战争：浅谈格斗游戏的精髓 http://daily.zhihu.com/story/4761397</a></p>
+<p><a href="https://www.zhihu.com/question/24251545" target="_blank" rel="noopener">怎样判断平面上一个矩形和一个圆形是否有重叠？ https://www.zhihu.com/question/24251545</a></p>
+<p><a href="https://aotu.io/notes/2017/02/16/2d-collision-detection/index.html" target="_blank" rel="noopener">“等一下，我碰！”——常见的2D碰撞检测 https://aotu.io/notes/2017/02/16/2d-collision-detection/index.html</a></p>
+<p><a href="https://www.cnblogs.com/iamzhanglei/archive/2012/06/07/2539751.html" target="_blank" rel="noopener">码农干货系列【1】–方向包围盒(OBB)碰撞检测 https://www.cnblogs.com/iamzhanglei/archive/2012/06/07/2539751.html</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Rotation_matrix" target="_blank" rel="noopener">Rotation matrix https://en.wikipedia.org/wiki/Rotation_matrix</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%82%B9%E7%A7%AF" target="_blank" rel="noopener">数量积 https://zh.wikipedia.org/wiki/%E7%82%B9%E7%A7%AF</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F" target="_blank" rel="noopener">向量 https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/向量/">向量</a>, <a class="has-link-grey -link" href="/tags/碰撞检测/">碰撞检测</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/12/CSS Houdini实现动态波浪纹/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">CSS Houdini实现动态波浪纹</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt="维C团">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        维C团
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/wecteam/blog" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/H5开发/">
+            <span class="level-start">
+                <span class="level-item">H5开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/NodeJS/">
+            <span class="level-start">
+                <span class="level-item">NodeJS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/知识分享/">
+            <span class="level-start">
+                <span class="level-item">知识分享</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="碰撞检测的向量实现" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh_cn");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

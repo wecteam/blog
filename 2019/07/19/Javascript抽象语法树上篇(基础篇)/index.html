@@ -7,18 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Archives: 2019 - wecTeam</title>
+<title>Javascript抽象语法树上篇(基础篇) - wecTeam</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="wecTeam">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+    <meta name="description" content="一、基础为什么要了解抽象语法树日常工作中，我们会碰到js代码解析的场景，比如分析代码中require了哪些包，有些什么关键API调用，大部分情况使用正则表达式来处理，可一旦场景复杂，或者依赖于代码上下文时，正则就很难处理了，这时候就要用到抽象语法树。常见的uglify、eslint、babel、webpack等等都是基于抽象语法树来处理的，如此强大，有必要好好了解一下。">
+<meta name="keywords" content="AST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript抽象语法树上篇(基础篇)">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/Javascript抽象语法树上篇(基础篇)/index.html">
 <meta property="og:site_name" content="wecTeam">
+<meta property="og:description" content="一、基础为什么要了解抽象语法树日常工作中，我们会碰到js代码解析的场景，比如分析代码中require了哪些包，有些什么关键API调用，大部分情况使用正则表达式来处理，可一旦场景复杂，或者依赖于代码上下文时，正则就很难处理了，这时候就要用到抽象语法树。常见的uglify、eslint、babel、webpack等等都是基于抽象语法树来处理的，如此强大，有必要好好了解一下。">
 <meta property="og:locale" content="zh_cn">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png">
+<meta property="og:updated_time" content="2019-09-03T14:16:54.567Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wecTeam">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="Javascript抽象语法树上篇(基础篇)">
+<meta name="twitter:description" content="一、基础为什么要了解抽象语法树日常工作中，我们会碰到js代码解析的场景，比如分析代码中require了哪些包，有些什么关键API调用，大部分情况使用正则表达式来处理，可一旦场景复杂，或者依赖于代码上下文时，正则就很难处理了，这时候就要用到抽象语法树。常见的uglify、eslint、babel、webpack等等都是基于抽象语法树来处理的，如此强大，有必要好好了解一下。">
+<meta name="twitter:image" content="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png">
 
 
 
@@ -88,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="wecTeam" height="28">
+                <img src="/images/og_image.png" alt="Javascript抽象语法树上篇(基础篇)" height="28">
             
             </a>
         </div>
@@ -138,116 +143,153 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time>
                 
-                <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time>
-                        <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
-                    </p>
-                </a>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time>
-                        <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 read (About 1886 words)
+                </span>
                 
-                <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
-                    </p>
-                </a>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time>
-                        <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/06/27/collision-detection/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>
-                        <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Javascript抽象语法树上篇(基础篇)
+            
+        </h1>
+        <div class="content">
+            <h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><h2 id="为什么要了解抽象语法树"><a href="#为什么要了解抽象语法树" class="headerlink" title="为什么要了解抽象语法树"></a>为什么要了解抽象语法树</h2><p>日常工作中，我们会碰到js代码解析的场景，比如分析代码中require了哪些包，有些什么关键API调用，大部分情况使用正则表达式来处理，可一旦场景复杂，或者依赖于代码上下文时，正则就很难处理了，这时候就要用到抽象语法树。常见的uglify、eslint、babel、webpack等等都是基于抽象语法树来处理的，如此强大，有必要好好了解一下。</p>
+<a id="more"></a>
+<h2 id="什么是抽象语法树"><a href="#什么是抽象语法树" class="headerlink" title="什么是抽象语法树"></a>什么是抽象语法树</h2><p>抽象语法树即：Abstract Syntax Tree。简称AST，见下图。</p>
+<ol>
+<li>图中code先经过parse转换成一个树状数据结构</li>
+<li>接着对树中节点进行转换，图中将叶子节点对换位置</li>
+<li>将树状结构通过generate再生成code</li>
+</ol>
+<p>图中树状数据结构即AST，从这个过程可以看到将代码转成AST后，通过操作节点来改变代码。</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s1000x250_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="AST示例">  </p>
+<h2 id="如何获得抽象语法树"><a href="#如何获得抽象语法树" class="headerlink" title="如何获得抽象语法树"></a>如何获得抽象语法树</h2><p>获得抽象语法树的过程为：代码 =&gt; 词法分析 =&gt; 语法分析 =&gt; AST<br><code>词法分析</code>：把字符串形式的代码转换为令牌（tokens）流。<br><code>语法分析</code>：把一个令牌流转换成 AST 的形式。这个阶段会使用令牌中的信息把它们转换成一个 AST 的表述结构，这样更易于后续的操作。<br>如下图，代码为一个简单的函数声明。词法分析阶段，将代码作为字符串输入获得关键词，图中<code>function</code>、<code>square</code>、<code>(</code>、<code>)</code>、<code>{</code>、<code>}</code>等都被识别为关键词(稍微回忆下编译原理，字符挨个入栈，符合一定规则即出栈)。语法分析阶段，对关键词的组合形成一个个节点，如n*n这3个关键词组合成<code>二元表达式</code>，关键词return与二元表达式组合成<code>return语句</code>。最后组合成一个<code>函数声明语句</code>。</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s1000x505_jfs/t1/67215/22/6748/65259/5d4b98d6E32a2feb2/4bc376c9987dec15.jpg" alt="语法分析"></p>
+<h1 id="二、规范"><a href="#二、规范" class="headerlink" title="二、规范"></a>二、规范</h1><p>如何获得AST已经简单介绍了，那AST最终应该以什么样的数据结构存在呢，先看看上述函数声明的AST结构</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s1000x1000_jfs/t1/43930/17/12779/134361/5d5e7fb9E1fab10c2/ab0d1ed9d9d1f174.jpg" alt="AST结构"></p>
+<p>那解析的依据是什么，为什么要以上图的结构出现，业界已经有了一套成熟的规范。</p>
+<h2 id="规范起源"><a href="#规范起源" class="headerlink" title="规范起源"></a>规范起源</h2><p>在v8引擎之前，最早js引擎是SpiderMonkey，第一个版本由js作者Brendan Eich设计，后交给Mozilla组织维护。js引擎在执行js文件时，都会先将js代码转换成抽象语法树(AST)。有一天，一位Mozilla工程师在FireFox中公开了这个将代码转成AST的解析器Api，也就是<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API" target="_blank" rel="noopener">Parser_API</a><sup>[1]</sup>，后来被人整理到github项目<a href="https://github.com/estree/estree" target="_blank" rel="noopener">estree</a><sup>[2]</sup>，慢慢的成了业界的规范。</p>
+<h2 id="规范解读"><a href="#规范解读" class="headerlink" title="规范解读"></a>规范解读</h2><p>上面提到的<code>Parser_API</code>是规范的原文，中文版:<a href="https://developer.mozilla.org/zh-CN/docs/Mozilla/Projects/SpiderMonkey/Parser_API" target="_blank" rel="noopener">Parser_API</a><sup>[3]</sup>，但读起来并不太友好，推荐直接读整理后的git项目<a href="https://github.com/estree/estree" target="_blank" rel="noopener">estree</a>，打开项目地址，如下图<br><img src="https://img11.360buyimg.com/jdphoto/s1000x400_jfs/t1/52416/13/8437/259414/5d5e8084Ee689071b/de6fd0db3a182b11.jpg" alt="estree"><br>其中最下面的<code>es5.md</code>为ES5规范，仅列出ES5的内容，<code>es2015.md</code>为ES6规范，但只列出了针对ES5新增的内容，依次类推，最后的<code>es2019.md</code>即ES10是对ES9的补充，仅有一条规则。</p>
+<p>打开最基础的<code>es5.md</code>，可以看到所有语法基础，这里跟大家一起读一下大类，细分类别就略过了。读规范时可以使用<a href="https://astexplorer.net/" target="_blank" rel="noopener">https://astexplorer.net/</a> 辅助阅读，可以实时输出AST。</p>
+<ul>
+<li><a href="###node-objects">Node objects</a></li>
+<li><a href="###programs">Programs</a></li>
+<li><a href="###identifier">Identifier</a></li>
+<li><a href="###literal">Literal</a></li>
+<li><a href="###functions">Functions</a></li>
+<li><a href="###statements">Statements</a></li>
+<li><a href="###declarations">Declarations</a></li>
+<li><a href="###expressions">Expressions</a></li>
+<li><a href="###patterns">Patterns</a></li>
+</ul>
+<h3 id="Node-objects"><a href="#Node-objects" class="headerlink" title="Node objects"></a>Node objects</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Node &#123;</span><br><span class="line">    type: string;</span><br><span class="line">    loc: SourceLocation | <span class="hljs-literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义AST中节点基本类型，其他所有具体节点都需要实现以上接口，即每个节点都必须包含type、loc两个字段</p>
+<p><code>type</code>字段表示不同的节点类型，下边会再讲一下各个类型的情况，分别对应了 JavaScript 中的什么语法。你可以从这个字段看出这个节点实现了哪个接口<br><code>loc</code>字段表示源码的位置信息，如果没有相关信息的话为 null，否则是一个对象，包含了开始和结束的位置。接口如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface SourceLocation &#123;</span><br><span class="line">    source: string | <span class="hljs-literal">null</span>;</span><br><span class="line">    start: Position;</span><br><span class="line">    end: Position;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个 <code>Position</code> 对象包含了行（从1开始）和列（从0开始）信息，接口如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Position &#123;</span><br><span class="line">    line: number; <span class="hljs-comment">// &gt;= 1</span></span><br><span class="line">    column: number; <span class="hljs-comment">// &gt;= 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Programs"><a href="#Programs" class="headerlink" title="Programs"></a>Programs</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Program &lt;: Node &#123;</span><br><span class="line">    type: <span class="hljs-string">"Program"</span>;</span><br><span class="line">    body: [ Directive | Statement ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一棵完整的程序代码树，一般作为根节点</p>
+<h3 id="Identifier"><a href="#Identifier" class="headerlink" title="Identifier"></a>Identifier</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Identifier &lt;: Expression, Pattern &#123;</span><br><span class="line">    type: <span class="hljs-string">"Identifier"</span>;</span><br><span class="line">    name: string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>标识符，我们写代码时自定义的名称，如变量名、函数名、属性名。</p>
+<h3 id="Literal"><a href="#Literal" class="headerlink" title="Literal"></a>Literal</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Literal &lt;: Expression &#123;</span><br><span class="line">    type: <span class="hljs-string">"Literal"</span>;</span><br><span class="line">    value: string | boolean | <span class="hljs-literal">null</span> | number | <span class="hljs-built_in">RegExp</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字面量，如<code>“hello”</code>、<code>true</code>、<code>null</code>、<code>100</code>、<code>/\d/</code>这些，注意字面量本身也是一个表达式语句(ExpressionStatement)</p>
+<h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface <span class="hljs-built_in">Function</span> &lt;: Node &#123;</span><br><span class="line">    id: Identifier | <span class="hljs-literal">null</span>;</span><br><span class="line">    params: [ Pattern ];</span><br><span class="line">    body: FunctionBody;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个函数声明或者表达式，id是函数名，params是标识符数组，body是函数体，也是一个语句块。</p>
+<h3 id="Statements"><a href="#Statements" class="headerlink" title="Statements"></a>Statements</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface Statement &lt;: Node &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>语句，子类有很多，<code>块语句</code>、<code>if/switch语句</code>、<code>return语句</code>、<code>for/while语句</code>、<code>with语句</code>等等</p>
+<h3 id="Declarations"><a href="#Declarations" class="headerlink" title="Declarations"></a>Declarations</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface Declaration &lt;: Statement &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>声明，子类主要有变量申明、函数声明。</p>
+<h3 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface Expression &lt;: Node &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>表达式，子类很多，有二元表达式(<code>n*n</code>)、函数表达式(var fun = <code>function(){}</code>)、数组表达式(var arr = <code>[]</code>)、对象表达式(var obj = <code>{}</code>)、赋值表达式(<code>a = 1</code>)等等</p>
+<h3 id="Patterns"><a href="#Patterns" class="headerlink" title="Patterns"></a>Patterns</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface Pattern &lt;: Node &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>模式，主要在 ES6 的解构赋值中有意义(let <code>{name}</code> = user，其中{name}部分为<code>ObjectPattern</code>)，在 ES5 中，可以理解为和<code>Identifier</code> 差不多的东西。</p>
+<h1 id="三、现状"><a href="#三、现状" class="headerlink" title="三、现状"></a>三、现状</h1><p>通过以上规范解读，知道了最终要生成的AST以什么样的结构存在，对于javascript的解析，业界已经有很多成熟的解析器，可以将js代码转换成符合规范的AST</p>
+<ul>
+<li>Esprima，比较经典，出现的比较早</li>
+<li>Acorn，fork自Esprima，代码更精简。webpack使用acorn进行模块解析</li>
+<li>UglifyJS2，主要用于代码压缩</li>
+<li>babylon，babel解析器，fork自Acorn，目前最新版本是babylon7,对应npm包@babel/parser</li>
+<li>Espree，eslint默认的解析器，由于遵循同一套规范，也可以使用babel的解析器替代</li>
+<li>flow、shift等等</li>
+</ul>
+<p>AST基础篇介绍完毕，下篇将从实践的角度继续介绍</p>
+<p><strong>References</strong><br>[1] Parser_API：<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API</a><br>[2] estree：<a href="https://github.com/estree/estree" target="_blank" rel="noopener">https://github.com/estree/estree</a><br>[3] Parser_API(中文)：<a href="https://developer.mozilla.org/zh-CN/docs/Mozilla/Projects/SpiderMonkey/Parser_API" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Mozilla/Projects/SpiderMonkey/Parser_API</a>  </p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/AST/">AST</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Javascript抽象语法树下篇(实践篇)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/12/CSS Houdini实现动态波浪纹/">
+                <span class="level-item">CSS Houdini实现动态波浪纹</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -783,7 +825,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="wecTeam" height="28">
+                    <img src="/images/og_image.png" alt="Javascript抽象语法树上篇(基础篇)" height="28">
                 
                 </a>
                 <p class="is-size-7">

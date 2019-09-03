@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>CSS Houdini实现动态波浪纹 - wecTeam</title>
+
+
+    <meta name="description" content="CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Houdini实现动态波浪纹">
+<meta property="og:url" content="http://yoursite.com/2019/07/12/CSS Houdini实现动态波浪纹/index.html">
+<meta property="og:site_name" content="wecTeam">
+<meta property="og:description" content="CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。">
+<meta property="og:locale" content="zh_cn">
+<meta property="og:image" content="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg">
+<meta property="og:updated_time" content="2019-09-03T14:15:54.915Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Houdini实现动态波浪纹">
+<meta name="twitter:description" content="CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。">
+<meta name="twitter:image" content="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="CSS Houdini实现动态波浪纹" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 read (About 2729 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                CSS Houdini实现动态波浪纹
+            
+        </h1>
+        <div class="content">
+            <p>CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。</p>
+<a id="more"></a>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们知道，浏览器在渲染页面时，首先会解析页面的 HTML 和 CSS，生成渲染树（rendering tree），再经由布局（layout）和绘制（painting），呈现出整个页面内容。在 Houdini 出现之前，这个流程上我们能操作的空间少之甚少，尤其是 layout 和 painting 环节，可以说是完全封闭，使得我们很难通过 polyfill 等类似的手段为欠支持的 CSS 特性提供兼容。而另一方面，语法特性的缺失也极大地限制了 CSS 的编程灵活性，社区中 sass、less、stylus 等 CSS 预处理技术的出现大多都源于这个原因，它们都希望通过预编译，突破 CSS 的局限性，让 CSS 拥有更强大的组织和编写能力。所以慢慢地，我们都不再手写 CSS，更方便、更灵活的 CSS 扩展语言成了 web 开发的主角。看到这样的情况，CSS Houdini 终于坐不住了。</p>
+<h2 id="什么是-CSS-Houdini？"><a href="#什么是-CSS-Houdini？" class="headerlink" title="什么是 CSS Houdini？"></a>什么是 CSS Houdini？</h2><p>CSS Houdini 对外开放了浏览器解析流程的一系列 API，这些 API 允许开发者介入浏览器的 CSS engine 运作，带来了更多的 CSS 解决方案。</p>
+<p><img src="http://img10.360buyimg.com/wq/jfs/t1/68616/22/5220/46079/5d35ae6cE910a7d93/c4847bf0290cc197.png" alt></p>
+<p>CSS Houdini 目前主要提供了以下几个 API：</p>
+<h4 id="CSS-Properties-and-Values-API"><a href="#CSS-Properties-and-Values-API" class="headerlink" title="CSS Properties and Values API"></a>CSS Properties and Values API</h4><p><img src="http://img10.360buyimg.com/wq/jfs/t1/62083/29/7239/130597/5d552adfE3e66fe18/f2cd80f6ff6b96ef.png" alt></p>
+<p>允许在 CSS 中定义变量和使用变量，是目前支持程度最高的一个 API。CSS 变量以 <code>--</code> 开头，通过 <code>var()</code> 调用：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">div</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">--font-color</span>: <span class="hljs-number">#9e4a9b</span>;</span><br><span class="line">  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--font-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，CSS 变量也可以在其他节点中使用，只不过是有作用域限制的，也就是说自身定义的 CSS 变量只能被自身或自身的子节点使用：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.container</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">--font-color</span>: <span class="hljs-number">#9e4a9b</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-selector-class">.container</span> <span class="hljs-selector-class">.text</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--font-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义和使用 CSS 变量可以让我们的 CSS 代码变得更加简洁明了，比如我们可以单纯通过改变变量来改变 box-shadow 的颜色：</p>
+ <figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.text</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">--box-shadow-color</span>: <span class="hljs-number">#3a4ba2</span>;</span><br><span class="line">  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">30px</span> <span class="hljs-built_in">var</span>(--box-shadow-color);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-selector-class">.text</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">--box-shadow-color</span>: <span class="hljs-number">#7f2c2b</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Painting-API"><a href="#Painting-API" class="headerlink" title="Painting API"></a>Painting API</h4><p><img src="http://img10.360buyimg.com/wq/jfs/t1/44659/25/7169/119642/5d552a70Ea58b14ae/de69915b1641efad.png" alt></p>
+<p>允许开发者编写自己的 Paint Module，自定义诸如 background-image 这类的绘制属性。自定义的重点在于，”怎么画” 的逻辑需要我们来描述，因此我们利用 registerPaint 来描述我们的绘制逻辑：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">registerPaint(<span class="hljs-string">'rect'</span>, <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;</span><br><span class="line">  paint(ctx, size, properties, args) &#123;</span><br><span class="line">    <span class="hljs-comment">// @TODO</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>registerPaint 方法注册了一个 Paint 类 rect 以供调用，这个类的核心在于它的 paint 方法。paint 方法用于描述自定义的绘制逻辑，它接收四个参数：</p>
+<ul>
+<li><code>ctx</code>：一个 Canvas 的 Context 对象，因此 paint 中的绘制方式跟 canvas 绘制是一样的。</li>
+<li><code>size</code>：包含节点的尺寸信息，同时也是 canvas 可绘制范围（画板）的尺寸信息。</li>
+<li><code>properties</code>：包含节点的 CSS 属性，需要调用静态方法 <code>inputProperties</code> 声明注入。</li>
+<li><code>args</code>: CSS 中调用 Paint 类时传入的参数，需要调用静态方法 <code>inputArguments</code> 声明注入。</li>
+</ul>
+<p>编写完 Paint 类之后，我们在 CSS 中只需要这样调用，就能应用到我们自定义的绘制逻辑：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">paint</span>(rect);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Painting API 目前在高版本 Chrome、Opera 浏览器已有支持，且实现起来比较简单，后边我们还将通过 demo 进一步演示。</p>
+<h4 id="Layout-API"><a href="#Layout-API" class="headerlink" title="Layout API"></a>Layout API</h4><p>允许开发者编写自己的 Layout Module，自定义诸如 display 这类的布局属性。同样的，”如何布局” 的逻辑需要我们自己编写：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">registerLayout(<span class="hljs-string">'block-like'</span>, <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;</span><br><span class="line">  layout(children, edges, constraints, properties, breakToken) &#123;</span><br><span class="line">    <span class="hljs-comment">// @TODO</span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// inlineSize: number,</span></span><br><span class="line">      <span class="hljs-comment">// blockSize: number,</span></span><br><span class="line">      <span class="hljs-comment">// autoBlockSize: number,</span></span><br><span class="line">      <span class="hljs-comment">// childFragments: sequence&lt;LayoutFragment&gt;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>registerLayout 方法用于注册一个 Layout 类以供调用，它的 layout 方法用于描述自定义的布局逻辑，最终返回一个包含布局后的位置尺寸信息和子节点序列信息的对象，引擎将根据这个对象进行布局渲染。</p>
+<p>同样的，调用时只需：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">display</span>: <span class="hljs-built_in">layout</span>(<span class="hljs-string">'block-like'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此利用 Layout API，你完全可以实现对 flex 布局的手工兼容。相比 Painting，Layout 的编写显得更加复杂，涉及到盒模型的深入概念，且支持度不高，这里就不细讲了。</p>
+<h4 id="Worklets"><a href="#Worklets" class="headerlink" title="Worklets"></a>Worklets</h4><p>registerPaint、registerLayout 这些 API 在全局上并不存在，为什么可以直接调用呢？这是因为上述的 JS 代码并不是直接执行的，而是通过 Worklets 载入执行的。Worklets 类似于 Web Worker，是一个运行于主代码之外的独立工作进程，但比 Worker 更为轻量，负责 CSS 渲染任务是最合适的了。和 Web Worker 一样，Worklets 拥有一个隔离于主进程的全局空间，在这个空间里，没有 window 对象，却有 registerPaint、registerLayout 这些全局 API。因此，我们需要这样引入自定义 JS 代码：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-string">"paintWorklet"</span> <span class="hljs-keyword">in</span> CSS) &#123;</span><br><span class="line">  CSS.paintWorklet.addModule(<span class="hljs-string">"paintworklet.js"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-string">"layoutWorklet"</span> <span class="hljs-keyword">in</span> CSS) &#123;</span><br><span class="line">  CSS.layoutWorklet.addModule(<span class="hljs-string">"layoutworklet.js"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基础：三步用上-Painting-API"><a href="#基础：三步用上-Painting-API" class="headerlink" title="基础：三步用上 Painting API"></a>基础：三步用上 Painting API</h2><p>我们来自定义 background-image 属性，它将用于给作用节点绘制一个矩形背景，背景色值由该节点上的一个 CSS 变量 <code>--rect-color</code> 指定。</p>
+<h4 id="1、编写一个-Paint-类："><a href="#1、编写一个-Paint-类：" class="headerlink" title="1、编写一个 Paint 类："></a>1、编写一个 Paint 类：</h4><p>新建一个 paintworklet.js，利用 registerPaint 方法注册一个 Paint 类 rect，定义属性的绘制逻辑：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">registerPaint(<span class="hljs-string">"rect"</span>, <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> inputProperties() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> [<span class="hljs-string">"--rect-color"</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  paint(ctx, geom, properties) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> color = properties.get(<span class="hljs-string">"--rect-color"</span>)[<span class="hljs-number">0</span>];</span><br><span class="line">    ctx.fillStyle = color;</span><br><span class="line">    ctx.fillRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, geom.width, geom.height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上边定义了一个名为 rect 的 Paint 类，当 rect 被使用时，会实例化 rect 并自动触发 paint 方法执行渲染。paint 方法中，我们获取节点 CSS 定义的 <code>--rect-color</code> 变量，并将元素的背景填充为指定颜色。由于需要使用属性 <code>--rect-color</code>，我们需要在静态方法 <code>inputProperties</code> 中声明。</p>
+<h4 id="2、Worklets-加载-Paint-类："><a href="#2、Worklets-加载-Paint-类：" class="headerlink" title="2、Worklets 加载 Paint 类："></a>2、Worklets 加载 Paint 类：</h4><p>HTML 中通过 Worklets 载入上一步骤实现的 paintworklet.js 并注册 Paint 类：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"rect"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-keyword">if</span> (<span class="hljs-string">"paintWorklet"</span> <span class="hljs-keyword">in</span> CSS) &#123;</span></span><br><span class="line"><span class="hljs-javascript">    CSS.paintWorklet.addModule(<span class="hljs-string">"paintworklet.js"</span>);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、使用-Paint-类："><a href="#3、使用-Paint-类：" class="headerlink" title="3、使用 Paint 类："></a>3、使用 Paint 类：</h4><p>CSS 中使用的时候，只需要调用 paint 方法：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.rect</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">100vw</span>;</span><br><span class="line">  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;</span><br><span class="line">  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">paint</span>(rect);</span><br><span class="line">  <span class="hljs-attribute">--rect-color</span>: <span class="hljs-built_in">rgb</span>(255, 64, 129);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看得出利用 CSS Houdini，我们可以像操作 canvas 一样灵活自如地实现我们想要的样式功能。</p>
+<h2 id="进阶：实现动态波纹"><a href="#进阶：实现动态波纹" class="headerlink" title="进阶：实现动态波纹"></a>进阶：实现动态波纹</h2><p>根据上述步骤，我们演示一下如何用 CSS Painting API 实现一个动态波浪的效果：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"wave"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"><span class="hljs-css">  <span class="hljs-selector-id">#wave</span> &#123;</span></span><br><span class="line">    width: 20%;</span><br><span class="line">    height: 70vh;</span><br><span class="line">    margin: 10vh auto;</span><br><span class="line"><span class="hljs-css">    <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-id">#ff3e81</span>;</span></span><br><span class="line">    background-image: paint(wave);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-javascript">  <span class="hljs-keyword">if</span> (<span class="hljs-string">"paintWorklet"</span> <span class="hljs-keyword">in</span> CSS) &#123;</span></span><br><span class="line"><span class="hljs-javascript">    CSS.paintWorklet.addModule(<span class="hljs-string">"paintworklet.js"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-keyword">const</span> wave = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"#wave"</span>);</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-keyword">let</span> tick = <span class="hljs-number">0</span>;  </span></span><br><span class="line"><span class="hljs-javascript">    requestAnimationFrame(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">raf</span>(<span class="hljs-params">now</span>) </span>&#123;</span></span><br><span class="line">      tick += 1;</span><br><span class="line"><span class="hljs-javascript">      wave.style.cssText = <span class="hljs-string">`--animation-tick: <span class="hljs-subst">$&#123;tick&#125;</span>;`</span>;</span></span><br><span class="line">      requestAnimationFrame(raf);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// paintworklet.js</span></span><br><span class="line">registerPaint(<span class="hljs-string">'wave'</span>, <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> inputProperties() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> [<span class="hljs-string">'--animation-tick'</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  paint(ctx, geom, properties) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> tick = <span class="hljs-built_in">Number</span>(properties.get(<span class="hljs-string">'--animation-tick'</span>));</span><br><span class="line">    <span class="hljs-keyword">const</span> &#123;</span><br><span class="line">      width,</span><br><span class="line">      height</span><br><span class="line">    &#125; = geom;</span><br><span class="line">    <span class="hljs-keyword">const</span> initY = height * <span class="hljs-number">0.4</span>;</span><br><span class="line">    tick = tick * <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="hljs-number">0</span>, initY + <span class="hljs-built_in">Math</span>.sin(tick / <span class="hljs-number">20</span>) * <span class="hljs-number">10</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= width; i++) &#123;</span><br><span class="line">      ctx.lineTo(i, initY + <span class="hljs-built_in">Math</span>.sin((i + tick) / <span class="hljs-number">20</span>) * <span class="hljs-number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.lineTo(width, height);</span><br><span class="line">    ctx.lineTo(<span class="hljs-number">0</span>, height);</span><br><span class="line">    ctx.lineTo(<span class="hljs-number">0</span>, initY + <span class="hljs-built_in">Math</span>.sin(tick / <span class="hljs-number">20</span>) * <span class="hljs-number">10</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = <span class="hljs-string">'rgba(255, 255, 255, 0.5)'</span>;</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>paintworklet 中，利用 sin 函数绘制波浪线，由于 AnimationWorklets 尚处于实验阶段，开放较少，这里我们在 worklet 外部用 requestAnimationFrame API 来做动画驱动，让波浪纹动起来。完成后能看到下边这样的效果。</p>
+<p><img src="http://img11.360buyimg.com/jdphoto/jfs/t1/62725/39/5284/51731/5d370c8dE7f7aa85c/742a46388ea6a1c6.gif" alt></p>
+<p>然而事实上这个效果略显僵硬，sin 函数太过于规则了，现实中的波浪应该是不规则波动的，这种不规则主要体现在两个方面：</p>
+<h5 id="1）波纹高度（Y）随位置（X）变化而不规则变化"><a href="#1）波纹高度（Y）随位置（X）变化而不规则变化" class="headerlink" title="1）波纹高度（Y）随位置（X）变化而不规则变化"></a>1）波纹高度（Y）随位置（X）变化而不规则变化</h5><p><img src="http://img14.360buyimg.com/jdphoto/s900x500_jfs/t1/40083/3/12170/6523/5d3671ebE5dd16e72/2b687d898da5cd39.jpg" alt></p>
+<p>把图按照 x-y 正交分解之后，我们希望的不规则，可以认为是固定某一时刻，随着 x 轴变化，波纹高度 y 呈现不规则变化；</p>
+<h5 id="2）固定某点（X-固定），波纹高度（Y）随时间推进而不规则变化"><a href="#2）固定某点（X-固定），波纹高度（Y）随时间推进而不规则变化" class="headerlink" title="2）固定某点（X 固定），波纹高度（Y）随时间推进而不规则变化"></a>2）固定某点（X 固定），波纹高度（Y）随时间推进而不规则变化</h5><p>动态过程需要考虑时间维度，我们希望的不规则，还需要体现在时间的影响中，比如风吹过的前一秒和后一秒，同一个位置的波浪高度肯定是不规则变化的。</p>
+<p>提到不规则，有朋友可能想到了用 Math.random 方法，然而这里的不规则并不适合用随机数来实现，因为前后两次取的随机数是不连续的，而前后两个点的波浪是连续的。这个不难理解，你见过长成锯齿状的波浪吗？又或者你见过上一刻 10 米高、下一刻就掉到 2 米的波浪吗？</p>
+<p>为了实现这种连续不规则的特征，我们弃用 sin 函数，引入了一个包 simplex-noise。由于影响波高的有两个维度，位置 X 和时间 T，这里需要用到 noise2D 方法，它提前在一个三维的空间中，构建了一个连续的不规则曲面：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// paintworklet.js</span></span><br><span class="line"><span class="hljs-keyword">import</span> SimplexNoise <span class="hljs-keyword">from</span> <span class="hljs-string">'simplex-noise'</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> sim = <span class="hljs-keyword">new</span> SimplexNoise(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-number">1</span>);</span><br><span class="line"></span><br><span class="line">registerPaint(<span class="hljs-string">'wave'</span>, <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> inputProperties() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> [<span class="hljs-string">'--animation-tick'</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  paint(ctx, geom, properties) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> tick = <span class="hljs-built_in">Number</span>(properties.get(<span class="hljs-string">'--animation-tick'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.drawWave(ctx, geom, <span class="hljs-string">'rgba(255, 255, 255, 0.4)'</span>, <span class="hljs-number">0.004</span>, tick, <span class="hljs-number">15</span>, <span class="hljs-number">0.4</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.drawWave(ctx, geom, <span class="hljs-string">'rgba(255, 255, 255, 0.5)'</span>, <span class="hljs-number">0.006</span>, tick, <span class="hljs-number">12</span>, <span class="hljs-number">0.4</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">   * 绘制波纹</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  drawWave(ctx, geom, fillColor, ratio, tick, amp, ih) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> &#123;</span><br><span class="line">      width,</span><br><span class="line">      height</span><br><span class="line">    &#125; = geom;</span><br><span class="line">    <span class="hljs-keyword">const</span> initY = height * ih;</span><br><span class="line">    <span class="hljs-keyword">const</span> speedT = tick * ratio;</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> x = <span class="hljs-number">0</span>, speedX = <span class="hljs-number">0</span>; x &lt;= width; x++) &#123;</span><br><span class="line">      speedX += ratio * <span class="hljs-number">1</span>;</span><br><span class="line">      <span class="hljs-keyword">var</span> y = initY + sim.noise2D(speedX, speedT) * amp;</span><br><span class="line">      ctx[x === <span class="hljs-number">0</span> ? <span class="hljs-string">'moveTo'</span> : <span class="hljs-string">'lineTo'</span>](x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.lineTo(width, height);</span><br><span class="line">    ctx.lineTo(<span class="hljs-number">0</span>, height);</span><br><span class="line">    ctx.lineTo(<span class="hljs-number">0</span>, initY + sim.noise2D(<span class="hljs-number">0</span>, speedT) * amp);</span><br><span class="line">    ctx.closePath();</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = fillColor;</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>修改峰值和偏置项等参数，可以再画多一个不一样的波浪纹，效果如下，完工！</p>
+<p><img src="http://img10.360buyimg.com/wq/jfs/t1/53549/28/5908/185285/5d388198E26af6da0/3a083165ba78d400.gif" alt></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<p><a href="https://www.w3.org/TR/css-paint-api-1/" target="_blank" rel="noopener">CSS Painting API Level 1</a><br><a href="https://www.w3.org/TR/2018/WD-css-layout-api-1-20180412/" target="_blank" rel="noopener">CSS Layout API Level 1</a><br><a href="https://blog.techbridge.cc/2017/05/23/css-houdini/" target="_blank" rel="noopener">CSS 魔術師 Houdini API 介紹</a></p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/CSS/">CSS</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Javascript抽象语法树上篇(基础篇)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/27/collision-detection/">
+                <span class="level-item">碰撞检测的向量实现</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt="维C团">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        维C团
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/wecteam/blog" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/H5开发/">
+            <span class="level-start">
+                <span class="level-item">H5开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/NodeJS/">
+            <span class="level-start">
+                <span class="level-item">NodeJS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/知识分享/">
+            <span class="level-start">
+                <span class="level-item">知识分享</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="CSS Houdini实现动态波浪纹" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh_cn");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Javascript抽象语法树下篇(实践篇) - wecTeam</title>
+
+
+    <meta name="description" content="上篇已经对AST基础做了介绍，本篇介绍AST的运用 AST应用的三个要点 需要一个解析器，将代码转换为AST 需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作 需要一个代码生成器，能够将AST转换为代码">
+<meta name="keywords" content="AST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript抽象语法树下篇(实践篇)">
+<meta property="og:url" content="http://yoursite.com/2019/07/20/Javascript抽象语法树下篇(实践篇)/index.html">
+<meta property="og:site_name" content="wecTeam">
+<meta property="og:description" content="上篇已经对AST基础做了介绍，本篇介绍AST的运用 AST应用的三个要点 需要一个解析器，将代码转换为AST 需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作 需要一个代码生成器，能够将AST转换为代码">
+<meta property="og:locale" content="zh_cn">
+<meta property="og:image" content="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png">
+<meta property="og:updated_time" content="2019-09-03T14:17:33.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript抽象语法树下篇(实践篇)">
+<meta name="twitter:description" content="上篇已经对AST基础做了介绍，本篇介绍AST的运用 AST应用的三个要点 需要一个解析器，将代码转换为AST 需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作 需要一个代码生成器，能够将AST转换为代码">
+<meta name="twitter:image" content="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="Javascript抽象语法树下篇(实践篇)" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 read (About 1787 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Javascript抽象语法树下篇(实践篇)
+            
+        </h1>
+        <div class="content">
+            <p>上篇已经对AST基础做了介绍，本篇介绍AST的运用</p>
+<h2 id="AST应用的三个要点"><a href="#AST应用的三个要点" class="headerlink" title="AST应用的三个要点"></a>AST应用的三个要点</h2><ol>
+<li>需要一个解析器，将代码转换为AST</li>
+<li>需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作</li>
+<li>需要一个代码生成器，能够将AST转换为代码<a id="more"></a>
+
+</li>
+</ol>
+<h2 id="esprima与babel"><a href="#esprima与babel" class="headerlink" title="esprima与babel"></a>esprima与babel</h2><p>常用的满足上述3个要点的工具包有两个，一个是<code>esprima</code>，一个是<code>babel</code></p>
+<p>esprima相关包及使用如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> esprima = <span class="hljs-built_in">require</span>(<span class="hljs-string">'esprima'</span>);   <span class="hljs-comment">// code =&gt; ast</span></span><br><span class="line"><span class="hljs-keyword">const</span> estraverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'estraverse'</span>); <span class="hljs-comment">//ast遍历</span></span><br><span class="line"><span class="hljs-keyword">const</span> escodegen = <span class="hljs-built_in">require</span>(<span class="hljs-string">'escodegen'</span>); <span class="hljs-comment">// ast =&gt; code</span></span><br><span class="line"><span class="hljs-keyword">let</span> code = <span class="hljs-string">'const a = 1'</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ast = esprima.parseScript(code);</span><br><span class="line">estraverse.traverse(ast, &#123;</span><br><span class="line">    enter: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//节点操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> transformCode = escodegen.generate(ast);</span><br></pre></td></tr></table></figure>
+
+<p>babel相关包及使用如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);  <span class="hljs-comment">//code =&gt; ast</span></span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default; <span class="hljs-comment">// ast遍历，节点增删改查，作用域处理等</span></span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default; <span class="hljs-comment">// ast =&gt; code</span></span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>); <span class="hljs-comment">// 用于AST节点的Lodash式工具库,各节点构造、验证等</span></span><br><span class="line"><span class="hljs-keyword">let</span> code = <span class="hljs-string">'const a = 1'</span>;</span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  enter (path) &#123; </span><br><span class="line">    <span class="hljs-comment">//节点操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="hljs-keyword">const</span> transformCode = escodegen.generate(ast);</span><br></pre></td></tr></table></figure>
+
+<p>目前babel不管是从生态上还是文档上比esprima要好很多，因此推荐大家使用babel工具，本文示例也使用babel来做演示。</p>
+<h2 id="使用babel工具操作AST"><a href="#使用babel工具操作AST" class="headerlink" title="使用babel工具操作AST"></a>使用babel工具操作AST</h2><p>如上一章节所示</p>
+<ul>
+<li><code>@babel/parser</code>用于将代码转换为AST</li>
+<li><code>@babel/traverse</code>用于对AST的遍历，包括节点增删改查、作用域等处理</li>
+<li><code>@babel/generator</code> 用于将AST转换成代码</li>
+<li><code>@babel/types</code> 用于AST节点操作的Lodash式工具库,各节点构造、验证等</li>
+</ul>
+<p>更多api详见<a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="noopener">babel手册</a><sup>[1]</sup></p>
+<p>下面通过简单案例来介绍如何操作AST，注意案例只是示例，由于篇幅对部分边界问题只会注释说明，实际开发过程中需要考虑周全。</p>
+<h3 id="案例1-去掉代码中的console-log"><a href="#案例1-去掉代码中的console-log" class="headerlink" title="案例1:去掉代码中的console.log()"></a>案例1:去掉代码中的console.log()</h3><p>实现代码</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(n) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.log(n);</span></span><br><span class="line"><span class="hljs-string">  console.warn(n);</span></span><br><span class="line"><span class="hljs-string">  return n * n;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line"> CallExpression(path) &#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> &#123; callee &#125; = path.node;</span><br><span class="line">  <span class="hljs-keyword">if</span> (callee.type === ‘MemberExpression’ &amp;&amp; callee.object.name === ‘<span class="hljs-built_in">console</span>’ &amp;&amp; callee.property.name === ‘log’ ) &#123;</span><br><span class="line">   path.remove(); <span class="hljs-comment">// 注意考虑对象挂载的识别，如global.console.log()，此时remove后剩下global.,会导致语法错误，此时可以判断父节点类型来排除</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+
+<p>处理结果</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function square(n) &#123;</span><br><span class="line"><span class="hljs-deletion">-  console.log(n);</span></span><br><span class="line">  console.warn(n);</span><br><span class="line">  return n * n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此案例涉及知识点</p>
+<ol>
+<li>如何通过traverse遍历特定节点</li>
+<li>识别出console.log()在规范中属于函数调用表达式,节点类型为<code>CallExpression</code>。</li>
+<li>console.log本身即<code>callee</code>是在对象console上的一个方法，因此<code>console.log</code>是一个成员表达式，类型为<code>MemberExpression</code>。</li>
+<li><code>MemberExpression</code>根据规范有一个<code>object</code>属性代表被访问的对象，有一个<code>property</code>代表访问的成员。</li>
+<li>通过<code>path.remove()</code>api可以对节点进行删除。</li>
+<li>可以通过<a href="https://astexplorer.net/" target="_blank" rel="noopener">https://astexplorer.net/</a> 来辅助对代码节点的识别。注意选择<code>babylon7</code>，即babe7,对应<code>@babel/parser</code></li>
+</ol>
+<h3 id="案例2-变量混淆"><a href="#案例2-变量混淆" class="headerlink" title="案例2:变量混淆"></a>案例2:变量混淆</h3><p>实现代码</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(number) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.warn(number);</span></span><br><span class="line"><span class="hljs-string">  return number * number;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  FunctionDeclaration(path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unia = path.scope.generateUidIdentifier(<span class="hljs-string">"a"</span>);</span><br><span class="line">    path.scope.rename(<span class="hljs-string">"number"</span>,unia.name);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+
+<p>处理结果</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-function square(number) &#123;</span></span><br><span class="line"><span class="hljs-addition">+  function square(_a) &#123;</span></span><br><span class="line"><span class="hljs-deletion">-  console.warn(number);</span></span><br><span class="line"><span class="hljs-addition">+  console.warn(_a);</span></span><br><span class="line"><span class="hljs-deletion">-  return number * number;</span></span><br><span class="line"><span class="hljs-addition">+  return _a * _a;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此案例涉及知识点</p>
+<ol>
+<li><code>path.scope</code>保存了当前作用域的相关信息</li>
+<li>可以通过api对作用域内的变量名进行批量修改操作</li>
+<li>通过<code>path.scope</code>可以获得当前作用域唯一标识符，避免变量名冲突</li>
+</ol>
+<h3 id="案例3-转换箭头函数并去掉未使用参数"><a href="#案例3-转换箭头函数并去掉未使用参数" class="headerlink" title="案例3:转换箭头函数并去掉未使用参数"></a>案例3:转换箭头函数并去掉未使用参数</h3><p>实现代码</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">new Promise((resolve,reject)=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">  setTimeout(()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">    resolve(1);</span></span><br><span class="line"><span class="hljs-string">  &#125;,200)</span></span><br><span class="line"><span class="hljs-string">&#125;);</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ArrowFunctionExpression (path) &#123; </span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; id, params, body &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> path.scope.bindings)&#123;   <span class="hljs-comment">//注意考虑箭头函数的this特性，若发现函数体中有this调用，则需要在当前作用域绑定其父作用域的this</span></span><br><span class="line">      <span class="hljs-keyword">if</span>(!path.scope.bindings[key].referenced)&#123;</span><br><span class="line">        params = params.filter(<span class="hljs-function"><span class="hljs-params">param</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> param.name!==key;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  path.replaceWith(t.functionExpression(id, params, body)); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+
+<p>处理结果</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-new Promise((resolve,reject)=&gt;&#123;</span></span><br><span class="line"><span class="hljs-addition">+new Promise(function(resolve)&#123;</span></span><br><span class="line"><span class="hljs-deletion">-  setTimeout(()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-addition">+  setTimeout(function()&#123;</span></span><br><span class="line">    resolve(1);</span><br><span class="line">  &#125;,200)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此案例涉及知识点</p>
+<ol>
+<li>箭头函数节点：<code>ArrowFunctionExpression</code></li>
+<li>通过path.scope可以识别变量引用情况，是否有被引用，被哪些路径引用</li>
+<li>通过@babel/types可以很方便的构建任意类型节点</li>
+<li>通过<code>path.replaceWith()</code>可以进行节点替换</li>
+</ol>
+<h3 id="案例4-京东购物小程序的Tree-shaking"><a href="#案例4-京东购物小程序的Tree-shaking" class="headerlink" title="案例4:京东购物小程序的Tree-shaking"></a>案例4:京东购物小程序的Tree-shaking</h3><p>删掉小程序中的冗余代码，<code>部分</code>实现代码示例如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">export function square (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">export function cube (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ExportNamedDeclaration (path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unused = [<span class="hljs-string">'cube'</span>]   <span class="hljs-comment">// 借助webpack，我们能获得导出的方法中，哪些是没有被使用过的</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; declaration = &#123;&#125; &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">if</span> (declaration.type === <span class="hljs-string">'FunctionDeclaration'</span>) &#123;</span><br><span class="line">      unused.forEach(<span class="hljs-function"><span class="hljs-params">exportItem</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// references=1表示仅有一次引用，即export的引用，没有在别处调用</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (declaration.id.name === exportItem &amp;&amp; path.scope.bindings[exportItem].references === <span class="hljs-number">1</span>) &#123;</span><br><span class="line">          path.remove();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+
+<p>处理结果</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export function square (x) &#123;</span><br><span class="line">    return x * x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-deletion">-export function cube (x) &#123;</span></span><br><span class="line"><span class="hljs-deletion">-    return x * x * x;</span></span><br><span class="line"><span class="hljs-deletion">-&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>此案例涉及知识点</p>
+<ol>
+<li>export节点：<code>ExportNamedDeclaration</code></li>
+</ol>
+<h3 id="案例5-将代码转换成svg流程图"><a href="#案例5-将代码转换成svg流程图" class="headerlink" title="案例5:将代码转换成svg流程图"></a>案例5:将代码转换成svg流程图</h3><p>此案例是git上一个比较有意思的开源项目，通过AST将代码转换为svg流程图，详见<a href="https://github.com/Bogdan-Lyashenko/js-code-to-svg-flowchart" target="_blank" rel="noopener">js-code-to-svg-flowchart</a><sup>[2]</sup></p>
+<p>可以体验一下：<a href="https://bogdan-lyashenko.github.io/js-code-to-svg-flowchart/docs/live-editor/index.html" target="_blank" rel="noopener">demo</a><sup>[3]</sup></p>
+<p>通过以上示例，可以看到通过AST我们可以对代码任意蹂躏，做出很多有意思的事情</p>
+<h2 id="AST在其他语言的应用"><a href="#AST在其他语言的应用" class="headerlink" title="AST在其他语言的应用"></a>AST在其他语言的应用</h2><p>除了Javascript，其他语言如HTML、CSS、SQL等也有广泛的AST应用。如下图，可以在这里找到对应语言的解析器，开启AST之门。</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s600x600_jfs/t1/43052/11/11500/153664/5d4c1b42E574a7b81/886ebd80827cc3fa.jpg" alt="其他AST"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在上述<a href="https://astexplorer.net/" target="_blank" rel="noopener">AST网站</a>中，可以看到HTML的解析器有个vue选项，读过vue源码的同学应该知道vue模板在转换成HTML之前会先将模板转换成AST然后生成render function进而生成VirtualDOM。我们平时开发对AST使用比较少，但其实到处都能见到AST的影子：babel、webpack、eslint、taro等等。希望能抛砖引玉，使同学们在各自团队产出更多基于AST的优秀工具、项目。</p>
+<p><strong>References</strong><br>[1] babel手册：<a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="noopener">https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md</a><br>[2] js-code-to-svg-flowchart：<a href="https://github.com/Bogdan-Lyashenko/js-code-to-svg-flowchart" target="_blank" rel="noopener">https://github.com/Bogdan-Lyashenko/js-code-to-svg-flowchart</a><br>[3] demo：<a href="https://bogdan-lyashenko.github.io/js-code-to-svg-flowchart/docs/live-editor/index.html" target="_blank" rel="noopener">https://bogdan-lyashenko.github.io/js-code-to-svg-flowchart/docs/live-editor/index.html</a>  </p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/AST/">AST</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/">
+                <span class="level-item">Javascript抽象语法树上篇(基础篇)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt="维C团">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        维C团
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/wecteam/blog" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/H5开发/">
+            <span class="level-start">
+                <span class="level-item">H5开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/NodeJS/">
+            <span class="level-start">
+                <span class="level-item">NodeJS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/知识分享/">
+            <span class="level-start">
+                <span class="level-item">知识分享</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time></div>
+                    <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树下篇(实践篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Javascript抽象语法树上篇(基础篇)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/H5开发/">H5开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/27/collision-detection/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
+                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="Javascript抽象语法树下篇(实践篇)" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh_cn");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
