@@ -6,6 +6,7 @@
     "version": "3.9.0"
   },
   "dependencies": {
+    "eslint": "^6.3.0",
     "hexo": "^3.9.0",
     "hexo-deployer-git": "^1.0.0",
     "hexo-generator-archive": "^0.1.5",
