@@ -7,7 +7,7 @@ meta:
 # Path or URL to RSS atom.xml
 rss: 
 # Path or URL to the website's logo to be shown on the left of the navigation bar or footer
-logo: /images/logo.svg
+logo: /images/og_image.png
 # Open Graph metadata
 # https://hexo.io/docs/helpers.html#open-graph
 open_graph:
@@ -34,20 +34,20 @@ navbar:
     links:
         Download on GitHub:
             icon: fab fa-github
-            url: 'https://github.com/ppoffice/hexo-theme-icarus'
+            url: 'https://github.com/wecteam/blog'
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section
     links:
-        Creative Commons:
-            icon: fab fa-creative-commons
-            url: 'https://creativecommons.org/'
-        Attribution 4.0 International:
-            icon: fab fa-creative-commons-by
-            url: 'https://creativecommons.org/licenses/by/4.0/'
+        # Creative Commons:
+        #     icon: fab fa-creative-commons
+        #     url: 'https://creativecommons.org/'
+        # Attribution 4.0 International:
+        #     icon: fab fa-creative-commons-by
+        #     url: 'https://creativecommons.org/licenses/by/4.0/'
         Download on GitHub:
             icon: fab fa-github
-            url: 'https://github.com/ppoffice/hexo-theme-icarus'
+            url: 'https://github.com/wecteam/blog'
 # Article display settings
 article:
     # Code highlight settings
@@ -75,29 +75,29 @@ comment:
     type: 
 # Donation entries
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Donation/
-donate:
-    -
-        # Donation entry name
-        type: alipay
-        # Qrcode image URL
-        qrcode: ''
-    -
-        # Donation entry name
-        type: wechat
-        # Qrcode image URL
-        qrcode: ''
-    -
-        # Donation entry name
-        type: paypal
-        # Paypal business ID or email address
-        business: ''
-        # Currency code
-        currency_code: USD
-    -
-        # Donation entry name
-        type: patreon
-        # URL to the Patreon page
-        url: ''
+# donate:
+#     -
+#         # Donation entry name
+#         type: alipay
+#         # Qrcode image URL
+#         qrcode: ''
+#     -
+#         # Donation entry name
+#         type: wechat
+#         # Qrcode image URL
+#         qrcode: ''
+#     -
+#         # Donation entry name
+#         type: paypal
+#         # Paypal business ID or email address
+#         business: ''
+#         # Currency code
+#         currency_code: USD
+#     -
+#         # Donation entry name
+#         type: patreon
+#         # URL to the Patreon page
+#         url: ''
 # Share plugin settings
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share
 share:
@@ -125,11 +125,11 @@ widgets:
         # Where should the widget be placed, left or right
         position: left
         # Author name to be shown in the profile widget
-        author: Your name
+        author: 维C团
         # Title of the author to be shown in the profile widget
-        author_title: Your title
+        author_title: ' '
         # Author's current location to be shown in the profile widget
-        location: Your location
+        location: 中国 深圳
         # Path or URL to the avatar to be shown in the profile widget
         avatar: 
         # Email address for the Gravatar to be shown in the profile widget
@@ -137,24 +137,24 @@ widgets:
         # Whether to show avatar image rounded or square
         avatar_rounded: false
         # Path or URL for the follow button
-        follow_link: 'https://github.com/ppoffice'
+        follow_link: 'https://github.com/wecteam/blog'
         # Links to be shown on the bottom of the profile widget
         social_links:
             Github:
                 icon: fab fa-github
-                url: 'https://github.com/ppoffice'
-            Facebook:
-                icon: fab fa-facebook
-                url: 'https://facebook.com'
-            Twitter:
-                icon: fab fa-twitter
-                url: 'https://twitter.com'
-            Dribbble:
-                icon: fab fa-dribbble
-                url: 'https://dribbble.com'
-            RSS:
-                icon: fas fa-rss
-                url: /
+                url: 'https://github.com/wecteam/blog'
+            # Facebook:
+            #     icon: fab fa-facebook
+            #     url: 'https://facebook.com'
+            # Twitter:
+            #     icon: fab fa-twitter
+            #     url: 'https://twitter.com'
+            # Dribbble:
+            #     icon: fab fa-dribbble
+            #     url: 'https://dribbble.com'
+            # RSS:
+            #     icon: fas fa-rss
+            #     url: /
     -
         # Widget name
         type: toc
@@ -168,7 +168,7 @@ widgets:
         # Links to be shown in the links widget
         links:
             Hexo: 'https://hexo.io'
-            PPOffice: 'https://github.com/ppoffice'
+            PPOffice: 'https://github.com/wecteam/blog'
     -
         # Widget name
         type: category

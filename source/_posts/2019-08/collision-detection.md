@@ -1,7 +1,8 @@
 ---
 title: 碰撞检测的向量实现
 subtitle: 1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现
-cover: blog/aabb/1.jpg
+# cover: blog/aabb/1.jpg
+# thumbnail: blog/aabb/1.jpg
 date: 2019-06-27 00:00:00
 tags: 
     - 碰撞检测
@@ -45,7 +46,7 @@ const vecA = new Vector2d(1,2);
 const vecB = new Vector2d(3,1);
 ```
 ![act1](//img11.360buyimg.com/jdphoto/s1290x1154_jfs/t1/68885/38/8539/71859/5d65e55bE2b5751b3/2b647f5612032dd9.jpg)
-
+<!--more-->
 ### 向量运算
 
 加法：向量的加法满足平行四边形法则和三角形法则。具体的，两向量相加还是一个向量，分别是x与y两个分量的相加。

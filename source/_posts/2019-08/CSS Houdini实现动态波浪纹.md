@@ -2,6 +2,7 @@
 title: CSS Houdini实现动态波浪纹
 subtitle: CSS Houdini号称CSS领域最令人振奋的革新，它直接将CSS的API暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的CSS属性，从而定制和扩展浏览器的展示行为。
 cover: http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg
+thumbnail: http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg
 date: 2019-07-22 19:00:00
 tags:
   - CSS
@@ -29,7 +30,7 @@ CSS Houdini 目前主要提供了以下几个 API：
 #### CSS Properties and Values API
 
 ![](http://img10.360buyimg.com/wq/jfs/t1/62083/29/7239/130597/5d552adfE3e66fe18/f2cd80f6ff6b96ef.png)
-
+<!--more-->
 允许在 CSS 中定义变量和使用变量，是目前支持程度最高的一个 API。CSS 变量以 `--` 开头，通过 `var()` 调用：
 
 ```css

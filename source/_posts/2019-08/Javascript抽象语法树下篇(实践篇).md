@@ -2,6 +2,7 @@
 title: Javascript抽象语法树下篇(实践篇)
 subtitle: AST应用
 cover: https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png
+thumbnail: https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png
 date: 2019-07-20 22:00:00
 tags: 
   - AST
@@ -53,7 +54,7 @@ const transformCode = escodegen.generate(ast);
 ```
 
 目前babel不管是从生态上还是文档上比esprima要好很多，因此推荐大家使用babel工具，本文示例也使用babel来做演示。
-
+<!--more-->
 ## 使用babel工具操作AST
 如上一章节所示
 - `@babel/parser`用于将代码转换为AST

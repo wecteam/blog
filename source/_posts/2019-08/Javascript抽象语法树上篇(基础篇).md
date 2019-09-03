@@ -2,6 +2,7 @@
 title: Javascript抽象语法树上篇(基础篇)
 subtitle: 介绍AST基础、规范解读、业界现状
 cover: https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png
+thumbnail: https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png
 date: 2019-07-19 22:00:00
 tags: 
   - AST
@@ -26,7 +27,7 @@ author:
 图中树状数据结构即AST，从这个过程可以看到将代码转成AST后，通过操作节点来改变代码。
 
 ![AST示例](https://img11.360buyimg.com/jdphoto/s1000x250_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png)  
-
+<!--more-->
 ## 如何获得抽象语法树
 获得抽象语法树的过程为：代码 => 词法分析 => 语法分析 => AST  
 `词法分析`：把字符串形式的代码转换为令牌（tokens）流。  
