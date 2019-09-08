@@ -3,7 +3,7 @@ title: CSS Houdini实现动态波浪纹
 subtitle: CSS Houdini号称CSS领域最令人振奋的革新，它直接将CSS的API暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的CSS属性，从而定制和扩展浏览器的展示行为。
 cover: http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg
 thumbnail: http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg
-date: 2019-07-22 19:00:00
+date: 2019-07-12 19:00:00
 tags:
   - CSS
 categories: H5开发
@@ -14,7 +14,7 @@ author:
 ---
 
 CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。
-
+<!--more-->
 ## 背景
 
 我们知道，浏览器在渲染页面时，首先会解析页面的 HTML 和 CSS，生成渲染树（rendering tree），再经由布局（layout）和绘制（painting），呈现出整个页面内容。在 Houdini 出现之前，这个流程上我们能操作的空间少之甚少，尤其是 layout 和 painting 环节，可以说是完全封闭，使得我们很难通过 polyfill 等类似的手段为欠支持的 CSS 特性提供兼容。而另一方面，语法特性的缺失也极大地限制了 CSS 的编程灵活性，社区中 sass、less、stylus 等 CSS 预处理技术的出现大多都源于这个原因，它们都希望通过预编译，突破 CSS 的局限性，让 CSS 拥有更强大的组织和编写能力。所以慢慢地，我们都不再手写 CSS，更方便、更灵活的 CSS 扩展语言成了 web 开发的主角。看到这样的情况，CSS Houdini 终于坐不住了。
@@ -30,7 +30,7 @@ CSS Houdini 目前主要提供了以下几个 API：
 #### CSS Properties and Values API
 
 ![](http://img10.360buyimg.com/wq/jfs/t1/62083/29/7239/130597/5d552adfE3e66fe18/f2cd80f6ff6b96ef.png)
-<!--more-->
+
 允许在 CSS 中定义变量和使用变量，是目前支持程度最高的一个 API。CSS 变量以 `--` 开头，通过 `var()` 调用：
 
 ```css
