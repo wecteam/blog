@@ -25,11 +25,11 @@ open_graph:
 navbar:
     # Navigation bar menu links
     menu:
-        Home: /
-        Archives: /archives
-        Categories: /categories
-        Tags: /tags
-        About: /about
+        主页: /
+        归档: /archives
+        分类: /categories
+        标签: /tags
+        关于我们: /about
     # Navigation bar links to be shown on the right
     links:
         Download on GitHub:
@@ -125,7 +125,7 @@ widgets:
         # Where should the widget be placed, left or right
         position: left
         # Author name to be shown in the profile widget
-        author: 维C团
+        author: ' '
         # Title of the author to be shown in the profile widget
         author_title: ' '
         # Author's current location to be shown in the profile widget
@@ -167,8 +167,9 @@ widgets:
         position: left
         # Links to be shown in the links widget
         links:
-            Hexo: 'https://hexo.io'
-            PPOffice: 'https://github.com/wecteam/blog'
+            凹凸实验室: 'https://aotu.io/'
+            奇舞团: 'https://75team.com/'
+            alloyteam: 'http://www.alloyteam.com/'
     -
         # Widget name
         type: category

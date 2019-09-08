@@ -10,7 +10,8 @@
         <% if (post.layout != 'page') { %>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="<%= date_xml(post.date) %>"><%= date(post.date) %></time>
+                <!--<time class="level-item has-text-grey" datetime="<%= date_xml(post.date) %>"><%= date(post.date) %></time>-->
+                <div class="level-item has-text-grey"><%= date(post.date) %></div>
                 <% if (post.categories && post.categories.length) { %>
                 <div class="level-item">
                 <%- list_categories(post.categories, {
@@ -25,7 +26,7 @@
                 <span class="level-item has-text-grey">
                     <% const words = word_count(post._content); %>
                     <% const time = duration((words / 150.0) * 60, 'seconds') %>
-                    <%= `${ time.locale(get_config('language', 'en')).humanize() } ${ __('article.read')} (${ __('article.about') } ${ words } ${ __('article.words') })` %>
+                    <%= `${ time.locale('zh-cn').humanize() } ${ __('article.read')} (${ __('article.about') } ${ words } ${ __('article.words') })` %>
                 </span>
                 <% } %>
                 <% if (!index && (has_config('plugins.busuanzi') ? get_config('plugins.busuanzi') : false)) { %>
