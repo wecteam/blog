@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/27/collision-detection/index.html">
 <meta property="og:site_name" content="wecTeam">
 <meta property="og:description" content="注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现 前言2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在">
-<meta property="og:locale" content="zh_cn">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg">
 <meta property="og:updated_time" content="2019-09-03T14:21:05.212Z">
 <meta name="twitter:card" content="summary">
@@ -102,19 +102,19 @@
             <div class="navbar-start">
                 
                 <a class="navbar-item"
-                href="/">Home</a>
+                href="/">主页</a>
                 
                 <a class="navbar-item"
-                href="/archives">Archives</a>
+                href="/archives">归档</a>
                 
                 <a class="navbar-item"
-                href="/categories">Categories</a>
+                href="/categories">分类</a>
                 
                 <a class="navbar-item"
-                href="/tags">Tags</a>
+                href="/tags">标签</a>
                 
                 <a class="navbar-item"
-                href="/about">About</a>
+                href="/about">关于我们</a>
                 
             </div>
             
@@ -131,7 +131,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Search" href="javascript:;">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -155,7 +155,8 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>
+                <!--<time class="level-item has-text-grey" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>-->
+                <div class="level-item has-text-grey">2019-06-27</div>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/知识分享/">知识分享</a>
@@ -165,7 +166,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 read (About 3612 words)
+                    24 分钟 读完 (大约 3612 个字)
                 </span>
                 
                 
@@ -332,11 +333,11 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img  src="/images/avatar.png" alt="维C团">
+                        <img  src="/images/avatar.png" alt=" ">
                     </figure>
                     
                     <p class="is-size-4 is-block">
-                        维C团
+                         
                     </p>
                     
                     
@@ -357,7 +358,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        文章
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -367,7 +368,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        分类
                     </p>
                     <p class="title has-text-weight-normal">
                         3
@@ -377,7 +378,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        标签
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -387,7 +388,7 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
-                Follow</a>
+                关注我</a>
         </div>
         
         
@@ -413,28 +414,39 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            链接
         </h3>
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">Hexo</span>
+                        <span class="level-item">凹凸实验室</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
+                        <span class="level-item tag">aotu.io</span>
                     </span>
                 </a>
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://github.com/wecteam/blog" target="_blank">
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">PPOffice</span>
+                        <span class="level-item">奇舞团</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">github.com</span>
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
                     </span>
                 </a>
             </li>
@@ -451,7 +463,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                分类
             </h3>
             <ul class="menu-list">
             <li>
@@ -488,7 +500,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            标签云
         </h3>
         <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
     </div>
@@ -502,7 +514,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -589,14 +601,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
-                    <span class="level-item">七月 2019</span>
+                    <span class="level-item">July 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">3</span>
@@ -607,7 +619,7 @@
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
                 <span class="level-start">
-                    <span class="level-item">六月 2019</span>
+                    <span class="level-item">June 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -624,7 +636,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -676,7 +688,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -763,14 +775,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
-                    <span class="level-item">七月 2019</span>
+                    <span class="level-item">July 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">3</span>
@@ -781,7 +793,7 @@
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
                 <span class="level-start">
-                    <span class="level-item">六月 2019</span>
+                    <span class="level-item">June 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -798,7 +810,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -878,7 +890,7 @@
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh_cn");</script>
+<script>moment.locale("zh-Hans");</script>
 
 <script>
 var IcarusThemeSettings = {
@@ -959,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -986,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -998,11 +1010,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
             },
             CONTENT_URL: '/content.json',
         };
