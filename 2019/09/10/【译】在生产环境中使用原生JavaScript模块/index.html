@@ -7,18 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>wecTeam</title>
+<title>【译】在生产环境中使用原生JavaScript模块 - wecTeam</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="wecTeam">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="原文地址：https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/原文作者：PHILIP WALTON译者：龚亮 ，校对：刘辉声明：本翻译仅做学习交流使用，转载请注明来源  两年前，我写了一篇有关module/nomodule技术的文章，这项技术允许你在编写ES2015+代码时，使">
+<meta name="keywords" content="type=&quot;module&quot;,代码拆分,rollup打包,modulepreload">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】在生产环境中使用原生JavaScript模块">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/【译】在生产环境中使用原生JavaScript模块/index.html">
 <meta property="og:site_name" content="wecTeam">
+<meta property="og:description" content="原文地址：https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/原文作者：PHILIP WALTON译者：龚亮 ，校对：刘辉声明：本翻译仅做学习交流使用，转载请注明来源  两年前，我写了一篇有关module/nomodule技术的文章，这项技术允许你在编写ES2015+代码时，使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg">
+<meta property="og:updated_time" content="2019-09-10T09:59:10.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wecTeam">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="【译】在生产环境中使用原生JavaScript模块">
+<meta name="twitter:description" content="原文地址：https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/原文作者：PHILIP WALTON译者：龚亮 ，校对：刘辉声明：本翻译仅做学习交流使用，转载请注明来源  两年前，我写了一篇有关module/nomodule技术的文章，这项技术允许你在编写ES2015+代码时，使">
+<meta name="twitter:image" content="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg">
 
 
 
@@ -88,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="wecTeam" height="28">
+                <img src="/images/og_image.png" alt="【译】在生产环境中使用原生JavaScript模块" height="28">
             
             </a>
         </div>
@@ -96,7 +101,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/">主页</a>
                 
                 <a class="navbar-item"
@@ -138,13 +143,12 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-image">
-        <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="image is-7by1">
+        <span  class="image is-7by1">
             <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
-        </a>
+        </span>
     </div>
     
     <div class="card-content article ">
@@ -171,7 +175,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/">【译】在生产环境中使用原生JavaScript模块</a>
+                【译】在生产环境中使用原生JavaScript模块
             
         </h1>
         <div class="content">
@@ -179,16 +183,163 @@
 <p>原文地址：<a href="https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/" target="_blank" rel="noopener">https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/</a><br>原文作者：PHILIP WALTON<br>译者：龚亮 ，校对：刘辉<br>声明：本翻译仅做学习交流使用，转载请注明来源</p>
 </blockquote>
 <p>两年前，我写了一篇有关module/nomodule技术的<a href="https://philipwalton.com/articles/deploying-es2015-code-in-production-today/" target="_blank" rel="noopener">文章</a>，这项技术允许你在编写ES2015+代码时，使用打包器和转换器生成两个版本的代码库，一个具有现代语法的版本（通过<code>&lt;script type=&quot;module&quot;&gt;</code>加载）和一个使用ES5语法的版本（通过<code>&lt;script nomodule&gt;</code>加载）。该技术允许你向支持模块（<em>译者注：指ECMA制定的标准的export/import模块语法及其加载机制，又称为ES Module、ESM、ES6 Module、ES2015 Module，下文中将出现很多”模块”一词，都是这个含义</em>）的浏览器发送更少的代码，现在大多数Web框架和CLI都支持它。</p>
+<a id="more"></a>
+<p>但是那时候，尽管能够在生产中部署现代JavaScript，大多数浏览器也都支持模块，我仍然建议打包你的代码。  </p>
+<p>为什么？主要是因为我觉得在浏览器中加载模块很慢。尽管像HTTP/2这样的新协议理论上有效地支持加载大量小文件，但当时的所有性能研究都认为使用打包器更有效。  </p>
+<p>其实当时的研究是不完整的。该研究所使用的模块测试示例由部署到生产环境中未优化和未缩小的源文件组成。它并没有将优化后的模块包与优化后的原始脚本进行比较。  </p>
+<p>不过，当时并没有更好的方法来部署模块(<em>译者注：指遵循ES2015模块规范的文件</em>)。但是现在，打包技术取得了一些最新进展，可以将生产代码部署为ES2015模块(包含静态导入和动态导入)，从而获得比非模块(<em>译者注：指除ES2015模块外的传统部署方式</em>)更好的性能。实际上，这个站点(<em>译者注：指原文章所在的网站</em>)已经在生产环境中使用原生模块好几个月了。</p>
+<h1 id="对模块的误解"><a href="#对模块的误解" class="headerlink" title="对模块的误解"></a>对模块的误解</h1><p>与我交流过的很多人都认为模块（<em>译者注：指遵循ES2015模块规范的部署方式</em>）是大规模生产环境下应用程序的一个选择罢了。他们中的许多人引用了我刚刚提到的研究，并建议不要在生产环境中使用模块，除非:</p>
+<blockquote>
+<p>…小型web应用程序，总共只有不到100个模块，依赖树相对较浅(即最大深度小于5)。</p>
+</blockquote>
+<p>如果你曾经查看过node_modules目录，可能知道即使是小型应用程序也很容易有超过100个模块依赖项。我们来看看npm上一些流行的工具包有多少个模块依赖项吧：</p>
+<table>
+    <tbody>
+        <tr>
+            <th style="background-color: #eee;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">包</font></font></th>
+            <th style="background-color: #eee;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">模块数量</font></font></th>
+        </tr>
+        <tr>
+            <td><a href="https://www.npmjs.com/package/date-fns" target="_blank" rel="noopener"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">date-fns</font></font></a></td>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">729</font></font></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.npmjs.com/package/lodash-es" target="_blank" rel="noopener"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">lodash-es</font></font></a></td>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">643</font></font></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.npmjs.com/package/rxjs" target="_blank" rel="noopener"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rxjs</font></font></a></td>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">226</font></font></td>
+        </tr>
+    </tbody>
+</table>
+
+<p>人们对模块的主要误解是，在生产环境中使用模块时只有两个选择：(1)按原样部署所有源代码(包括node_modules目录)，(2)完全不使用模块。</p>
+<p>如果你仔细考虑我所引用研究给出的建议，它没有说加载模块比普通加载脚本慢，也没有说你不应该使用模块。它只是说，如果你将数百个未经过压缩的模块文件部署到生产环境中，Chrome将无法像加载单个经过压缩的模块一样快速的加载它们。所以建议继续使用打包器、编译器和压缩器（<em>译者注：原文是minifier，指去除空格注释等</em>）。  </p>
+<p>实际情况是，<strong>你可以在生产环境中使用上面所有技术的同时，也可以使用ES2015模块！</strong></p>
+<p>事实上，因为浏览器已经知道如何加载模块（对不支持模块的浏览器可以做降级处理），所以模块才是我们应该打包出的格式。如果你检查大多数流行的打包器生成的输出代码，你会发现很多样板代码（<em>译者注：指rollup和webpack中的runtime的代码</em>），其唯一的目的是动态加载其它代码并管理依赖，但如果我们只使用带有<code>import</code>和<code>export</code>语句的模块，则不需要这些代码！</p>
+<p>幸运的是，今天至少有一个流行的打包器（Rollup）支持模块作为输出格式，这意味着可以打包代码并在生产环境中部署模块（没有加载器样板代码）。由于Rollup（根据我的经验，这是最好的打包器）具有出色的tree-shaking，使得Rollup打包出的模块是目前所有打包器输出模块中代码最少的。</p>
+<p style="background:#f8f8f8;padding:10px;">
+<font style="font-weight: bold">更新：</font> Parcel<a src="https://twitter.com/devongovett/status/1163792519764877312">计划</a>在下一版本中添加模块支持。Webpack目前不支持模块输出格式，但这里有一些相关讨论<a src="https://github.com/webpack/webpack/issues/2933">＃2933</a>，<a src="https://github.com/webpack/webpack/issues/8895">＃8895</a>，<a src="https://github.com/webpack/webpack/issues/8896">＃8896</a>。
+</p>
+另一个误解是，除非你的所有依赖项都使用模块，否则你不能使用模块。不幸的是大多数npm包仍然以CommonJS的形式发布(甚至有些包以ES2015编写，但在发布到npm之前转换为CommonJS)！
+
+<p>尽管如此，Rollup有一个插件（<a href="https://github.com/rollup/rollup-plugin-commonjs" target="_blank" rel="noopener">rollup-plugin-commonjs</a>），它可以将CommonJS源代码转换为<code>ES2015</code>。如果一开始你的依赖项采用ES2015模块管理肯定会<a href="https://rollupjs.org/guide/en/#why-are-es-modules-better-than-commonjs-modules" target="_blank" rel="noopener">更好</a>，但是有一些依赖关系不是这样管理的并不会阻止你部署模块。</p>
+<p>在本文的剩余部分，我将向你展示如何打包到模块（包括使用动态导入和代码拆分的粒度），解释为什么它通常比原始脚本更高效，并展示如何处理不支持模块的浏览器。</p>
+<h1 id="最优打包策略"><a href="#最优打包策略" class="headerlink" title="最优打包策略"></a>最优打包策略</h1><p>打包生产代码一直是需要权衡利弊。一方面，希望代码尽快加载和执行。另一方面，又不希望加载用户实际用不到的代码。</p>
+<p>同时，还希望代码尽可能地被缓存。打包的一个大问题是，即使只是一行代码有修改也会使整个打包后的包缓存失效。如果直接使用ES2015模块部署应用程序（就像它们在源代码中一样），那么你可以自由地进行小的更改，同时让应用程序的大部分代码仍然保留在缓存中。但就像我已经指出的那样，这也意味着你的代码需要更长时间才能被新用户的浏览器加载完成。</p>
+<p>因此，找到最优打包粒度的挑战是在加载性能和长期缓存之间取得适当的平衡。</p>
+<p>默认情况下，大多数打包器在动态导入时进行代码拆分，但我认为仅动态导入的代码拆分粒度不够细，特别是对于拥有大量留存用户的站点（缓存很重要）。</p>
+<p>在我看来，你应该尽可能细粒度地拆分代码，直到开始显著地影响加载性能为止。虽然我强烈建议你自己动手进行分析，但是查阅上文引用的研究可以得出一个大致的结论。当加载少于100个模块时，没有明显的性能差异。针对HTTP/2性能的研究发现，加载少于50个文件时没有明显的差异(尽管他们只测试了1、6、50和1000，所以100个文件可能就可以了)。</p>
+<p>那么，最好的代码拆分方法是什么呢？除了通过动态导入做代码拆分外，我还建议以npm包为粒度做代码拆分，node_modules中的模块都合并到以其包名命名的文件中。</p>
+<h1 id="包级别的代码拆分"><a href="#包级别的代码拆分" class="headerlink" title="包级别的代码拆分"></a>包级别的代码拆分</h1><p>如上所述，打包技术的一些最新进展使得高性能模块部署成为可能。我提到的增强是指Rollup的两个新功能：通过动态<code>import()</code>时<a href="https://rollupjs.org/guide/en/#code-splitting" target="_blank" rel="noopener">自动代码拆分</a>（在v1.0.0中添加）和通过<code>manualChunks</code>选项进行<a href="https://rollupjs.org/guide/en/#manualchunks" target="_blank" rel="noopener">可编程的手动代码拆分</a>（在v1.11.0中添加）。</p>
+<p>有了这两个功能，现在很容易在包级别进行代码拆分的构建配置。</p>
+<p>这是一个使用<code>manualChunks</code>选项配置的例子，每个位于node_module里的模块将被合并到以包名命名的文件里(当然，这种模块路径里肯定包含node_modules)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  input: &#123;</span><br><span class="line">    main: &apos;src/main.mjs&apos;,</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    dir: &apos;build&apos;,</span><br><span class="line">    format: &apos;esm&apos;,</span><br><span class="line">    entryFileNames: &apos;[name].[hash].mjs&apos;,</span><br><span class="line">  &#125;,</span><br><span class="line">  manualChunks(id) &#123;</span><br><span class="line">    if (id.includes(&apos;node_modules&apos;)) &#123;</span><br><span class="line">      // Return the directory name following the last `node_modules`.</span><br><span class="line">      // 返回最后一个node_modules后面跟着的目录名</span><br><span class="line">      // Usually this is the package, but it could also be the scope.</span><br><span class="line">      // 通常都会是一个包名，也有可能是一个私有域</span><br><span class="line">      const dirs = id.split(path.sep);</span><br><span class="line">      return dirs[dirs.lastIndexOf(&apos;node_modules&apos;) + 1];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>manualChunks</code>选项接收一个函数，该函数将模块文件路径作为惟一的参数，也可以返回一个文件名，参数中的模块将被加入到这个文件里。如果没有返回任何内容，参数中的模块将被添加到默认文件中。</p>
+<p>考虑从<code>lodash-es</code>包中导入<code>cloneDeep()</code>、<code>debounce()</code>和<code>find()</code>模块的一个应用程序。上面的配置将把各个模块(以及它们导入的任何其它<code>lodash</code>模块)一起放入一个名为<code>npm.lodash-es.XXXX.mjs</code>的输出文件中，(其中XXXX是lodash-es模块文件的哈希值)。</p>
+<p>在该文件的末尾，你会看到这样的导出语句(注意，它只包含添加到块中模块的导出语句，而不是所有lodash模块):</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export &#123;cloneDeep, debounce, find&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>希望这个例子能清楚地说明使用Rollup手动拆分代码的工作原理。就我个人而言，我认为使用<code>import</code>和<code>export</code>语句的代码拆分比使用非标准的、特定于打包器实现的代码拆分更容易阅读和理解。</p>
+<p>例如，跟踪这个文件中发生了什么很难(我以前使用webpack对一个项目做代码拆分后的实际输出)，而且在支持模块的浏览器中其实不需要这些代码:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(window[&quot;webpackJsonp&quot;] = window[&quot;webpackJsonp&quot;] || []).push([[&quot;import1&quot;],&#123;</span><br><span class="line"></span><br><span class="line">/***/ &quot;tLzr&quot;:</span><br><span class="line">/*!*********************************!*\</span><br><span class="line">  !*** ./app/scripts/import-1.js ***!</span><br><span class="line">  \*********************************/</span><br><span class="line">/*! exports provided: import1 */</span><br><span class="line">/***/ (function(module, __webpack_exports__, __webpack_require__) &#123;</span><br><span class="line"></span><br><span class="line">&quot;use strict&quot;;</span><br><span class="line">__webpack_require__.r(__webpack_exports__);</span><br><span class="line">/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, &quot;import1&quot;, function() &#123; return import1; &#125;);</span><br><span class="line">/* harmony import */ var _dep_1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dep-1 */ &quot;6xPP&quot;);</span><br><span class="line"></span><br><span class="line">const import1 = &quot;imported: &quot; + _dep_1__WEBPACK_IMPORTED_MODULE_0__[&quot;dep1&quot;];</span><br><span class="line"></span><br><span class="line">/***/ &#125;)</span><br><span class="line"></span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="如果你有数百个npm依赖项怎么办？"><a href="#如果你有数百个npm依赖项怎么办？" class="headerlink" title="如果你有数百个npm依赖项怎么办？"></a>如果你有数百个npm依赖项怎么办？</h2><p>我在上面说过，我认为包级别上的代码拆分是站点代码拆分的最佳状态，而又不会太激进。</p>
+<p>当然，如果你的应用程序从数百个不同的npm包中导入模块，那么浏览器可能无法有效地加载所有模块。</p>
+<p>但是，如果你确实有很多npm依赖项，那么先不要完全放弃这个策略。请记住，你可能不会在每个页面上加载所有的npm依赖项，因此检查实际加载了多少依赖项非常重要。</p>
+<p>尽管如此，确实有一些非常大的应用程序具有如此多的npm依赖关系，以至于它们不能实际地对其中的每一个应用程序进行代码拆分。如果你是这种情况，我建议你找出一种方法来将一些依赖项分组到公共文件中。一般来说，你可以将可能在同一时间发生变化的包(例如，<code>React</code>和<code>react-dom</code>)分组，因为它们必须一起失效(例如，我稍后展示的示例应用程序将所有React依赖项<a href="https://github.com/philipwalton/rollup-native-modules-boilerplate/blob/da5e616c24d554dd8ffe562a7436709106be9eed/rollup.config.js#L159-L162" target="_blank" rel="noopener">分组为同一个文件</a>)。</p>
+<h1 id="动态导入"><a href="#动态导入" class="headerlink" title="动态导入"></a>动态导入</h1><p>使用原生<code>import</code>语句进行代码拆分和模块加载的一个缺点是，需要开发人员对不支持模块的浏览器做兼容处理。</p>
+<p>如果你想使用动态<code>import()</code>懒加载代码，那么你还必须处理这样一个事实：有些浏览器<a href="https://caniuse.com/#feat=es6-module" target="_blank" rel="noopener">支持模块</a>，但<a href="https://caniuse.com/#feat=es6-module-dynamic-import" target="_blank" rel="noopener">不支持动态<code>import()</code></a>（Edge 16–18, Firefox 60–66, Safari 11, Chrome 61–63）。</p>
+<p>幸运的是，一个很小的(~400字节)、非常高性能的polyfill可用于动态<code>import()</code>。</p>
+<p>向站点添加polyfill很容易。你所要做的是导入它并在应用程序的主入口点初始化它(在调用<code>import()</code>之前):</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import dynamicImportPolyfill from &apos;dynamic-import-polyfill&apos;;</span><br><span class="line"></span><br><span class="line">// This needs to be done before any dynamic imports are used. And if your</span><br><span class="line">// modules are hosted in a sub-directory, the path must be specified here.</span><br><span class="line">dynamicImportPolyfill.initialize(&#123;modulePath: &apos;/modules/&apos;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>最后要做的是告诉Rollup将输出代码中的动态<code>import()</code>重命名为你指定的另一个名称(通过<a href="https://rollupjs.org/guide/en/#outputdynamicimportfunction" target="_blank" rel="noopener"><code>output.dynamicImportFunction</code></a>选项配置)。动态导入polyfill默认使用名称为<strong>import</strong>，但是可以<a href="https://github.com/GoogleChromeLabs/dynamic-import-polyfill#configuration-options" target="_blank" rel="noopener">配置</a>它。</p>
+<p>需要重命名<code>import()</code>语句的原因是<code>import</code>是JavaScript中的一个关键字。这意味着不可能使用相同的名称来填充原生<code>import()</code>，因为这样做会导致语法错误。</p>
+<p>让Rollup在构建时重命名它是很好的，这意味着你的源代码可以使用标准版本，并且在将来不再需要polyfill时，你将不必重新更改它。</p>
+<h2 id="高效加载JavaScript模块"><a href="#高效加载JavaScript模块" class="headerlink" title="高效加载JavaScript模块"></a>高效加载JavaScript模块</h2><p>当你使用代码拆分的时候，最好预加载所有马上要使用的模块(即主入口模块导入图中的所有模块)。</p>
+<p>但是，当你加载实际的JavaScript模块（通过<code>&lt;script type=&quot;module&quot;&gt;</code>以及随后<code>import</code>语句引用的模块时），你将希望使用<a href="https://developers.google.com/web/updates/2017/12/modulepreload" target="_blank" rel="noopener"><code>modulepreload</code></a>而不是传统的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content" target="_blank" rel="noopener"><code>preload</code></a>(仅适用于原始脚本)。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;modulepreload&quot; href=&quot;/modules/main.XXXX.mjs&quot;&gt;</span><br><span class="line">&lt;link rel=&quot;modulepreload&quot; href=&quot;/modules/npm.pkg-one.XXXX.mjs&quot;&gt;</span><br><span class="line">&lt;link rel=&quot;modulepreload&quot; href=&quot;/modules/npm.pkg-two.XXXX.mjs&quot;&gt;</span><br><span class="line">&lt;link rel=&quot;modulepreload&quot; href=&quot;/modules/npm.pkg-three.XXXX.mjs&quot;&gt;</span><br><span class="line">&lt;!-- ... --&gt;</span><br><span class="line">&lt;script type=&quot;module&quot; src=&quot;/modules/main.XXXX.mjs&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>实际上，对于预加载原生的模块，<code>modulepreload</code>实际上比传统的<code>preload</code>要严格得多，它不仅下载文件，而且在主线程之外立即开始解析和编译文件。传统的预加载无法做到这一点，因为它不知道在预加载时该文件将用作模块脚本还是原始脚本。</p>
+<p>这意味着通过<code>modulepreload</code>加载模块通常会更快，而且在实例化时不太可能导致主线程卡顿。</p>
+<h2 id="生成modulepreload列表"><a href="#生成modulepreload列表" class="headerlink" title="生成modulepreload列表"></a>生成<code>modulepreload</code>列表</h2><p>Rollup的<a href="https://rollupjs.org/guide/en/#generatebundle" target="_blank" rel="noopener">bundle</a>对象中的每个入口文件在其静态依赖关系图中包含完整的导入列表，因此在Rollup的<a href="https://rollupjs.org/guide/en/#generatebundle" target="_blank" rel="noopener">generateBundle</a>钩子中很容易获得需要预加载哪些文件的列表。</p>
+<p>虽然在npm上确实存在一些modulepreload插件，但是为图中的每个入口点生成一个modulepreload列表只需要几行代码，所以我更愿意像这样手动创建它:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  generateBundle(options, bundle) &#123;</span><br><span class="line">    // A mapping of entry chunk names to their full dependency list.</span><br><span class="line">    const modulepreloadMap = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    for (const [fileName, chunkInfo] of Object.entries(bundle)) &#123;</span><br><span class="line">      if (chunkInfo.isEntry || chunkInfo.isDynamicEntry) &#123;</span><br><span class="line">        modulepreloadMap[chunkInfo.name] = [fileName, ...chunkInfo.imports];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Do something with the mapping...</span><br><span class="line">    console.log(modulepreloadMap);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，这里是我如何为这个站点以及我的<a href="https://github.com/philipwalton/rollup-native-modules-boilerplate/blob/78c687bf757374b5e685508e3afc9560a86a3c96/rollup.config.js#L57-L84" target="_blank" rel="noopener">demo应用</a>生成<a href="https://github.com/philipwalton/blog/blob/90e914731c77296dccf2ed315599326c6014a080/tasks/javascript.js#L18-L43" target="_blank" rel="noopener">modulepreload列表的</a>。</p>
+<p style="background:#f8f8f8;padding:10px;">
+注意：虽然对于模块脚本来说，modulepreload绝对比原始的preload更好，但它对浏览器的支持更差(目前只支持chrome)。如果你的流量中有相当一部分是非chrome流量，那么使用classic preload是有意义的。<br>
+<br>
+与使用modulepreload不同，使用preload时需要注意的一点是，预加载脚本不会放在浏览器的模块映射中，这意味着可能会不止一次地处理预加载的请求(例如，如果模块在浏览器完成预加载之前导入文件)。
+</p>
+
+<h1 id="为什么要部署原生模块？"><a href="#为什么要部署原生模块？" class="headerlink" title="为什么要部署原生模块？"></a>为什么要部署原生模块？</h1><p>如果你已经在使用像webpack这样的打包器，并且已经在使用细粒度代码拆分和预加载这些文件(与我在这里描述的类似)，那么你可能想知道是否值得改变策略，使用原生模块。下面是我认为你应该考虑它的几个原因，以及为什么打包到原生模块比使用带有模块加载代码的原始脚本要好。</p>
+<h3 id="更小的代码总量"><a href="#更小的代码总量" class="headerlink" title="更小的代码总量"></a>更小的代码总量</h3><p>当使用原生模块时，现代浏览器不必为用户加载任何不必要的模块加载或依赖关系管理代码。例如，如果使用原生模块，则根本不需要<a href="https://webpack.js.org/concepts/manifest/" target="_blank" rel="noopener">webpack运行时和清单</a>。</p>
+<h3 id="更好的预加载"><a href="#更好的预加载" class="headerlink" title="更好的预加载"></a>更好的预加载</h3><p>正如我在前一节中提到的，使用<code>modulepreload</code>允许你加载代码并在主线程之外解析/编译代码。在其他条件相同的情况下，这意味着页面的交互速度更快，并且主线程在用户交互期间不太可能被阻塞。</p>
+<p>因此，无论你如何细粒度地对应用程序进行代码拆分，使用import语句和<code>modulepreload</code>加载模块要比通过原始script标签和常规preload加载更有效(特别是如果这些标签是动态生成的，并在运行时添加到DOM中)。</p>
+<p>换句话说，由Rollup打包出的20个模块文件将比由webpack打包出的20个原始脚本文件加载得更快(不是因为webpack，而是因为它不是原生模块)。</p>
+<h3 id="更面向未来"><a href="#更面向未来" class="headerlink" title="更面向未来"></a>更面向未来</h3><p>许多最令人兴奋的新浏览器特性都是构建在模块之上的，而不是原始的脚本。这意味着，如果你想使用这些特性中的任何一个，你的代码需要作为原生模块部署，而不是转换为ES5并通过原始的script标签加载(我在尝试使用实验性<a href="https://developers.google.com/web/updates/2019/03/kv-storage" target="_blank" rel="noopener">KV存储API</a>时曾提到过这个问题)。</p>
+<p>以下是一些仅限模块才有的最令人兴奋的新功能：</p>
+<ul>
+<li><a href="https://github.com/tc39/proposal-javascript-standard-library/" target="_blank" rel="noopener">内置模块</a></li>
+<li><a href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/html-modules-explainer.md" target="_blank" rel="noopener">HTML模块</a></li>
+<li><a href="https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/master/CSSModules/v1Explainer.md" target="_blank" rel="noopener">CSS模块</a></li>
+<li><a href="https://github.com/whatwg/html/pull/4407" target="_blank" rel="noopener">JSON模块</a></li>
+<li><a href="https://github.com/WICG/import-maps" target="_blank" rel="noopener">导入地图</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/workers.html#module-worker-example" target="_blank" rel="noopener">workers、service workers和window之间共享模块</a></li>
+</ul>
+<h1 id="支持旧版浏览器"><a href="#支持旧版浏览器" class="headerlink" title="支持旧版浏览器"></a>支持旧版浏览器</h1><p>在全球范围内，超过83%的浏览器原生支持JavaScript模块(包括动态导入)，因此对于你的大多数用户来说，不需要做任何处理就可以使用这项技术。</p>
+<p>对于支持模块但不支持动态导入的浏览器，可以使用上面提到的<a href="https://github.com/GoogleChromeLabs/dynamic-import-polyfill" target="_blank" rel="noopener"><code>dynamic-import-polyfill</code></a>。由于polyfill非常小，并且在可用时将使用浏览器的原生动态<code>import()</code>，因此添加这个polyfill几乎没有大小或性能成本。</p>
+<p>对于根本不支持模块的浏览器，可以使用我前面提到的module/nomodule技术。</p>
+<h2 id="一个实际的例子"><a href="#一个实际的例子" class="headerlink" title="一个实际的例子"></a>一个实际的例子</h2><p>由于谈论跨浏览器兼容性总是比实际实现它要容易，所以我构建了一个<a href="https://rollup-native-modules-boilerplate.glitch.me/" target="_blank" rel="noopener">演示应用程序</a>，它使用了我在这里阐述的所有技术。</p>
+<figure style="margin:0;">
+    <a href="https://rollup-native-modules-boilerplate.glitch.me/" target="_blank" rel="noopener">
+        <img srcset="https://wq.360buyimg.com/data/ppms/picture/native_javascript_modules_demo_1400w_82ff366688.png" src="https://wq.360buyimg.com/data/ppms/picture/native_javascript_modules_demo_1400w_82ff366688.png" alt="A demo app showing how to use native JavaScript modules with legacy browser support">
+    </a>
+</figure>
+
+<p>这个演示程序可以在不支持动态<code>import()</code>的浏览器中运行(如Edge 18和Firefox ESR)，也可以在不支持模块的浏览器中运行(如Internet Explorer 11)。</p>
+<p>为了说明这个策略不仅适用于简单的用例，我还包含了当今复杂的JavaScript应用程序需要的许多特性:</p>
+<ul>
+<li>Babel转换（包括JSX）</li>
+<li>CommonJS的依赖关系（例如react，react-dom）</li>
+<li>CSS依赖项</li>
+<li>Asset hashing</li>
+<li>代码拆分</li>
+<li>动态导入（带有polyfill降级机制）</li>
+<li>module/nomodule降级机制</li>
+</ul>
+<p>代码托管在<a href="https://github.com/philipwalton/rollup-native-modules-boilerplate" target="_blank" rel="noopener">GitHub</a>上(因此你可以派生repo并自己构建它)，而演示则托管在<a href="https://glitch.com/edit/#!/rollup-native-modules-boilerplate" target="_blank" rel="noopener">Glitch</a>上，因此你可以重新组合代码并使用这些特性。</p>
+<p>最重要的是查看示例中使用的<a href="https://github.com/philipwalton/rollup-native-modules-boilerplate/blob/master/rollup.config.js" target="_blank" rel="noopener">Rollup配置</a>，因为它定义了如何生成最终模块。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>希望这篇文章让你相信，现在不仅可以在生产环境中部署原生JavaScript模块，而且这样做可以提高站点的加载和运行时性能。</p>
+<p>以下是快速完成此工作所需步骤的摘要：</p>
+<ul>
+<li>使用打包器，但要确保输出格式为ES2015模块</li>
+<li>积极地进行代码拆分(如果可能的话，一直到node包)</li>
+<li>预加载静态依赖关系图中的所有模块(通过<code>modulepreload</code>)</li>
+<li>使用polyfill来支持不支持动态<code>import()</code>的浏览器</li>
+<li>使用<code>&lt;script nomodule&gt;</code>支持根本不支持模块的浏览器</li>
+</ul>
+<p>如果你已经在构建设置中使用了Rollup，我希望你尝试这里介绍的技术，并在生产环境中部署原生模块(带有代码拆分和动态导入)。如果你这样做了，请<a href="https://twitter.com/philwalton" target="_blank" rel="noopener">告诉我</a>进展如何，因为我既想听你的问题，也想听你的成功故事！</p>
+<p>模块是JavaScript的明确未来，我希望我们所有的工具和依赖都能尽快包含模块。希望本文能在这个方向上起到一点推动作用。</p>
+<blockquote>
+<p>译者评：<br>1.作者上一篇文章的译文：<a href="https://jdc.jd.com/archives/4911" target="_blank" rel="noopener">https://jdc.jd.com/archives/4911</a><br>2.另外一篇讲JavaScript原生模块的文章：<a href="https://www.jianshu.com/p/9aae3884b05b" target="_blank" rel="noopener">https://www.jianshu.com/p/9aae3884b05b</a></p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/modulepreload/">modulepreload</a>, <a class="has-link-grey -link" href="/tags/rollup打包/">rollup打包</a>, <a class="has-link-grey -link" href="/tags/type-module/">type="module"</a>, <a class="has-link-grey -link" href="/tags/代码拆分/">代码拆分</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -198,249 +349,19 @@
 
 
 
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-07-20T14:00:00.000Z">2019-07-20</time>-->
-                <div class="level-item has-text-grey">2019-07-20</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1787 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/">
+                <span class="level-item">Javascript抽象语法树下篇(实践篇)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/">Javascript抽象语法树下篇(实践篇)</a>
-            
-        </h1>
-        <div class="content">
-            <p>上篇已经对AST基础做了介绍，本篇介绍AST的运用</p>
-<h2 id="AST应用的三个要点"><a href="#AST应用的三个要点" class="headerlink" title="AST应用的三个要点"></a>AST应用的三个要点</h2><ol>
-<li>需要一个解析器，将代码转换为AST</li>
-<li>需要一个遍历器，能够遍历AST,并能够方便的对AST节点进行增删改查等操作</li>
-<li>需要一个代码生成器，能够将AST转换为代码</li></ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树上篇(基础篇)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-07-19T14:00:00.000Z">2019-07-19</time>-->
-                <div class="level-item has-text-grey">2019-07-19</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/NodeJS/">NodeJS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1886 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/">Javascript抽象语法树上篇(基础篇)</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><h2 id="为什么要了解抽象语法树"><a href="#为什么要了解抽象语法树" class="headerlink" title="为什么要了解抽象语法树"></a>为什么要了解抽象语法树</h2><p>日常工作中，我们会碰到js代码解析的场景，比如分析代码中require了哪些包，有些什么关键API调用，大部分情况使用正则表达式来处理，可一旦场景复杂，或者依赖于代码上下文时，正则就很难处理了，这时候就要用到抽象语法树。常见的uglify、eslint、babel、webpack等等都是基于抽象语法树来处理的，如此强大，有必要好好了解一下。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/19/Javascript抽象语法树上篇(基础篇)/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="image is-7by1">
-            <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time>-->
-                <div class="level-item has-text-grey">2019-07-12</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 分钟 读完 (大约 2729 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/12/CSS Houdini实现动态波浪纹/">CSS Houdini实现动态波浪纹</a>
-            
-        </h1>
-        <div class="content">
-            <p>CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/12/CSS Houdini实现动态波浪纹/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/06/27/collision-detection/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time>-->
-                <div class="level-item has-text-grey">2019-06-27</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    24 分钟 读完 (大约 3612 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/27/collision-detection/">碰撞检测的向量实现</a>
-            
-        </h1>
-        <div class="content">
-            <hr>
-<p><em>注：1、本文只讨论2d图形碰撞检测。2、本文讨论圆形与圆形，矩形与矩形、圆形与矩形碰撞检测的向量实现</em></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2D游戏中，通常使用矩形、圆形等来代替复杂图形的相交检测。因为这两种形状的碰撞检测速度是最快的。其中矩形包围盒又可以分为轴对齐包围盒（AABB, Axis Aligned Bounding Box）与转向包围盒（OBB, Oriented Bounding Box）。AABB与OBB的区别在于，AABB中的矩形的其中一条边和坐标轴平行，OBB的计算复杂度要高于AABB。根据不同的使用场景，可以用不同的方案。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/06/27/collision-detection/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -1107,7 +1028,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="wecTeam" height="28">
+                    <img src="/images/og_image.png" alt="【译】在生产环境中使用原生JavaScript模块" height="28">
                 
                 </a>
                 <p class="is-size-7">
