@@ -7,7 +7,7 @@ date: 2019-06-27 00:00:00
 tags: 
     - 碰撞检测
     - 向量
-categories: 知识分享
+categories: Web开发
 ckey: 15
 author:
     nick: 吴冠禧
