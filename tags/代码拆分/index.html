@@ -28,7 +28,9 @@
 
 <link rel="icon" href="/images/favicon.svg">
 
-
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
 <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
@@ -202,6 +204,23 @@
         
         
     </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+    
 </div>
 
 

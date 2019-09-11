@@ -10,18 +10,18 @@
 <title>WecTeam | 京东社交电商前端团队 - wecTeam</title>
 
 
-    <meta name="description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！">
+    <meta name="description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！ 联系我们">
 <meta property="og:type" content="website">
 <meta property="og:title" content="WecTeam | 京东社交电商前端团队">
 <meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="wecTeam">
-<meta property="og:description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！">
+<meta property="og:description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！ 联系我们">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-10T10:34:08.070Z">
+<meta property="og:updated_time" content="2019-09-10T10:42:04.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WecTeam | 京东社交电商前端团队">
-<meta name="twitter:description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！">
+<meta name="twitter:description" content="维C团简介维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！ 联系我们">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -32,7 +32,9 @@
 
 <link rel="icon" href="/images/favicon.svg">
 
-
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
 <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
@@ -153,12 +155,30 @@
         </h1>
         <div class="content">
             <h2 id="维C团简介"><a href="#维C团简介" class="headerlink" title="维C团简介"></a>维C团简介</h2><p>维C团(WecTeam)是京东社交电商部跨多个业务团队的前端工程师自发成立的一个前端技术团队，我们热爱技术，乐于分享，希望通过技术实践总结、新技术探秘、Bug深度分析、优质英文资料引入等方式，参与和推动前端技术的发展，为公司及行业带来价值！</p>
+<h2 id="联系我们"><a href="#联系我们" class="headerlink" title="联系我们"></a>联系我们</h2><p><img src="https://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MzI5NjIzNjA1Nw==&mid=2247483675&idx=1&sn=506146ed98a2ef13919a7fb6887dbb25&send_time=" alt></p>
 
         </div>
         
         
         
     </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+    
 </div>
 
 
