@@ -25,3 +25,8 @@ for (let filter of postHtmlFilter) {
 hexo.extend.helper.register('console', function () {
     console.log(arguments)
 });
+
+hexo.extend.helper.register('post_key', function(path, customKey){
+    customKey = customKey || new Buffer(path).toString('base64');
+    return customKey;
+});
