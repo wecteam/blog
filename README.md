@@ -1,5 +1,11 @@
 
-# 目录
+# 这是什么？
+
+这是京东社交电商部维C团(WecTeam)的在线博客，官网地址是：https://wecteam.io/。
+
+维C团(WecTeam)，京东社交电商部前端技术团队，我们是一群热爱技术、乐于分享的前端工程师。主要对外输出技术实践总结、新技术探秘、Bug深度分析、优质英文资料翻译等，参与和推动前端技术的发展，为公司及行业带来价值！
+
+# 文章列表
 
 * [【译】在生产环境中使用原生JavaScript模块](https://wecteam.io/2019%2F09%2F10%2F%E3%80%90%E8%AF%91%E3%80%91%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9FJavaScript%E6%A8%A1%E5%9D%97%2F)
 
@@ -11,3 +17,13 @@
 
 * [碰撞检测的向量实现](https://wecteam.io/2019%2F06%2F27%2Fcollision-detection%2F)
     
+# 文章排版指南
+
+[文章排版指南](https://github.com/wecteam/blog/blob/master/docs/document-guide.md)
+
+# 联系我们
+
+请关注我们的微信公众号
+
+![WecTeam](https://wq.360buyimg.com/data/ppms/picture/wecteam_qrcode.jpeg)
+
