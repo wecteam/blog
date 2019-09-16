@@ -36,22 +36,23 @@ hexo.extend.generator.register('archive', function(locals){
     var posts = locals.posts.map(item=>{
         return {
             title:item.title,
-            date:item.date.unix()
+            date:item.date.unix(),
+            path:item.path
         }
-    });
-    console.log(posts.length,posts.sort,posts);
-    posts.sort((a,b)=>{
+    }).sort((a,b)=>{
         return b.date - a.date
     });
+    // console.log(posts.length,posts.sort,posts);
+    posts
     var content = `
 # 目录
 
 ${posts.map(item=>{
-    console.log(item.title);
+    // console.log(item.title);
     return `* [${item.title}](https://wecteam.io/${encodeURIComponent(item.path)})`
 }).join('\n\n')}
     `;
     fs.writeFile(path.join(this.base_dir,'README.md'),content,data=>{
-        console.log(data);
+        // console.log(data);
     })
 });
