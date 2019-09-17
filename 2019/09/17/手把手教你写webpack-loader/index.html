@@ -74,7 +74,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="WecTeam" height="28">
+                <img src="/images/og_image.png" alt="手把手教你写webpack loader" height="28">
             
             </a>
         </div>
@@ -125,30 +125,19 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">rollup打包</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-image">
-        <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg" alt="手把手教你写webpack loader">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-10T09:47:26.000Z">2019-09-10</time>-->
-                <div class="level-item has-text-grey">2019-09-10</div>
+                <!--<time class="level-item has-text-grey" datetime="2019-09-17T01:32:51.000Z">2019-09-17</time>-->
+                <div class="level-item has-text-grey">2019-09-17</div>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
@@ -158,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    39 分钟 读完 (大约 5808 个字)
+                    12 分钟 读完 (大约 1800 个字)
                 </span>
                 
                 
@@ -167,24 +156,54 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/">【译】在生产环境中使用原生JavaScript模块</a>
+                手把手教你写webpack loader
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>原文地址：<a href="https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/" target="_blank" rel="noopener">https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/</a><br>原文作者：PHILIP WALTON<br>译者：龚亮 ，校对：刘辉<br>声明：本翻译仅做学习交流使用，转载请注明来源</p>
-</blockquote>
-<p>两年前，我写了一篇有关module/nomodule技术的<a href="https://philipwalton.com/articles/deploying-es2015-code-in-production-today/" target="_blank" rel="noopener">文章</a>，这项技术允许你在编写ES2015+代码时，使用打包器和转换器生成两个版本的代码库，一个具有现代语法的版本（通过<code>&lt;script type=&quot;module&quot;&gt;</code>加载）和一个使用ES5语法的版本（通过<code>&lt;script nomodule&gt;</code>加载）。该技术允许你向支持模块（<em>译者注：指ECMA制定的标准的export/import模块语法及其加载机制，又称为ES Module、ESM、ES6 Module、ES2015 Module，下文中将出现很多”模块”一词，都是这个含义</em>）的浏览器发送更少的代码，现在大多数Web框架和CLI都支持它。</p>
+            <h2 id="一、什么是-loader"><a href="#一、什么是-loader" class="headerlink" title="一、什么是 loader"></a>一、什么是 loader</h2><p>loader 和 plugins 是 webpack 系统的两大重要组成元素。依靠对 loader、plugins 的不同组合搭配，我们可以灵活定制出高度适配自身业务的打包构建流程。</p>
+<p>loader 是 webpack 容纳各类资源的一个重要手段，它用于对模块的源代码进行转换，允许你在 import 或加载模块时预处理文件，利用 loader，我们可以将各种类型的资源转换成 webpack 本质接受的资源类型，如 javascript。</p>
+<a id="more"></a>
+<h2 id="二、如何编写一个-yaml-loader"><a href="#二、如何编写一个-yaml-loader" class="headerlink" title="二、如何编写一个 yaml-loader"></a>二、如何编写一个 yaml-loader</h2><h3 id="1、YAML"><a href="#1、YAML" class="headerlink" title="1、YAML"></a>1、YAML</h3><p>yaml 语言多用于编写配置文件，结构与 JSON 类似，但语法格式比 JSON 更加方便简洁。yaml 支持注释，大小写敏感，使用缩进来表示层级关系：</p>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#对象 </span></span><br><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-number">1.2</span><span class="hljs-number">.4</span></span><br><span class="line"><span class="hljs-comment">#数组</span></span><br><span class="line"><span class="hljs-attr">author:</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">Mike</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">Hankle</span></span><br><span class="line"><span class="hljs-comment">#常量</span></span><br><span class="line"><span class="hljs-attr">name:</span> <span class="hljs-string">"my project"</span> <span class="hljs-comment">#定义一个字符串</span></span><br><span class="line"><span class="hljs-attr">limit:</span> <span class="hljs-number">30</span> <span class="hljs-comment">#定义一个数值</span></span><br><span class="line"><span class="hljs-attr">es6:</span> <span class="hljs-literal">true</span> <span class="hljs-comment">#定义一个布尔值</span></span><br><span class="line"><span class="hljs-attr">openkey:</span> <span class="hljs-literal">Null</span> <span class="hljs-comment">#定义一个null</span></span><br><span class="line"><span class="hljs-comment">#锚点引用</span></span><br><span class="line"><span class="hljs-attr">server:</span></span><br><span class="line"><span class="hljs-attr">  base:</span> <span class="hljs-meta">&amp;base</span></span><br><span class="line"><span class="hljs-attr">    port:</span> <span class="hljs-number">8005</span></span><br><span class="line"><span class="hljs-attr">  dev:</span></span><br><span class="line"><span class="hljs-attr">    ip:</span> <span class="hljs-number">120.168</span><span class="hljs-number">.117</span><span class="hljs-number">.21</span></span><br><span class="line">    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*base</span></span><br><span class="line"><span class="hljs-attr">  gamma:</span></span><br><span class="line"><span class="hljs-attr">    ip:</span> <span class="hljs-number">120.168</span><span class="hljs-number">.117</span><span class="hljs-number">.22</span></span><br><span class="line">    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*base</span></span><br></pre></td></tr></table></figure>
+
+<p>等同于：</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.2.4"</span>,</span><br><span class="line">  <span class="hljs-attr">"author"</span>: [<span class="hljs-string">"Mike"</span>, <span class="hljs-string">"Hankle"</span>],</span><br><span class="line">  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"my project"</span>,</span><br><span class="line">  <span class="hljs-attr">"limit"</span>: <span class="hljs-number">30</span>,</span><br><span class="line">  <span class="hljs-attr">"es6"</span>: <span class="hljs-literal">true</span>,</span><br><span class="line">  <span class="hljs-attr">"openkey"</span>: <span class="hljs-literal">null</span>,</span><br><span class="line">  <span class="hljs-attr">"server"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"base"</span>: &#123;</span><br><span class="line">      <span class="hljs-attr">"port"</span>: <span class="hljs-number">8005</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="hljs-attr">"dev"</span>: &#123;</span><br><span class="line">      <span class="hljs-attr">"ip"</span>: <span class="hljs-string">"120.168.117.21"</span>,</span><br><span class="line">      <span class="hljs-attr">"port"</span>: <span class="hljs-number">8005</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="hljs-attr">"gamma"</span>: &#123;</span><br><span class="line">      <span class="hljs-attr">"ip"</span>: <span class="hljs-string">"120.168.117.22"</span>,</span><br><span class="line">      <span class="hljs-attr">"port"</span>: <span class="hljs-number">8005</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在基于 webpack 构建的应用中，如果希望能够引用 yaml 文件中的数据，就需要一个 yaml-loader 来支持编译。一般情况下，你都能在 npm 上找到可用的 loader，但如果万一没有对应的支持，或者你希望有一些自定义的转换，那么就需要自己编写一个 webpack loader 了。</p>
+<h3 id="2、loader-的原理"><a href="#2、loader-的原理" class="headerlink" title="2、loader 的原理"></a>2、loader 的原理</h3><p>loader 是一个 node 模块，它导出为一个函数，用于在转换资源时调用。该函数接收一个 String/Buffer 类型的入参，并返回一个 String/Buffer 类型的返回值。一个最简单的 loader 是这样的：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// loaders/yaml-loader.js</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">source</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> source;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>loader 支持管道式传递，对同一类型的文件，我们可以使用多个 loader 进行处理，这批 loader 将按照“从下到上、从右到左”的顺序执行，并以前一个 loader 的返回值作为后一个 loader 的入参。这个机制无非是希望我们在编写 loader 的时候能够尽量避免重复造轮子，只关注需要实现的核心功能。因此配置的时候，我们可以引入 json-loader：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// webpack.config.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  <span class="hljs-built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="hljs-regexp">/\.yml$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="hljs-string">"json-loader"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            loader: path.resolve(__dirname, <span class="hljs-string">"./loaders/yaml-loader.js"</span>)</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、开始"><a href="#3、开始" class="headerlink" title="3、开始"></a>3、开始</h3><p>这样一来，我们需要的 yaml-loader，就只做一件事情：将 yaml 的数据转化成为一个 JSON 字符串。因此，我们可以很简单地实现这样一个 yaml-loader：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">"js-yaml"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">source</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.cacheable &amp;&amp; <span class="hljs-keyword">this</span>.cacheable();</span><br><span class="line">  <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> res = yaml.safeLoad(source);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.stringify(res, <span class="hljs-literal">undefined</span>, <span class="hljs-string">"\t"</span>);</span><br><span class="line">  &#125; <span class="hljs-keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emitError(err);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>就是这么简单。但是可能有朋友会问，这里是因为有个现成的模块 js-yaml，可以直接将 yaml 转换成 JavaScript 对象，万一没有这个模块，该怎么做呢？是的，loader 的核心工作其实就是字符串的处理，这是个相当恶心的活儿，尤其是在这类语法转换的场景上，对源代码的字符串处理将变得极其复杂。这个情况下，我们可以考虑另外一种解法，借助 AST 语法树，来协助我们更加便捷地操作转换。</p>
+<h3 id="4、利用-AST-作源码转换"><a href="#4、利用-AST-作源码转换" class="headerlink" title="4、利用 AST 作源码转换"></a>4、利用 AST 作源码转换</h3><p>yaml-ast-parser 是一个将 yaml 转换成 AST 语法树的 node 模块，我们把字符串解析的工作交给了 AST parser，而操作 AST 语法树远比操作字符串要简单、方便得多：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">"yaml-ast-parser"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YamlParser</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(source) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.data = yaml.load(source);</span><br><span class="line">    <span class="hljs-keyword">this</span>.parse();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  parse() &#123;</span><br><span class="line">    <span class="hljs-comment">// parse ast into javascript object</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">source</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.cacheable &amp;&amp; <span class="hljs-keyword">this</span>.cacheable();</span><br><span class="line">  <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> parser = <span class="hljs-keyword">new</span> YamlParser(source);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.stringify(parser.data, <span class="hljs-literal">undefined</span>, <span class="hljs-string">"\t"</span>);</span><br><span class="line">  &#125; <span class="hljs-keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emitError(err);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们可以利用 AST parser 提供的方法直接转化出 json，如果没有或者有所定制，也可以手动实现一下 parse 的过程，仅仅只是一个树结构的迭代遍历而已，关键步骤是对 AST 语法树的各类型节点分别进行处理：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">"yaml-ast-parser"</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> types = yaml.Kind;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YamlParser</span> </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  parse() &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.data = <span class="hljs-keyword">this</span>.traverse(<span class="hljs-keyword">this</span>.data);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  traverse(node) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> type = types[node.kind];</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">switch</span> (type) &#123;</span><br><span class="line">      <span class="hljs-comment">// 对象</span></span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-string">"MAP"</span>: &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> ret = &#123;&#125;;</span><br><span class="line">        node.mappings.forEach(<span class="hljs-function"><span class="hljs-params">mapping</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="hljs-built_in">Object</span>.assign(ret, <span class="hljs-keyword">this</span>.traverse(mapping));</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">// 键值对</span></span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-string">"MAPPING"</span>: &#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> ret = &#123;&#125;;</span><br><span class="line">        <span class="hljs-comment">// 验证</span></span><br><span class="line">        <span class="hljs-keyword">const</span> keyValid =</span><br><span class="line">          yaml.determineScalarType(node.key) == yaml.ScalarType.string;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!keyValid) &#123;</span><br><span class="line">          <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"键值非法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (node.key.value == <span class="hljs-string">"&lt;&lt;"</span> &amp;&amp; types[node.value.kind] === <span class="hljs-string">"ANCHOR_REF"</span>) &#123;</span><br><span class="line">          <span class="hljs-comment">// 引用合并</span></span><br><span class="line">          ret = <span class="hljs-keyword">this</span>.traverse(node.value);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">          ret[node.key.value] = <span class="hljs-keyword">this</span>.traverse(node.value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">// 常量</span></span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-string">"SCALAR"</span>: &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> node.valueObject !== <span class="hljs-literal">undefined</span> ? node.valueObject : node.value;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">// 数组</span></span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-string">"SEQ"</span>: &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> ret = [];</span><br><span class="line">        node.items.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;</span><br><span class="line">          ret.push(<span class="hljs-keyword">this</span>.traverse(item));</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">// 锚点引用</span></span><br><span class="line">      <span class="hljs-keyword">case</span> <span class="hljs-string">"ANCHOR_REF"</span>: &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.traverse(node.value);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">default</span>:</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"unvalid node"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>当然这样的实现略为粗糙，正常来说，一些完备的 AST parser 一般都会自带遍历方法（traverse），这样的方法都是有做过优化的，我们可以直接调用，尽量避免自己手动实现。</p>
+<p>按照相同的做法，你还可以实现一个 markdown-loader，甚至更为复杂的 vue-loader。</p>
+<h2 id="三、loader-的一些开发技巧"><a href="#三、loader-的一些开发技巧" class="headerlink" title="三、loader 的一些开发技巧"></a>三、loader 的一些开发技巧</h2><h3 id="1、单一任务"><a href="#1、单一任务" class="headerlink" title="1、单一任务"></a>1、单一任务</h3><p>只做一件事情，做好一件事情。loader 的管道（pipeline）设计正是希望能够将任务拆解并独立成一个个子任务，由多个 loader 分别处理，以此来保证每个 loader 的可复用性。因此我们在开发 loader 前一定要先给 loader 一个准确的功能定位，从通用的角度出发去设计，避免做多余的事。</p>
+<h3 id="2、无状态"><a href="#2、无状态" class="headerlink" title="2、无状态"></a>2、无状态</h3><p>loader 应该是不保存状态的。这样的好处一方面是使我们 loader 中的数据流简单清晰，另一方面是保证 loader 具有良好可测性。因此我们的 loader 每次运行都不应该依赖于自身之前的编译结果，也不应该通过除出入参外的其他方式与其他编译模块进行数据交流。当然，这并不代表 loader 必须是一个无任何副作用的纯函数，loader 支持异步，因此是可以在 loader 中有 I/O 操作的。</p>
+<h3 id="3、尽可能使用缓存"><a href="#3、尽可能使用缓存" class="headerlink" title="3、尽可能使用缓存"></a>3、尽可能使用缓存</h3><p>在开发时，loader 可能会被不断地执行，合理的缓存能够降低重复编译带来的成本。loader 执行时默认是开启缓存的，这样一来， webpack 在编译过程中执行到判断是否需要重编译 loader 实例的时候，会直接跳过 rebuild 环节，节省不必要重建带来的开销。</p>
+<p>当且仅当有你的 loader 有其他不稳定的外部依赖（如 I/O 接口依赖）时，可以关闭缓存：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.cacheable &amp;&amp; <span class="hljs-keyword">this</span>.cacheable(<span class="hljs-literal">false</span>);</span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/webpack-loader/">webpack loader</a>, <a class="has-link-grey -link" href="/tags/工程化/">工程化</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -211,7 +230,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/17/【译】Web内容如何影响电池的使用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">【译】Web内容如何影响电池的使用</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/">
+                <span class="level-item">【译】在生产环境中使用原生JavaScript模块</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -948,7 +986,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="WecTeam" height="28">
+                    <img src="/images/og_image.png" alt="手把手教你写webpack loader" height="28">
                 
                 </a>
                 <p class="is-size-7">

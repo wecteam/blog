@@ -186,14 +186,14 @@
 <p>更多api详见<a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="noopener">babel手册</a><sup>[1]</sup></p>
 <p>下面通过简单案例来介绍如何操作AST，注意案例只是示例，由于篇幅对部分边界问题只会注释说明，实际开发过程中需要考虑周全。</p>
 <h3 id="案例1-去掉代码中的console-log"><a href="#案例1-去掉代码中的console-log" class="headerlink" title="案例1:去掉代码中的console.log()"></a>案例1:去掉代码中的console.log()</h3><p>实现代码</p>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(n) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.log(n);</span></span><br><span class="line"><span class="hljs-string">  console.warn(n);</span></span><br><span class="line"><span class="hljs-string">  return n * n;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line"> CallExpression(path) &#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> &#123; callee &#125; = path.node;</span><br><span class="line">  <span class="hljs-keyword">if</span> (callee.type === ‘MemberExpression’ &amp;&amp; callee.object.name === ‘<span class="hljs-built_in">console</span>’ &amp;&amp; callee.property.name === ‘log’ ) &#123;</span><br><span class="line">   path.remove(); <span class="hljs-comment">// 注意考虑对象挂载的识别，如global.console.log()，此时remove后剩下global.,会导致语法错误，此时可以判断父节点类型来排除</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(n) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.log(n);</span></span><br><span class="line"><span class="hljs-string">  console.warn(n);</span></span><br><span class="line"><span class="hljs-string">  return n * n;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line"> CallExpression(path) &#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> &#123; callee &#125; = path.node;</span><br><span class="line">  <span class="hljs-keyword">if</span> (callee.type === ‘MemberExpression’ &amp;&amp; callee.object.name === ‘<span class="hljs-built_in">console</span>’ &amp;&amp; callee.property.name === ‘log’ ) &#123;</span><br><span class="line">   path.remove(); <span class="hljs-comment">// 注意考虑对象挂载的识别，如global.console.log()，此时remove后剩下global.,会导致语法错误，此时可以判断父节点类型来排除</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
 
 <p>处理结果</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function square(n) &#123;</span><br><span class="line"><span class="hljs-deletion">-  console.log(n);</span></span><br><span class="line">  console.warn(n);</span><br><span class="line">  return n * n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此案例涉及知识点</p>
 <ol>
-<li>如何通过traverse遍历特定节点</li>
+<li>如何通过traverse遍历特定节点</li>
 <li>识别出console.log()在规范中属于函数调用表达式,节点类型为<code>CallExpression</code>。</li>
 <li>console.log本身即<code>callee</code>是在对象console上的一个方法，因此<code>console.log</code>是一个成员表达式，类型为<code>MemberExpression</code>。</li>
 <li><code>MemberExpression</code>根据规范有一个<code>object</code>属性代表被访问的对象，有一个<code>property</code>代表访问的成员。</li>
@@ -201,7 +201,7 @@
 <li>可以通过<a href="https://astexplorer.net/" target="_blank" rel="noopener">https://astexplorer.net/</a> 来辅助对代码节点的识别。注意选择<code>babylon7</code>，即babe7,对应<code>@babel/parser</code></li>
 </ol>
 <h3 id="案例2-变量混淆"><a href="#案例2-变量混淆" class="headerlink" title="案例2:变量混淆"></a>案例2:变量混淆</h3><p>实现代码</p>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(number) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.warn(number);</span></span><br><span class="line"><span class="hljs-string">  return number * number;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  FunctionDeclaration(path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unia = path.scope.generateUidIdentifier(<span class="hljs-string">"a"</span>);</span><br><span class="line">    path.scope.rename(<span class="hljs-string">"number"</span>,unia.name);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">function square(number) &#123;</span></span><br><span class="line"><span class="hljs-string">  console.warn(number);</span></span><br><span class="line"><span class="hljs-string">  return number * number;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  FunctionDeclaration(path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unia = path.scope.generateUidIdentifier(<span class="hljs-string">"a"</span>);</span><br><span class="line">    path.scope.rename(<span class="hljs-string">"number"</span>,unia.name);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
 
 <p>处理结果</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-function square(number) &#123;</span></span><br><span class="line"><span class="hljs-addition">+  function square(_a) &#123;</span></span><br><span class="line"><span class="hljs-deletion">-  console.warn(number);</span></span><br><span class="line"><span class="hljs-addition">+  console.warn(_a);</span></span><br><span class="line"><span class="hljs-deletion">-  return number * number;</span></span><br><span class="line"><span class="hljs-addition">+  return _a * _a;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -213,7 +213,7 @@
 <li>通过<code>path.scope</code>可以获得当前作用域唯一标识符，避免变量名冲突</li>
 </ol>
 <h3 id="案例3-转换箭头函数并去掉未使用参数"><a href="#案例3-转换箭头函数并去掉未使用参数" class="headerlink" title="案例3:转换箭头函数并去掉未使用参数"></a>案例3:转换箭头函数并去掉未使用参数</h3><p>实现代码</p>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">new Promise((resolve,reject)=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">  setTimeout(()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">    resolve(1);</span></span><br><span class="line"><span class="hljs-string">  &#125;,200)</span></span><br><span class="line"><span class="hljs-string">&#125;);</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ArrowFunctionExpression (path) &#123; </span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; id, params, body &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> path.scope.bindings)&#123;   <span class="hljs-comment">//注意考虑箭头函数的this特性，若发现函数体中有this调用，则需要在当前作用域绑定其父作用域的this</span></span><br><span class="line">      <span class="hljs-keyword">if</span>(!path.scope.bindings[key].referenced)&#123;</span><br><span class="line">        params = params.filter(<span class="hljs-function"><span class="hljs-params">param</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> param.name!==key;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  path.replaceWith(t.functionExpression(id, params, body)); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">new Promise((resolve,reject)=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">  setTimeout(()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-string">    resolve(1);</span></span><br><span class="line"><span class="hljs-string">  &#125;,200)</span></span><br><span class="line"><span class="hljs-string">&#125;);</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ArrowFunctionExpression (path) &#123; </span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; id, params, body &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> path.scope.bindings)&#123;   <span class="hljs-comment">//注意考虑箭头函数的this特性，若发现函数体中有this调用，则需要在当前作用域绑定其父作用域的this</span></span><br><span class="line">      <span class="hljs-keyword">if</span>(!path.scope.bindings[key].referenced)&#123;</span><br><span class="line">        params = params.filter(<span class="hljs-function"><span class="hljs-params">param</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> param.name!==key;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  path.replaceWith(t.functionExpression(id, params, body)); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
 
 <p>处理结果</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-new Promise((resolve,reject)=&gt;&#123;</span></span><br><span class="line"><span class="hljs-addition">+new Promise(function(resolve)&#123;</span></span><br><span class="line"><span class="hljs-deletion">-  setTimeout(()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-addition">+  setTimeout(function()&#123;</span></span><br><span class="line">    resolve(1);</span><br><span class="line">  &#125;,200)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -226,7 +226,7 @@
 <li>通过<code>path.replaceWith()</code>可以进行节点替换</li>
 </ol>
 <h3 id="案例4-京东购物小程序的Tree-shaking"><a href="#案例4-京东购物小程序的Tree-shaking" class="headerlink" title="案例4:京东购物小程序的Tree-shaking"></a>案例4:京东购物小程序的Tree-shaking</h3><p>删掉小程序中的冗余代码，<code>部分</code>实现代码示例如下</p>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">export function square (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">export function cube (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ExportNamedDeclaration (path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unused = [<span class="hljs-string">'cube'</span>]   <span class="hljs-comment">// 借助webpack，我们能获得导出的方法中，哪些是没有被使用过的</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; declaration = &#123;&#125; &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">if</span> (declaration.type === <span class="hljs-string">'FunctionDeclaration'</span>) &#123;</span><br><span class="line">      unused.forEach(<span class="hljs-function"><span class="hljs-params">exportItem</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// references=1表示仅有一次引用，即export的引用，没有在别处调用</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (declaration.id.name === exportItem &amp;&amp; path.scope.bindings[exportItem].references === <span class="hljs-number">1</span>) &#123;</span><br><span class="line">          path.remove();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/parser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/traverse'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> generate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/generator'</span>).default;</span><br><span class="line"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@babel/types'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> sourceCode = <span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-string">export function square (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">export function cube (x) &#123;</span></span><br><span class="line"><span class="hljs-string">    return x * x * x;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">`</span></span><br><span class="line"><span class="hljs-keyword">let</span> ast = parser.parse(sourceCode);</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  ExportNamedDeclaration (path) &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> unused = [<span class="hljs-string">'cube'</span>]   <span class="hljs-comment">// 借助webpack，我们能获得导出的方法中，哪些是没有被使用过的</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; declaration = &#123;&#125; &#125; = path.node;</span><br><span class="line">    <span class="hljs-keyword">if</span> (declaration.type === <span class="hljs-string">'FunctionDeclaration'</span>) &#123;</span><br><span class="line">      unused.forEach(<span class="hljs-function"><span class="hljs-params">exportItem</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// references=1表示仅有一次引用，即export的引用，没有在别处调用</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (declaration.id.name === exportItem &amp;&amp; path.scope.bindings[exportItem].references === <span class="hljs-number">1</span>) &#123;</span><br><span class="line">          path.remove();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(generate(ast).code);</span><br></pre></td></tr></table></figure>
 
 <p>处理结果</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export function square (x) &#123;</span><br><span class="line">    return x * x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-deletion">-export function cube (x) &#123;</span></span><br><span class="line"><span class="hljs-deletion">-    return x * x * x;</span></span><br><span class="line"><span class="hljs-deletion">-&#125;</span></span><br></pre></td></tr></table></figure>
@@ -346,7 +346,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        7
                     </p>
                 </div>
             </div>
@@ -366,7 +366,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        9
+                        14
                     </p>
                 </div>
             </div>
@@ -465,7 +465,7 @@
                 <span class="level-item">Web开发</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li>
             </ul>
@@ -479,7 +479,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a>
     </div>
 </div>
 
@@ -493,6 +493,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/17/【译】Web内容如何影响电池的使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/56997/19/11003/158528/5d8039dcE9902aa49/f5c7d0573e9d1f97.jpg" alt="【译】Web内容如何影响电池的使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T01:37:44.000Z">2019-09-17</time></div>
+                    <a href="/2019/09/17/【译】Web内容如何影响电池的使用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Web内容如何影响电池的使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/17/手把手教你写webpack-loader/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg" alt="手把手教你写webpack loader">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T01:32:51.000Z">2019-09-17</time></div>
+                    <a href="/2019/09/17/手把手教你写webpack-loader/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写webpack loader</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -551,44 +589,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
-                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/27/collision-detection/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
-                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -607,7 +607,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -690,6 +690,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/代码拆分/">
                         <span class="tag">代码拆分</span>
                         <span class="tag is-grey">1</span>
@@ -699,6 +713,27 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/向量/">
                         <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -735,6 +770,44 @@
         
         <article class="media">
             
+            <a href="/2019/09/17/【译】Web内容如何影响电池的使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/56997/19/11003/158528/5d8039dcE9902aa49/f5c7d0573e9d1f97.jpg" alt="【译】Web内容如何影响电池的使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T01:37:44.000Z">2019-09-17</time></div>
+                    <a href="/2019/09/17/【译】Web内容如何影响电池的使用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Web内容如何影响电池的使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/17/手把手教你写webpack-loader/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg" alt="手把手教你写webpack loader">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T01:32:51.000Z">2019-09-17</time></div>
+                    <a href="/2019/09/17/手把手教你写webpack-loader/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写webpack loader</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
@@ -790,44 +863,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time></div>
-                    <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="title has-link-black-ter is-size-6 has-text-weight-normal">CSS Houdini实现动态波浪纹</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/27/collision-detection/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s300x200_jfs/t1/69704/11/8440/18353/5d65e55fE03a7fcd8/b1033efa2e0d2752.jpg" alt="碰撞检测的向量实现">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-26T16:00:00.000Z">2019-06-27</time></div>
-                    <a href="/2019/06/27/collision-detection/" class="title has-link-black-ter is-size-6 has-text-weight-normal">碰撞检测的向量实现</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -846,7 +881,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -929,6 +964,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/代码拆分/">
                         <span class="tag">代码拆分</span>
                         <span class="tag is-grey">1</span>
@@ -938,6 +987,27 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/向量/">
                         <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
