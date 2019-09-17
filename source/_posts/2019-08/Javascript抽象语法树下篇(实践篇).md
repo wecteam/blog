@@ -12,6 +12,8 @@ author:
     github_name: chenxiaoqiang12
 ---
 
+> 作者：陈晓强 
+
 上篇已经对AST基础做了介绍，本篇介绍AST的运用
 
 ## AST应用的三个要点
@@ -75,7 +77,7 @@ const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require('@babel/types');
-let sourceCode = `
+let sourceCode = `
 function square(n) {
   console.log(n);
   console.warn(n);
@@ -83,14 +85,14 @@ function square(n) {
 }
 `
 let ast = parser.parse(sourceCode);
-traverse(ast, {
+traverse(ast, {
  CallExpression(path) {
   let { callee } = path.node;
   if (callee.type === ‘MemberExpression’ && callee.object.name === ‘console’ && callee.property.name === ‘log’ ) {
    path.remove(); // 注意考虑对象挂载的识别，如global.console.log()，此时remove后剩下global.,会导致语法错误，此时可以判断父节点类型来排除
   }
  }
-})
+})
 console.log(generate(ast).code);
 ```
 
@@ -105,7 +107,7 @@ function square(n) {
 
 
 此案例涉及知识点
-1. 如何通过traverse遍历特定节点
+1. 如何通过traverse遍历特定节点
 2. 识别出console.log()在规范中属于函数调用表达式,节点类型为`CallExpression`。
 3. console.log本身即`callee`是在对象console上的一个方法，因此`console.log`是一个成员表达式，类型为`MemberExpression`。
 4. `MemberExpression`根据规范有一个`object`属性代表被访问的对象，有一个`property`代表访问的成员。
@@ -121,7 +123,7 @@ const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require('@babel/types');
-let sourceCode = `
+let sourceCode = `
 function square(number) {
   console.warn(number);
   return number * number;
@@ -164,7 +166,7 @@ const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require('@babel/types');
-let sourceCode = `
+let sourceCode = `
 new Promise((resolve,reject)=>{
   setTimeout(()=>{
     resolve(1);
@@ -214,7 +216,7 @@ const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require('@babel/types');
-let sourceCode = `
+let sourceCode = `
 export function square (x) {
     return x * x;
 }
