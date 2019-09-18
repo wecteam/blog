@@ -29,22 +29,17 @@
 
 如果图片过大，可以使用网址 <https://tinypng.com/> 进行压缩；如果图片不够清晰，请重新制图。
 
-**2、图片尺寸规范**：
-
-待补充。
-
-**3、图片格式**：
+**2、图片格式**：
 
 ![](http://img.smyhvae.com/20190908_2238.png)
 
 静态图片用 png、jpg格式；动态图用 gif 格式。gif 动图可以使用软件 [LICEcap](https://www.cockos.com/licecap/) 录制屏幕生成。
 
-**4、图片文件名**：
+**3、图片文件名**：
 
 图片的文件名使用**当前时间戳**，格式：`YYMMDD_HHMM`。格式举例：
 
 ```
-
 20190902_1010.png
 
 20180228_1505.jpg
@@ -52,7 +47,7 @@
 20180616_1618.gif
 ```
 
-**5、流程图制作工具**：
+**4、流程图制作工具**：
 
 - 流程图、思维导图（在线）：<https://www.processon.com>
 
@@ -61,6 +56,7 @@
 - 思维导图（本地）：<https://www.xmind.cn>
 
 - 列清单、思维导图（在线）：<https://mubu.com>
+
 
 ## 空格
 
@@ -195,6 +191,24 @@ Facebook, Inc.
 互联网上充斥着大量的内容，「知识付费」成为下一个风口。我每天使用「得到」App，阅读一小时。
 ```
 
+## 公众号 Markdown 编辑器推荐
+
+- markdown在线转换工具：<http://blog.didispace.com/tools/online-markdown/>
+
+- markdown在线转换工具2：<http://prod.zkqiang.cn/wxeditor/index.html>
+
+可以针对外链，自动生成脚注。
+
+- markdown在线转换工具3：<https://www.mdnice.com/>
+
+可以针对外链，自动生成脚注。
+
+- markdown在线转换工具4：<http://md.aclickall.com/>
+
+**备注**：生成的脚注，效果如下：
+
+![](http://img.smyhvae.com/20190915_1522.png)
+
 ## 参考链接
 
 - [《中文技术文档的写作规范》](https://github.com/ruanyf/document-style-guide)
@@ -210,4 +224,5 @@ Facebook, Inc.
 - [stormzhang | 每个人都需要的中文排版指南](https://mp.weixin.qq.com/s/k5DAmYtMrdSlK1jHsW-hrg)
 
 - [《这是曹将公众号排版的所有秘密！》](https://mp.weixin.qq.com/s/DEUUcO4FhCiIYmh61wGXnw)
+
 
