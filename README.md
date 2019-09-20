@@ -7,6 +7,8 @@
 
 # 文章列表
 
+* [你还在用图片做引导蒙层？](https://wecteam.io/2019%2F09%2F20%2Fguid-mask%2F)
+
 * [【译】Web内容如何影响电池的使用](https://wecteam.io/2019%2F09%2F17%2F%E3%80%90%E8%AF%91%E3%80%91Web%E5%86%85%E5%AE%B9%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E7%94%B5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8%2F)
 
 * [手把手教你写webpack loader](https://wecteam.io/2019%2F09%2F17%2F%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99webpack-loader%2F)
