@@ -229,11 +229,3 @@ Facebook, Inc.
 
 - [《这是曹将公众号排版的所有秘密！》](https://mp.weixin.qq.com/s/DEUUcO4FhCiIYmh61wGXnw)
 
-
-![](http://img.smyhvae.com/WX20190918-135736@2x.png)
-
-![](http://img.smyhvae.com/WX20190918-135911@2x.png)
-
-
-
-**加粗的**
