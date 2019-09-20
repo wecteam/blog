@@ -33,7 +33,11 @@
 
 ![](http://img.smyhvae.com/20190908_2238.png)
 
-静态图片用 png、jpg格式；动态图用 gif 格式。gif 动图可以使用软件 [LICEcap](https://www.cockos.com/licecap/) 录制屏幕生成。
+静态图片用 png、jpg格式。
+
+动态图用 gif 格式。gif 动图可以使用软件 [LICEcap](https://www.cockos.com/licecap/) 录制屏幕生成）。
+
+**gif 图的帧数不要超过 300 帧**，否则无法上传到公众号。一般情况下，gif 图的大小控制在 500kb 以内，基本能符合要求。
 
 **3、图片文件名**：
 
@@ -201,7 +205,7 @@ Facebook, Inc.
 
 - markdown在线转换工具3：<https://www.mdnice.com/>
 
-可以针对外链，自动生成脚注。
+可以针对外链，自动生成脚注。推荐里面的「橙心主题」。
 
 - markdown在线转换工具4：<http://md.aclickall.com/>
 
@@ -226,3 +230,10 @@ Facebook, Inc.
 - [《这是曹将公众号排版的所有秘密！》](https://mp.weixin.qq.com/s/DEUUcO4FhCiIYmh61wGXnw)
 
 
+![](http://img.smyhvae.com/WX20190918-135736@2x.png)
+
+![](http://img.smyhvae.com/WX20190918-135911@2x.png)
+
+
+
+**加粗的**
