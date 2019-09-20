@@ -35,7 +35,7 @@
 
 静态图片用 png、jpg格式。
 
-动态图用 gif 格式。gif 动图可以使用软件 [LICEcap](https://www.cockos.com/licecap/) 录制屏幕生成）。
+动态图用 gif 格式。gif 动图可以使用软件 [LICEcap](https://www.cockos.com/licecap/) 录制屏幕生成。
 
 **gif 图的帧数不要超过 300 帧**，否则无法上传到公众号。一般情况下，gif 图的大小控制在 500kb 以内，基本能符合要求。
 
