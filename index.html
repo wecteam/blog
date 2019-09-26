@@ -128,6 +128,86 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="image is-7by1">
+            <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time>-->
+                <div class="level-item has-text-grey">2019-09-27</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    41 分钟 读完 (大约 6206 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/27/记一次Node-js直出服务的性能优化/">记一次Node.js直出服务的性能优化</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：肖睦群、李刚松</p>
+</blockquote>
+<h2 id="一-问题背景"><a href="#一-问题背景" class="headerlink" title="一.问题背景"></a>一.问题背景</h2><p>MPM（Market Page Maker）是京东社交电商部的组件化的页面可视化搭建平台，于2016年9月份上线，平均每周150+个页面，目前已经成为社交电商部的一个核心系统。系统使用Vue.js作为组件化的基础框架,并于2017年5月份上线了Node.js直出服务。MPM的页面会被运营同学拿到各种渠道投放，整体流量很不稳定，因此对于流量的暴涨情况要能够及时响应和处理。</p>
+<p>前几天突然收到告警信息，由于运营同学将某个MPM活动页面投放了外部广告，直出服务流量大涨，服务器CPU使用率达到了80%以上，于是立马申请扩容，问题虽解决，但是留给了我们一个问题：直出服务能否优化，这次量级的流量进来之后，是否可以稳定支撑而不需要扩容？</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/09/27/记一次Node-js直出服务的性能优化/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+    
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/09/24/前端资源治理（一）/" class="image is-7by1">
             <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
         </a>
@@ -895,7 +975,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        9
+                        10
                     </p>
                 </div>
             </div>
@@ -905,7 +985,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        3
                     </p>
                 </div>
             </div>
@@ -915,7 +995,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        18
+                        21
                     </p>
                 </div>
             </div>
@@ -1001,6 +1081,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/NodeJS/">
             <span class="level-start">
                 <span class="level-item">NodeJS</span>
@@ -1028,7 +1116,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
     </div>
 </div>
 
@@ -1042,6 +1130,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1119,25 +1226,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T09:47:26.000Z">2019-09-10</time></div>
-                    <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】在生产环境中使用原生JavaScript模块</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1156,7 +1244,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1204,6 +1292,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CSS/">
                         <span class="tag">CSS</span>
                         <span class="tag is-grey">1</span>
@@ -1213,6 +1308,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/CSS-Houdini/">
                         <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1297,6 +1399,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1347,6 +1456,25 @@
         
         <article class="media">
             
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/09/24/前端资源治理（一）/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
@@ -1421,25 +1549,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T09:47:26.000Z">2019-09-10</time></div>
-                    <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】在生产环境中使用原生JavaScript模块</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1458,7 +1567,7 @@
                     <span class="level-item">September 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1506,6 +1615,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/CSS/">
                         <span class="tag">CSS</span>
                         <span class="tag is-grey">1</span>
@@ -1515,6 +1631,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/CSS-Houdini/">
                         <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1599,6 +1722,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

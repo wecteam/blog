@@ -129,7 +129,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">canvas</a></li>
+            <li class="is-active"><a href="#" aria-current="page">火焰图</a></li>
         </ul>
         </nav>
     </div>
@@ -138,8 +138,8 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2019/09/20/guid-mask/" class="image is-7by1">
-            <img class="thumbnail" src="http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg" alt="你还在用图片做引导蒙层？">
+        <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="image is-7by1">
+            <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
         </a>
     </div>
     
@@ -147,18 +147,18 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-20T02:43:41.000Z">2019-09-20</time>-->
-                <div class="level-item has-text-grey">2019-09-20</div>
+                <!--<time class="level-item has-text-grey" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time>-->
+                <div class="level-item has-text-grey">2019-09-27</div>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 读完 (大约 3580 个字)
+                    41 分钟 读完 (大约 6206 个字)
                 </span>
                 
                 
@@ -167,21 +167,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/20/guid-mask/">你还在用图片做引导蒙层？</a>
+                <a class="has-link-black-ter" href="/2019/09/27/记一次Node-js直出服务的性能优化/">记一次Node.js直出服务的性能优化</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p>作者：深山蚂蚁</p>
+<p>作者：肖睦群、李刚松</p>
 </blockquote>
-<p>引导蒙层通常在新业务上线、或者业务有变更时的给新用户的一个操作指引。下图页面即是一个蒙层，会在某个局部位置高亮我们需要重点突出的内容：  </p>
+<h2 id="一-问题背景"><a href="#一-问题背景" class="headerlink" title="一.问题背景"></a>一.问题背景</h2><p>MPM（Market Page Maker）是京东社交电商部的组件化的页面可视化搭建平台，于2016年9月份上线，平均每周150+个页面，目前已经成为社交电商部的一个核心系统。系统使用Vue.js作为组件化的基础框架,并于2017年5月份上线了Node.js直出服务。MPM的页面会被运营同学拿到各种渠道投放，整体流量很不稳定，因此对于流量的暴涨情况要能够及时响应和处理。</p>
+<p>前几天突然收到告警信息，由于运营同学将某个MPM活动页面投放了外部广告，直出服务流量大涨，服务器CPU使用率达到了80%以上，于是立马申请扩容，问题虽解决，但是留给了我们一个问题：直出服务能否优化，这次量级的流量进来之后，是否可以稳定支撑而不需要扩容？</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/20/guid-mask/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2019/09/27/记一次Node-js直出服务的性能优化/#more">阅读更多</a>
                 </div>
             </div>
         </div>
