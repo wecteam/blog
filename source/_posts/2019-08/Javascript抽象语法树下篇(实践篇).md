@@ -6,7 +6,7 @@ thumbnail: https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/14
 date: 2019-07-20 22:00:00
 tags: 
   - AST
-categories: NodeJS
+categories: Node.js
 author:
     nick: 陈晓强
     github_name: chenxiaoqiang12

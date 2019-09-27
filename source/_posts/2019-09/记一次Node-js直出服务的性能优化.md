@@ -7,7 +7,7 @@ tags:
   - Vue.compile
   - CPU性能优化
   - 火焰图
-categories: Node.JS
+categories: Node.js
 ---
 
 > 作者：肖睦群、李刚松
