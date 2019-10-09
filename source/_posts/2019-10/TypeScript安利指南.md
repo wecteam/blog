@@ -194,11 +194,9 @@ youFoo('sss', 'c', {
  * 
  * [还不懂？点这里吧](https://www.google.com)
  * 
- * ```js
  * // demo
  * genErrMsg('demo', 10086)
  * 
- * ```
  */
 export function genErrMsg (message: string, code: number | string, type?: ('demo1' | 'demo2')): string {
     return (message || `网络繁忙，请稍候再试`) + (code ? `(${code})` : ``)
