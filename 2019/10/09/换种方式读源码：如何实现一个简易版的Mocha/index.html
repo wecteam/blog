@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="换种方式读源码：如何实现一个简易版的Mocha" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time>-->
+                <div class="level-item has-text-grey">2019-10-09</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    37 分钟 读完 (大约 5583 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                换种方式读源码：如何实现一个简易版的Mocha
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：黄浩群</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Mocha 是目前最流行的 JavaScript 测试框架，理解 Mocha 的内部实现原理有助于我们更深入地了解和学习自动化测试。然而阅读源码一直是个让人望而生畏的过程，大量的高级写法经常是晦涩难懂，大量的边缘情况的处理也十分影响对核心代码的理解，以至于写一篇源码解析过后往往是连自己都看不懂。所以，这次我们不生啃 Mocha 源码，换个方式，从零开始一步步实现一个简易版的 Mocha。</p>
+<h2 id="我们将实现什么？"><a href="#我们将实现什么？" class="headerlink" title="我们将实现什么？"></a>我们将实现什么？</h2><ul>
+<li>实现 Mocha 框架的 BDD 风格测试，能通过 describe/it 函数定义一组或单个的测试用例；</li>
+<li>实现 Mocha 框架的 Hook 机制，包括 before、after、beforeEach、afterEach；</li>
+<li>实现简单格式的测试报告输出。<a id="more"></a>
+<h2 id="Mocha-的-BDD-测试"><a href="#Mocha-的-BDD-测试" class="headerlink" title="Mocha 的 BDD 测试"></a>Mocha 的 BDD 测试</h2></li>
+</ul>
+<p>Mocha 支持 BDD/TDD 等多种测试风格，默认使用 BDD 接口。BDD（行为驱动开发）是一种以需求为导向的敏捷开发方法，相比主张”测试先行“的 TDD（测试驱动开发）而言，它强调”需求先行“，从一个更加宏观的角度去关注包括开发、QA、需求方在内的多方利益相关者的协作关系，力求让开发者“做正确的事“。在 Mocha 中，一个简单的 BDD 式测试用例如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="hljs-string">'Array'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  describe(<span class="hljs-string">'#indexOf()'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">    it(<span class="hljs-string">'should return -1 when not present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">    it(<span class="hljs-string">'should return the index when present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">    after(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Mocha 的 BDD 测试主要包括以下几个 API：</p>
+<ul>
+<li><code>describe/context</code>：行为描述，代表一个测试块，是一组测试单元的集合；</li>
+<li><code>it/specify</code>：描述了一个测试单元，是最小的测试单位；</li>
+<li><code>before</code>：Hook 函数，在执行该测试块之前执行；</li>
+<li><code>after</code>：Hook 函数，在执行该测试块之后执行；</li>
+<li><code>beforeEach</code>：Hook 函数，在执行该测试块中每个测试单元之前执行；</li>
+<li><code>afterEach</code>：Hook 函数，在执行该测试块中每个测试单元之后执行。</li>
+</ul>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>话不多说，我们直接开始。</p>
+<h4 id="一、目录设计"><a href="#一、目录设计" class="headerlink" title="一、目录设计"></a>一、目录设计</h4><p>新建一个项目，命名为 simple-mocha。目录结构如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├─ mocha/</span><br><span class="line">│   ├─ index.js</span><br><span class="line">│   ├─ src/</span><br><span class="line">│   ├─ interfaces/</span><br><span class="line">│   └─ reporters/</span><br><span class="line">├─ test/</span><br><span class="line">└─ package.json</span><br></pre></td></tr></table></figure>
+
+<p>先对这个目录结构作简单解释：</p>
+<ul>
+<li><code>mocha/</code>：存放我们即将实现的 simple-mocha 的源代码</li>
+<li><code>mocha/index.js</code>：simple-mocha 入口</li>
+<li><code>mocha/src/</code>：simple-mocha 核心代码</li>
+<li><code>mocha/interfaces/</code>：存放各类风格的测试接口，如 BDD</li>
+<li><code>mocha/reporters/</code>：存放用于输出测试报告的各种 reporter，如 SPEC</li>
+<li><code>test/</code>：存放我们编写的测试用例</li>
+<li><code>package.json</code></li>
+</ul>
+<p>其中 package.json 内容如下：</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"simple-mocha"</span>,</span><br><span class="line">  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.0"</span>,</span><br><span class="line">  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a simple mocha for understanding the mechanism of mocha"</span>,</span><br><span class="line">  <span class="hljs-attr">"main"</span>: <span class="hljs-string">""</span>,</span><br><span class="line">  <span class="hljs-attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"node mocha/index.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-attr">"author"</span>: <span class="hljs-string">"hankle"</span>,</span><br><span class="line">  <span class="hljs-attr">"license"</span>: <span class="hljs-string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>npm test</code> 就可以启动执行测试用例。</p>
+<h4 id="二、模块设计"><a href="#二、模块设计" class="headerlink" title="二、模块设计"></a>二、模块设计</h4><p>Mocha 的 BDD 测试应该是一个”先定义后执行“的过程，这样才能保证其 Hook 机制正确执行，而与代码编写顺序无关，因此我们把整个测试流程分为两个阶段：收集测试用例（定义）和执行测试用例（执行）。我们构造了一个 Mocha 类来完成这两个过程，同时这个类也负责统筹协调其他各模块的执行，因此它是整个测试流程的核心。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;&#125;</span><br><span class="line">  run() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = Mocha;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/index.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> Mocha = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./src/mocha'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> mocha = <span class="hljs-keyword">new</span> Mocha();</span><br><span class="line">mocha.run();</span><br></pre></td></tr></table></figure>
+
+<p>另一方面我们知道，describe 函数描述了一个测试集合，这个测试集合除包括若干测试单元外，还拥有着一些自身的 Hook 函数，维护了一套严格的执行流。it 函数描述了一个测试单元，它需要执行测试用例，并且接收断言结果。这是两个逻辑复杂的单元，同时需要维护一定的内部状态，我们用两个类（Suite/Test）来分别构造它们。此外我们可以看出，BDD 风格的测试用例是一个典型的树形结构，describe 定义的测试块可以包含测试块，也可以包含 it 定义的测试单元。所以 Suite/Test 实例还将作为节点，构造出一棵 suite-test 树。比如下边这个测试用例：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="hljs-string">'Array'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  describe(<span class="hljs-string">'#indexOf()'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'should return -1 when not present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;)</span><br><span class="line">    it(<span class="hljs-string">'should return the index when present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  describe(<span class="hljs-string">'#every()'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'should return true when all items are satisfied'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-comment">// ...</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>由它构造出来的 suite-test 树是这样的：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">                                             ┌────────────────────────────────────────────────────────┐</span><br><span class="line">                                           ┌─┤        test:<span class="hljs-string">"should return -1 when not present"</span>        │</span><br><span class="line">                    ┌────────────────────┐ │ └────────────────────────────────────────────────────────┘</span><br><span class="line">                  ┌─┤ suite:<span class="hljs-string">"#indexOf()"</span> ├─┤</span><br><span class="line">                  │ └────────────────────┘ │ ┌────────────────────────────────────────────────────────┐</span><br><span class="line">┌───────────────┐ │                        └─┤       test:<span class="hljs-string">"should return the index when present"</span>      │</span><br><span class="line">│ suite:<span class="hljs-string">"Array"</span> ├─┤                          └────────────────────────────────────────────────────────┘</span><br><span class="line">└───────────────┘ │</span><br><span class="line">                  │ ┌────────────────────┐   ┌────────────────────────────────────────────────────────┐</span><br><span class="line">                  └─┤  suite:<span class="hljs-string">"#every()"</span>  ├───┤ test:<span class="hljs-string">"should return true when all items are satisfied"</span> │ </span><br><span class="line">                    └────────────────────┘   └────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>因此，Suite/Test 除了要能够表示 describe/it 之外，还应该能够诠释这种树状结构的父子级关系：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/suite.js</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Suite</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.title = props.title;    <span class="hljs-comment">// Suite名称，即describe传入的第一个参数</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.suites = [];            <span class="hljs-comment">// 子级suite</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.tests = [];             <span class="hljs-comment">// 包含的test</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.parent = props.parent;  <span class="hljs-comment">// 父suite</span></span><br><span class="line">    <span class="hljs-keyword">this</span>._beforeAll = [];        <span class="hljs-comment">// before hook</span></span><br><span class="line">    <span class="hljs-keyword">this</span>._afterAll = [];         <span class="hljs-comment">// after hook</span></span><br><span class="line">    <span class="hljs-keyword">this</span>._beforeEach = [];       <span class="hljs-comment">// beforeEach hook</span></span><br><span class="line">    <span class="hljs-keyword">this</span>._afterEach = [];        <span class="hljs-comment">// afterEach hook</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (props.parent <span class="hljs-keyword">instanceof</span> Suite) &#123;</span><br><span class="line">      props.parent.suites.push(<span class="hljs-keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = Suite;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/test.js</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.title = props.title;  <span class="hljs-comment">// Test名称，即it传入的第一个参数</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.fn = props.fn;        <span class="hljs-comment">// Test的执行函数，即it传入的第二个参数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = Test;</span><br></pre></td></tr></table></figure>
+
+<p>我们完善一下目录结构：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├─ mocha/</span><br><span class="line">│   ├─ index.js</span><br><span class="line">│   ├─ src/</span><br><span class="line">│   │   ├─ mocha.js</span><br><span class="line">│   │   ├─ runner.js</span><br><span class="line">│   │   ├─ suite.js</span><br><span class="line">│   │   ├─ test.js</span><br><span class="line">│   │   └─ utils.js</span><br><span class="line">│   ├─ interfaces/</span><br><span class="line">│   │   ├─ bdd.js</span><br><span class="line">│   │   └─ index.js</span><br><span class="line">│   └─ reporters/</span><br><span class="line">│       ├─ spec.js</span><br><span class="line">│       └─ index.js</span><br><span class="line">├─ test/</span><br><span class="line">└─ package.json</span><br></pre></td></tr></table></figure>
+
+<p>考虑到执行测试用例的过程较为复杂，我们把这块逻辑单独抽离到 <code>runner.js</code>，它将在执行阶段负责调度 suite 和 test 节点并运行测试用例，后续会详细说到。</p>
+<h4 id="三、收集测试用例"><a href="#三、收集测试用例" class="headerlink" title="三、收集测试用例"></a>三、收集测试用例</h4><p>收集测试用例环节首先需要创建一个 suite 根节点，并把 API 挂载到全局，然后再执行测试用例文件 <code>*.spec.js</code> 进行用例收集，最终将生成一棵与之结构对应的 suite-test 树。</p>
+<p><img src="http://img14.360buyimg.com/jdphoto/jfs/t1/53678/4/6276/45324/5d3d8050Ec3ec53ee/f8ce3fdc0c125be1.png" alt></p>
+<h6 id="1、suite-根节点"><a href="#1、suite-根节点" class="headerlink" title="1、suite 根节点"></a>1、suite 根节点</h6><p>我们先创建一个 suite 实例，作为整棵 suite-test 树的根节点，同时它也是我们收集和执行测试用例的起点。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> Suite = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./suite'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="hljs-comment">// 创建一个suite根节点</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.rootSuite = <span class="hljs-keyword">new</span> Suite(&#123;</span><br><span class="line">      title: <span class="hljs-string">''</span>,</span><br><span class="line">      parent: <span class="hljs-literal">null</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="2、BDD-API-的全局挂载"><a href="#2、BDD-API-的全局挂载" class="headerlink" title="2、BDD API 的全局挂载"></a>2、BDD API 的全局挂载</h6><p>在我们使用 Mocha 编写测试用例时，我们不需要手动引入 Mocha 提供的任何模块，就能够直接使用 describe、it 等一系列 API。那怎么样才能实现这一点呢？很简单，把 API 挂载到 global 对象上就行。因此，我们需要在执行测试用例文件之前，先将 BDD 风格的 API 全部作全局挂载。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-keyword">const</span> interfaces = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../interfaces'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="hljs-comment">// 创建一个根suite</span></span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    <span class="hljs-comment">// 使用bdd测试风格，将API挂载到global对象上</span></span><br><span class="line">    <span class="hljs-keyword">const</span> ui = <span class="hljs-string">'bdd'</span>;</span><br><span class="line">    interfaces[ui](global, <span class="hljs-keyword">this</span>.rootSuite);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/interfaces/index.js</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports.bdd = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./bdd'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/interfaces/bdd.js</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, root</span>) </span>&#123;</span><br><span class="line">  context.describe = context.context = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">title, fn</span>) </span>&#123;&#125;</span><br><span class="line">  context.it = context.specify = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">title, fn</span>) </span>&#123;&#125;</span><br><span class="line">  context.before = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;&#125;</span><br><span class="line">  context.after = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;&#125;</span><br><span class="line">  context.beforeEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;&#125;</span><br><span class="line">  context.afterEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="3、BDD-API-的具体实现"><a href="#3、BDD-API-的具体实现" class="headerlink" title="3、BDD API 的具体实现"></a>3、BDD API 的具体实现</h6><p>我们先看看 describe 函数怎么实现。</p>
+<p>describe 传入的 fn 参数是一个函数，它描述了一个测试块，测试块包含了若干子测试块和测试单元。因此我们需要执行 describe 传入的 fn 函数，才能够获知到它的子层结构，从而构造出一棵完整的 suite-test 树。而逐层执行 describe 的 fn 函数，本质上就是一个深度优先遍历的过程，因此我们需要利用一个栈（stack）来记录 suite 根节点到当前节点的路径。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/interfaces/bdd.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> Suite = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../src/suite'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> Test = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../src/test'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, root</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// 记录 suite 根节点到当前节点的路径</span></span><br><span class="line">  <span class="hljs-keyword">const</span> suites = [root];</span><br><span class="line"></span><br><span class="line">  context.describe = context.context = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">title, fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> parent = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    <span class="hljs-keyword">const</span> suite = <span class="hljs-keyword">new</span> Suite(&#123;</span><br><span class="line">      title,</span><br><span class="line">      parent</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    suites.unshift(suite);</span><br><span class="line">    fn.call(suite);</span><br><span class="line">    suites.shift(suite);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每次处理一个 describe 时，我们都会构建一个 Suite 实例来表示它，并且在执行 fn 前入栈，执行 fn 后出栈，保证 <code>suites[0]</code> 始终是当前正在处理的 suite 节点。利用这个栈列表，我们可以在遍历过程中构建出 suite 的树级关系。</p>
+<p>同样的，其他 API 也都需要依赖这个栈列表来实现：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/interfaces/bdd.js</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, root</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// 记录 suite 根节点到当前节点的路径</span></span><br><span class="line">  <span class="hljs-keyword">const</span> suites = [root];</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// context.describe = ...</span></span><br><span class="line"></span><br><span class="line">  context.it = context.specify = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">title, fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> parent = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    <span class="hljs-keyword">const</span> test = <span class="hljs-keyword">new</span> Test(&#123;</span><br><span class="line">      title,</span><br><span class="line">      fn</span><br><span class="line">    &#125;);</span><br><span class="line">    parent.tests.push(test);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.before = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> cur = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    cur._beforeAll.push(fn);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.after = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> cur = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    cur._afterAll.push(fn);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.beforeEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> cur = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    cur._beforeEach.push(fn);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.afterEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> cur = suites[<span class="hljs-number">0</span>];</span><br><span class="line">    cur._afterEach.push(fn);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="4、执行测试用例文件"><a href="#4、执行测试用例文件" class="headerlink" title="4、执行测试用例文件"></a>4、执行测试用例文件</h6><p>一切准备就绪，我们开始 <code>require</code> 测试用例文件。要完成这个步骤，我们需要一个函数来协助完成，它负责解析 test 路径下的资源，返回一个文件列表，并且能够支持 test 路径为文件和为目录的两种情况。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/utils.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports.lookupFiles = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lookupFiles</span>(<span class="hljs-params">filepath</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> stat;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 假设路径是文件</span></span><br><span class="line">  <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    stat = fs.statSync(<span class="hljs-string">`<span class="hljs-subst">$&#123;filepath&#125;</span>.js`</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span> (stat.isFile()) &#123;</span><br><span class="line">      <span class="hljs-comment">// 确实是文件，直接以数组形式返回</span></span><br><span class="line">      <span class="hljs-keyword">return</span> [filepath];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">catch</span>(e) &#123;&#125;</span><br><span class="line">	</span><br><span class="line">  <span class="hljs-comment">// 假设路径是目录</span></span><br><span class="line">  <span class="hljs-keyword">let</span> files = []; <span class="hljs-comment">// 存放目录下的所有文件</span></span><br><span class="line">  fs.readdirSync(filepath).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">dirent</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> pathname = path.join(filepath, dirent);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">      stat = fs.statSync(pathname);</span><br><span class="line">      <span class="hljs-keyword">if</span> (stat.isDirectory()) &#123;</span><br><span class="line">        <span class="hljs-comment">// 是目录，进一步递归</span></span><br><span class="line">        files = files.concat(lookupFiles(pathname));</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (stat.isFile()) &#123;</span><br><span class="line">        <span class="hljs-comment">// 是文件，补充到待返回的文件列表中</span></span><br><span class="line">        files.push(pathname);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span>(e) &#123;&#125;</span><br><span class="line">  &#125;);</span><br><span class="line">	</span><br><span class="line">  <span class="hljs-keyword">return</span> files;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="hljs-comment">// 创建一个根suite</span></span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    <span class="hljs-comment">// 使用bdd测试风格，将API挂载到global对象上</span></span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    <span class="hljs-comment">// 执行测试用例文件，构建suite-test树</span></span><br><span class="line">    <span class="hljs-keyword">const</span> spec = path.resolve(__dirname, <span class="hljs-string">'../../test'</span>);</span><br><span class="line">    <span class="hljs-keyword">const</span> files = utils.lookupFiles(spec);</span><br><span class="line">    files.forEach(<span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-built_in">require</span>(file);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、执行测试用例"><a href="#四、执行测试用例" class="headerlink" title="四、执行测试用例"></a>四、执行测试用例</h4><p>在这个环节中，我们需要通过遍历 suite-test 树来递归执行 suite 节点和 test 节点，并同步地输出测试报告。</p>
+<p><img src="http://img12.360buyimg.com/jdphoto/jfs/t1/84286/39/5724/43564/5d3d7f79E2576b082/4e91c6c081678702.png" alt></p>
+<h6 id="1、异步执行"><a href="#1、异步执行" class="headerlink" title="1、异步执行"></a>1、异步执行</h6><p>Mocha 的测试用例和 Hook 函数是支持异步执行的。异步执行的写法有两种，一种是函数返回值为一个 promise 对象，另一种是函数接收一个入参 <code>done</code>，并由开发者在异步代码中手动调用 <code>done(error)</code> 来向 Mocha 传递断言结果。所以，在执行测试用例之前，我们需要一个包装函数，将开发者传入的函数 promise 化：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/utils.js</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports.adaptPromise = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (fn.length == <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 不使用参数 done</span></span><br><span class="line">      <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> ret = fn();</span><br><span class="line">        <span class="hljs-comment">// 判断是否返回promise</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (ret <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Promise</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> ret.then(resolve, resolve);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">          resolve();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="hljs-keyword">catch</span> (error) &#123;</span><br><span class="line">        resolve(error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 使用参数 done</span></span><br><span class="line">      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">done</span>(<span class="hljs-params">error</span>) </span>&#123;</span><br><span class="line">        resolve(error);</span><br><span class="line">      &#125;</span><br><span class="line">      fn(done);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个工具函数传入一个函数 fn 并返回另外一个函数，执行返回的函数能够以 promise 的形式去运行 fn。这样一来，我们需要稍微修改一下之前的代码：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/interfaces/bdd.js</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-keyword">const</span> &#123; adaptPromise &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../src/utils'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, root</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  context.it = context.specify = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">title, fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    <span class="hljs-keyword">const</span> test = <span class="hljs-keyword">new</span> Test(&#123;</span><br><span class="line">      title,</span><br><span class="line">      fn: adaptPromise(fn)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.before = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    cur._beforeAll.push(adaptPromise(fn));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.after = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    cur._afterAll.push(adaptPromise(fn));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.beforeEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    cur._beforeEach.push(adaptPromise(fn));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.afterEach = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// ...</span></span><br><span class="line">    cur._afterEach.push(adaptPromise(fn));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="2、测试用例执行器"><a href="#2、测试用例执行器" class="headerlink" title="2、测试用例执行器"></a>2、测试用例执行器</h6><p>执行测试用例需要调度 suite 和 test 节点，因此我们需要一个执行器（runner）来统一负责执行过程。这是执行阶段的核心，我们先直接贴代码：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/runner.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> EventEmitter = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 监听事件的标识</span></span><br><span class="line"><span class="hljs-keyword">const</span> constants = &#123;</span><br><span class="line">  EVENT_RUN_BEGIN: <span class="hljs-string">'EVENT_RUN_BEGIN'</span>,      <span class="hljs-comment">// 执行流程开始</span></span><br><span class="line">  EVENT_RUN_END: <span class="hljs-string">'EVENT_RUN_END'</span>,          <span class="hljs-comment">// 执行流程结束</span></span><br><span class="line">  EVENT_SUITE_BEGIN: <span class="hljs-string">'EVENT_SUITE_BEGIN'</span>,  <span class="hljs-comment">// 执行suite开始</span></span><br><span class="line">  EVENT_SUITE_END: <span class="hljs-string">'EVENT_SUITE_END'</span>,      <span class="hljs-comment">// 执行suite开始</span></span><br><span class="line">  EVENT_FAIL: <span class="hljs-string">'EVENT_FAIL'</span>,                <span class="hljs-comment">// 执行用例失败</span></span><br><span class="line">  EVENT_PASS: <span class="hljs-string">'EVENT_PASS'</span>                 <span class="hljs-comment">// 执行用例成功</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Runner</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>();</span><br><span class="line">    <span class="hljs-comment">// 记录 suite 根节点到当前节点的路径</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.suites = [];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">   * 主入口</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">async</span> run(root) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emit(constants.EVENT_RUN_BEGIN);</span><br><span class="line">    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.runSuite(root);</span><br><span class="line">    <span class="hljs-keyword">this</span>.emit(constants.EVENT_RUN_END);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">   * 执行suite</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">async</span> runSuite(suite) &#123;</span><br><span class="line">    <span class="hljs-comment">// suite执行开始</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.emit(constants.EVENT_SUITE_BEGIN, suite);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 1）执行before钩子函数</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (suite._beforeAll.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> fn <span class="hljs-keyword">of</span> suite._beforeAll) &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fn();</span><br><span class="line">        <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">this</span>.emit(constants.EVENT_FAIL, <span class="hljs-string">`"before all" hook in <span class="hljs-subst">$&#123;suite.title&#125;</span>: <span class="hljs-subst">$&#123;result.message&#125;</span>`</span>);</span><br><span class="line">          <span class="hljs-comment">// suite执行结束</span></span><br><span class="line">          <span class="hljs-keyword">this</span>.emit(constants.EVENT_SUITE_END);</span><br><span class="line">          <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 路径栈推入当前节点</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.suites.unshift(suite);</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 2）执行test</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (suite.tests.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> test <span class="hljs-keyword">of</span> suite.tests) &#123;</span><br><span class="line">        <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.runTest(test);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 3）执行子级suite</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (suite.suites.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> child <span class="hljs-keyword">of</span> suite.suites) &#123;</span><br><span class="line">        <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.runSuite(child);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 路径栈推出当前节点</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.suites.shift(suite);</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 4）执行after钩子函数</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (suite._afterAll.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> fn <span class="hljs-keyword">of</span> suite._afterAll) &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fn();</span><br><span class="line">        <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">this</span>.emit(constants.EVENT_FAIL, <span class="hljs-string">`"after all" hook in <span class="hljs-subst">$&#123;suite.title&#125;</span>: <span class="hljs-subst">$&#123;result.message&#125;</span>`</span>);</span><br><span class="line">          <span class="hljs-comment">// suite执行结束</span></span><br><span class="line">          <span class="hljs-keyword">this</span>.emit(constants.EVENT_SUITE_END);</span><br><span class="line">          <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// suite结束</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.emit(constants.EVENT_SUITE_END);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">   * 执行suite</span></span><br><span class="line"><span class="hljs-comment">   */</span></span><br><span class="line">  <span class="hljs-keyword">async</span> runTest(test) &#123;</span><br><span class="line">    <span class="hljs-comment">// 1）由suite根节点向当前suite节点，依次执行beforeEach钩子函数</span></span><br><span class="line">    <span class="hljs-keyword">const</span> _beforeEach = [].concat(<span class="hljs-keyword">this</span>.suites).reverse().reduce(<span class="hljs-function">(<span class="hljs-params">list, suite</span>) =&gt;</span> list.concat(suite._beforeEach), []);</span><br><span class="line">    <span class="hljs-keyword">if</span> (_beforeEach.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> fn <span class="hljs-keyword">of</span> _beforeEach) &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fn();</span><br><span class="line">        <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(constants.EVENT_FAIL, <span class="hljs-string">`"before each" hook for <span class="hljs-subst">$&#123;test.title&#125;</span>: <span class="hljs-subst">$&#123;result.message&#125;</span>`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 2）执行测试用例</span></span><br><span class="line">    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> test.fn();</span><br><span class="line">    <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(constants.EVENT_FAIL, <span class="hljs-string">`<span class="hljs-subst">$&#123;test.title&#125;</span>`</span>);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emit(constants.EVENT_PASS, <span class="hljs-string">`<span class="hljs-subst">$&#123;test.title&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="hljs-comment">// 3）由当前suite节点向suite根节点，依次执行afterEach钩子函数</span></span><br><span class="line">    <span class="hljs-keyword">const</span> _afterEach = [].concat(<span class="hljs-keyword">this</span>.suites).reduce(<span class="hljs-function">(<span class="hljs-params">list, suite</span>) =&gt;</span> list.concat(suite._afterEach), []);</span><br><span class="line">    <span class="hljs-keyword">if</span> (_afterEach.length) &#123;</span><br><span class="line">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> fn <span class="hljs-keyword">of</span> _afterEach) &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fn();</span><br><span class="line">        <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(constants.EVENT_FAIL, <span class="hljs-string">`"after each" hook for <span class="hljs-subst">$&#123;test.title&#125;</span>: <span class="hljs-subst">$&#123;result.message&#125;</span>`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Runner.constants = constants;</span><br><span class="line"><span class="hljs-built_in">module</span>.exports = Runner</span><br></pre></td></tr></table></figure>
+
+<p>代码很长，我们稍微捋一下。</p>
+<p>首先，我们构造一个 Runner 类，利用两个 async 方法来完成对 suite-test 树的遍历：</p>
+<ul>
+<li><code>runSuite</code> ：负责执行 suite 节点。它不仅需要调用 runTest 执行该 suite 节点上的若干 test 节点，还需要调用 runSuite 执行下一级的若干 suite 节点来实现遍历，同时，before/after 也将在这里得到调用。执行顺序依次是：<code>before -&gt; runTest -&gt; runSuite -&gt; after</code>。</li>
+<li><code>runTest</code> ：负责执行 test 节点，主要是执行该 test 对象上定义的测试用例。另外，beforeEach/afterEach 的执行有一个类似浏览器事件捕获和冒泡的过程，我们需要沿节点路径向当前 suite 节点方向和向 suite 根节点方向分别执行各 suite 的 beforeEach/afterEach 钩子函数。执行顺序依次是：<code>beforeEach -&gt; run test case -&gt; afterEach</code>。</li>
+</ul>
+<p>在遍历过程中，我们依然是利用一个栈列表来维护 suite 根节点到当前节点的路径。同时，这两个流程都用 async/await 写法来组织，保证所有任务在异步场景下依然是按序执行的。</p>
+<p>其次，测试结论是“边执行边输出”的。为了在执行过程中能向 reporter 实时通知执行结果和执行状态，我们让 Runner 类继承自 EventEmitter 类，使其具备订阅/发布事件的能力，这个后续会细讲。</p>
+<p>最后，我们在 Mocha 实例的 run 方法中去实例化 Runner 并调用它：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-keyword">const</span> Runner = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./runner'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> runner = <span class="hljs-keyword">new</span> Runner();</span><br><span class="line">    runner.run(<span class="hljs-keyword">this</span>.rootSuite);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="3、输出测试报告"><a href="#3、输出测试报告" class="headerlink" title="3、输出测试报告"></a>3、输出测试报告</h6><p>reporter 负责测试报告输出，这个过程是在执行测试用例的过程中同步进行的，因此我们利用 EventEmitter 让 reporter 和 runner 保持通信。在 runner 中我们已经在各个关键节点都作了 event emit，所以我们只需要在 reporter 中加上相应的事件监听即可：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/reporters/index.js</span></span><br><span class="line"><span class="hljs-built_in">module</span>.exports.spec = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./spec'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/reporters/spec.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> constants = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../src/runner'</span>).constants;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">runner</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 执行开始</span></span><br><span class="line">  runner.on(constants.EVENT_RUN_BEGIN, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// suite执行开始</span></span><br><span class="line">  runner.on(constants.EVENT_SUITE_BEGIN, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">suite</span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// suite执行结束</span></span><br><span class="line">  runner.on(constants.EVENT_SUITE_END, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 用例通过</span></span><br><span class="line">  runner.on(constants.EVENT_PASS, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">title</span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 用例失败</span></span><br><span class="line">  runner.on(constants.EVENT_FAIL, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">title</span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 执行结束</span></span><br><span class="line">  runner.once(constants.EVENT_RUN_END, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Mocha 类中引入 reporter，执行事件订阅，就能让 runner 将测试的状态结果实时推送给 reporter 了：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/src/mocha.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> reporters = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../reporters'</span>);</span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mocha</span> </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> runner = <span class="hljs-keyword">new</span> Runner();</span><br><span class="line">    reporters[<span class="hljs-string">'spec'</span>](runner);</span><br><span class="line">    runner.run(<span class="hljs-keyword">this</span>.rootSuite);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>reporter 中可以任意构造你想要的报告样式输出，例如这样：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mocha/reporters/spec.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> constants = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../src/runner'</span>).constants;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> colors = &#123;</span><br><span class="line">  pass: <span class="hljs-number">90</span>,</span><br><span class="line">  fail: <span class="hljs-number">31</span>,</span><br><span class="line">  green: <span class="hljs-number">32</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">color</span>(<span class="hljs-params">type, str</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-string">'\u001b['</span> + colors[type] + <span class="hljs-string">'m'</span> + str + <span class="hljs-string">'\u001b[0m'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">runner</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">let</span> indents = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">let</span> passes = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">let</span> failures = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">indent</span>(<span class="hljs-params">i = <span class="hljs-number">0</span></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>(indents + i).join(<span class="hljs-string">'  '</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 执行开始</span></span><br><span class="line">  runner.on(constants.EVENT_RUN_BEGIN, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// suite执行开始</span></span><br><span class="line">  runner.on(constants.EVENT_SUITE_BEGIN, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">suite</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log();</span><br><span class="line"></span><br><span class="line">    ++indents;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(indent(), suite.title);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// suite执行结束</span></span><br><span class="line">  runner.on(constants.EVENT_SUITE_END, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    --indents;</span><br><span class="line">    <span class="hljs-keyword">if</span> (indents == <span class="hljs-number">1</span>) <span class="hljs-built_in">console</span>.log();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 用例通过</span></span><br><span class="line">  runner.on(constants.EVENT_PASS, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">title</span>) </span>&#123;</span><br><span class="line">    passes++;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> fmt = indent(<span class="hljs-number">1</span>) + color(<span class="hljs-string">'green'</span>, <span class="hljs-string">'  ✓'</span>) + color(<span class="hljs-string">'pass'</span>, <span class="hljs-string">' %s'</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(fmt, title);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 用例失败</span></span><br><span class="line">  runner.on(constants.EVENT_FAIL, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">title</span>) </span>&#123;</span><br><span class="line">    failures++;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> fmt = indent(<span class="hljs-number">1</span>) + color(<span class="hljs-string">'fail'</span>, <span class="hljs-string">'  × %s'</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(fmt, title);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 执行结束</span></span><br><span class="line">  runner.once(constants.EVENT_RUN_END, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(color(<span class="hljs-string">'green'</span>, <span class="hljs-string">'  %d passing'</span>), passes);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(color(<span class="hljs-string">'fail'</span>, <span class="hljs-string">'  %d failing'</span>), failures);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="五、验证"><a href="#五、验证" class="headerlink" title="五、验证"></a>五、验证</h4><p>到这里，我们的 simple-mocha 就基本完成了，我们可以编写一个测试用例来简单验证一下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// test/test.spec.js</span></span><br><span class="line"><span class="hljs-keyword">const</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">'assert'</span>);</span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'Array'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  describe(<span class="hljs-string">'#indexOf()'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'should return -1 when not present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      assert.equal(<span class="hljs-number">-1</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].indexOf(<span class="hljs-number">4</span>))</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    it(<span class="hljs-string">'should return the index when present'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      assert.equal(<span class="hljs-number">-1</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].indexOf(<span class="hljs-number">3</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  describe(<span class="hljs-string">'#every()'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'should return true when all items are satisfied'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      assert.equal(<span class="hljs-literal">true</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].every(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> !<span class="hljs-built_in">isNaN</span>(item)))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'Srting'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  describe(<span class="hljs-string">'#replace'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'should return a string that has been replaced'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      assert.equal(<span class="hljs-string">'hey Hankle'</span>, <span class="hljs-string">'hey Densy'</span>.replace(<span class="hljs-string">'Densy'</span>, <span class="hljs-string">'Hankle'</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里我们用 node 内置的 assert 模块来执行断言测试。下边是执行结果：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">npm test</span><br><span class="line"></span><br><span class="line">&gt; simple-mocha@1.0.0 test /Documents/simple-mocha</span><br><span class="line">&gt; node mocha</span><br><span class="line"></span><br><span class="line">   Array</span><br><span class="line">     #indexOf()</span><br><span class="line">        ✓ should return -1 when not present</span><br><span class="line">        × should return the index when present</span><br><span class="line">     #every()</span><br><span class="line">        ✓ should return true when all items are satisfied</span><br><span class="line"></span><br><span class="line">   String</span><br><span class="line">     #replace</span><br><span class="line">        ✓ should return a string that has been replaced</span><br><span class="line"></span><br><span class="line">  3 passing</span><br><span class="line">  1 failing</span><br></pre></td></tr></table></figure>
+
+<p>测试用例执行成功。附上完整的流程图：</p>
+<p><img src="http://img13.360buyimg.com/jdphoto/jfs/t1/48002/14/6249/38293/5d3d7dd6E1b985819/7ba08cfe21c04c73.png" alt></p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>如果你看到了这里，看完并看懂了上边实现 simple-mocha 的整个流程，那么很高兴地告诉你，你已经掌握了 Mocha 最核心的运行机理。simple-mocha 的整个实现过程其实就是 Mocha 实现的一个简化。而为了让大家在看完这篇文章后再去阅读 Mocha 源码时能够更快速地理解，我在简化和浅化 Mocha 实现流程的同时，也尽可能地保留了其中的一些命名和实现细节。有差别的地方，如执行测试用例环节，Mocha 源码利用了一个复杂的 Hook 机制来实现异步测试的依序执行，而我为了方便理解，用 async/await 来替代实现。当然这不是说 Mocha 实现得繁琐，在更加复杂的测试场景下，这套 Hook 机制是十分必要的。所以，这篇文章仅仅希望能够帮助我们攻克 Mocha 源码阅读的第一道陡坡，而要理解 Mocha 的精髓，光看这篇文章是远远不够的，还得深入阅读 Mocha 源码。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<p><a href="https://mochajs.org/" target="_blank" rel="noopener">Mocha官方文档</a><br><a href="http://www.moye.me/2014/11/22/bdd_mocha/" target="_blank" rel="noopener">BDD和Mocha框架</a></p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/BDD-TDD/">BDD/TDD</a>, <a class="has-link-grey -link" href="/tags/Mocha/">Mocha</a>, <a class="has-link-grey -link" href="/tags/测试框架/">测试框架</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/08/TypeScript安利指南/">
+                <span class="level-item">TypeScript安利指南</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        25
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 10px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Mocha/" style="font-size: 10px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/测试框架/" style="font-size: 10px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="title has-link-black-ter is-size-6 has-text-weight-normal">换种方式读源码：如何实现一个简易版的Mocha</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/08/TypeScript安利指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://upload-images.jianshu.io/upload_images/326255-af25e45293307405.png?imageMogr2/auto-orient/strip|imageView2/2/w/730/format/webp" alt="TypeScript安利指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-08T15:35:07.000Z">2019-10-08</time></div>
+                    <a href="/2019/10/08/TypeScript安利指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TypeScript安利指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/24/前端资源治理（一）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time></div>
+                    <a href="/2019/09/24/前端资源治理（一）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端资源治理（一）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/20/guid-mask/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg" alt="你还在用图片做引导蒙层？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T02:43:41.000Z">2019-09-20</time></div>
+                    <a href="/2019/09/20/guid-mask/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你还在用图片做引导蒙层？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="title has-link-black-ter is-size-6 has-text-weight-normal">换种方式读源码：如何实现一个简易版的Mocha</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/08/TypeScript安利指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://upload-images.jianshu.io/upload_images/326255-af25e45293307405.png?imageMogr2/auto-orient/strip|imageView2/2/w/730/format/webp" alt="TypeScript安利指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-08T15:35:07.000Z">2019-10-08</time></div>
+                    <a href="/2019/10/08/TypeScript安利指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TypeScript安利指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/24/前端资源治理（一）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time></div>
+                    <a href="/2019/09/24/前端资源治理（一）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端资源治理（一）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/20/guid-mask/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg" alt="你还在用图片做引导蒙层？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T02:43:41.000Z">2019-09-20</time></div>
+                    <a href="/2019/09/20/guid-mask/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你还在用图片做引导蒙层？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="换种方式读源码：如何实现一个简易版的Mocha" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
