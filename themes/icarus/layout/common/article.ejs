@@ -35,6 +35,12 @@
                     <%- _p('plugin.visit', '<span id="busuanzi_value_page_pv">0</span>') %>
                 </span>
                 <% } %>
+                <% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                <% } %>
             </div>
         </div>
         <% } %>
@@ -91,6 +97,7 @@
     
             if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
         </script>
+        
     
 </div>
 
