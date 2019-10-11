@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="Electron 实践笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time>-->
+                <div class="level-item has-text-grey">2019-10-11</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    32 分钟 读完 (大约 4786 个字)
+                </span>
+                
+                
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Electron 实践笔记
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：周全</p>
+</blockquote>
+<p>社交魔方平台是京东的 SNS 活动搭建平台，其内置了很多模板，每一个模板都有一个模板 JSON 用于生成表单，运营同学、商家配置了这个表单后就可以生成活动页面了。<br>模板 JSON 是标准的结构化数据，包含名称、类型、控件类型、校验器、默认值等等字段。以往都是采用手写 JSON 的方式，这是非常低效的，而且容易出错。针对其结构化数据的特点可以用 GUI 的方式去编辑，我们基于 <a href="http://electronjs.org" target="_blank" rel="noopener">Electron</a> 参考 <a href="https://github.com/desktop/desktop" target="_blank" rel="noopener">Github Desktop 客户端</a> 的架构编写了一个 <a href="http://git.jd.com/zhouquan31_repos/cubic" target="_blank" rel="noopener">编辑器</a>，通过填写表单的方式生成 JSON。所以在这里记录下这个 Electron 编辑器开发过程中可以记录的点和从 Github Desktop 客户端代码中值得学习的点。</p>
+<a id="more"></a>
+<p><img src="http://img13.360buyimg.com/jdphoto/jfs/t1/69749/12/12614/548388/5d9f4cebE13fe8229/6b2bb3d8394c8a5b.jpg" alt="APP"></p>
+<h2 id="一、关于-Electron"><a href="#一、关于-Electron" class="headerlink" title="一、关于 Electron"></a>一、关于 Electron</h2><blockquote>
+<p>Electron是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将Chromium和Node.js合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用来实现这一目的。</p>
+</blockquote>
+<p>上面是来自 Electron 官方的介绍。基于 Electron 平台，我们可以使用熟悉的前端技术栈来开发桌面应用。Electron 运行 package.json 的 main 脚本的进程被称为主进程（以下简称main）。 在主进程中运行的脚本通过创建 web 页面来展示用户界面（以下简称 renderer）。 一个 Electron 应用总是有且只有一个主进程。main 用于创建应用，创建浏览器窗口，它就是一个彻底的 Node 进程，获取不到 DOM, BOM 这些接口。在 main 创建的浏览器窗口中运行的就是 renderer 进程，它既可以获取 DOM, BOM 这些接口，也可以使用 Node 的 API。两类进程之间可以通过 Electron 提供的 IPC 接口通信。</p>
+<h2 id="二、开发环境搭建"><a href="#二、开发环境搭建" class="headerlink" title="二、开发环境搭建"></a>二、开发环境搭建</h2><p>我们了解到 Electron 分为两类进程，main 和 renderer。所以搭建开发环境时不能像普通的前端应用一样一个 webpack 配置搞定。并且我们想要实现</p>
+<ol>
+<li>一键启动开发环境</li>
+<li>一键打包</li>
+<li>一键发布</li>
+</ol>
+<p>那么就需要两个 webpack 配置文件。</p>
+<p>一个用于开发环境 – <code>webpack.dev.ts</code>。</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// webpack.dev.ts</span></span><br><span class="line"><span class="hljs-keyword">const</span> mainConfig = merge(&#123;&#125;, base.mainConfig, config, &#123;</span><br><span class="line">  watch: <span class="hljs-literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> rendererConfig = merge(&#123;&#125;, base.rendererConfig, config, &#123;</span><br><span class="line">  <span class="hljs-keyword">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="hljs-regexp">/\.css$/</span>,</span><br><span class="line">        use: [<span class="hljs-string">'style-loader'</span>, <span class="hljs-string">'css-loader'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="hljs-regexp">/\.styl$/</span>,</span><br><span class="line">        use: [<span class="hljs-string">'style-loader'</span>, <span class="hljs-string">'css-loader'</span>, <span class="hljs-string">'stylus-loader'</span>],</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: path.join(__dirname, base.outputDir),</span><br><span class="line">    port: <span class="hljs-number">8000</span>,</span><br><span class="line">    hot: <span class="hljs-literal">true</span>,</span><br><span class="line">    inline: <span class="hljs-literal">true</span>,</span><br><span class="line">    historyApiFallback: <span class="hljs-literal">true</span>,</span><br><span class="line">    writeToDisk: <span class="hljs-literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = [rendererConfig, mainConfig]</span><br></pre></td></tr></table></figure>
+
+<p>另一个用于生产环境 – <code>webpack.prod.ts</code>。</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> config: webpack.Configuration = &#123;</span><br><span class="line">  mode: <span class="hljs-string">'production'</span>,</span><br><span class="line">  devtool: <span class="hljs-string">'source-map'</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> mainConfig = merge(&#123;&#125;, base.mainConfig, config)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> rendererConfig = merge(&#123;&#125;, base.rendererConfig, config, &#123;</span><br><span class="line">  <span class="hljs-keyword">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="hljs-regexp">/\.css$/</span>,</span><br><span class="line">        use: [MiniCssExtractPlugin.loader, <span class="hljs-string">'css-loader'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="hljs-regexp">/\.styl$/</span>,</span><br><span class="line">        use: [MiniCssExtractPlugin.loader, <span class="hljs-string">'css-loader'</span>, <span class="hljs-string">'stylus-loader'</span>],</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="hljs-keyword">new</span> MiniCssExtractPlugin(&#123; filename: <span class="hljs-string">'renderer.css'</span> &#125;),</span><br><span class="line">    <span class="hljs-keyword">new</span> BundleAnalyzerPlugin(&#123;</span><br><span class="line">      analyzerMode: <span class="hljs-string">'static'</span>,</span><br><span class="line">      openAnalyzer: <span class="hljs-literal">false</span>,</span><br><span class="line">      reportFilename: <span class="hljs-string">'renderer.report.html'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = [mainConfig, rendererConfig]</span><br></pre></td></tr></table></figure>
+
+<p>这里参考了 Desktop 使用 Typescript 编写 webpack 配置文件。配合 interface 可以实现 webpack 配置文件的编辑器自动补全。具体使用方法可参考 webpack 文档 <a href="https://webpack.js.org/configuration/configuration-languages/#typescript" target="_blank" rel="noopener">https://webpack.js.org/configuration/configuration-languages/#typescript</a></p>
+<p>每一个配置文件导出一个数组，分别是 main, renderer 的配置对象。</p>
+<p>使用 webpack-dev-server 启动能实现 renderer 的热更新，main 则是使用 webpack 的 watch 模式。</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"compile:dev"</span>: <span class="hljs-string">"webpack-dev-server --config scripts/webpack.dev.ts"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <a href="https://nodemon.io" target="_blank" rel="noopener">nodemon</a> 监听 main 编译后的产物，nodemon 监听到改动则重新运行 <code>electron .</code> 重启应用,这样间接实现了 main 的 livereload。</p>
+<blockquote>
+<p>Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.</p>
+</blockquote>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"app"</span>: <span class="hljs-string">"electron ."</span>,</span><br><span class="line">  <span class="hljs-attr">"app:watch"</span>: <span class="hljs-string">"nodemon --watch 'dest/main.js' --exec npm run app"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就实现了一键启动开发环境，且能够监听代码变化，重新启动应用。</p>
+<blockquote>
+<p>Tips: 开源社区有更好的 <a href="https://github.com/electron-userland/electron-webpack" target="_blank" rel="noopener">electron-webpack</a>, HMR for both renderer and main processes</p>
+</blockquote>
+<p>生产环境则使用 webpack 顺序编译 main 和 renderer。编译完成后使用 <a href="https://www.electron.build" target="_blank" rel="noopener">electron-builder</a> 打包。这样就实现了一键打包。</p>
+<p>由于工具链的缺失实现不了一键发布，就只能打包后手动发布了（后面详细说明）。</p>
+<p>下面就是完整的 scripts。</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"run-p -c compile:dev typecheck:watch app:watch"</span>,</span><br><span class="line">    <span class="hljs-attr">"dist"</span>: <span class="hljs-string">"npm run compile:prod &amp;&amp; electron-builder build --win --mac"</span>,</span><br><span class="line">    <span class="hljs-attr">"compile:dev"</span>: <span class="hljs-string">"webpack-dev-server --config scripts/webpack.dev.ts"</span>,</span><br><span class="line">    <span class="hljs-attr">"compile:prod"</span>: <span class="hljs-string">"npm run clean &amp;&amp; webpack --config scripts/webpack.prod.ts"</span>,</span><br><span class="line">    <span class="hljs-attr">"app"</span>: <span class="hljs-string">"electron ."</span>,</span><br><span class="line">    <span class="hljs-attr">"app:watch"</span>: <span class="hljs-string">"nodemon --watch 'dest/main.js' --exec npm run app"</span>,</span><br><span class="line">    <span class="hljs-attr">"clean"</span>: <span class="hljs-string">"rimraf dest dist"</span>,</span><br><span class="line">    <span class="hljs-attr">"typecheck"</span>: <span class="hljs-string">"tsc --noEmit"</span>,</span><br><span class="line">    <span class="hljs-attr">"typecheck:watch"</span>: <span class="hljs-string">"tsc --noEmit --watch"</span>,</span><br><span class="line">    <span class="hljs-attr">"lint"</span>: <span class="hljs-string">"eslint src --ext .ts,.js --fix"</span>,</span><br><span class="line">    <span class="hljs-attr">"release:patch"</span>: <span class="hljs-string">"standard-version --release-as patch &amp;&amp; git push --follow-tags origin master &amp;&amp; npm run dist"</span>,</span><br><span class="line">    <span class="hljs-attr">"release:minor"</span>: <span class="hljs-string">"standard-version --release-as minor &amp;&amp; git push --follow-tags origin master &amp;&amp; npm run dist"</span>,</span><br><span class="line">    <span class="hljs-attr">"release:major"</span>: <span class="hljs-string">"standard-version --release-as major &amp;&amp; git push --follow-tags origin master &amp;&amp; npm run dist"</span>,</span><br><span class="line">    <span class="hljs-attr">"repush"</span>: <span class="hljs-string">"git push --follow-tags origin master &amp;&amp; npm run dist"</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、目录结构"><a href="#三、目录结构" class="headerlink" title="三、目录结构"></a>三、目录结构</h2><h3 id="1-项目目录结构"><a href="#1-项目目录结构" class="headerlink" title="1. 项目目录结构"></a>1. 项目目录结构</h3><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">├── lib</span><br><span class="line">│   ├── cube</span><br><span class="line">│   ├── databases</span><br><span class="line">│   ├── enviroment</span><br><span class="line">│   ├── files</span><br><span class="line">│   ├── <span class="hljs-built_in">local</span>-storage</span><br><span class="line">│   ├── <span class="hljs-built_in">log</span></span><br><span class="line">│   ├── shell</span><br><span class="line">│   ├── stores</span><br><span class="line">│   ├── update</span><br><span class="line">│   ├── validator</span><br><span class="line">│   └── watcher</span><br><span class="line">├── main</span><br><span class="line">│   ├── app-window.ts</span><br><span class="line">│   ├── event-bus.ts</span><br><span class="line">│   ├── index.ts</span><br><span class="line">│   ├── keyboard</span><br><span class="line">│   └── menu</span><br><span class="line">├── models</span><br><span class="line">│   ├── popup.ts</span><br><span class="line">│   └── project.ts</span><br><span class="line">└── renderer</span><br><span class="line">    ├── App.tsx</span><br><span class="line">    ├── assets</span><br><span class="line">    ├── components</span><br><span class="line">    ├── index.html</span><br><span class="line">    ├── index.tsx</span><br><span class="line">    ├── pages</span><br><span class="line">    └── types</span><br></pre></td></tr></table></figure>
+
+<p>在目录结构上模仿了 Desktop。main 目录存放 main 进程相关代码，包括应用入口，窗口创建，菜单，快捷键等等；而 renderer 目录则是整个 UI 渲染层的代码。lib 目录则是一些和 UI 无关也和 main 无强相关的业务逻辑代码。models 则存放一些领域模型。</p>
+<h3 id="2-CSS-规范"><a href="#2-CSS-规范" class="headerlink" title="2. CSS 规范"></a>2. CSS 规范</h3><p>在这个 React 中项目中没有使用 css-modules 这类方案。而是使用 BEM 这类能形成命名空间的规范来实现模块化，这样做的好处是能够比较好的对样式进行覆盖。</p>
+<p>在文件的组织方式上采用一个独立的 React 组件搭配一个独立的样式文件，这样在重构的时候，我们想要修改一个组件的样式只需要找到对应的样式文件进行修改即可，提高重构的效率。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stylesheets</span><br><span class="line">  ├── common.styl</span><br><span class="line">  ├── components</span><br><span class="line">  │   ├── editor.styl</span><br><span class="line">  │   ├── empty-guide.styl</span><br><span class="line">  │   ├── find-in-page.styl</span><br><span class="line">  │   ├── reindex.styl</span><br><span class="line">  │   ├── sidebar.styl</span><br><span class="line">  │   ├── source-viewer.styl</span><br><span class="line">  │   └── upload.styl</span><br><span class="line">  ├── index.styl</span><br><span class="line">  └── reset.styl</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、IPC-通信"><a href="#三、IPC-通信" class="headerlink" title="三、IPC 通信"></a>三、IPC 通信</h2><blockquote>
+<p>进程间通信（IPC，InterProcess Communication）是指在不同进程之间传播或交换信息。 </p>
+</blockquote>
+<p>Electron 的 main 进程和 renderer 进程的通信是通过 Electron 提供的 <code>ipcMain</code> 和 <code>ipcRenderer</code> 来实现的。</p>
+<h3 id="1-main-端"><a href="#1-main-端" class="headerlink" title="1. main 端"></a>1. main 端</h3><p>在 main 中向某一个窗口 renderer 发送消息可以使用 <code>window.webContents.send</code>。<br>在 main 端监听 renderer 消息可以使用 <code>ipcMain.on</code>。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在主进程中.</span></span><br><span class="line"><span class="hljs-keyword">const</span> &#123; ipcMain &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'electron'</span>)</span><br><span class="line">ipcMain.on(<span class="hljs-string">'asynchronous-message'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(arg) <span class="hljs-comment">// prints "ping"</span></span><br><span class="line">  event.reply(<span class="hljs-string">'asynchronous-reply'</span>, <span class="hljs-string">'pong'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ipcMain.on(<span class="hljs-string">'synchronous-message'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(arg) <span class="hljs-comment">// prints "ping"</span></span><br><span class="line">  event.returnValue = <span class="hljs-string">'pong'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-renderer-端"><a href="#2-renderer-端" class="headerlink" title="2. renderer 端"></a>2. renderer 端</h3><p>回复同步消息可以使用 <code>event.returnValue</code>。同步消息的返回值可以直接读取。<br>回复异步消息可以使用 <code>event.reply</code>。那么在 renderer 就要监听回复的 channel 得到返回值。</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//在渲染器进程 (网页) 中。</span></span><br><span class="line"><span class="hljs-keyword">const</span> &#123; ipcRenderer &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'electron'</span>)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(ipcRenderer.sendSync(<span class="hljs-string">'synchronous-message'</span>, <span class="hljs-string">'ping'</span>)) <span class="hljs-comment">// prints "pong"</span></span><br><span class="line"></span><br><span class="line">ipcRenderer.on(<span class="hljs-string">'asynchronous-reply'</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(arg) <span class="hljs-comment">// prints "pong"</span></span><br><span class="line">&#125;)</span><br><span class="line">ipcRenderer.send(<span class="hljs-string">'asynchronous-message'</span>, <span class="hljs-string">'ping'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 renderer 可以使用 <code>ipcRenderer.send</code> 向主进程发送异步消息。用 <code>ipcRenderer.sendSync</code> 发送同步消息。</p>
+<h2 id="四、数据持久化及状态管理"><a href="#四、数据持久化及状态管理" class="headerlink" title="四、数据持久化及状态管理"></a>四、数据持久化及状态管理</h2><h3 id="1-复杂数据持久化"><a href="#1-复杂数据持久化" class="headerlink" title="1. 复杂数据持久化"></a>1. 复杂数据持久化</h3><p>数据持久化可选的方案有很多，比如 <a href="https://github.com/sindresorhus/electron-store#readme" target="_blank" rel="noopener">electron-store</a>等基于 JSON 文件实现的存储方案。对于更复杂的应用场景还可以使用 <a href="https://github.com/typicode/lowdb" target="_blank" rel="noopener">lowdb</a>，<a href="https://github.com/louischatriot/nedb" target="_blank" rel="noopener">nedb</a> ，<code>sqlite</code>等。</p>
+<p>最初我使用的是 <code>electron-store</code>, 并且一直有一个执念是对磁盘的读写只能在 main 进程进行，renderer 进程只负责渲染界面。所以在最初设计的是在 renderer 进程渲染数据或者更新数据的时候都需要通过 IPC 到 main 进程来完成最终的磁盘读写。除去读写正常的情况，还要考虑读写磁盘的异常，这样导致数据流异常的绕。而且还需要自己维护 ID 的生成。借鉴了 Desktop 的代码后，重构了数据持久化部分，也采用了 <a href="https://github.com/dfahlander/Dexie.js" target="_blank" rel="noopener">Dexie</a>，它是对浏览器标准数据库 indexedDB 的一个封装。从它的 Readme 可以看到它主要解决了indexedDB 的三个问题：</p>
+<ol>
+<li>不明确的异常处理</li>
+<li>查询很烂</li>
+<li>代码复杂</li>
+</ol>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Dexie <span class="hljs-keyword">from</span> <span class="hljs-string">'dexie'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> IDatabaseProject &#123;</span><br><span class="line">  id?: <span class="hljs-built_in">number</span>;</span><br><span class="line">  name: <span class="hljs-built_in">string</span>;</span><br><span class="line">  filePath: <span class="hljs-built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ProjectsDatabase <span class="hljs-keyword">extends</span> Dexie &#123;</span><br><span class="line">  <span class="hljs-keyword">public</span> projects: Dexie.Table&lt;IDatabaseProject, <span class="hljs-built_in">number</span>&gt;;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(<span class="hljs-string">'ProjectsDatabase'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.version(<span class="hljs-number">1</span>).stores(&#123;</span><br><span class="line">      projects: <span class="hljs-string">'++id,&amp;name,&amp;filePath'</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.projects = <span class="hljs-keyword">this</span>.table(<span class="hljs-string">'projects'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继承 Dexie 来实现我们自己的数据库类，在构造函数中声明数据库的版本，表的 schema 等等。具体可以参考 <a href="https://dexie.org/docs/" target="_blank" rel="noopener">Dexie 官方文档</a>。</p>
+<h3 id="2-简单数据持久化"><a href="#2-简单数据持久化" class="headerlink" title="2. 简单数据持久化"></a>2. 简单数据持久化</h3><p>一些 UI 状态的标志位存储（比如某个弹窗是否显示过），我们一般会把这种标志位存储到 <code>localStorage</code> 中。<br>在查看 Desktop 的源码过程中，发现他们对 <code>number</code>, <code>boolean</code> 类型的数据的 get, set 进行了简单的封装。使用起来非常方便，这里贴一下对于 <code>boolean</code> 型数据的处理。</p>
+<figure class="highlight typescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBoolean</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">boolean</span> | <span class="hljs-title">undefined</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-title">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBoolean</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span>, defaultValue: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">boolean</span></span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function"><span class="hljs-title">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBoolean</span>(<span class="hljs-params"></span></span></span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function"><span class="hljs-function"><span class="hljs-params">  key: <span class="hljs-built_in">string</span>,</span></span></span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function"><span class="hljs-function"><span class="hljs-params">  defaultValue?: <span class="hljs-built_in">boolean</span></span></span></span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function"><span class="hljs-function"><span class="hljs-params"></span>): <span class="hljs-title">boolean</span> | <span class="hljs-title">undefined</span> </span>&#123;</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function">  <span class="hljs-title">const</span> <span class="hljs-title">value</span> = <span class="hljs-title">localStorage</span>.<span class="hljs-title">getItem</span>(<span class="hljs-params">key</span>)</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-function">  <span class="hljs-title">if</span> (<span class="hljs-params">value === <span class="hljs-literal">null</span></span>) </span>&#123;</span></span><br><span class="line"><span class="hljs-function">    <span class="hljs-title">return</span> <span class="hljs-title">defaultValue</span></span></span><br><span class="line"><span class="hljs-function">  &#125;</span></span><br><span class="line"><span class="hljs-function"></span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">if</span> (<span class="hljs-params">value === '1' || value === '<span class="hljs-literal">true</span>'</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (value === <span class="hljs-string">'0'</span> || value === <span class="hljs-string">'false'</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">return</span> defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setBoolean</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span>, value: <span class="hljs-built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">  localStorage.setItem(key, value ? <span class="hljs-string">'1'</span> : <span class="hljs-string">'0'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/desktop/desktop/blob/development/app/src/lib/local-storage.ts" target="_blank" rel="noopener">源码详见</a></p>
+<h2 id="五、功能实现"><a href="#五、功能实现" class="headerlink" title="五、功能实现"></a>五、功能实现</h2><h3 id="1-磁盘-编辑器版本实时同步"><a href="#1-磁盘-编辑器版本实时同步" class="headerlink" title="1. 磁盘/编辑器版本实时同步"></a>1. 磁盘/编辑器版本实时同步</h3><p>一般情况下，在编辑器中我们编辑的内容其实是编辑器读取磁盘文件到内存中的副本。所以说如果磁盘的文件发生了改动，比如 Git 切换分支造成文件变动，抑或是删除了磁盘文件，重命名等等都会造成内存版本和磁盘版本的不一致，即磁盘版本领先于内存版本，这个时候就可能产生冲突。解决这个问题很简单，可以使用 fs.watch/watchFile 监听当前编辑的文件，一旦发生变化，就重新读取磁盘版本，更新内存版本来实现同步。但是 fs.watch 这个 API 在工程上不是可以开箱即用的，有许多兼容问题和一些 bug。比如说</p>
+<p>Node.js fs.watch:</p>
+<ul>
+<li>Doesn’t report filenames on MacOS.</li>
+<li>Doesn’t report events at all when using editors like Sublime on MacOS.</li>
+<li>Often reports events twice.</li>
+<li>Emits most changes as rename.</li>
+<li>Does not provide an easy way to recursively watch file trees.</li>
+</ul>
+<p>Node.js fs.watchFile:</p>
+<ul>
+<li>Almost as bad at event handling.</li>
+<li>Also does not provide any recursive watching.</li>
+<li>Results in high CPU utilization.</li>
+</ul>
+<p>上面列举的点来自 <a href="https://github.com/paulmillr/chokidar" target="_blank" rel="noopener">chokidar</a>，它是一个 Node 模块，提供了开箱可用的监听文件变化的能力。只需要监听 <code>add</code>, <code>unlink</code>, <code>change</code> 等事件读取最新版本的文本到编辑器就可以实现磁盘/编辑器版本的同步了。</p>
+<h3 id="2-Context-Menu"><a href="#2-Context-Menu" class="headerlink" title="2. Context-Menu"></a>2. Context-Menu</h3><p>Desktop 的 <code>contextmenu</code> (右键菜单)的实现基于原生 IPC 的，比较绕。</p>
+<p>首先我们需要知道的是 <code>Menu</code> 类是 <code>main process only</code> 的。</p>
+<p>在需要 <code>contextmenu</code> 的 <code>JSX.Element</code> 上绑定 <code>onContextMenu</code> 事件。构造对象数组 <code>Array&lt;MenuItem&gt;</code>, 并且为每个 MenuItem 对象绑定触发事件，再通过 IPC 将对象传递至 main 进程，值得一提的是这个时候将 MenuItem 数组赋值给了一个全局对象，暂存起来。在 main 进程构造出真正的 MenuItem 实例，绑定 MenuItem 的点击事件，触发 MenuItem 点击事件的时候记录 MenuItem 的 序列号 index，再将 index 通过 event.sender.send 将 index 传递到 renderer 进程。renderer 进程拿到 index 之后根据之前保存的全局对象取出单个 MenuItem， 执行绑定的事件。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onContextMenu =&gt; showContextualMenu (暂存MenuItems，ipcRenderer.send) =&gt; icpMain =&gt; menu.popup() =&gt; MenuItem.onClick(index) =&gt; event.sernder.send(index) =&gt; MenuItem.action()</span><br></pre></td></tr></table></figure>
+
+<p>所以在我的应用中使用了 remote 对象屏蔽上述复杂的 IPC 通信。在 renderer 进程完成 Menu 的构造展示和事件的绑定触发。</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; remote &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'electron'</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> &#123; MenuItem, dialog, getCurrentWindow, Menu &#125; = remote;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> onContextMenu = <span class="hljs-function">(<span class="hljs-params">project: Project</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> menu = <span class="hljs-keyword">new</span> Menu();</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">const</span> menus = [</span><br><span class="line">    <span class="hljs-keyword">new</span> MenuItem(&#123;</span><br><span class="line">      label: <span class="hljs-string">'在终端中打开'</span>,</span><br><span class="line">      visible: __DARWIN__,</span><br><span class="line">      click() &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> accessor = <span class="hljs-keyword">new</span> FileAccessor(project.filePath);</span><br><span class="line">        accessor.openInTerminal();</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="hljs-keyword">new</span> MenuItem(&#123;</span><br><span class="line">      label: <span class="hljs-string">'在 vscode 中打开'</span>,</span><br><span class="line">      click() &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> accessor = <span class="hljs-keyword">new</span> FileAccessor(project.filePath);</span><br><span class="line">        accessor.openInVscode();</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  menus.forEach(menu.append);</span><br><span class="line">  menu.popup(&#123; <span class="hljs-built_in">window</span>: getCurrentWindow() &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、日志"><a href="#六、日志" class="headerlink" title="六、日志"></a>六、日志</h2><p>完善的日志不论是开发环境还是生产环境都是非常重要的，大致记录 UI 状态迁移背后的数据变动，流程的分支走向，能很好的辅助开发。</p>
+<p>参考 Desktop，他们的日志基于日志库：<a href="https://github.com/winstonjs/winston#readme" target="_blank" rel="noopener">winston</a>。</p>
+<p>在 main 进程和 renderer 进程都提供了全局 log 对象，接口都是一致的。分别是 <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>。在 renderer 进程，简单的封装了 <code>window.console</code> 对象上的 <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code> 方法，日志打印到浏览器控制台的时候也通过 IPC 传递到 main 进程，由 main 进程统一管理。 </p>
+<p>main 进程接收了来自 renderer 进程的日志信息和 main 进程自身的日志信息。设置了两个 <code>transports</code>。<code>winston.transports.Console</code> 和 <code>winston.transports.DailyRotateFile</code> 分别用于将日志信息打印在终端控制台和存储在磁盘文件。DailyRotateFile 以天为单位，设置了最多存储 14 天的上限。</p>
+<p>在 main 进程和 renderer 进程启动时分别引入日志安装模块。因为 log 方法都是暴露在全局，因此只需要在进程启动时引入一次即可。同时在 TS 环境中还需要添加 log 方法的类型声明。</p>
+<h2 id="七、打包，发布及更新"><a href="#七、打包，发布及更新" class="headerlink" title="七、打包，发布及更新"></a>七、打包，发布及更新</h2><p>开源世界已经有非常完善的打包和发布的工具 – <a href="https://www.electron.build" target="_blank" rel="noopener">electron-builder</a>。它集多平台打包，签名，自动更新，发布到Github等平台等等功能于一身。</p>
+<p>鉴于这个工具只能在内网使用，不能发布到 Github 而且也没有没有苹果开发者工具无法进行签名，只能利用 <code>electron-builder</code> 在本机打包，发布的话只能使用手动打包上传了，用户也只能手动下载安装包覆盖安装，不能像 VSCODE 这样实现自动更新。</p>
+<p>既然不能自动更新，那么新版本下发后，如何通知到用户去下载新版本安装包更新呢？<br>从用户这一端来看，在应用每次启动的时候可以做一次请求，查询是否有版本更新，或者是在应用菜单栏提供入口，让用户手动触发更新查询。查询到服务端的最新版本后，使用 <a href="https://www.npmjs.com/package/semver" target="_blank" rel="noopener">sermver</a> 比较本机版本是否低于服务器版本，如果是就下发通知给用户，提示用户去下载更新。</p>
+<p>在有限的条件下怎么实现这个功能呢？</p>
+<p>实现这个功能必需的三个元素：服务端标识着最新版本的可读文件；托管各个版本安装包的云空间；应用代码中的更新逻辑。</p>
+<p>服务端标识着最新版本的可读文件：每次打包时都会更新 <code>package.json</code>，所以我们直接把 <code>package.json</code> 上传到某个不带鉴权的 CDN 就可以，更新的时候就请求这个文件。</p>
+<p>托管各个版本安装包的云空间：这个可以使用云盘，云盘可以生成分享链接，把这个链接手动拷贝到 Gitlab 该版本的 tag 的 Notes 中。</p>
+<p>应用代码中的更新逻辑：</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> got <span class="hljs-keyword">from</span> <span class="hljs-string">'got'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> semver <span class="hljs-keyword">from</span> <span class="hljs-string">'semver'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> &#123; app, remote, BrowserWindow &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'electron'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> realApp = app || remote.app;</span><br><span class="line"><span class="hljs-keyword">const</span> currentVersion = realApp.getVersion();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkForUpdates</span>(<span class="hljs-params"><span class="hljs-built_in">window</span>: BrowserWindow, silent: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> url = <span class="hljs-string">`http://yourcdn/package.json?t=<span class="hljs-subst">$&#123;<span class="hljs-built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">  <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> got(url);</span><br><span class="line">    <span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">JSON</span>.parse(response.body);</span><br><span class="line">    log.debug(<span class="hljs-string">'检查更新，云端版本：'</span>, pkg.version);</span><br><span class="line">    log.debug(<span class="hljs-string">'当前版本'</span>, currentVersion);</span><br><span class="line">    <span class="hljs-keyword">if</span> (semver.lt(currentVersion, pkg.version)) &#123;</span><br><span class="line">      <span class="hljs-built_in">window</span>.webContents.send(<span class="hljs-string">'update-available'</span>, pkg.version);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-built_in">window</span>.webContents.send(<span class="hljs-string">'update-not-available'</span>, silent);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="hljs-built_in">window</span>.webContents.send(<span class="hljs-string">'update-error'</span>, silent);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分别在应用主进程启动、用户点击应用菜单<code>检查更新</code>时调用这个方法，从而通知 UI 进程下发通知。我们期望应用主进程启动时的更新是在失败或者无更新时是静默的，不用打扰用户，所以在 IPC 管道可以提供一个 <code>silent</code> 参数。检测到更新后就可以通知用户，用户点击更新后就可以跳转到最新版本的 Gitlab tags ，引导用户下载最新版本进行手动安装。</p>
+<h2 id="八、其他"><a href="#八、其他" class="headerlink" title="八、其他"></a>八、其他</h2><h3 id="1-devtools"><a href="#1-devtools" class="headerlink" title="1. devtools"></a>1. devtools</h3><p>开发 Electron 应用中 renderer 端也是使用 Chrome devtools 来调试的。对于 React, Mobx 这类框的 devtools 扩展也可以通过 <code>electron-devtools-installer</code> 来安装。应用窗口创建之后调用<code>electron-devtools-installer</code> 进行 <code>mobx</code>、<code>react</code> 等扩展的安装。</p>
+<figure class="highlight ts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> &#123; <span class="hljs-keyword">default</span>: installExtension, MOBX_DEVTOOLS, REACT_DEVELOPER_TOOLS &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'electron-devtools-installer'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> extensions = [REACT_DEVELOPER_TOOLS, MOBX_DEVTOOLS];</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> extension of extensions) &#123;</span><br><span class="line">  <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">    installExtension(extension);</span><br><span class="line">  &#125; <span class="hljs-keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="hljs-comment">// log.error(e);</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-保持窗口大小"><a href="#2-保持窗口大小" class="headerlink" title="2. 保持窗口大小"></a>2. 保持窗口大小</h3><p>对于桌面应用，一个常见的需求就是关闭后重新打开，需要恢复到上次打开时的窗口大小，位置。实现这个比较简单，监听窗口的 resize 事件，把窗口信息记录到当前用户的应用数据文件夹, 即 <code>app.getPath(appData)</code>。下次启动应用创建窗口时读取这个文件设置窗口信息即可。开源社区已经有对这个功能封装好的库：<a href="https://github.com/mawie81/electron-window-state#readme" target="_blank" rel="noopener">electron-window-state</a></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> windowStateKeeper = <span class="hljs-built_in">require</span>(<span class="hljs-string">'electron-window-state'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> win;</span><br><span class="line"></span><br><span class="line">app.on(<span class="hljs-string">'ready'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> mainWindowState = windowStateKeeper(&#123;</span><br><span class="line">    defaultWidth: <span class="hljs-number">1000</span>,</span><br><span class="line">    defaultHeight: <span class="hljs-number">800</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  win = <span class="hljs-keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    <span class="hljs-string">'x'</span>: mainWindowState.x,</span><br><span class="line">    <span class="hljs-string">'y'</span>: mainWindowState.y,</span><br><span class="line">    <span class="hljs-string">'width'</span>: mainWindowState.width,</span><br><span class="line">    <span class="hljs-string">'height'</span>: mainWindowState.height</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  mainWindowState.manage(win);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>只需要提供缺省窗口大小，剩余的事情 <code>electron-window-state</code> 都帮我们搞定了。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Electron/">Electron</a>, <a class="has-link-grey -link" href="/tags/桌面开发/">桌面开发</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/">
+                <span class="level-item">Vue.js 3.0编译器compiler-core源码解析</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 20px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Mocha/" style="font-size: 20px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 20px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue.js 3.0编译器compiler-core源码解析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T11:34:30.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue.js 3.0编译器compiler-core源码解析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="title has-link-black-ter is-size-6 has-text-weight-normal">换种方式读源码：如何实现一个简易版的Mocha</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/08/TypeScript安利指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s730x365_jfs/t1/50551/4/13032/13279/5d9f1c13E4cf58cdb/ce413415dfbb4521.jpg" alt="TypeScript安利指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-08T15:35:07.000Z">2019-10-08</time></div>
+                    <a href="/2019/10/08/TypeScript安利指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TypeScript安利指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue.js 3.0编译器compiler-core源码解析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T11:34:30.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue.js 3.0编译器compiler-core源码解析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="title has-link-black-ter is-size-6 has-text-weight-normal">换种方式读源码：如何实现一个简易版的Mocha</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/08/TypeScript安利指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s730x365_jfs/t1/50551/4/13032/13279/5d9f1c13E4cf58cdb/ce413415dfbb4521.jpg" alt="TypeScript安利指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-08T15:35:07.000Z">2019-10-08</time></div>
+                    <a href="/2019/10/08/TypeScript安利指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TypeScript安利指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
+                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="Electron 实践笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

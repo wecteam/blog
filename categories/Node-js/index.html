@@ -139,6 +139,87 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/10/11/Electron-实践笔记/" class="image is-7by1">
+            <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time>-->
+                <div class="level-item has-text-grey">2019-10-11</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    32 分钟 读完 (大约 4786 个字)
+                </span>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/11/Electron-实践笔记/">Electron 实践笔记</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：周全</p>
+</blockquote>
+<p>社交魔方平台是京东的 SNS 活动搭建平台，其内置了很多模板，每一个模板都有一个模板 JSON 用于生成表单，运营同学、商家配置了这个表单后就可以生成活动页面了。<br>模板 JSON 是标准的结构化数据，包含名称、类型、控件类型、校验器、默认值等等字段。以往都是采用手写 JSON 的方式，这是非常低效的，而且容易出错。针对其结构化数据的特点可以用 GUI 的方式去编辑，我们基于 <a href="http://electronjs.org" target="_blank" rel="noopener">Electron</a> 参考 <a href="https://github.com/desktop/desktop" target="_blank" rel="noopener">Github Desktop 客户端</a> 的架构编写了一个 <a href="http://git.jd.com/zhouquan31_repos/cubic" target="_blank" rel="noopener">编辑器</a>，通过填写表单的方式生成 JSON。所以在这里记录下这个 Electron 编辑器开发过程中可以记录的点和从 Github Desktop 客户端代码中值得学习的点。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/11/Electron-实践笔记/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="image is-7by1">
             <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
         </a>
@@ -161,6 +242,7 @@
                     
                     43 分钟 读完 (大约 6387 个字)
                 </span>
+                
                 
                 
             </div>
@@ -206,6 +288,7 @@
     
             if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
         </script>
+        
     
 </div>
 
@@ -241,6 +324,7 @@
                     
                     12 分钟 读完 (大约 1793 个字)
                 </span>
+                
                 
                 
             </div>
@@ -289,6 +373,7 @@
     
             if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
         </script>
+        
     
 </div>
 
@@ -324,6 +409,7 @@
                     
                     13 分钟 读完 (大约 1892 个字)
                 </span>
+                
                 
                 
             </div>
@@ -368,6 +454,7 @@
     
             if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
         </script>
+        
     
 </div>
 
@@ -422,7 +509,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -442,7 +529,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        25
+                        27
                     </p>
                 </div>
             </div>
@@ -533,7 +620,7 @@
                 <span class="level-item">Node.js</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Web前端/">
@@ -563,7 +650,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 20px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Mocha/" style="font-size: 20px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/测试框架/" style="font-size: 20px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 20px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Mocha/" style="font-size: 20px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 20px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
     </div>
 </div>
 
@@ -577,6 +664,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -654,25 +760,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/前端资源治理（一）/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/前端资源治理（一）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端资源治理（一）</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -691,7 +778,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -773,6 +860,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/CSS-Houdini/">
                         <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -878,6 +972,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -942,6 +1043,25 @@
         
         <article class="media">
             
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue.js 3.0编译器compiler-core源码解析">
@@ -1016,25 +1136,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/24/前端资源治理（一）/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time></div>
-                    <a href="/2019/09/24/前端资源治理（一）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端资源治理（一）</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1053,7 +1154,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1135,6 +1236,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/CSS-Houdini/">
                         <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1240,6 +1348,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1324,6 +1439,22 @@
             </div>
         </div>
     </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
