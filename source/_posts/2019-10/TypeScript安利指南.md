@@ -1,8 +1,8 @@
 ---
 title: TypeScript安利指南
 date: 2019-10-08 23:35:07
-cover:  https://upload-images.jianshu.io/upload_images/326255-af25e45293307405.png?imageMogr2/auto-orient/strip|imageView2/2/w/730/format/webp
-thumbnail: https://upload-images.jianshu.io/upload_images/326255-af25e45293307405.png?imageMogr2/auto-orient/strip|imageView2/2/w/730/format/webp
+cover: https://img11.360buyimg.com/jdphoto/s730x365_jfs/t1/50551/4/13032/13279/5d9f1c13E4cf58cdb/ce413415dfbb4521.jpg
+thumbnail: https://img11.360buyimg.com/jdphoto/s730x365_jfs/t1/50551/4/13032/13279/5d9f1c13E4cf58cdb/ce413415dfbb4521.jpg
 tags: 
   - TypeScript
 categories: Web前端
