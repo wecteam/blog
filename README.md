@@ -37,6 +37,8 @@
     
 # 文章排版指南
 
+[如何参与本博客](https://github.com/wecteam/blog/blob/master/docs/post-guide.md)
+
 [文章排版指南](https://github.com/wecteam/blog/blob/master/docs/document-guide.md)
 
 # 联系我们
