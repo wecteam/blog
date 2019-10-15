@@ -74,7 +74,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="WecTeam" height="28">
+                <img src="/images/og_image.png" alt="浏览器层合成与页面渲染优化" height="28">
             
             </a>
         </div>
@@ -82,7 +82,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/">主页</a>
                 
                 <a class="navbar-item"
@@ -124,13 +124,12 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-image">
-        <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="image is-7by1">
+        <span  class="image is-7by1">
             <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
-        </a>
+        </span>
     </div>
     
     <div class="card-content article ">
@@ -153,12 +152,17 @@
                 
                 
                 
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/10/15/浏览器层合成与页面渲染优化/">浏览器层合成与页面渲染优化</a>
+                浏览器层合成与页面渲染优化
             
         </h1>
         <div class="content">
@@ -169,765 +173,180 @@
 <ul>
 <li><p>页面加载时存在明显的延迟，但通过代理抓到的网络请求耗时并不比 Android 的高；</p>
 </li>
-<li><p>页面滚动时会出现短暂的局部白屏，即丢帧。</p></li></ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/15/浏览器层合成与页面渲染优化/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/11/Electron-实践笔记/" class="image is-7by1">
-            <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time>-->
-                <div class="level-item has-text-grey">2019-10-11</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    32 分钟 读完 (大约 4786 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/11/Electron-实践笔记/">Electron 实践笔记</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：周全</p>
-</blockquote>
-<p>社交魔方平台是京东的 SNS 活动搭建平台，其内置了很多模板，每一个模板都有一个模板 JSON 用于生成表单，运营同学、商家配置了这个表单后就可以生成活动页面了。<br>模板 JSON 是标准的结构化数据，包含名称、类型、控件类型、校验器、默认值等等字段。以往都是采用手写 JSON 的方式，这是非常低效的，而且容易出错。针对其结构化数据的特点可以用 GUI 的方式去编辑，我们基于 <a href="http://electronjs.org" target="_blank" rel="noopener">Electron</a> 参考 <a href="https://github.com/desktop/desktop" target="_blank" rel="noopener">Github Desktop 客户端</a> 的架构编写了一个 <a href="http://git.jd.com/zhouquan31_repos/cubic" target="_blank" rel="noopener">编辑器</a>，通过填写表单的方式生成 JSON。所以在这里记录下这个 Electron 编辑器开发过程中可以记录的点和从 Github Desktop 客户端代码中值得学习的点。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/11/Electron-实践笔记/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/" class="image is-7by1">
-            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue.js 3.0编译器compiler-core源码解析">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-10-09T11:34:30.000Z">2019-10-09</time>-->
-                <div class="level-item has-text-grey">2019-10-09</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 分钟 读完 (大约 3226 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/">Vue.js 3.0编译器compiler-core源码解析</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：深山蚂蚁</p>
-</blockquote>
-<p>Vue.js 3.0的源代码正在国庆假期就这么突然放出来了，假期还没结束，陆陆续续看到努力的码农就在各种分析了。   </p>
-<p>目前还是 pre Alpha，乐观估计还有 Alpha，Beta版本，最后才是正式版。   </p>
-<p>话不多说，看 <a href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener">Pre-Alpha</a>。  瞧 <a href="https://github.com/vuejs/vue-next/tree/master/packages/compiler-core" target="_blank" rel="noopener">compiler-core</a>   </p>
-<p>热门的 reactivity 被大佬翻来覆去再研究了，我就和大伙一起来解读一下 ”冷门“ 的 compiler 吧！😄😄😄😄   </p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/09/Vue-js-3-0编译器compiler-core源码解析/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/" class="image is-7by1">
-            <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg" alt="换种方式读源码：如何实现一个简易版的Mocha">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-10-09T03:38:01.000Z">2019-10-09</time>-->
-                <div class="level-item has-text-grey">2019-10-09</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    37 分钟 读完 (大约 5583 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/">换种方式读源码：如何实现一个简易版的Mocha</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：黄浩群</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Mocha 是目前最流行的 JavaScript 测试框架，理解 Mocha 的内部实现原理有助于我们更深入地了解和学习自动化测试。然而阅读源码一直是个让人望而生畏的过程，大量的高级写法经常是晦涩难懂，大量的边缘情况的处理也十分影响对核心代码的理解，以至于写一篇源码解析过后往往是连自己都看不懂。所以，这次我们不生啃 Mocha 源码，换个方式，从零开始一步步实现一个简易版的 Mocha。</p>
-<h2 id="我们将实现什么？"><a href="#我们将实现什么？" class="headerlink" title="我们将实现什么？"></a>我们将实现什么？</h2><ul>
-<li>实现 Mocha 框架的 BDD 风格测试，能通过 describe/it 函数定义一组或单个的测试用例；</li>
-<li>实现 Mocha 框架的 Hook 机制，包括 before、after、beforeEach、afterEach；</li>
-<li>实现简单格式的测试报告输出。</li></ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/09/换种方式读源码：如何实现一个简易版的Mocha/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/08/TypeScript安利指南/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s730x365_jfs/t1/50551/4/13032/13279/5d9f1c13E4cf58cdb/ce413415dfbb4521.jpg" alt="TypeScript安利指南">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-10-08T15:35:07.000Z">2019-10-08</time>-->
-                <div class="level-item has-text-grey">2019-10-08</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    28 分钟 读完 (大约 4274 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/08/TypeScript安利指南/">TypeScript安利指南</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：李逸君</p>
-</blockquote>
-<p>骚年，你感受过debug一年找不到问题，最后发现是变量名写错时的绝望吗？<br>骚年，你感受过生产线上代码出现<code>Uncaught TypeError</code>时的恐惧吗？<br>骚年，你感受过写代码找一万个文件还找不到方法定义时委屈吗？</p>
-<p>拿起键盘，让我们对谋害生命的代码拖进垃圾箱！(划掉)</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>据了解，目前有相当一部分同学不想去学习ts，毕竟没(xue)时(bu)间(dong)。很不幸两个月前我也是其中的一员。在看到尤大大都用ts写vue3了，蠢蠢欲动的我小心翼翼的踏入了这个深坑。在经历了长达一天的摸爬滚打之后，领悟到了真谛</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/08/TypeScript安利指南/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="image is-7by1">
-            <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time>-->
-                <div class="level-item has-text-grey">2019-09-27</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    43 分钟 读完 (大约 6387 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/27/记一次Node-js直出服务的性能优化/">记一次Node.js直出服务的性能优化</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：肖睦群、李刚松</p>
-</blockquote>
-<h2 id="一-问题背景"><a href="#一-问题背景" class="headerlink" title="一.问题背景"></a>一.问题背景</h2><p>MPM（Market Page Maker）是京东社交电商部的组件化的页面可视化搭建平台，于2016年9月份上线，平均每周150+个页面，目前已经成为社交电商部的一个核心系统。系统使用Vue.js作为组件化的基础框架,并于2017年5月份上线了Node.js直出服务。MPM的页面会被运营同学拿到各种渠道投放，整体流量很不稳定，对于流量的暴涨情况要能够及时处理，这对于开发同学来说是一个比较烦的工作。</p>
-<p>前几天突然收到告警信息，由于运营同学将某个MPM活动页面投放了外部广告，直出服务流量大涨，服务器CPU使用率达到了80%以上，于是立马申请扩容，问题虽解决，但是留给了我们一个问题：直出服务能否优化，这次量级的流量进来之后，是否可以稳定支撑而不需要扩容？</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/27/记一次Node-js直出服务的性能优化/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/09/24/前端资源治理（一）/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time>-->
-                <div class="level-item has-text-grey">2019-09-24</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    30 分钟 读完 (大约 4487 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/24/前端资源治理（一）/">前端资源治理（一）</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：李刚松</p>
-</blockquote>
-<h2 id="0-也谈前端工程化"><a href="#0-也谈前端工程化" class="headerlink" title="0.也谈前端工程化"></a>0.也谈前端工程化</h2><p>随着前端技术的飞速发展，前端需要一种更加工程化的方式解决前端开发日益复杂的问题。前端工程化本质也是软件工程的一种，由于软件工程并无严格的定义(或者说缺乏统一的定义)，因此前端工程化的内涵其实相当宽泛，一般来说，前端工程化重点关注的是研发和维护效率，所有最终目的是这个的，都可以算作前端工程化的范畴。<br>前端工程化近几年也是技术热点，基本上大型前端技术交流会议都有此专题，从规范、组件、编译及构建、工作流、持续集成、监控等多个维度都有涉及，笔者尝试从前端资源治理的角度谈一下前端工程化,本文是系列文章的第一篇，主要讲问题及解决的思路，不涉及具体的实现细节。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/24/前端资源治理（一）/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/09/20/guid-mask/" class="image is-7by1">
-            <img class="thumbnail" src="http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg" alt="你还在用图片做引导蒙层？">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-20T02:43:41.000Z">2019-09-20</time>-->
-                <div class="level-item has-text-grey">2019-09-20</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    24 分钟 读完 (大约 3580 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/20/guid-mask/">你还在用图片做引导蒙层？</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：深山蚂蚁</p>
-</blockquote>
-<p>引导蒙层通常在新业务上线、或者业务有变更时的给新用户的一个操作指引。下图页面即是一个蒙层，会在某个局部位置高亮我们需要重点突出的内容：  </p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/20/guid-mask/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/09/17/【译】Web内容如何影响电池的使用/" class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/56997/19/11003/158528/5d8039dcE9902aa49/f5c7d0573e9d1f97.jpg" alt="【译】Web内容如何影响电池的使用">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-17T01:37:44.000Z">2019-09-17</time>-->
-                <div class="level-item has-text-grey">2019-09-17</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 分钟 读完 (大约 3327 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/17/【译】Web内容如何影响电池的使用/">【译】Web内容如何影响电池的使用</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>原文地址：<a href="https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/" target="_blank" rel="noopener">https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/</a><br>原文作者：Benjamin Poulain &amp; Simon Fraser<br>译者：刘辉    校验：李刚松</p>
-</blockquote>
-<p>现在用户上网大多使用移动设备或者笔记本电脑。对这两者来说，电池寿命都很重要。在这篇文章里，我们将讨论影响电池寿命的因素，以及作为一个web开发者，我们如何让网页耗电更少，以便用户有更多时间来关注我们的内容。</p>
-<h1 id="是什么在耗电？"><a href="#是什么在耗电？" class="headerlink" title="是什么在耗电？"></a>是什么在耗电？</h1><p>移动设备的电力消耗有以下几个因素：</p>
-<ul>
-<li>CPU （核心处理器）</li>
-<li>GPU （图形处理）</li>
-<li>网络 （wifi或者蜂窝移动网络）</li>
-<li>屏幕</li>
+<li><p>页面滚动时会出现短暂的局部白屏，即丢帧。</p>
+<a id="more"></a>
+<p>根据这些表征情况不难推断出，应该是有什么东西在疯狂占用 CPU，卡住了渲染进程。</p>
+</li>
 </ul>
-<p>屏幕功耗相对稳定，并且主要由用户控制（通过屏幕使用时间和亮度），但是对于其他组件，例如CPU，GPU，网络模块，功耗是动态变化的，而且变化范围很大。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/17/【译】Web内容如何影响电池的使用/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
-        <script>
-            var gitalk = new Gitalk({
-                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
-                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
-                repo: 'blog',      // 存放评论的仓库
-                owner: 'wecteam',          // 仓库的创建者，
-                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
-                title: document.title,
-                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
-            })
-    
-    
-            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-        </script>
-        
-    
-</div>
+<p>然而具体是什么东西，要问我我也并不知道。对于这种没法通过断点定位到的问题，恐怕只有用上祖师爷亲传的 “代码二分法” 才能制服得了了。一番艰苦排查之后，问题的根源终于聚焦到了下边这行 CSS 代码上：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">filter</span>: <span class="hljs-selector-tag">blur</span>(100<span class="hljs-selector-tag">px</span>);</span><br></pre></td></tr></table></figure>
 
+<p>这行 CSS 代码用于实现一个高斯模糊，来构造一个优惠券模块的底部阴影。由于活动配置了多个优惠券，导致页面里存在多个设置了这个属性的 div 元素，而 IOS 手机的浏览器似乎对这个属性的渲染十分吃力（然而为何吃力的原因不得而知），进而导致渲染进程的 CPU 占用率过高，最终造成卡顿。</p>
+<p>哦？CPU 忙不过来了？好办嘛！我给优惠券模块又加了这样一行代码，然后问题迎刃而解 ……</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">will-change</span>: <span class="hljs-selector-tag">transform</span>;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/09/17/手把手教你写webpack-loader/" class="image is-7by1">
-            <img class="thumbnail" src="http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg" alt="手把手教你写webpack loader">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-17T01:32:51.000Z">2019-09-17</time>-->
-                <div class="level-item has-text-grey">2019-09-17</div>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1806 个字)
-                </span>
-                
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/17/手把手教你写webpack-loader/">手把手教你写webpack loader</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>作者：黄浩群 </p>
+<p>你没看错，我也没写少，确实就是靠一行代码解决的。</p>
+<p>认识它的人可能已经看出来了，大致原理其实很简单，这行代码能够开启 GPU 加速页面渲染，从而大大降低了 CPU 的负载压力，达到优化页面渲染性能的目的，不了解 CSS 硬件加速的可以看看这篇文章 <a href="https://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css" target="_blank" rel="noopener">Increase Your Site’s Performance with Hardware-Accelerated CSS</a> 。</p>
+<p>问题解决了，但是真的就这么完事了吗？本着 “拔树寻根” 的伟大原则，我把这个东西好好地研究了一番，才发现 GPU 加速其实没那么简单。</p>
+<h2 id="浏览器渲染流程"><a href="#浏览器渲染流程" class="headerlink" title="浏览器渲染流程"></a>浏览器渲染流程</h2><p>在具体讨论原理之前，我们需要了解一下浏览器渲染流程的一些基本概念。浏览器渲染流程是个老生常谈的话题了，对于 “浏览器如何呈现一个页面的内容” 的这类问题，不少人都可以讲出一个相对完整的过程，从网络请求到浏览器解析，可以具体到很多的细节。除去网络资源获取的步骤，我们理解的 Web 页面的展示，一般可以分为 <code>构建 DOM 树</code>、<code>构建渲染树</code>、<code>布局</code>、<code>绘制</code>、<code>渲染层合成</code> 几个步骤。</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/64776/12/12185/85384/5d9ad4e3E01d48107/5e8011b0a213988d.png" alt></p>
+<ul>
+<li><p>构建 DOM 树：浏览器将 HTML 解析成树形结构的 DOM 树，一般来说，这个过程发生在页面初次加载，或页面 JavaScript 修改了节点结构的时候。</p>
+</li>
+<li><p>构建渲染树：浏览器将 CSS 解析成树形结构的 CSSOM 树，再和 DOM 树合并成渲染树。</p>
+</li>
+<li><p>布局（Layout）：浏览器根据渲染树所体现的节点、各个节点的CSS定义以及它们的从属关系，计算出每个节点在屏幕中的位置。Web 页面中元素的布局是相对的，在页面元素位置、大小发生变化，往往会导致其他节点联动，需要重新计算布局，这时候的布局过程一般被称为回流（Reflow）。</p>
+</li>
+<li><p>绘制（Paint）：遍历渲染树，调用渲染器的 <code>paint()</code> 方法在屏幕上绘制出节点内容，本质上是一个像素填充的过程。这个过程也出现于回流或一些不影响布局的 CSS 修改引起的屏幕局部重画，这时候它被称为重绘（Repaint）。实际上，绘制过程是在多个层上完成的，这些层我们称为渲染层（RenderLayer）。</p>
+</li>
+<li><p>渲染层合成（Composite）：多个绘制后的渲染层按照恰当的重叠顺序进行合并，而后生成位图，最终通过显卡展示到屏幕上。</p>
+</li>
+</ul>
+<p>这是一个基本的浏览器从解析到绘制一个 Web 页面的过程，跟上边页面卡顿问题的解决方法相关的，主要是最后一个环节 —— 渲染层合成。</p>
+<h2 id="渲染层合成"><a href="#渲染层合成" class="headerlink" title="渲染层合成"></a>渲染层合成</h2><h3 id="一、什么是渲染层合成"><a href="#一、什么是渲染层合成" class="headerlink" title="一、什么是渲染层合成"></a>一、什么是渲染层合成</h3><p>在 DOM 树中每个节点都会对应一个渲染对象（RenderObject），当它们的渲染对象处于相同的坐标空间（z 轴空间）时，就会形成一个 RenderLayers，也就是渲染层。渲染层将保证页面元素以正确的顺序堆叠，这时候就会出现层合成（composite），从而正确处理透明元素和重叠元素的显示。</p>
+<p>这个模型类似于 Photoshop 的图层模型，在 Photoshop 中，每个设计元素都是一个独立的图层，多个图层以恰当的顺序在 z 轴空间上叠加，最终构成一个完整的设计图。</p>
+<p>对于有位置重叠的元素的页面，这个过程尤其重要，因为一旦图层的合并顺序出错，将会导致元素显示异常。</p>
+<h3 id="二、浏览器的渲染原理"><a href="#二、浏览器的渲染原理" class="headerlink" title="二、浏览器的渲染原理"></a>二、浏览器的渲染原理</h3><p>从浏览器的渲染过程中我们知道，页面 HTML 会被解析成 DOM 树，每个 HTML 元素对应了树结构上的一个 node 节点。而从 DOM 树转化到一个个的渲染层，并最终执行合并、绘制的过程，中间其实还存在一些过渡的数据结构，它们记录了 DOM 树到屏幕图形的转化原理，其本质也就是树结构到层结构的演化。</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/72300/13/12230/57970/5d9af266Ea33a2a11/0e079cf78463f9f3.png" alt></p>
+<h4 id="1、渲染对象（RenderObject）"><a href="#1、渲染对象（RenderObject）" class="headerlink" title="1、渲染对象（RenderObject）"></a>1、渲染对象（RenderObject）</h4><p>一个 DOM 节点对应了一个渲染对象，渲染对象依然维持着 DOM 树的树形结构。一个渲染对象知道如何绘制一个 DOM 节点的内容，它通过向一个绘图上下文（GraphicsContext）发出必要的绘制调用来绘制 DOM 节点。</p>
+<h4 id="2、渲染层（RenderLayer）"><a href="#2、渲染层（RenderLayer）" class="headerlink" title="2、渲染层（RenderLayer）"></a>2、渲染层（RenderLayer）</h4><p>这是浏览器渲染期间构建的第一个层模型，处于相同坐标空间（z轴空间）的渲染对象，都将归并到同一个渲染层中，因此根据层叠上下文，不同坐标空间的的渲染对象将形成多个渲染层，以体现它们的层叠关系。所以，对于满足形成层叠上下文条件的渲染对象，浏览器会自动为其创建新的渲染层。能够导致浏览器为其创建新的渲染层的，包括以下几类常见的情况：</p>
+<ul>
+<li><p>根元素 document</p>
+</li>
+<li><p>有明确的定位属性（relative、fixed、sticky、absolute）</p>
+</li>
+<li><p>opacity &lt; 1</p>
+</li>
+<li><p>有 CSS fliter 属性</p>
+</li>
+<li><p>有 CSS mask 属性</p>
+</li>
+<li><p>有 CSS mix-blend-mode 属性且值不为 normal</p>
+</li>
+<li><p>有 CSS transform 属性且值不为 none</p>
+</li>
+<li><p>backface-visibility 属性为 hidden</p>
+</li>
+<li><p>有 CSS reflection 属性</p>
+</li>
+<li><p>有 CSS column-count 属性且值不为 auto或者有 CSS column-width 属性且值不为 auto</p>
+</li>
+<li><p>当前有对于 opacity、transform、fliter、backdrop-filter 应用动画</p>
+</li>
+<li><p>overflow 不为 visible</p>
+</li>
+</ul>
+<p>DOM 节点和渲染对象是一一对应的，满足以上条件的渲染对象就能拥有独立的渲染层。当然这里的独立是不完全准确的，并不代表着它们完全独享了渲染层，由于不满足上述条件的渲染对象将会与其第一个拥有渲染层的父元素共用同一个渲染层，因此实际上，这些渲染对象会与它的部分子元素共用这个渲染层。</p>
+<h4 id="3、图形层（GraphicsLayer）"><a href="#3、图形层（GraphicsLayer）" class="headerlink" title="3、图形层（GraphicsLayer）"></a>3、图形层（GraphicsLayer）</h4><p>GraphicsLayer 其实是一个负责生成最终准备呈现的内容图形的层模型，它拥有一个图形上下文（GraphicsContext），GraphicsContext 会负责输出该层的位图。存储在共享内存中的位图将作为纹理上传到 GPU，最后由 GPU 将多个位图进行合成，然后绘制到屏幕上，此时，我们的页面也就展现到了屏幕上。</p>
+<p>所以 GraphicsLayer 是一个重要的渲染载体和工具，但它并不直接处理渲染层，而是处理合成层。</p>
+<h4 id="4、合成层（CompositingLayer）"><a href="#4、合成层（CompositingLayer）" class="headerlink" title="4、合成层（CompositingLayer）"></a>4、合成层（CompositingLayer）</h4><p>满足某些特殊条件的渲染层，会被浏览器自动提升为合成层。合成层拥有单独的 GraphicsLayer，而其他不是合成层的渲染层，则和其第一个拥有 GraphicsLayer 的父层共用一个。</p>
+<p>那么一个渲染层满足哪些特殊条件时，才能被提升为合成层呢？这里列举了一些常见的情况：</p>
+<ul>
+<li><p>3D transforms：translate3d、translateZ 等</p>
+</li>
+<li><p>video、canvas、iframe 等元素</p>
+</li>
+<li><p>通过 Element.animate() 实现的 opacity 动画转换</p>
+</li>
+<li><p>通过 СSS 动画实现的 opacity 动画转换</p>
+</li>
+<li><p>position: fixed</p>
+</li>
+<li><p>具有 will-change 属性</p>
+</li>
+<li><p>对 opacity、transform、fliter、backdropfilter 应用了 animation 或者 transition</p>
+</li>
+</ul>
+<p>因此，文首例子的解决方案，其实就是利用 will-change 属性，将 CPU 消耗高的渲染元素提升为一个新的合成层，才能开启 GPU 加速的，因此你也可以使用 <code>transform: translateZ(0)</code> 来解决这个问题。</p>
+<p>这里值得注意的是，不少人会将这些合成层的条件和渲染层产生的条件混淆，这两种条件发生在两个不同的层处理环节，是完全不一样的。</p>
+<p>另外，有些文章会把 CSS Filter 也列为影响 Composite 的因素之一，然而我验证后发现并没有效果。</p>
+<h3 id="三、隐式合成"><a href="#三、隐式合成" class="headerlink" title="三、隐式合成"></a>三、隐式合成</h3><p>上边提到，满足某些显性的特殊条件时，渲染层会被浏览器提升为合成层。除此之外，在浏览器的 Composite 阶段，还存在一种隐式合成，部分渲染层在一些特定场景下，会被默认提升为合成层。</p>
+<p>对于隐式合成，<a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="noopener">CSS GPU Animation</a> 中是这么描述的：</p>
+<blockquote>
+<p>This is called implicit compositing: One or more non-composited elements that should appear above a composited one in the stacking order are promoted to composite layers.<br>(一个或多个非合成元素应出现在堆叠顺序上的合成元素之上，被提升到合成层。)</p>
 </blockquote>
-<h2 id="一、什么是-loader"><a href="#一、什么是-loader" class="headerlink" title="一、什么是 loader"></a>一、什么是 loader</h2><p>loader 和 plugins 是 webpack 系统的两大重要组成元素。依靠对 loader、plugins 的不同组合搭配，我们可以灵活定制出高度适配自身业务的打包构建流程。</p>
-<p>loader 是 webpack 容纳各类资源的一个重要手段，它用于对模块的源代码进行转换，允许你在 import 或加载模块时预处理文件，利用 loader，我们可以将各种类型的资源转换成 webpack 本质接受的资源类型，如 javascript。</p>
+<p>这句话可能不好理解，它其实是在描述一个交叠问题（overlap）。举个例子说明一下：</p>
+<ul>
+<li>两个 absolute 定位的 div 在屏幕上交叠了，根据 <code>z-index</code> 的关系，其中一个 div 就会”盖在“了另外一个上边。</li>
+</ul>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/66180/26/12280/12579/5d9c6518Ec22cbb0a/51a686ef840a786a.png" alt></p>
+<ul>
+<li>这个时候，如果处于下方的 div 被加上了 CSS 属性：<code>transform: translateZ(0)</code>，就会被浏览器提升为合成层。提升后的合成层位于 Document 上方，假如没有隐式合成，原本应该处于上方的 div 就依然还是跟 Document 共用一个 GraphicsLayer，层级反而降了，就出现了元素交叠关系错乱的问题。</li>
+</ul>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/58063/27/12935/18359/5d9c6527Efe3e170d/25a87da60392f373.png" alt></p>
+<ul>
+<li>所以为了纠正错误的交叠顺序，浏览器必须让原本应该”盖在“它上边的渲染层也同时提升为合成层。</li>
+</ul>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/73747/34/12559/25562/5d9c6537Ee08ae16a/1d32a52a5a58cadc.png" alt></p>
+<h3 id="四、层爆炸和层压缩"><a href="#四、层爆炸和层压缩" class="headerlink" title="四、层爆炸和层压缩"></a>四、层爆炸和层压缩</h3><h4 id="1、层爆炸"><a href="#1、层爆炸" class="headerlink" title="1、层爆炸"></a>1、层爆炸</h4><p>从上边的研究中我们可以发现，一些产生合成层的原因太过于隐蔽了，尤其是隐式合成。在平时的开发过程中，我们很少会去关注层合成的问题，很容易就产生一些不在预期范围内的合成层，当这些不符合预期的合成层达到一定量级时，就会变成层爆炸。</p>
+<p>层爆炸会占用 GPU 和大量的内存资源，严重损耗页面性能，因此盲目地使用 GPU 加速，结果有可能会是适得其反。<a href="https://div.io/topic/1348" target="_blank" rel="noopener">CSS3硬件加速也有坑</a> 这篇文章提供了一个很有趣的 <a href="http://fouber.github.io/test/layer/" target="_blank" rel="noopener">DEMO</a>，这个 DEMO 页面中包含了一个 h1 标题，它对 transform 应用了 animation 动画，进而导致被放到了合成层中渲染。由于 animation transform 的特殊性（动态交叠不确定），隐式合成在不需要交叠的情况下也能发生，就导致了页面中所有 <code>z-index</code> 高于它的节点所对应的渲染层全部提升为合成层，最终让这个页面整整产生了几千个合成层。</p>
+<p>消除隐式合成就是要消除元素交叠，拿这个 DEMO 来说，我们只需要给 h1 标题的 <code>z-index</code> 属性设置一个较高的数值，就能让它高于页面中其他元素，自然也就没有合成层提升的必要了。点击 DEMO 中的复选按钮就可以给 h1 标题加上一个较大的 <code>z-index</code>，前后效果对比十分明显。</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/53422/4/12837/887162/5d9c91a5E7c057f7d/9dc2318cc194e91a.gif" alt></p>
+<h4 id="2、层压缩"><a href="#2、层压缩" class="headerlink" title="2、层压缩"></a>2、层压缩</h4><p>当然了，面对这种问题，浏览器也有相应的应对策略，如果多个渲染层同一个合成层重叠时，这些渲染层会被压缩到一个 GraphicsLayer 中，以防止由于重叠原因导致可能出现的“层爆炸”。这句话不好理解，具体可以看看这个例子：</p>
+<ul>
+<li>还是之前的模型，只不过这次不同的是，有四个 absolute 定位的 div 在屏幕内发生了交叠。此时处于最下方的 div 在加上了 CSS 属性 <code>transform: translateZ(0)</code> 后被浏览器提升为合成层，如果按照隐式合成的原理，盖在它上边的 div 会提升为一个新的合成层，第三个 div 又盖在了第二个上，自然也会被提升为合成层，第四个也同理。这样一来，岂不是就会产生四个合成层了？</li>
+</ul>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/77171/26/12580/58063/5d9c9840Eaefa1ecf/f7909d5e19083858.png" alt></p>
+<ul>
+<li>然而事实并不是这样的，浏览器的层压缩机制，会将隐式合成的多个渲染层压缩到同一个 GraphicsLayer 中进行渲染，也就是说，上方的三个 div 最终会处于同一个合成层中，这就是浏览器的层压缩。</li>
+</ul>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/71488/24/12380/43473/5d9c96c0Ee4afadc2/58d8c94677d2aaea.png" alt></p>
+<p>当然了，浏览器的自动层压缩并不是万能的，有很多特定情况下，浏览器是无法进行层压缩的，<a href="https://fed.taobao.org/blog/2016/04/26/performance-composite/" target="_blank" rel="noopener">无线性能优化：Composite</a> 这篇文章列举了许多详细的场景。</p>
+<h2 id="基于层合成的页面渲染优化"><a href="#基于层合成的页面渲染优化" class="headerlink" title="基于层合成的页面渲染优化"></a>基于层合成的页面渲染优化</h2><h3 id="一、层合成的得与失"><a href="#一、层合成的得与失" class="headerlink" title="一、层合成的得与失"></a>一、层合成的得与失</h3><p>层合成是一个相对复杂的浏览器特性，为什么我们需要关注这么底层又难理解的东西呢？那是因为渲染层提升为合成层之后，会给我们带来不少好处：</p>
+<ul>
+<li><p>合成层的位图，会交由 GPU 合成，比 CPU 处理要快得多；</p>
+</li>
+<li><p>当需要 repaint 时，只需要 repaint 本身，不会影响到其他的层；</p>
+</li>
+<li><p>元素提升为合成层后，transform 和 opacity 才不会触发 repaint，如果不是合成层，则其依然会触发 repaint。</p>
+</li>
+</ul>
+<p>当然了，利弊是相对和共存的，层合成也存在一些缺点，这很多时候也成为了我们网页性能问题的根源所在：</p>
+<ul>
+<li><p>绘制的图层必须传输到 GPU，这些层的数量和大小达到一定量级后，可能会导致传输非常慢，进而导致一些低端和中端设备上出现闪烁；</p>
+</li>
+<li><p>隐式合成容易产生过量的合成层，每个合成层都占用额外的内存，而内存是移动设备上的宝贵资源，过多使用内存可能会导致浏览器崩溃，让性能优化适得其反。</p>
+</li>
+</ul>
+<h3 id="二、Chrome-Devtools-如何查看合成层"><a href="#二、Chrome-Devtools-如何查看合成层" class="headerlink" title="二、Chrome Devtools 如何查看合成层"></a>二、Chrome Devtools 如何查看合成层</h3><p>层合成的特性给我们提供了一个利用终端硬件能力来优化页面性能的方式，对于一些重交互、重动画的页面，合理地利用层合成可以让页面的渲染效率得到极大提升，改善交互体验。而我们需要关注的是如何规避层合成对页面造成的负面影响，或者换个说法来讲，更多时候是如何权衡利害，合理组织页面的合成层，这就要求我们事先要对页面的层合成情况有一个详细的了解。Chrome Devtools 给我们提供了一些工具，可以方便的查看页面的合成层情况。</p>
+<p>首先是看看页面的渲染情况，以一个栏目页为例，点击 <code>More tools -&gt; Rendering</code>，选择 <code>Layer borders</code>，你就能看到页面中的合成层都带上了黄色边框。</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/77710/19/12438/584960/5d9d3039Ea64183ae/52acf54c52b37f89.jpg" alt></p>
+<p>这还不够，我们还需要更加详尽的层合成情况，点击 <code>More tools -&gt; Layers</code>，你可以看到像这样的一个视图：</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/64792/37/12298/581872/5d9d2f6eE24ea35bc/fb20c5fe66effd7e.jpg" alt></p>
+<p>左侧列出了所有提升为独立合成层的元素，右侧则是一个整体合成层边界视图，以及选定合成层的详细情况，包括以下几个比较关键的信息：</p>
+<ul>
+<li>Size：合成层的大小，其实也就是对应元素的尺寸；</li>
+<li>Compositing Reasons：形成复合层原因，这是最关键的，也是我们分析问题的突破口，比如图中的合成层产生的原因就是交叠问题；</li>
+<li>Memory estimate：内存占用估算；</li>
+<li>Paint count：绘制次数；</li>
+<li>Slow scroll regions：缓慢滚动区域。</li>
+</ul>
+<p>可以看出我们在不经意间就已经制造出了很多意料之外的合成层，这些没有实际意义的合成层都是可以被优化的。</p>
+<h3 id="三、一些优化建议"><a href="#三、一些优化建议" class="headerlink" title="三、一些优化建议"></a>三、一些优化建议</h3><h4 id="1、动画使用-transform-实现"><a href="#1、动画使用-transform-实现" class="headerlink" title="1、动画使用 transform 实现"></a>1、动画使用 transform 实现</h4><p>对于一些体验要求较高的关键动画，比如一些交互复杂的玩法页面，存在持续变化位置的 animation 元素，我们最好是使用 transform 来实现而不是通过改变 left/top 的方式。这样做的原因是，如果使用 left/top 来实现位置变化，animation 节点和 Document 将被放到了同一个 GraphicsLayer 中进行渲染，持续的动画效果将导致整个 Document 不断地执行重绘，而使用 transform 的话，能够让 animation 节点被放置到一个独立合成层中进行渲染绘制，动画发生时不会影响到其它层。并且另一方面，动画会完全运行在 GPU 上，相比起 CPU 处理图层后再发送给显卡进行显示绘制来说，这样的动画往往更加流畅。</p>
+<h4 id="2、减少隐式合成"><a href="#2、减少隐式合成" class="headerlink" title="2、减少隐式合成"></a>2、减少隐式合成</h4><p>虽然隐式合成从根本上来说是为了保证正确的图层重叠顺序，但具体到实际开发中，隐式合成很容易就导致一些无意义的合成层生成，归根结底其实就要求我们在开发时约束自己的布局习惯，避免踩坑。</p>
+<p>比如上边提到的栏目页面，就因为平时开发的不注意造成页面生成了过多的合成层，我在试图查看页面合成层情况的时候，在 PC 上已经能明显感到卡顿了。利用 Chrome Devtools 分析之后不难发现，页面里边存在的一个带动画 transform 的 button 按钮，提升为了合成层，动画交叠的不确定性使得页面内其他 <code>z-index</code> 大于它但其实并没有交叠的节点也都全部提升为了合成层（这个原因真的好坑）。</p>
+<p>这个时候我们只需要把这个动画节点的 <code>z-index</code> 属性值设置得大一些，让层叠顺序高过于页面其他无关节点就行。当然并不是盲目地设置 <code>z-index</code> 就能避免，有时候 <code>z-index</code> 也还是会导致隐式合成，这个时候可以试着调整一下文档中节点的先后顺序直接让后边的节点来覆盖前边的节点，而不用 <code>z-index</code> 来调整重叠关系。方法不是唯一的，具体方式还是得根据不同的页面具体分析。</p>
+<p>改善后的页面效果如下，可以看到相比优化前，我们消除了很多无意义的合成层。</p>
+<p><img src="https://img10.360buyimg.com/wq/jfs/t1/49398/34/13004/498267/5d9d5dcaE8ee4f855/2f18491a62374b69.jpg" alt></p>
+<h4 id="3、减小合成层的尺寸"><a href="#3、减小合成层的尺寸" class="headerlink" title="3、减小合成层的尺寸"></a>3、减小合成层的尺寸</h4><p>举个简单的例子，分别画两个尺寸一样的 div，但实现方式有点差别：一个直接设置尺寸 100x100，另一个设置尺寸 10x10，然后通过 <code>scale</code> 放大 10 倍，并且我们让这两个 div 都提升为合成层：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"><span class="hljs-css">  <span class="hljs-selector-class">.bottom</span>, <span class="hljs-selector-class">.top</span> &#123;</span></span><br><span class="line">    position: absolute;</span><br><span class="line">    will-change: transform;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-css">  <span class="hljs-selector-class">.bottom</span> &#123;</span></span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    top: 20px;</span><br><span class="line">    left: 20px;</span><br><span class="line">    z-index: 3;</span><br><span class="line">    background: rosybrown;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-css">  <span class="hljs-selector-class">.top</span> &#123;</span></span><br><span class="line">    width: 10px;</span><br><span class="line">    height: 10px;</span><br><span class="line">    transform: scale(10);</span><br><span class="line">    top: 200px;</span><br><span class="line">    left: 200px;</span><br><span class="line">    z-index: 5;</span><br><span class="line">    background: indianred;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"bottom"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"top"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>利用 Chrome Devtools 查看这两个合成层的内存占用后发现，<code>.bottom</code> 内存占用是 39.1 KB，而 <code>.top</code> 是 400 B，差距十分明显。这是因为 <code>.top</code> 是合成层，transform 位于的 Composite 阶段，现在完全在 GPU 上执行。因此对于一些纯色图层来说，我们可以使用 width 和 height 属性减小合成层的物理尺寸，然后再用 <code>transform: scale(…)</code> 放大，这样一来可以极大地减少层合成带来的内存消耗。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<p><a href="https://div.io/topic/1348" target="_blank" rel="noopener">CSS3硬件加速也有坑</a><br><a href="https://fed.taobao.org/blog/2016/04/26/performance-composite/" target="_blank" rel="noopener">无线性能优化：Composite</a><br><a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="noopener">CSS GPU Animation</a><br><a href="https://juejin.im/entry/59dc9aedf265da43200232f9" target="_blank" rel="noopener">详谈层合成</a></p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/09/17/手把手教你写webpack-loader/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/composite/">composite</a>, <a class="has-link-grey -link" href="/tags/性能优化/">性能优化</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -955,28 +374,21 @@
 
 
 
-
-
-
-
-    
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/11/Electron-实践笔记/">
+                <span class="level-item">Electron 实践笔记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -1937,7 +1349,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="WecTeam" height="28">
+                    <img src="/images/og_image.png" alt="浏览器层合成与页面渲染优化" height="28">
                 
                 </a>
                 <p class="is-size-7">

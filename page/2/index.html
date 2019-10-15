@@ -128,6 +128,87 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/" class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s800x350_jfs/t1/62365/21/9771/68519/5d770858Ec9e78573/093303e535ac7a36.jpg" alt="【译】在生产环境中使用原生JavaScript模块">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-09-10T09:47:26.000Z">2019-09-10</time>-->
+                <div class="level-item has-text-grey">2019-09-10</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    39 分钟 读完 (大约 5808 个字)
+                </span>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/">【译】在生产环境中使用原生JavaScript模块</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>原文地址：<a href="https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/" target="_blank" rel="noopener">https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/</a><br>原文作者：PHILIP WALTON<br>译者：龚亮 ，校对：刘辉<br>声明：本翻译仅做学习交流使用，转载请注明来源</p>
+</blockquote>
+<p>两年前，我写了一篇有关module/nomodule技术的<a href="https://philipwalton.com/articles/deploying-es2015-code-in-production-today/" target="_blank" rel="noopener">文章</a>，这项技术允许你在编写ES2015+代码时，使用打包器和转换器生成两个版本的代码库，一个具有现代语法的版本（通过<code>&lt;script type=&quot;module&quot;&gt;</code>加载）和一个使用ES5语法的版本（通过<code>&lt;script nomodule&gt;</code>加载）。该技术允许你向支持模块（<em>译者注：指ECMA制定的标准的export/import模块语法及其加载机制，又称为ES Module、ESM、ES6 Module、ES2015 Module，下文中将出现很多”模块”一词，都是这个含义</em>）的浏览器发送更少的代码，现在大多数Web框架和CLI都支持它。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/09/10/【译】在生产环境中使用原生JavaScript模块/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/07/20/Javascript抽象语法树下篇(实践篇)/" class="image is-7by1">
             <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1206x333_jfs/t1/50930/18/7113/140191/5d4b8ef0Effa8d6bc/e776e627fe5e3f93.png" alt="Javascript抽象语法树下篇(实践篇)">
         </a>
@@ -518,7 +599,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        14
+                        15
                     </p>
                 </div>
             </div>
@@ -538,7 +619,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        28
                     </p>
                 </div>
             </div>
@@ -637,7 +718,7 @@
                 <span class="level-item">Web前端</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Web开发/">
@@ -659,7 +740,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 20px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Mocha/" style="font-size: 20px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 20px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 20px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Mocha/" style="font-size: 20px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 20px;">测试框架</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
     </div>
 </div>
 
@@ -673,6 +754,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -750,25 +850,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
-                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -787,7 +868,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -909,6 +990,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/modulepreload/">
                         <span class="tag">modulepreload</span>
                         <span class="tag is-grey">1</span>
@@ -981,7 +1069,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1052,6 +1140,25 @@
         
         <article class="media">
             
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
@@ -1126,25 +1233,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg" alt="记一次Node.js直出服务的性能优化">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-26T19:06:01.000Z">2019-09-27</time></div>
-                    <a href="/2019/09/27/记一次Node-js直出服务的性能优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记一次Node.js直出服务的性能优化</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1163,7 +1251,7 @@
                     <span class="level-item">October 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1285,6 +1373,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/modulepreload/">
                         <span class="tag">modulepreload</span>
                         <span class="tag is-grey">1</span>
@@ -1357,7 +1452,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/性能优化/">
                         <span class="tag">性能优化</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
