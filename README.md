@@ -7,6 +7,8 @@
 
 # 文章列表
 
+* [浏览器层合成与页面渲染优化](https://wecteam.io/2019%2F10%2F15%2F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B1%82%E5%90%88%E6%88%90%E4%B8%8E%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%2F)
+
 * [Electron 实践笔记](https://wecteam.io/2019%2F10%2F11%2FElectron-%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0%2F)
 
 * [Vue.js 3.0编译器compiler-core源码解析](https://wecteam.io/2019%2F10%2F09%2FVue-js-3-0%E7%BC%96%E8%AF%91%E5%99%A8compiler-core%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%2F)
