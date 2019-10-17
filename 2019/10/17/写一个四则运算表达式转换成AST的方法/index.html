@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="写一个四则运算表达式转换成AST的方法" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time>-->
+                <div class="level-item has-text-grey">2019-10-17</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    39 分钟 读完 (大约 5924 个字)
+                </span>
+                
+                
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                写一个四则运算表达式转换成AST的方法
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：吴冠禧</p>
+</blockquote>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0 前言"></a>0 前言</h2><p>晓强哥在他的上篇文章里介绍了 <a href="https://wecteam.io/2019/07/19/Javascript%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91%E4%B8%8A%E7%AF%87(%E5%9F%BA%E7%A1%80%E7%AF%87" target="_blank" rel="noopener">Javascript 抽象语法树</a>里面「提到获得抽象语法树的过程为：代码 =&gt; 词法分析 =&gt; 语法分析 =&gt; AST」，抱着深究技术细节的目的，我决定研究这里的词法分析和语法分析，写一个简单的四则运算表达式转换成AST的方法，于是就有了下面的内容。</p>
+<h2 id="1-人类和计算机对于表达式的看法是不同的"><a href="#1-人类和计算机对于表达式的看法是不同的" class="headerlink" title="1 人类和计算机对于表达式的看法是不同的"></a>1 人类和计算机对于表达式的看法是不同的</h2><p>人类习惯 <code>a + b</code> 这种表达叫做「中序表达式」，优点是比较简单直观，缺点是要用一堆括号来确定优先级 <code>(a + b) * (c + d)</code>。</p>
+<p>这里说简单直观是相对人类的思维结构来说的，对计算机而言中序表达式是非常复杂的结构。</p>
+<p>为了计算机计算方便，我们需要将中序表达式转换成树形结构，也就是「抽象语法树AST」。</p>
+<a id="more"></a>
+<h2 id="2-javascript-与抽象语法树-AST"><a href="#2-javascript-与抽象语法树-AST" class="headerlink" title="2 javascript 与抽象语法树 AST"></a>2 javascript 与抽象语法树 AST</h2><p>我们知道，几乎任何语言中，代码在 “编译”（解释型语言在运行时也有编译的过程） 的过程中，都会生成一种树状的中间状态，这就是 AST。有些语言会直接把类似 AST 的语法暴露给程序员（例如：lisp、elixir、python等）。但是 javascript 并没有这个能力，但是我们可以用 javascript 自身实现这个过程。</p>
+<p>获得抽象语法树的过程为：代码（字符串） =&gt; 词法分析（Lexer）=&gt; Tokens =&gt; 语法分析（Parser） =&gt; AST</p>
+<h2 id="3-词法分析（Lexer）"><a href="#3-词法分析（Lexer）" class="headerlink" title="3 词法分析（Lexer）"></a>3 词法分析（Lexer）</h2><p>词法分析有点像中文的分词，就是将字符串流根据规则生成一个一个的有具体意义的 Token ，形成 Token 流，然后流入下一步。</p>
+<p>我们看一个简单的例子，</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">1</span> + <span class="hljs-number">2.3</span></span><br></pre></td></tr></table></figure>
+
+<p>很明显这个表达式是可以分成三个 Token ，分别是 <code>1</code> , <code>+</code> , <code>2.3</code>。</p>
+<p>词法分析这里，我们可以用有限状态机来解决。</p>
+<h3 id="3-1-有限状态机"><a href="#3-1-有限状态机" class="headerlink" title="3.1 有限状态机"></a>3.1 有限状态机</h3><p>绝大多数语言的词法部分都是用状态机实现的，我们下面就画出有限状态机的图形，然后根据图形直观地写出解析代码，总体图大概是这样。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s750x400_jfs/t1/71505/36/12619/47435/5da0222fEf7a21a7b/b427472a1c8bbf59.jpg" alt="ast"></p>
+<p>下面拆开细看。</p>
+<h3 id="3-2-开始（start）状态"><a href="#3-2-开始（start）状态" class="headerlink" title="3.2 开始（start）状态"></a>3.2 开始（start）状态</h3><p><img src="//img11.360buyimg.com/jdphoto/s750x400_jfs/t1/81063/19/12511/29679/5da0222fE1bb0fda7/610bb2041fbb9606.jpg" alt="ast"></p>
+<p>状态机的初始状态是 <code>start</code> 。</p>
+<p><code>start</code> 状态下输入数字（0 ～ 9）就会迁移到 <code>inInt</code> 状态。</p>
+<p><code>start</code> 状态下输入符号（.）就会迁移到 <code>inFloat</code> 状态。</p>
+<p><code>start</code> 状态下输入符号（+ - * /）就会输出 <code>「符号 Token」</code> ，并回到 <code>start</code> 状态。</p>
+<p><code>start</code> 状态下输入 EOF 就会输出 <code>「EOF Token」</code> ，并回到 <code>start</code> 状态。</p>
+<p>代码大概是这个样子：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">start(char) &#123;</span><br><span class="line">  <span class="hljs-comment">// 数字</span></span><br><span class="line">  <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inInt;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// .</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"."</span>)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// 符号</span></span><br><span class="line">  <span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>].includes(char)) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// 结束符</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (char === EOF)&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"EOF"</span>, EOF);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-在整数（inInt）状态"><a href="#3-3-在整数（inInt）状态" class="headerlink" title="3.3 在整数（inInt）状态"></a>3.3 在整数（inInt）状态</h3><p><code>start</code> 状态下输入输入数字（0 ～ 9）就会迁移到 <code>inInt</code> 状态。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s750x400_jfs/t1/78804/34/12584/20147/5da0222fEef8f09c4/ed63a73dddac5654.jpg" alt="ast"></p>
+<p><code>inInt</code> 状态下输入输入符号（.）就会迁移到 <code>inFloat</code> 状态。</p>
+<p><code>inInt</code> 状态下输入数字（0 ～ 9）就继续留在 <code>inInt</code> 状态。</p>
+<p><code>inInt</code> 状态下输入非数字和.（0 ～ 9 .）就会就会输出 <code>「整数 Token」</code> ，并迁移到 <code>start</code> 状态。</p>
+<p>代码：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">inInt(char) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inInt;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">'.'</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"NUMBER"</span>, <span class="hljs-keyword">this</span>.token.join(<span class="hljs-string">""</span>));</span><br><span class="line">    <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start(char); <span class="hljs-comment">// put back char</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-在浮点数（inFloat）状态"><a href="#3-4-在浮点数（inFloat）状态" class="headerlink" title="3.4 在浮点数（inFloat）状态"></a>3.4 在浮点数（inFloat）状态</h3><p><code>start</code> 状态下输入符号（.）就会迁移到 <code>inFloat</code> 状态。</p>
+<p><code>inInt</code> 状态下输入输入符号（.）就会迁移到 <code>inFloat</code> 状态。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s750x400_jfs/t1/47044/1/13068/25868/5da02230Eac0dd5ee/68e1eacf4a087979.jpg" alt="ast"></p>
+<p><code>inFloat</code> 状态下输入数字（0 ～ 9）就继续留在 <code>inFloat</code> 状态。</p>
+<p><code>inFloat</code> 状态下输入非数字（0 ～ 9 ）就会就会输出 <code>「浮点数 Token」</code>，并迁移到 <code>start</code> 状态。</p>
+<p>代码：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">inFloat(char) &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"."</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"不能出现`..`"</span>);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.token.length === <span class="hljs-number">1</span>  &amp;&amp; <span class="hljs-keyword">this</span>.token[<span class="hljs-number">0</span>] === <span class="hljs-string">"."</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"不能单独出现`.`"</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"NUMBER"</span>, <span class="hljs-keyword">this</span>.token.join(<span class="hljs-string">""</span>));</span><br><span class="line">    <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start(char); <span class="hljs-comment">// put back char</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-输出的-Token-种类-和定义"><a href="#3-5-输出的-Token-种类-和定义" class="headerlink" title="3.5 输出的 Token 种类 和定义"></a>3.5 输出的 Token 种类 和定义</h3><p>我将 <code>「浮点数 Token」</code> 和 <code>「整数 Token」</code> 合并为 <code>[NUMBER Token]</code> , 其他的 Token 还有 <code>「SIGN Token」</code> 和 <code>「EOF Token」</code>。</p>
+<p>Token 的 定义：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Token&#123;</span><br><span class="line">  type:<span class="hljs-built_in">String</span>,</span><br><span class="line">  value:<span class="hljs-built_in">String</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-6-完整的-Lexer-代码"><a href="#3-6-完整的-Lexer-代码" class="headerlink" title="3.6 完整的 Lexer 代码"></a>3.6 完整的 Lexer 代码</h3><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> EOF = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'EOF'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Lexer</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token = []; <span class="hljs-comment">// 临时 token 字符存储</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.tokens = []; <span class="hljs-comment">// 生成的正式 token</span></span><br><span class="line">    <span class="hljs-comment">// state 默认是 start 状态，后面通过 push 函数实现状态迁移</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.state = <span class="hljs-keyword">this</span>.start;</span><br><span class="line">  &#125;</span><br><span class="line">  start(char) &#123;</span><br><span class="line">    <span class="hljs-comment">// 数字</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inInt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// .</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"."</span>)&#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 符号</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 结束符</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (char === EOF)&#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"EOF"</span>, EOF);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  inInt(char) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inInt;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">'.'</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"NUMBER"</span>, <span class="hljs-keyword">this</span>.token.join(<span class="hljs-string">""</span>));</span><br><span class="line">      <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start(char); <span class="hljs-comment">// put back char</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  inFloat(char) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"."</span>) &#123;</span><br><span class="line">      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"不能出现`..`"</span>);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.token.length === <span class="hljs-number">1</span>  &amp;&amp; <span class="hljs-keyword">this</span>.token[<span class="hljs-number">0</span>] === <span class="hljs-string">"."</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"不能单独出现`.`"</span>);</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"NUMBER"</span>, <span class="hljs-keyword">this</span>.token.join(<span class="hljs-string">""</span>));</span><br><span class="line">      <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start(char); <span class="hljs-comment">// put back char</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  emmitToken(type, value) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.tokens.push(&#123;</span><br><span class="line">      type,</span><br><span class="line">      value,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  push(char)&#123;</span><br><span class="line">    <span class="hljs-comment">// 每次执行 state 函数都会返回新的状态函数，实现状态迁移</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.state = <span class="hljs-keyword">this</span>.state(char);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.check();</span><br><span class="line">  &#125;</span><br><span class="line">  end()&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.state(EOF);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.check();</span><br><span class="line">  &#125;</span><br><span class="line">  check()&#123;</span><br><span class="line">    <span class="hljs-comment">// 检测是否有 token 生成并返回。</span></span><br><span class="line">    <span class="hljs-keyword">const</span> _token = [...this.tokens];</span><br><span class="line">    <span class="hljs-keyword">this</span>.tokens = [];</span><br><span class="line">    <span class="hljs-keyword">return</span> _token;</span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">    <span class="hljs-keyword">this</span>.tokens = [];</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = <span class="hljs-keyword">this</span>.start;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> lexer = <span class="hljs-keyword">new</span> lexer();</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> input = <span class="hljs-string">`1 + 2.3`</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> tokens = [];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> c <span class="hljs-keyword">of</span> input.split(<span class="hljs-string">''</span>))&#123;</span><br><span class="line">  tokens = [...tokens,...lexer.push(c)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tokens = [...tokens,...lexer.end()];</span><br></pre></td></tr></table></figure>
+
+<p>效果如下图：</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s620x210_jfs/t1/50210/26/13138/29830/5da02230Ea3239b11/7004e567f66d0bb9.jpg" alt="ast"></p>
+<p>自此，我们成功实现了词法分析，后面进入到语法分析。</p>
+<h2 id="4-语法分析（Parser）"><a href="#4-语法分析（Parser）" class="headerlink" title="4 语法分析（Parser）"></a>4 语法分析（Parser）</h2><p>前面的词法分析，已经将字符串划分成一个个有意义的 Token 进入到语法分析（Parser）。语法分析在编译原理里面属于比较高深的学问，我是没有怎么看懂。但总的来说就是把 Token流 组装成 AST ，<br>AST 的结构是既定的，后面我就通过对不同节点制定不同规则把 AST 组装起来。</p>
+<h3 id="4-1-定义-AST-结构-和-节点（Node）"><a href="#4-1-定义-AST-结构-和-节点（Node）" class="headerlink" title="4.1 定义 AST 结构 和 节点（Node）"></a>4.1 定义 AST 结构 和 节点（Node）</h3><p>简单来说 AST 就是一棵树形结构，由节点（Node）和 叶子（字面量 Literal ）组成，节点 下面可以连接 其他节点 或者 字面量。最顶端的节点就是 根节点。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s318x320_jfs/t1/68355/21/12670/13784/5da02230E361eb32a/7b2301d29bdc640c.jpg" alt="ast"></p>
+<p>节点的定义就是一个简单的 javascript Object</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface Node &#123;</span><br><span class="line">  type:string,</span><br><span class="line">  children:[],<span class="hljs-comment">// children栈 里面可以是 Node 或者 Literal</span></span><br><span class="line">  maxChildren:number,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-栈-和-根节点（Root）"><a href="#4-2-栈-和-根节点（Root）" class="headerlink" title="4.2 栈 和 根节点（Root）"></a>4.2 栈 和 根节点（Root）</h3><p>语法分析（Parser）这里，我使用的是一个栈结构，每来一个 Token 就入栈，然后通过一定的规则组装 AST。</p>
+<p>第一步就是压入 根节点 <code>&lt;Root&gt;</code>。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RootNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"ROOT"</span>,</span><br><span class="line">    children:[],</span><br><span class="line">    maxChildren:<span class="hljs-number">0</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> stack = [RootNode()];</span><br></pre></td></tr></table></figure>
+
+<p><img src="//img11.360buyimg.com/jdphoto/s318x318_jfs/t1/73107/24/12672/9710/5da02230E50b4ed71/548c3b28fcbcb2b0.jpg" alt="ast"></p>
+<h3 id="4-3-通用规则"><a href="#4-3-通用规则" class="headerlink" title="4.3 通用规则"></a>4.3 通用规则</h3><p>在说明不同类型节点的规则前，先说一下通用规则。</p>
+<ul>
+<li><ol>
+<li>没有后代的节点（NoChildrenNode），就是节点的 maxChildren 属性为 0。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>非满的节点（NotFullNode），就是节点的 maxChildren 属性大于 0，而且其 children.length &lt; maxChildren。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>满的节点（FullNode），就是节点的 maxChildren 属性大于 0，而且其 children.length &gt;= maxChildren。</li>
+</ol>
+</li>
+</ul>
+<p>对应的3个函数:</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isFullNode</span>(<span class="hljs-params">node</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (isNoChildrenNode(node)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  <span class="hljs-keyword">return</span> node &amp;&amp; node.children &amp;&amp; node.children.length &gt;= node.maxChildren;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isNotFullNode</span>(<span class="hljs-params">node</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (isNoChildrenNode(node)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  <span class="hljs-keyword">return</span> node &amp;&amp; node.children &amp;&amp; node.children.length &lt; node.maxChildren;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isNoChildrenNode</span>(<span class="hljs-params">node</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> node.maxChildren === <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-数字节点（Number）"><a href="#4-4-数字节点（Number）" class="headerlink" title="4.4 数字节点（Number）"></a>4.4 数字节点（Number）</h3><p>定义一个数字节点，其children就是 数字字面量。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NumberNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"NUMBER"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">1</span>, <span class="hljs-comment">// 只能有一个 child</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//img11.360buyimg.com/jdphoto/s318x320_jfs/t1/82038/8/12501/7509/5da02230E34905adc/e6feb28340e73f83.jpg" alt="ast"></p>
+<h3 id="4-5-数字节点的规则"><a href="#4-5-数字节点的规则" class="headerlink" title="4.5 数字节点的规则"></a>4.5 数字节点的规则</h3><ul>
+<li><ol>
+<li>找到栈顶 top</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>和数字节点 number</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>top 不能是满项</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>如果 top 为非满的节点，number push 到 top.children</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>否则（top 是没有后代的节点），number 压栈</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> top = stack[stack.length - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 栈顶</span></span><br><span class="line"><span class="hljs-keyword">if</span> (token.type === <span class="hljs-string">"NUMBER"</span>) &#123;</span><br><span class="line">  <span class="hljs-comment">//  1 1 </span></span><br><span class="line">  <span class="hljs-comment">//  1 + 1 1</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"数字前一项不能是满项"</span>)</span><br><span class="line">  <span class="hljs-keyword">const</span> number = CreateTypeNode(token.type)(token.value);</span><br><span class="line">  <span class="hljs-keyword">if</span> (isNotFullNode(top))&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> topChildPush(number);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> stackPush(number);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//img11.360buyimg.com/jdphoto/s318x320_jfs/t1/69734/3/12678/10873/5da02230E362bad15/4fe7b27ee9fd7e8d.jpg" alt="ast"></p>
+<h3 id="4-6-符号节点（Sign-）"><a href="#4-6-符号节点（Sign-）" class="headerlink" title="4.6 符号节点（Sign + - * /）"></a>4.6 符号节点（Sign + - * /）</h3><p>定义一个符号节点，其 children 可以是 字面量 或者 其他节点。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">AddNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"+"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>, <span class="hljs-comment">// 能有两个 child</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SubNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"-"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>, <span class="hljs-comment">// 能有两个 child</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MulNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"*"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>, <span class="hljs-comment">// 能有两个 child</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DivNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"/"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>, <span class="hljs-comment">// 能有两个 child</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-7-节点的优先级"><a href="#4-7-节点的优先级" class="headerlink" title="4.7 节点的优先级"></a>4.7 节点的优先级</h3><p>大家都知道，运算符有优先级，例如 <code>* /</code> 的优先级就比 <code>+ -</code> 要高。我把这个优先级扩展到全部节点，所有节点都有一个优先级数值。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> operatorValue = &#123;</span><br><span class="line">  <span class="hljs-string">"ROOT"</span> : <span class="hljs-number">0</span>, </span><br><span class="line">  <span class="hljs-string">"+"</span> : <span class="hljs-number">1</span>,</span><br><span class="line">  <span class="hljs-string">"-"</span> : <span class="hljs-number">1</span>,</span><br><span class="line">  <span class="hljs-string">"*"</span> : <span class="hljs-number">2</span>,</span><br><span class="line">  <span class="hljs-string">"/"</span> : <span class="hljs-number">2</span>,</span><br><span class="line">  <span class="hljs-string">"NUMBER"</span> : <span class="hljs-number">3</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个数值后面马上就会用到。</p>
+<h3 id="4-8-retire-操作"><a href="#4-8-retire-操作" class="headerlink" title="4.8 retire 操作"></a>4.8 retire 操作</h3><p>我们回到 <code>1 + 2.3</code> 这个算术表达式。前面说到 <code>1</code> 这个 Token 已经压入栈了，现在轮到 <code>+</code> Token 。</p>
+<ul>
+<li><ol>
+<li>栈顶 top （就是 number 1）</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>符号节点 add</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>top 是满的节点，所以 add 是后置符号，进入后置符号规则</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>比较 top 节点与 符号 add 节点 的优先级数值</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>top &lt; add 执行 rob 操作 ，否则 执行 retire 操作 </li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 后置符号</span></span><br><span class="line"> <span class="hljs-keyword">if</span> (isFullNode(top)) &#123;</span><br><span class="line">   <span class="hljs-keyword">if</span> (operatorValue[token.value] &gt; operatorValue[top.type])&#123;</span><br><span class="line">       <span class="hljs-comment">// 1 + 2 * </span></span><br><span class="line">       <span class="hljs-keyword">return</span> rob(token.value,top.children);</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">       <span class="hljs-comment">//  1 +</span></span><br><span class="line">       <span class="hljs-comment">//  1 + 2 + </span></span><br><span class="line">       link(token.value);</span><br><span class="line">       <span class="hljs-keyword">return</span> retire(token.value);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>先说 retire 操作，retire 有退休的意思。我是想表达，这当前条件下，栈顶节点可以退下来了，把栈顶的位置让给新节点。</p>
+<p>步骤是把的旧栈顶节点出栈，新节点入栈，然后旧栈顶压进新节点的 children 栈里。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> retire = <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> &#123;</span><br><span class="line">  stack.push(CreateTypeNode(type)(stack.pop()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后到<code>2.3</code> Token，根据前面的规则，因为栈顶的 add 节点是非满节点，<code>2.3</code> 构建成 number 节点 后，直接 push 到 add 节点的 children 栈里。</p>
+<p>文字有点干，我们配合图一起看。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s400x1280_jfs/t1/66140/36/12635/60553/5da02231Ebfa5ea7d/feded00b2bef2b71.jpg" alt="ast"></p>
+<h3 id="4-9-rob-操作"><a href="#4-9-rob-操作" class="headerlink" title="4.9 rob 操作"></a>4.9 rob 操作</h3><p>前面提到 retire 操作的反向条件是 rob 操作。先来看一个例子<code>1 + 2.3 * 4</code>。</p>
+<p>接上一节，现在栈里是<code>&lt;Root&gt;,&lt;+ 1 2.3&gt;</code>，现需要压入新节点 mul，同样的 mul 节点和栈顶 add 节点比较， 优先级 mul &gt; add，执行 rob 操作。</p>
+<p>rob 操作 很好理解，因为乘法比加法的优先级要高，所以本来属于 add 节点 下的 number(2.3) 要被 mul 节点抢走了。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> rob = <span class="hljs-function">(<span class="hljs-params">type,children</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> child = children.pop();</span><br><span class="line">  stack.push(CreateTypeNode(type)(child));</span><br><span class="line">&#125;</span><br><span class="line">rob(token.value,top.children);</span><br></pre></td></tr></table></figure>
+
+<p>mul 节点抢走 number(2.3) 后放压进自己的 children 栈里，然后 mul 节点入栈，成为新的栈顶。</p>
+<p>然后到<code>4</code> Token，根据前面的规则，因为栈顶的 mul 节点是非满节点，<code>4</code> 构建成 number 节点 后，直接 push 到 mul 节点的 children 栈里。</p>
+<p>文字还是有点干，我们配合图一起看。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s400x1280_jfs/t1/49440/4/13086/71879/5da02231Ed7a47f3c/c8b65dbdb4135e7a.jpg" alt="ast"></p>
+<h3 id="4-10-link-操作"><a href="#4-10-link-操作" class="headerlink" title="4.10 link 操作"></a>4.10 link 操作</h3><p>细心的朋友应该会发现，在执行 retire 操作之前还执行了一个 link 操作。这个 link 是做啥的呢？我们来看一个例子<code>1 + 2.3 * 4 - 5</code>。</p>
+<p>接上一节，栈里现在是<code>&lt;Root&gt;,&lt;+ 1&gt;,&lt;* 2.3 4&gt;</code>，现在准备压入 sub 节点，因为优先级上 sub &lt; mul ，如果先忽略 link 直接走 retire 操作，就会变成<code>&lt;Root&gt;,&lt;+ 1&gt;,&lt;- &lt;* 2.3 4&gt;&gt;</code>。这个不是我想要的结果，因为<code>+</code>和<code>-</code>优先级是相同的，相同优先级应该先计算先出现的符号，理想的操作下，栈里应该变成<code>&lt;Root&gt;,&lt;- &lt;+ 1 &lt;* 2.3 4&gt;&gt;&gt;</code>。所以我引入了 link 操作。</p>
+<p>link 操作会先将栈顶的满项节点 push 到前一项的 childen 栈里（如果前一项是非满节点），而且这是一个循环操作 直到 前一项是满节点 或者 前一项节点的优先级比新节点的还要低。</p>
+<p>回看上面的例子，栈里现在是 <code>&lt;Root&gt;,&lt;+ 1&gt;,&lt;* 2.3 4&gt;</code> ，现在准备压入 sub 节点，因为优先级上 sub &lt; mul ，先在 link 操作下变成 <code>&lt;Root&gt;,&lt;+ 1 &lt;* 2.3 4&gt;&gt;</code> ，然后执行 retire ，<br>变成 <code>&lt;Root&gt;,&lt;- &lt;+ 1 &lt;* 2.3 4&gt;&gt;&gt;</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">typeValue</span>(<span class="hljs-params">node</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">undefined</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"node is undefined"</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> operatorValue[node.type];</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> link = <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> value = operatorValue[type];</span><br><span class="line">  <span class="hljs-keyword">while</span>(isFullNode(stack[stack.length <span class="hljs-number">-1</span>]) &amp;&amp;  isNotFullNode(stack[stack.length - <span class="hljs-number">2</span>]) &amp;&amp; (value &lt;= typeValue(stack[stack.length <span class="hljs-number">-1</span>])) &amp;&amp; (value &lt;= typeValue(stack[stack.length <span class="hljs-number">-2</span>])) ) &#123;</span><br><span class="line">    stack[stack.length - <span class="hljs-number">2</span>].children.push(stack.pop());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后到 <code>5</code> Token，根据前面的规则，因为栈顶的 sub 节点是非满节点，<code>5</code> 构建成 number 节点 后，直接 push 到 mul 节点的 children 栈里。</p>
+<p>继续上图。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s800x1280_jfs/t1/50267/24/13151/117159/5da02231E865ce1c0/63754ed2b9a0ec0f.jpg" alt="ast"></p>
+<h3 id="4-13-增加负数"><a href="#4-13-增加负数" class="headerlink" title="4.13 增加负数"></a>4.13 增加负数</h3><p>负数可以说是开了一个比较坏的先河，因为和减号公用一个 <code>-</code> 符号，导致代码逻辑的增加。负号和减号的区别在于，负号的取值是在它的右侧 <code>1 + - 1</code> ，减号是从左到右 <code>1 - 1</code> 。这里可以通过判断栈顶节点的情况来确定究竟是 负号 还是 减号。我将 负号这种取值在右边的符号称为 前置符号 ，加减乘除这种左到右取值的符号称为 后置符号。前置符号直接压栈。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 定义负数节点</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NegNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"NEGATE"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">1</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (token.type === <span class="hljs-string">"SIGN"</span>) &#123;</span><br><span class="line">    <span class="hljs-comment">// 后置符号</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isFullNode(top)) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (operatorValue[token.value] &gt; operatorValue[top.type])&#123;</span><br><span class="line">        <span class="hljs-comment">// 1 + 2 * </span></span><br><span class="line">        <span class="hljs-comment">// console.log("rob");</span></span><br><span class="line">        <span class="hljs-keyword">return</span> rob(token.value,top.children);</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">//  1 +</span></span><br><span class="line">        <span class="hljs-comment">//  1 + 2 + </span></span><br><span class="line">        link(token.value);</span><br><span class="line">        <span class="hljs-keyword">return</span> retire(token.value);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// 前置符号</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (</span><br><span class="line">    (isNoChildrenNode(top)) || <span class="hljs-comment">// (-</span></span><br><span class="line">    (isNotFullNode(top)) <span class="hljs-comment">// 1 + -</span></span><br><span class="line">  )&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">"-"</span>) <span class="hljs-keyword">return</span> stackPush(CreateTypeNode(<span class="hljs-string">"NEGATE"</span>)()); <span class="hljs-comment">// 取负公用符号 - </span></span><br><span class="line">    <span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">"+"</span>) <span class="hljs-keyword">return</span> ; <span class="hljs-comment">// + 号静默</span></span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(token.value + <span class="hljs-string">"符号不能前置"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子 <code>- 1</code> 。 <code>- 1</code> 这里开始栈 <code>&lt;Root&gt;</code> ，然后准备压入 <code>-</code> ，因为 Root 节点是没有后代的节点（NoChildrenNode），所以这里判断<code>-</code>是前置符号，生成 NE（NEGATE） 节点直接入栈 <code>&lt;Root&gt;&lt;NE&gt;</code> 。然后是 <code>1</code> , <code>&lt;Root&gt;&lt;NE 1&gt;</code> 。</p>
+<p>例子 <code>1 - - 1</code> 。这里第一个 <code>-</code> 时 <code>&lt;Root&gt;&lt;1&gt;</code> ，因为 栈顶 number 节点是满的节点（FullNode），所以第一个 <code>-</code> 是后置符号，生成 sub 节点。第二个 <code>-</code> 时 <code>&lt;Root&gt;&lt;- 1&gt;</code>，<br>栈顶的 sub 节点是未满的节点（NotFullNode），判定为前置符号，生成 NE（NEGATE） 节点直接入栈 <code>&lt;Root&gt;&lt;- 1&gt;&lt;NE&gt;</code> 。然后是 <code>1</code> , <code>&lt;Root&gt;&lt;- 1&gt;&lt;NE 1&gt;</code> 。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s800x320_jfs/t1/63999/20/12649/26253/5da02231E721980b2/53acee89c75d3d62.jpg" alt="ast"></p>
+<h3 id="4-14-增加括号"><a href="#4-14-增加括号" class="headerlink" title="4.14 增加括号"></a>4.14 增加括号</h3><p>括号 <code>(</code> 可以改变表达式里的优先级，先定义括号节点。</p>
+<p>首先需要在 词法分析 的时候加入 <code>(</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// start 状态里</span></span><br><span class="line"><span class="hljs-comment">// 符号</span></span><br><span class="line"><span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>,<span class="hljs-string">"("</span>].includes(char)) &#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ParNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"("</span>,</span><br><span class="line">    children:[],</span><br><span class="line">    maxChildren:<span class="hljs-number">0</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里 maxChildren 设为 0 ，当我们将 括号节点 push 到栈里时，就形成一个屏障，使后面节点变动时，不会越过 括号节点 。</p>
+<p>看例子 <code>1 * (2 + 3 * 4)</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  <span class="hljs-string">`&lt;Root&gt;`</span> </span><br><span class="line"><span class="hljs-number">1</span> <span class="hljs-string">`&lt;Root&gt;&lt;1&gt;`</span></span><br><span class="line">* <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;`</span></span><br><span class="line">( <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;`</span> <span class="hljs-comment">// ( 隔离</span></span><br><span class="line"><span class="hljs-number">2</span> <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;&lt;2&gt;`</span> <span class="hljs-comment">// 把 2 和 * 隔离</span></span><br><span class="line">+ <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;&lt;+ 2&gt;`</span> </span><br><span class="line"><span class="hljs-number">3</span> <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;&lt;+ 2 3&gt;`</span> </span><br><span class="line">* <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;&lt;+ 2&gt;&lt;* 3&gt;`</span> </span><br><span class="line"><span class="hljs-number">4</span> <span class="hljs-string">`&lt;Root&gt;&lt;* 1&gt;&lt;(&gt;&lt;+ 2&gt;&lt;* 3 4&gt;`</span></span><br></pre></td></tr></table></figure>
+
+<p>参考代码。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">"("</span> ) &#123;</span><br><span class="line">  <span class="hljs-comment">// 1(</span></span><br><span class="line">  <span class="hljs-comment">// 1 + 1 (</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"not a function"</span>);</span><br><span class="line">  <span class="hljs-comment">// (</span></span><br><span class="line">  <span class="hljs-keyword">return</span> stackPush(CreateTypeNode(<span class="hljs-string">"("</span>)());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//wq.360buyimg.com/data/ppms/others/ast14_s.gif" alt="ast"></p>
+<h3 id="4-14-增加反括号-与-remove-操作"><a href="#4-14-增加反括号-与-remove-操作" class="headerlink" title="4.14 增加反括号 与 remove 操作"></a>4.14 增加反括号 与 remove 操作</h3><p>反括号 <code>)</code> 的作用是将当前括号后面添加的节点收缩成一个稳定节点，具体方法是把 <code>(</code> 后面的节点 link 起来( <code>(</code> 的优先级设定得比较小，旨在将括号里的节点都连接起来)，并推到一个临时的栈里，然后将 <code>(</code> 节点 改写成 <code>)</code> 节点 ，再将临时栈的节点出栈 push 到 <code>)</code> 节点的 children 里。还因为 <code>)</code> 节点的优先级别设置了很高，不用担心会被后面的节点 rob 。</p>
+<p>首先需要在 词法分析 的时候加入 <code>)</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// start 状态里</span></span><br><span class="line"><span class="hljs-comment">// 符号</span></span><br><span class="line"><span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>,<span class="hljs-string">"("</span>,<span class="hljs-string">")"</span>].includes(char)) &#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">")"</span> ) &#123;</span><br><span class="line">  <span class="hljs-comment">// ()</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isNoChildrenNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Unexpected token )"</span>);</span><br><span class="line">  <span class="hljs-comment">// (1+)</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isNotFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Unexpected token )"</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> remove(<span class="hljs-string">"("</span>);  <span class="hljs-comment">// 收拢 (</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> remove = <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> &#123;</span><br><span class="line">  link(type);</span><br><span class="line">  <span class="hljs-comment">//  找到最近的( 其余push到tempStack</span></span><br><span class="line">  <span class="hljs-keyword">while</span>(stack.length &gt; <span class="hljs-number">0</span> &amp;&amp; !(stack[stack.length - <span class="hljs-number">1</span>].type === type &amp;&amp; !stack[stack.length - <span class="hljs-number">1</span>].children))&#123;</span><br><span class="line">    tempStack.push(stack.pop());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">// 修改最近的( </span></span><br><span class="line">  <span class="hljs-keyword">const</span> top = stack[stack.length - <span class="hljs-number">1</span>];</span><br><span class="line">  <span class="hljs-keyword">if</span> (top.type === type)&#123;</span><br><span class="line">    top.type = opposite[type];  <span class="hljs-comment">// 取反 ( =&gt; )</span></span><br><span class="line">    top.children = [];</span><br><span class="line">    <span class="hljs-comment">// tempStack的Node压给(</span></span><br><span class="line">    <span class="hljs-keyword">while</span>(tempStack.length &gt; <span class="hljs-number">0</span>)&#123;</span><br><span class="line">      top.children.push(tempStack.pop());</span><br><span class="line">    &#125;</span><br><span class="line">    top.maxChildren = top.children.length; <span class="hljs-comment">// maxChildren 设满</span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> operatorValue = &#123;</span><br><span class="line">  <span class="hljs-string">"ROOT"</span> : <span class="hljs-number">0</span>, </span><br><span class="line">  <span class="hljs-string">"("</span> : <span class="hljs-number">1</span>, <span class="hljs-comment">// 括号的优先级低，方便 link</span></span><br><span class="line">  <span class="hljs-string">"+"</span> : <span class="hljs-number">2</span>,</span><br><span class="line">  <span class="hljs-string">"-"</span> : <span class="hljs-number">2</span>,</span><br><span class="line">  <span class="hljs-string">"*"</span> : <span class="hljs-number">3</span>,</span><br><span class="line">  <span class="hljs-string">"/"</span> : <span class="hljs-number">3</span>,</span><br><span class="line">  <span class="hljs-string">"NEGATE"</span> : <span class="hljs-number">4</span>, <span class="hljs-comment">// 取负</span></span><br><span class="line">  <span class="hljs-string">"NUMBER"</span> : <span class="hljs-number">5</span>, <span class="hljs-comment">// 取正</span></span><br><span class="line">  <span class="hljs-string">")"</span> : <span class="hljs-number">6</span>, <span class="hljs-comment">// 反括号的优先级高，防止被 rob</span></span><br><span class="line">  <span class="hljs-string">"ROOT_END"</span> : <span class="hljs-number">7</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> opposite = &#123;</span><br><span class="line">  <span class="hljs-string">"("</span> : <span class="hljs-string">")"</span> ,</span><br><span class="line">  <span class="hljs-string">"ROOT"</span> : <span class="hljs-string">"ROOT_END"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//wq.360buyimg.com/data/ppms/others/ast15_s.gif" alt="ast"></p>
+<h3 id="4-15-EOF"><a href="#4-15-EOF" class="headerlink" title="4.15 EOF"></a>4.15 EOF</h3><p>括号的作用是将其内部的节点包裹起来，形成一个稳定的节点，括号 <code>(</code> 和反括号 <code>)</code> 自成一对。还有一对有同样的功能，就是 <code>ROOT</code> 和 <code>ROOT_END</code> 。</p>
+<p><code>ROOT</code> 和 <code>ROOT_END</code> 标示着这个表达式的开始和结束。 <code>ROOT</code> 节点是初始化时就添加的，那么 <code>ROOT_END</code> 对应就是 <code>EOF</code> 这个 Token 了。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (token.type === <span class="hljs-string">"EOF"</span>) &#123;</span><br><span class="line">  <span class="hljs-comment">// EOF</span></span><br><span class="line">  <span class="hljs-keyword">return</span> remove(<span class="hljs-string">"ROOT"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>来一个完整的流程gif。</p>
+<p><img src="//wq.360buyimg.com/data/ppms/others/ast16_s.gif" alt="ast"></p>
+<p><img src="//img11.360buyimg.com/jdphoto/s598x470_jfs/t1/58973/16/13042/49291/5da02232Eba090ed2/8876293a6a362b89.jpg" alt="ast"></p>
+<h2 id="5-计算求值"><a href="#5-计算求值" class="headerlink" title="5 计算求值"></a>5 计算求值</h2><p><code>EOF</code> 后，我们就可以得到抽象语法树 AST 了。因为是树形结构，我们可以用递归的方法求值。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">`1 * ( 2 + 3 * 4)`</span></span><br><span class="line"><span class="hljs-keyword">const</span> ast = &#123;</span><br><span class="line">  <span class="hljs-string">"type"</span>: <span class="hljs-string">"ROOT_END"</span>,</span><br><span class="line">  <span class="hljs-string">"children"</span>: [&#123;</span><br><span class="line">    <span class="hljs-string">"type"</span>: <span class="hljs-string">"*"</span>,</span><br><span class="line">    <span class="hljs-string">"children"</span>: [&#123;</span><br><span class="line">      <span class="hljs-string">"type"</span>: <span class="hljs-string">"NUMBER"</span>,</span><br><span class="line">      <span class="hljs-string">"children"</span>: [<span class="hljs-string">"1"</span>],</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="hljs-string">"type"</span>: <span class="hljs-string">")"</span>,</span><br><span class="line">      <span class="hljs-string">"children"</span>: [&#123;</span><br><span class="line">        <span class="hljs-string">"type"</span>: <span class="hljs-string">"+"</span>,</span><br><span class="line">        <span class="hljs-string">"children"</span>: [&#123;</span><br><span class="line">          <span class="hljs-string">"type"</span>: <span class="hljs-string">"NUMBER"</span>,</span><br><span class="line">          <span class="hljs-string">"children"</span>: [<span class="hljs-string">"2"</span>],</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          <span class="hljs-string">"type"</span>: <span class="hljs-string">"*"</span>,</span><br><span class="line">          <span class="hljs-string">"children"</span>: [&#123;</span><br><span class="line">            <span class="hljs-string">"type"</span>: <span class="hljs-string">"NUMBER"</span>,</span><br><span class="line">            <span class="hljs-string">"children"</span>: [<span class="hljs-string">"3"</span>],</span><br><span class="line">          &#125;, &#123;</span><br><span class="line">            <span class="hljs-string">"type"</span>: <span class="hljs-string">"NUMBER"</span>,</span><br><span class="line">            <span class="hljs-string">"children"</span>: [<span class="hljs-string">"4"</span>],</span><br><span class="line">          &#125;],</span><br><span class="line">        &#125;],</span><br><span class="line">      &#125;],</span><br><span class="line">    &#125;],</span><br><span class="line">  &#125;],</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">evaluate</span>(<span class="hljs-params">node</span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> &#123;type,children&#125; = node;</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"NUMBER"</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Number</span>(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"+"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]) + evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"-"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]) - evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"*"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]) * evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"/"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]) / evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">")"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"ROOT_END"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"NEGATE"</span>) <span class="hljs-keyword">return</span> evaluate(children[<span class="hljs-number">0</span>]) * <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(evaluate(ast)); <span class="hljs-comment">// 14</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6 小结"></a>6 小结</h2><p>写到这里，一个简单的四则运算解析器总算完成了。一共分 3 大部分。分别是 词法分析（Lexer）、语法分析（Parser）、计算求值（evaluate）。</p>
+<p>词法分析（Lexer）是将 表达式 字符串 转化为 Token 流，这里用到有限状态机。</p>
+<p>语法分析（Parser）是将 Token 流 转化为 抽象语法树（AST），这里主要是手工写的语法分析，用了 两个栈 ，规定了 4 个方法 link 、 retire 、 rob 、 remove，还有定义了不同节点的入栈规则。</p>
+<p>计算求值（evaluate）是将 AST 计算出表达式的 值，这里用了递归求值。</p>
+<h2 id="7-应用之自定义的向量运算"><a href="#7-应用之自定义的向量运算" class="headerlink" title="7 应用之自定义的向量运算"></a>7 应用之自定义的向量运算</h2><p>弄清楚四则运算的解析方法后，我们可以创造自己制定规则的表达式运算了。</p>
+<p>因为之前的项目我写过向量运算，但是因为函数调用的写法有点丑陋，我这里就尝试自定义向量运算表达式。</p>
+<h3 id="7-1-向量表示之引入符号（Sign-）"><a href="#7-1-向量表示之引入符号（Sign-）" class="headerlink" title="7.1 向量表示之引入符号（Sign [ , ]）"></a>7.1 向量表示之引入符号（Sign [ , ]）</h3><p>这里一个 2维向量 我用 <code>[1,2]</code> 来表示。所以先在 词法分析（Lexer）里增加 <code>[,]</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// start 状态里</span></span><br><span class="line"><span class="hljs-comment">// 符号</span></span><br><span class="line"><span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>,<span class="hljs-string">"("</span>,<span class="hljs-string">")"</span>,<span class="hljs-string">"["</span>,<span class="hljs-string">","</span>,<span class="hljs-string">"]"</span>].includes(char)) &#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>[</code> 和 <code>]</code> 是一对，本质和括号对 <code>(</code> <code>)</code> 没什么区别。</p>
+<p><code>,</code> 其定位就是一个分割符，没有成对子。而且 <code>,</code> 出现后，其前面的节点都要 link 起来。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">VecNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"["</span>,</span><br><span class="line">    children:[],</span><br><span class="line">    maxChildren:<span class="hljs-number">0</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">WallNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">","</span>,</span><br><span class="line">    children:[],</span><br><span class="line">    maxChildren:<span class="hljs-number">0</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> opposite = &#123;</span><br><span class="line">  <span class="hljs-string">"("</span> : <span class="hljs-string">")"</span> ,</span><br><span class="line">  <span class="hljs-string">"["</span> : <span class="hljs-string">"]"</span> ,</span><br><span class="line">  <span class="hljs-string">"ROOT"</span> : <span class="hljs-string">"ROOT_END"</span> ,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">"["</span> ) &#123;</span><br><span class="line">  <span class="hljs-comment">// 1[</span></span><br><span class="line">  <span class="hljs-comment">// 1 + 1 [</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"非顶端[前面不能有满项"</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> stack.push(CreateTypeNode(<span class="hljs-string">"["</span>)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">","</span> ) &#123;</span><br><span class="line">  <span class="hljs-comment">// ,</span></span><br><span class="line">  <span class="hljs-comment">// ,,</span></span><br><span class="line">  <span class="hljs-comment">// (,</span></span><br><span class="line">  <span class="hljs-comment">// [,</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isNoChildrenNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">",不能接在空符后面"</span>);</span><br><span class="line">  <span class="hljs-comment">// [ 1 + ,</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isNotFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">",不能接在非满项后面"</span>);</span><br><span class="line">  link(<span class="hljs-string">"["</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> stack.push(CreateTypeNode(<span class="hljs-string">","</span>)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (token.value === <span class="hljs-string">"]"</span> ) &#123;</span><br><span class="line">  <span class="hljs-comment">// [1+]</span></span><br><span class="line">  <span class="hljs-keyword">if</span> (isNotFullNode(top)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"]前不能有非满项"</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> remove(<span class="hljs-string">"["</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子 <code>[ 1 + 2 * 3 , 4 + 5 * 6 ]</code> 。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="hljs-string">`&lt;Root&gt;`</span></span><br><span class="line">[   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;`</span> </span><br><span class="line"><span class="hljs-number">1</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;1&gt;`</span> </span><br><span class="line">+   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1&gt;`</span> </span><br><span class="line"><span class="hljs-number">2</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 2&gt;`</span> </span><br><span class="line">*   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1&gt;&lt;* 2&gt;`</span> </span><br><span class="line"><span class="hljs-number">3</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1&gt;&lt;* 2 3&gt;`</span> </span><br><span class="line">,   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;`</span> </span><br><span class="line"><span class="hljs-number">4</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;4&gt;`</span> </span><br><span class="line">+   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&gt;`</span> </span><br><span class="line"><span class="hljs-number">5</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4 5&gt;`</span> </span><br><span class="line">*   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&gt;&lt;* 5&gt;`</span> </span><br><span class="line"><span class="hljs-number">6</span>   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&gt;&lt;* 5 6&gt;`</span> </span><br><span class="line">]   <span class="hljs-string">`&lt;Root&gt;&lt;[&gt;&lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&lt;* 5 6&gt;&gt;`</span> </span><br><span class="line">    <span class="hljs-string">`&lt;Root&gt;&lt;] &lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&lt;* 5 6&gt;&gt;&gt;`</span> </span><br><span class="line">EOF <span class="hljs-string">`&lt;RootEnd &lt;] &lt;+ 1 &lt;* 2 3&gt;&gt;&lt;,&gt;&lt;+ 4&lt;* 5 6&gt;&gt;&gt;&gt;`</span></span><br></pre></td></tr></table></figure>
+
+
+<p>最后在 evaluate 方法里增加对向量的支持。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// evaluate 里</span></span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"]"</span>) &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> notWall = children.filter(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.type !== <span class="hljs-string">","</span>);</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(notWall[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(notWall[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumA = <span class="hljs-keyword">typeof</span> a === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumB = <span class="hljs-keyword">typeof</span> b === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (isNumA &amp;&amp; isNumB) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Vector2d(a,b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"只有两个数量才能生成向量"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//wq.360buyimg.com/data/ppms/others/ast18_s.gif" alt="ast"></p>
+<p><img src="//img11.360buyimg.com/jdphoto/s755x660_jfs/t1/51274/9/13256/68924/5da02232Ed7289fd9/2a7ffb17f4a9bb21.jpg" alt="ast"></p>
+<h3 id="7-2-向量加减乘除法取负"><a href="#7-2-向量加减乘除法取负" class="headerlink" title="7.2 向量加减乘除法取负"></a>7.2 向量加减乘除法取负</h3><p>向量加减乘除法取负继续源用 <code>+</code> , <code>-</code> , <code>*</code> , <code>/</code> 符号，只需要在 evaluate 方法里做判断就可以了。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// evaluate 里</span></span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"+"</span>) &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (Vector2d.is(a) &amp;&amp; Vector2d.is(b))&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.add(a,b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"-"</span>) &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (Vector2d.is(a) &amp;&amp; Vector2d.is(b))&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.sub(a,b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> a - b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"*"</span> || type === <span class="hljs-string">"/"</span>) &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecA = Vector2d.is(a);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecB = Vector2d.is(b);</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumA = <span class="hljs-keyword">typeof</span> a === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumB = <span class="hljs-keyword">typeof</span> b === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> ( isNumA &amp;&amp; isNumB )&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"*"</span>) <span class="hljs-keyword">return</span> a * b;</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"/"</span>) <span class="hljs-keyword">return</span> a / b;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(isVecA &amp;&amp; isNumB) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"*"</span>) <span class="hljs-keyword">return</span> Vector2d.scale(a,b);</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"/"</span>) <span class="hljs-keyword">return</span> Vector2d.scale(a,<span class="hljs-number">1</span>/b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isVecB &amp;&amp; isNumA) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"*"</span>) <span class="hljs-keyword">return</span> Vector2d.scale(b,a);</span><br><span class="line">    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">"/"</span>) <span class="hljs-keyword">return</span> Vector2d.scale(b,<span class="hljs-number">1</span>/a);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"两个向量不能相乘，请用@dot"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"NEGATE"</span>) &#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">if</span> (Vector2d.is(a))&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.scale(a,<span class="hljs-number">-1</span>);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> a * <span class="hljs-number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-向量旋转、点乘，角度的单位转换"><a href="#7-3-向量旋转、点乘，角度的单位转换" class="headerlink" title="7.3 向量旋转、点乘，角度的单位转换"></a>7.3 向量旋转、点乘，角度的单位转换</h3><p>向量的旋转（<code>@rot</code>）、点乘（<code>@dot</code>），角度的单位转换（<code>@deg</code>），用这3个自定义符号。</p>
+<p>这里需要修改一下 词法分析 的状态机，在 start 状态下新增一个跃迁状态 customSgin 用 <code>@</code> 为标识。然后 customSgin 状态下输入[a-zA-Z]都回跃迁自身 否则 跃迁回状态 start 并输出 Token。</p>
+<p><img src="//img11.360buyimg.com/jdphoto/s750x400_jfs/t1/69281/39/12809/13086/5da02232Ef5aaefde/6cebfe531f9f4497.jpg" alt="ast"></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Lexer 里</span></span><br><span class="line">  start(char) &#123;</span><br><span class="line">    <span class="hljs-comment">// 数字</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"0"</span>,<span class="hljs-string">"1"</span>,<span class="hljs-string">"2"</span>,<span class="hljs-string">"3"</span>,<span class="hljs-string">"4"</span>,<span class="hljs-string">"5"</span>,<span class="hljs-string">"6"</span>,<span class="hljs-string">"7"</span>,<span class="hljs-string">"8"</span>,<span class="hljs-string">"9"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inInt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// .</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"."</span>)&#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.inFloat;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 符号</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"*"</span>,<span class="hljs-string">"/"</span>,<span class="hljs-string">"("</span>,<span class="hljs-string">")"</span>,<span class="hljs-string">"["</span>,<span class="hljs-string">"]"</span>,<span class="hljs-string">","</span>,<span class="hljs-string">"&lt;"</span>,<span class="hljs-string">"&gt;"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 空白字符</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ([<span class="hljs-string">" "</span>,<span class="hljs-string">"\r"</span>,<span class="hljs-string">"\n"</span>].includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// 结束</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (char === EOF)&#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"EOF"</span>, EOF);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (char === <span class="hljs-string">"@"</span>)&#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.customSgin;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  customSgin(char) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>.split(<span class="hljs-string">""</span>).includes(char)) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.token.push(char);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.customSgin;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.emmitToken(<span class="hljs-string">"SIGN"</span>, <span class="hljs-keyword">this</span>.token.join(<span class="hljs-string">""</span>));</span><br><span class="line">      <span class="hljs-keyword">this</span>.token = [];</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.start(char); <span class="hljs-comment">// put back char</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后定义节点和节点优先级。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DegNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"@deg"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">1</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DotNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"@dot"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RotNode</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">    type:<span class="hljs-string">"@rot"</span>,</span><br><span class="line">    children:[...arguments],</span><br><span class="line">    maxChildren:<span class="hljs-number">2</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> operatorValue = &#123;</span><br><span class="line">  <span class="hljs-string">"ROOT"</span> : <span class="hljs-number">0</span>, </span><br><span class="line">  <span class="hljs-string">"("</span> : <span class="hljs-number">1</span>,</span><br><span class="line">  <span class="hljs-string">"["</span> : <span class="hljs-number">1</span>,</span><br><span class="line">  <span class="hljs-string">"@dot"</span> : <span class="hljs-number">2</span>, <span class="hljs-comment">// 向量点乘</span></span><br><span class="line">  <span class="hljs-string">"&lt;"</span> : <span class="hljs-number">3</span>,</span><br><span class="line">  <span class="hljs-string">"&gt;"</span> : <span class="hljs-number">3</span>,</span><br><span class="line">  <span class="hljs-string">"+"</span> : <span class="hljs-number">4</span>,</span><br><span class="line">  <span class="hljs-string">"-"</span> : <span class="hljs-number">4</span>,</span><br><span class="line">  <span class="hljs-string">"*"</span> : <span class="hljs-number">5</span>,</span><br><span class="line">  <span class="hljs-string">"/"</span> : <span class="hljs-number">5</span>,</span><br><span class="line">  <span class="hljs-string">"@rot"</span> : <span class="hljs-number">5</span>, <span class="hljs-comment">// 向量旋转</span></span><br><span class="line">  <span class="hljs-string">"NEGATE"</span> : <span class="hljs-number">6</span>, <span class="hljs-comment">// 取负</span></span><br><span class="line">  <span class="hljs-string">"@deg"</span> : <span class="hljs-number">7</span>, <span class="hljs-comment">// 角度转换</span></span><br><span class="line">  <span class="hljs-string">"NUMBER"</span> : <span class="hljs-number">8</span>, <span class="hljs-comment">// 取正</span></span><br><span class="line">  <span class="hljs-string">")"</span> : <span class="hljs-number">9</span>,</span><br><span class="line">  <span class="hljs-string">"]"</span> : <span class="hljs-number">9</span>,</span><br><span class="line">  <span class="hljs-string">"ROOT_END"</span> : <span class="hljs-number">10</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有在 evaluate 里写对应的方法。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"@dot"</span>)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecA = Vector2d.is(a);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecB = Vector2d.is(b);</span><br><span class="line">  <span class="hljs-keyword">if</span> (isVecA &amp;&amp; isVecB) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.dot(a,b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"只有向量和向量能点乘"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"@rot"</span>)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> b = evaluate(children[<span class="hljs-number">1</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecA = Vector2d.is(a);</span><br><span class="line">  <span class="hljs-keyword">const</span> isVecB = Vector2d.is(b);</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumA = <span class="hljs-keyword">typeof</span> a === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumB = <span class="hljs-keyword">typeof</span> b === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (isVecA &amp;&amp; isNumB) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.rotate(a,b);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isVecB &amp;&amp; isNumA) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Vector2d.rotate(b,a);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"只有向量和数量能旋转"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">"@deg"</span>)&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> a = evaluate(children[<span class="hljs-number">0</span>]);</span><br><span class="line">  <span class="hljs-keyword">const</span> isNumA = <span class="hljs-keyword">typeof</span> a === <span class="hljs-string">"number"</span>;</span><br><span class="line">  <span class="hljs-keyword">if</span> (isNumA)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> a / <span class="hljs-number">180</span> * <span class="hljs-built_in">Math</span>.PI;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"非数字不能转换deg"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来一个例子 <code>[1, 0] @rot - 90 @deg</code> ,把 [1,0] 旋转负 90 度。</p>
+<p><img src="//wq.360buyimg.com/data/ppms/others/ast21_s.gif" alt="ast"></p>
+<p><img src="//img11.360buyimg.com/jdphoto/s626x567_jfs/t1/78350/34/12497/62507/5da02232E064c50c9/8d71fa5ebacbd32a.jpg" alt="ast"></p>
+<h2 id="8-Demo手动玩"><a href="#8-Demo手动玩" class="headerlink" title="8 Demo手动玩"></a>8 Demo手动玩</h2><p>最后结合 Vue 写了一个 表达式转 AST 的可视化 demo，支持数字和向量。</p>
+<p><a href="http://rococolate.github.io/blog/ast/index.html" target="_blank" rel="noopener">http://rococolate.github.io/blog/ast/index.html</a></p>
+<p>demo 源码: <a href="https://github.com/Rococolate/ast_demo" target="_blank" rel="noopener">https://github.com/Rococolate/ast_demo</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/AST/">AST</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/17/手把手教你写一个AST解析器/">
+                <span class="level-item">手把手教你写一个AST解析器</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        18
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        30
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 15px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 10px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 15px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 15px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g812gp34euj31900u077e.jpg" alt="【译】Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T03:44:05.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g812gp34euj31900u077e.jpg" alt="【译】Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T03:44:05.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="写一个四则运算表达式转换成AST的方法" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

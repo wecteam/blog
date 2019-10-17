@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="【译】Interection Observer如何观察变化" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g812gp34euj31900u077e.jpg" alt="【译】Interection Observer如何观察变化">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-10-17T03:44:05.000Z">2019-10-17</time>-->
+                <div class="level-item has-text-grey">2019-10-17</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 小时 读完 (大约 9157 个字)
+                </span>
+                
+                
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                【译】Interection Observer如何观察变化
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>原文地址：<a href="https://css-tricks.com/an-explanation-of-how-the-intersection-observer-watches/" target="_blank" rel="noopener">https://css-tricks.com/an-explanation-of-how-the-intersection-observer-watches/</a><br>原文作者：Travis Almand<br>翻译：刘辉</p>
+</blockquote>
+<p>有几篇精彩的文章探讨了如何使用<code>Intersection Observer API</code>，包括Phil Hawksworth，Preethi和Mateusz Rybczonek等。 我这篇文章将讲一些不一样的东西。 我在今年早些时候有幸向达拉斯VueJS聚会介绍了VueJS过渡组件，我在CSS-Tricks的第一篇文章就是以此为基础的。 在演讲的问答环节中，有人问我基于滚动事件触发过渡怎么样 - 我说当然可以，但是一些听众建议我了解一下<code>Intersection Observer</code>。</p>
+<p>这让我开始思考。我对<code>Intersection Observer</code>有基本的了解，并且能够用其完成简单的示例。 我是否知道它的工作原理而不仅仅是使用它？它到底为我们开发人员提供了什么？ 作为一个资深开发者，我如何向新手甚至不知道它存在的开发者解释它的工作原理？</p>
+<a id="more"></a>
+
+<p>在花了一些时间进行研究，测试和验证后，我决定分享自己学到的东西。</p>
+<h1 id="Intersection-Observer-简述"><a href="#Intersection-Observer-简述" class="headerlink" title="Intersection Observer 简述"></a>Intersection Observer 简述</h1><p>W3C公共工作草案摘要（日期为2017年9月14日的初稿）将<code>Intersection Observer API</code>描述为：</p>
+<blockquote>
+<p>本规范描述了一个API，可用于了解DOM元素（<code>targets</code>）相对于包含元素或顶级视口（<code>root</code>）的可见性和位置。 该位置是异步传递的，对于理解元素的可见性以及实现DOM内容的预加载和延迟加载很有用。</p>
+</blockquote>
+<p>这个API的总体思路是提供一种观察子元素并在其进入其父元素之一的边界框内时得到通知的方法。 目标元素滚动到根元素视图中时最常用。 在引入<code>Intersection Observer</code>之前，此类功能是通过侦听滚动事件来完成的。</p>
+<p>尽管<code>Intersection Observer</code>是针对此类功能的更高性能的解决方案，但我不建议我们将其视为滚动事件的替代品。 相反，我建议我们将此API视为与滚动事件在功能上互补的额外工具。 在某些情况下，两者可以一起解决特定的问题。</p>
+<h1 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h1><p>我知道我有可能重复其他文章中已经讲过的内容，不过还是让我们先来看一个<code>Intersection Observer</code>的基本示例及其提供的能力。</p>
+<p>Observer由四部分组成：</p>
+<ol>
+<li><code>root</code>，是观察者所绑定的父元素，可以是viewport</li>
+<li><code>target</code>，它是被观察的子元素，可以有多个</li>
+<li><code>options</code>对象，它定义了观察者某些方面的行为</li>
+<li>回调函数，每次观察到父子元素的交集变化时都会调用</li>
+</ol>
+<p>基本示例的代码如下所示：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> options = &#123;</span><br><span class="line">  root: <span class="hljs-built_in">document</span>.body,</span><br><span class="line">  rootMargin: <span class="hljs-string">'0px'</span>,</span><br><span class="line">  threshold: <span class="hljs-number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span> (<span class="hljs-params">entries, observer</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(observer);</span><br><span class="line">  </span><br><span class="line">  entries.forEach(<span class="hljs-function"><span class="hljs-params">entry</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(entry);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> observer = <span class="hljs-keyword">new</span> IntersectionObserver(callback, options);</span><br><span class="line">observer.observe(targetElement);</span><br></pre></td></tr></table></figure>
+
+<p>代码的第一部分是<code>options</code>对象，它具有<code>root</code>，<code>rootMargin</code>和<code>threshold</code>属性。</p>
+<p><code>root</code>是父元素，一般是有滚动条的元素，其中包含被观察的元素。根据需要，这几乎可以是页面上的任何单个元素。如果不提供该属性，或者该值设置为null，跟元素就是viewport。</p>
+<p><code>rootMargin</code>描述了根元素的外边距，由<code>rootMargin</code>规定的矩形的每一边都会被添加至root元素的边框盒(bounding box)的相应边。它的行为很像CSS margin属性。你可以使用类似10px 15px 20px的值，这使我们的顶部边距为10px，左侧和右侧边距为15px，底部边距为20px。仅边界框受影响，元素本身不受影响。请记住，唯一允许的长度是像素和百分比值，可以是负数或正数。另请注意，如果root元素不是页面上的实际元素（例如viewport），则<code>rootMargin</code>无效。</p>
+<p><code>threshold</code>是用于确定何时触发交集改变事件的值。数组中可以包含多个值，以便同一目标可以多次触发交集改变事件。不同的值是使用0到1的百分比，非常类似于CSS中的不透明度，因此将0.5的值视为50％，依此类推。这些值与目标的交叉比例有关，稍后将对其进行说明。阈值为0时，目标元素的第一个像素与根元素相交就会触发交集改变事件。阈值为1时，整个目标元素都在根元素内部时才会触发交集改变事件。</p>
+<p>代码的第二部分是回调函数，只要观察到交集改变，就会调用该函数。传递了两个参数；<code>entries</code>是个数组，代表触发交集更改的每个目标元素。这提供了很多信息为开发人员所用。第二个参数是有关观察者本身的信息。如果目标绑定到多个观察者，可以通过此参数识别是哪个观察者。</p>
+<p>代码的第三部分是观察者本身的创建以及观察对象。创建观察者时，回调函数和<code>options</code>对象可以放在观察者外部。 如果需要，可以在多个观察者之间使用相同的回调和<code>options</code>对象。然后，将需要观察的目标元素传递给<code>observe()</code>方法。它只能接受一个目标，但是可以在同一观察者上针对多个目标重复调用该方法。</p>
+<p>注意代码中的console.log,可以看看控制台输出了什么。</p>
+<h2 id="观察者对象"><a href="#观察者对象" class="headerlink" title="观察者对象"></a>观察者对象</h2><p>传递给回调函数的观察者数据如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IntersectionObserver</span><br><span class="line">  root: <span class="hljs-literal">null</span></span><br><span class="line">  rootMargin: <span class="hljs-string">"0px 0px 0px 0px"</span></span><br><span class="line">  thresholds: <span class="hljs-built_in">Array</span> [ <span class="hljs-number">0</span> ]</span><br><span class="line">  &lt;prototype&gt;: IntersectionObserverPrototype &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>…本质上是创建对象时传递给观察者的选<code>options</code>对象。 这可用于确定相交所绑定的根元素。 注意即使原始选项对象的<code>rootMargin</code>值为0px，该对象也将其转为0px 0px 0px 0px，这是CSS边距规范所需要的。然后是观察者正在使用的一系列阈值。</p>
+<h2 id="entry对象"><a href="#entry对象" class="headerlink" title="entry对象"></a>entry对象</h2><p>传递给回调函数的<code>entry</code>对象数据如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">IntersectionObserverEntry</span><br><span class="line">  boundingClientRect: DOMRect</span><br><span class="line">    bottom: <span class="hljs-number">923.3999938964844</span>, <span class="hljs-attr">top</span>: <span class="hljs-number">771</span></span><br><span class="line">    height: <span class="hljs-number">152.39999389648438</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">411</span></span><br><span class="line">    left: <span class="hljs-number">9</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">420</span></span><br><span class="line">    x: <span class="hljs-number">9</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">771</span></span><br><span class="line">    &lt;prototype&gt;: DOMRectPrototype &#123; &#125;</span><br><span class="line">  intersectionRatio: <span class="hljs-number">0</span></span><br><span class="line">  intersectionRect: DOMRect</span><br><span class="line">    bottom: <span class="hljs-number">0</span>, <span class="hljs-attr">top</span>: <span class="hljs-number">0</span></span><br><span class="line">    height: <span class="hljs-number">0</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">0</span></span><br><span class="line">    left: <span class="hljs-number">0</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">0</span></span><br><span class="line">    x: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span></span><br><span class="line">    &lt;prototype&gt;: DOMRectPrototype &#123; &#125;</span><br><span class="line">  isIntersecting: <span class="hljs-literal">false</span></span><br><span class="line">  rootBounds: <span class="hljs-literal">null</span></span><br><span class="line">  target: <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">  time: 522</span></span><br><span class="line">  &lt;prototype&gt;: IntersectionObserverEntryPrototype &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这里做了很多工作。</p>
+<p>对于大多数开发人员而言，最可能有用的两个属性是<code>intersectionRatio</code>和<code>isIntersecting</code>。 <code>isIntersecting</code>属性是一个布尔值，在交集更改时目标元素与根元素是否相交。<code>intersectionRatio</code>是当前与根元素相交的目标元素的百分比。它也是零到一之间的百分比表示，非常类似于观察者的<code>options</code>对象中<code>threshold</code>。</p>
+<p>三个属性（<code>boundingClientRect</code>，<code>intersectionRect</code>和<code>rootBounds</code>）表示交集相关的三个方面的具体数据。 <code>boundingClientRect</code>属性为目标元素的边界框提供从viewport左上角开始的bottom，left，right和top值，就像<code>Element.getBoundingClientRect()</code>一样。然后，将目标元素的高度和宽度作为X和Y坐标提供。 <code>rootBounds</code>属性为根元素提供相同形式的数据。<code>intersectionRect</code>提供相似的数据，它描述了由目标元素在根元素内部的相交区域形成的矩形，该区域也被用于计算<code>intersectionRatio</code>值。传统的滚动事件需要手动完成此计算。</p>
+<p>要注意的是，代表这些不同元素的所有这些形状始终都是矩形。无论所涉及元素的实际形状如何，它们总是会缩小到包含该元素的最小矩形。</p>
+<p><code>target</code>属性是指正在观察的目标元素。在观察者包含多个目标的情况下，这是确定哪个目标元素触发了此相交更改的简便方法。</p>
+<p><code>time</code>属性提供从首次创建观察者到触发此交集改变的时间（以毫秒为单位）。通过这种方式，你可以跟踪观看者遇到特定目标所花费的时间。即使稍后将目标再次滚动到视图中，此属性也会提供新的时间。这可用于跟踪目标进入和离开根元素的时间。</p>
+<p>除了每次观察到交集改变时我们可以获得这些信息外，观察者第一次启动时也会向我们提供这些信息。例如，在页面加载时，页面上的观察者将立即调用回调函数，并提供它正在观察的每个目标元素的当前状态。</p>
+<p><code>Intersection Observer</code>以非常高效的方式提供了有关页面上元素之间关系的数据。</p>
+<h1 id="Intersection-Observer-可用的方法"><a href="#Intersection-Observer-可用的方法" class="headerlink" title="Intersection Observer 可用的方法"></a>Intersection Observer 可用的方法</h1><p>Intersection Observer 主要有三个方法：observe()，unobserve()和disconnect()。</p>
+<ul>
+<li>observe()：observe方法用来添加观察者要监视的目标元素。 观察者可以具有多个目标元素，但是此方法一次只能接受一个目标。</li>
+<li>unobserve()：unobserve方法用来从观察的元素列表中移除元素。</li>
+<li>disconnect()：disconnect方法用来停止观察其所有目标元素。观察者本身仍处于活动状态，但没有目标。在disconnect()之后，目标元素仍然可以通过observe()传递给观察者。</li>
+</ul>
+<p>这些方法提供了监视和取消监视目标元素的功能，但是一旦创建，便无法更改传递给观察者的<code>options</code>对象。 如果需要修改，则必须手动重新创建观察者。</p>
+<h1 id="Intersection-Observer和滚动事件的性能对比"><a href="#Intersection-Observer和滚动事件的性能对比" class="headerlink" title="Intersection Observer和滚动事件的性能对比"></a>Intersection Observer和滚动事件的性能对比</h1><p>在探索Intersection Observer以及将其与使用滚动事件进行比较时，我需要进行一些性能测试。我只想大致了解两者之间的性能差异，为此我创建了三个简单的测试。</p>
+<p>首先，我创建了一个样本HTML文件，该文件包含一百个设置了高度的div，以此创建一个长滚动页面。把页面放在静态服务器上，然后我用Puppeteer加载了HTML文件，启动了跟踪，让页面以预设的增量向下滚动到底部，一旦到达底部，就停止了跟踪，最后保存跟踪的结果。这样测试可以重复多次并输出每次的结果数据。然后，我复制了样本HTML，并为要运行的每种测试类型在脚本标签中编写了js。每个测试都有两个文件：一个用于<code>Intersection Observer</code>，另一个用于滚动事件。</p>
+<p>所有测试的目的是检测目标元素何时以25％的增量向上滚动通过视口。每次增加时，都会应用CSS类来更改元素的背景颜色。换句话说，每个元素都应用了DOM修改，这将触发重绘。每次测试都在两台不同的计算机上运行了五次：我的开发用的Mac是最新的设备，而我的个人Windows 7计算机可能是当前的平均水平。记录脚本，渲染，绘画和系统的跟踪结果，然后取平均值。</p>
+<p>第一个测试有一个观察者或一个滚动事件，每个事件都有一个回调。对于观察者和滚动事件，这是一个相当标准的设置。尽管在这种情况下，滚动事件还有很多工作要做，因为滚动事件试图模仿观察者默认提供的数据。完成所有这些计算后，就像观察者一样，将数据存储在条目数组中。然后，在两者之间删除和应用类的功能完全相同。另外我使用了<code>requestAnimationFrame</code>对滚动事件进行了节流处理。</p>
+<p>第二个测试有100个观察者或100个滚动事件，每种类型都有一个回调。每个元素都分配有自己的观察者和事件，但回调函数相同。这实际上是低效的，因为每个观察者和事件的行为都完全相同，但是我想要一个简单的压力测试，而不必创建100个唯一的观察者和事件-尽管我已经看到了许多以这种方式使用观察者的示例。</p>
+<p>第三次测试具有100个观察者或100个滚动事件，每种类型具有100个回调。这意味着每个元素都有其自己的观察器，事件和回调函数。当然，这是极其低效的，因为这是存储在巨大阵列中的所有重复功能。但是这种低效率是该测试的重点。</p>
+<p><img src="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1165,f_auto,q_auto/v1568831070/observer-01_wzz6he.png" alt="Intersection Observer和滚动事件的压力测试对比"></p>
+<p>在上面的图表中，你可以看到，第一列代表我们的基准，根本没有运行JavaScript。接下来的两列代表第一种测试类型。 Mac的运行都非常好，符合我对开发用高端计算机的预期。 Windows机器给了我们一个不一样的结果。对我来说，主要的兴趣点是红色所代表的脚本。在Mac上，观察者的差异约为88毫秒，而滚动事件的差异约为300毫秒。在Mac上，每种测试的总体结果都相当接近，但是脚本在滚动事件方面表现出色。对于Windows机器，它要差得多得多。观察者大约是150毫秒，而第一次和最简单的测试是1400毫秒。</p>
+<p>对于第二个测试，我们开始看到滚动测试的效率变得更加明显。 Mac和Windows机器都运行了观察者测试，结果与以前几乎相同。对于滚动事件测试，脚本陷入了更多困境，无法完成给定的任务。 Mac跃升到几乎一整秒的脚本编写时间，而Windows计算机跃升到惊人的3200ms。</p>
+<p>对于第三次测试，情况没有变坏。结果与第二项测试大致相同。要注意的一件事是，在所有三个测试中，观察者的结果对于两台计算机都是一致的。尽管没有为提高观察者测试的效率做出任何优化，但<code>Intersection Observer</code>的性能表现还是远远超过了滚动事件。</p>
+<p>因此，在我自己的两台机器上进行了非科学性测试之后，我感到对滚动事件和<code>Intersection Observer</code>之间的性能差异有一个不错的了解。 我敢肯定，我可以通过一些努力使滚动事件更有效，但这值得吗？ 在某些情况下，滚动事件的精度是必需的，但是在大多数情况下，<code>Intersection Observer</code>就足够了-尤其是因为它看起来更加高效，而无需付出任何努力。</p>
+<h1 id="搞清intersectionRatio属性"><a href="#搞清intersectionRatio属性" class="headerlink" title="搞清intersectionRatio属性"></a>搞清intersectionRatio属性</h1><p><code>IntersectionObserverEntry</code>给我们提供的<code>intersectionRatio</code>属性，表示目标元素在交集更改上的根元素边界内的百分比。 我发现我一开始不太了解这个值的实际含义。 由于某种原因，我认为这是目标元素外观的一种简单的0％到100％的表示形式。 它与创建时传递给观察者的阈值相关。 例如，它可用于确定哪个阈值是刚刚触发相交更改的原因。 但是，它提供的值并不总是很简单。</p>
+<p>以这个demo为例：</p>
+<p>  <a href="https://codepen.io/talmand/embed/VwZXpaj?height=632&theme-id=1&default-tab=result&user=talmand&slug-hash=VwZXpaj&pen-title=Intersection%20Observer%3A%20intersectionRatio&name=cp_embed_1" target="_blank" rel="noopener">demo</a></p>
+<p>在此demo中，已为观察者分配了父容器作为根元素。 具有目标背景的子元素已分配为目标元素。 已创建阈值数组，其中包含100个条目，其顺序为0、0.01、0.02、0.03，依此类推，直到1。观察者触发目标元素在根元素内部出现或消失的每一个百分比，以便每当比率 更改至少百分之一，此框下方的输出文本将更新。 如果您感到好奇，可以使用以下代码来完成此阈值：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...Array(<span class="hljs-number">100</span>).keys()].map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x / <span class="hljs-number">100</span>) &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我不建议你以这种方式为项目中的具体用途设置阈值。</p>
+<p>首先，目标元素完全包含在根元素中，并且按钮上方的输出将显示比率1。它应该是第一次加载的，但是我们很快就会发现该比率并不总是精确的；该数字可能在0.99到1之间。这似乎很奇怪，但是有可能发生，因此，如果你对等于特定值的比率进行检查，请记住这一点。</p>
+<p>单击“left”按钮将使目标元素向左转换，以使其一半在根元素中，另一半不在。然后，ratioRatio应该更改为0.5，或者接近0.5。现在我们知道目标元素的一半与根元素相交，但是我们不知道它在哪里。以后再说。</p>
+<p>单击“top”按钮具有相同的功能。它将目标元素转换为根元素的顶部，并再次将其移入和移出。再一次，交集比率应该在0.5左右。即使目标元素位于与以前完全不同的位置，结果比率也相同。</p>
+<p>再次单击“corner”按钮，会将目标元素转换为根元素的右上角。此时，目标元素中只有四分之一位于根元素内。intersectionRatio应以大约0.25的值反映出来。单击“center”会将目标元素转换回中心并完全包含在根元素中。</p>
+<p>如果单击“large”按钮，则将目标元素的高度更改为高于根元素。相交比应为0.8左右。这是依赖intersectionRatio的棘手部分。根据提供给观察者的阈值创建代码可以使阈值永远不会触发。在此“large”示例中，基于阈值1的任何代码都将无法执行。还要考虑可以调整根元素大小的情况，例如将视口从纵向旋转为横向。</p>
+<h1 id="查找位置"><a href="#查找位置" class="headerlink" title="查找位置"></a>查找位置</h1><p>那么，我们如何知道目标元素相对于根元素的位置呢？此数据由<code>IntersectionObserverEntry</code>提供，因此我们只需要进行简单的比较即可。</p>
+<p>看这个demo:</p>
+<p><a href="https://codepen.io/talmand/embed/dybmvZN?height=631&theme-id=1&default-tab=result&user=talmand&slug-hash=dybmvZN&pen-title=Intersection%20Observer%3A%20Finding%20the%20Position&name=cp_embed_2" target="_blank" rel="noopener">demo2</a></p>
+<p>该演示的设置与之前的设置大致相同。 父容器是根元素，内部具有目标背景的子容器是目标元素。 阈值是一个0、0.5和1的数组。在根元素中滚动时，将出现目标，并且其位置将在按钮上方的输出中报告。</p>
+<p>下面执行这些检查的代码：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> output = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#output pre'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">io_callback</span> (<span class="hljs-params">entries</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> ratio = entries[<span class="hljs-number">0</span>].intersectionRatio;</span><br><span class="line">  <span class="hljs-keyword">const</span> boundingRect = entries[<span class="hljs-number">0</span>].boundingClientRect;</span><br><span class="line">  <span class="hljs-keyword">const</span> intersectionRect = entries[<span class="hljs-number">0</span>].intersectionRect;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">if</span> (ratio === <span class="hljs-number">0</span>) &#123;</span><br><span class="line">    output.innerText = <span class="hljs-string">'outside'</span>;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ratio &lt; <span class="hljs-number">1</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (boundingRect.top &lt; intersectionRect.top) &#123;</span><br><span class="line">      output.innerText = <span class="hljs-string">'on the top'</span>;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      output.innerText = <span class="hljs-string">'on the bottom'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    output.innerText = <span class="hljs-string">'inside'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我应该指出，我没有遍历entrys数组，因为我知道总是只有一个条目，因为只有一个目标。我走了捷径，使用<code>entries[0]</code>。</p>
+<p>您会发现比率为零会将目标置于“外部”。小于1的比率将其放在顶部或底部。这样一来，我们就可以查看目标的“顶部”是否小于交集矩形的顶部，这实际上意味着目标在页面上更高，并被视为“顶部”。实际上，检查根元素的“顶部”也可以解决此问题。从逻辑上讲，如果目标不在顶部，则它必须在底部。如果比率恰好等于1，则它在根元素“内部”。除了使用left或right属性检查水平位置外，其他检查方法相同。</p>
+<p>这是高效使用<code>Intersection Observer</code>的一部分。开发人员无需在节流的滚动事件上从多处请求此数据，然后进行计算。它是由观察者提供的，所需要的只是一个简单的if检查。</p>
+<p>首先，目标元素要比根元素高，因此永远不会将其报告为“内部”。单击“切换目标大小”按钮以使其小于根。现在，上下滚动时目标元素可以位于根元素内部。</p>
+<p>通过再次单击“toggle target size”，然后单击“toggle root size”按钮，将目标元素恢复为其原始大小。这将调整根元素的大小，使其比目标元素高。再次，当上下滚动时，目标元素可能位于根元素内部。</p>
+<p>此demo演示了有关<code>Intersection Observer</code>的两件事：如何确定目标元素相对于根元素的位置以及调整两个元素的大小时会发生什么。这种对调整大小的响应让我们看到了<code>Intersection Observer</code>相对于滚动事件的另一个优势-不用再单独处理resize事件。</p>
+<h1 id="创建位置粘性事件"><a href="#创建位置粘性事件" class="headerlink" title="创建位置粘性事件"></a>创建位置粘性事件</h1><p><a href="https://css-tricks.com/almanac/properties/p/position/#article-header-id-3" target="_blank" rel="noopener">CSS position属性的“sticky”</a>是一个有用的功能，但在CSS和JavaScript方面却有一些限制。粘性节点的样式只能是一种设计，无论是处于其正常状态还是处于其粘性状态内。没办法让js知道这些变化。到目前为止，还没有伪类或js事件使我们知道元素的状态变化。</p>
+<p>我已经看到了使用滚动事件和<code>Intersection Observer</code>进行粘性定位事件的示例。使用滚动事件的解决方案始终存在与将滚动事件用于其他目的相似的问题。观察者的通常解决方案是用一个定位元素，仅作为观察者的目标元素使用。我喜欢避免使用诸如此类的单一目的的元素，因此我决定修改这个特定的想法。</p>
+<p>在此demo中，上下滚动以查看章节标题对各自章节的粘性反应。</p>
+<p><a href="https://codepen.io/talmand/embed/ExYLayz?height=400&theme-id=1&default-tab=result&user=talmand&slug-hash=ExYLayz&pen-title=Intersection%20Observer%3A%20Position%20Sticky%20Event&name=cp_embed_3" target="_blank" rel="noopener">demo3</a></p>
+<p>这个示例检测粘性元素何时位于滚动容器顶部，然后给其添加一个css类。 这是通过在给观察者特定的<code>rootMargin</code>时利用DOM的一个有趣的特性来实现的。 给出的值是：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rootMargin: <span class="hljs-string">'0px 0px -100% 0px'</span></span><br></pre></td></tr></table></figure>
+
+<p>这样会将根边界的底部边缘推到根元素的顶部，从而留下一小部分可用于相交检测的零像素区域。 可以说，即使目标元素碰触到零像素区域，也会触发相交变化，即使它不存在于数字中也是如此。 考虑一下，我们可以在DOM中具有折叠高度为零的元素。</p>
+<p>该解决方案通过识别粘性元素始终位于根元素顶部的“粘性”位置来利用这一优势。 随着滚动的继续，粘性元素最终移出视野，并且相交停止。 因此，我们根据输入对象的<code>isIntersecting</code>属性添加和删除类。</p>
+<p>下面是HTML：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"sticky-container"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"sticky-content"</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&amp;sect;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Section 1<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  &#123;&#123; content here &#125;&#125;</span><br><span class="line">  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>class为<code>sticky-container</code>的外部div是观察者的目标。 该div将被设置为粘性元素并充当容器。 用于根据粘性状态设置样式和更改元素的元素是class为<code>sticky-content</code>的div及其子元素。 这样可以确保实际的粘性元素始终与根元素顶部缩小的<code>rootMargin</code>接触。</p>
+<p>下面是CSS：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.sticky-content</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">position</span>: relative;</span><br><span class="line">  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.25s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.sticky-content</span> <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="line">  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;</span><br><span class="line">  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.25s</span>;</span><br><span class="line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.sticky-content</span> <span class="hljs-selector-tag">h2</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="hljs-selector-class">.sticky-container</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">position</span>: sticky;</span><br><span class="line">  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.sticky-container</span><span class="hljs-selector-class">.active</span> <span class="hljs-selector-class">.sticky-content</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(0, 0, 0, 0.8);</span><br><span class="line">  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;</span><br><span class="line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-selector-class">.sticky-container</span><span class="hljs-selector-class">.active</span> <span class="hljs-selector-class">.sticky-content</span> <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="line">  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.25s</span> <span class="hljs-number">0.5s</span>;</span><br><span class="line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你会看到<code>.sticky-container</code>在top为0的位置创建了我们的粘滞元素。 其余部分是<code>.sticky-content</code>中的常规状态和<code>.active .sticky-content</code>中的粘滞状态样式的混合。 同样，您几乎可以在粘性内容div中做任何您想做的事情。 在此demo中，当粘滞状态处于活动状态时，在延迟的过渡中会出现一个隐藏的章节符号。没有<code>Intersection Observer</code>之类的辅助手段，很难达到这种效果。</p>
+<p>JavaScript：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> stickyContainers = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.sticky-container'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> io_options = &#123;</span><br><span class="line">  root: <span class="hljs-built_in">document</span>.body,</span><br><span class="line">  rootMargin: <span class="hljs-string">'0px 0px -100% 0px'</span>,</span><br><span class="line">  threshold: <span class="hljs-number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-keyword">const</span> io_observer = <span class="hljs-keyword">new</span> IntersectionObserver(io_callback, io_options);</span><br><span class="line"></span><br><span class="line">stickyContainers.forEach(<span class="hljs-function"><span class="hljs-params">element</span> =&gt;</span> &#123;</span><br><span class="line">  io_observer.observe(element);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">io_callback</span> (<span class="hljs-params">entries, observer</span>) </span>&#123;</span><br><span class="line">  entries.forEach(<span class="hljs-function"><span class="hljs-params">entry</span> =&gt;</span> &#123;</span><br><span class="line">    entry.target.classList.toggle(<span class="hljs-string">'active'</span>, entry.isIntersecting);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这实际上是使用<code>Intersection Observer</code>完成此任务的非常简单的示例。 唯一的例外是<code>rootMargin</code>中的-100％值。 请注意，这对于其他三个方面也可以重复； 它只需要一个具有自己独特的<code>rootMargin</code>的新观察者，对于相应方面，它具有-100％的值。 将会有更多独特的粘性容器，它们具有自己的类，例如<code>sticky-container-top</code>和<code>sticky-container-bottom</code>。</p>
+<p>这样做的限制是，粘性元素的top，right，bottom或left属性必须始终为零。 从技术上讲，你可以使用其他值，但随后必须进行数学运算以找出<code>rootMargin</code>的正确值。 这很容易做到，但是如果调整大小，不仅需要再次进行数学运算，还必须停止观察者并使用新值重新启动它。 将position属性设置为零，并使用内部元素以所需的方式设置样式更加容易。</p>
+<h1 id="和滚动事件结合"><a href="#和滚动事件结合" class="headerlink" title="和滚动事件结合"></a>和滚动事件结合</h1><p>到目前为止，我们已经在一些演示中看到了，<code>intersectionRatio</code>可能不精确且有些局限。使用滚动事件可以更精确，但会降低性能的效率。那把两者结合起来怎么样？</p>
+<p><a href="https://cdpn.io/talmand/fullembedgrid/wvwjBry?type=embed&animations=run" target="_blank" rel="noopener">demo4</a></p>
+<p>在此demo中，我们创建了一个<code>Intersection Observer</code>，并且回调函数的唯一目的是添加和删除侦听根元素上的scroll事件的事件侦听器。 当目标首次进入根元素时，将创建滚动事件侦听器，然后在目标离开根元素时将其删除。 滚动时，输出仅显示每个事件的时间戳，以实时显示事件的变化-比单独的观察者要精确得多。</p>
+<p>下面是JavaScript。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> root = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#root'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> target = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#target'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> output = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#output pre'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> io_options = &#123;</span><br><span class="line">  root: root,</span><br><span class="line">  rootMargin: <span class="hljs-string">'0px'</span>,</span><br><span class="line">  threshold: <span class="hljs-number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-keyword">let</span> io_observer;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">scrollingEvents</span> (<span class="hljs-params">e</span>) </span>&#123;</span><br><span class="line">  output.innerText = e.timeStamp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">io_callback</span> (<span class="hljs-params">entries</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (entries[<span class="hljs-number">0</span>].isIntersecting) &#123;</span><br><span class="line">    root.addEventListener(<span class="hljs-string">'scroll'</span>, scrollingEvents);</span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    root.removeEventListener(<span class="hljs-string">'scroll'</span>, scrollingEvents);</span><br><span class="line">    output.innerText = <span class="hljs-number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">io_observer = <span class="hljs-keyword">new</span> IntersectionObserver(io_callback, io_options);</span><br><span class="line">io_observer.observe(target);</span><br></pre></td></tr></table></figure>
+
+<p>这是一个相当标准的例子。 请注意，我们希望阈值为零，因为如果阈值不止一个，我们将同时获得多个事件监听器。 回调函数是我们感兴趣的，甚至是一个简单的设置：在if-else块中添加和删除事件监听器。 事件的回调函数仅更新输出中的div。 每当目标触发相交变化并且不与根相交时，我们会将输出设置回零。</p>
+<p>这个实例利用了<code>Intersection Observer</code>和滚动事件的优点。 考虑使用一个滚动动画库，该动画库仅在页面上需要它的部分实际可见时才起作用。 库和滚动事件在整个页面中并非无效地活动。</p>
+<h1 id="浏览器的有趣差异"><a href="#浏览器的有趣差异" class="headerlink" title="浏览器的有趣差异"></a>浏览器的有趣差异</h1><p>您可能想知道<code>Intersection Observer</code>有多少浏览器支持。 实际上，还蛮多的！</p>
+<p>该浏览器支持数据来自Caniuse，更多信息。 数字表示浏览器支持该版本及更高版本的功能。</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s939x589_jfs/t1/47754/22/12887/54388/5d9eec58Ea352f2c4/d56f0ccaa8a322a3.png" alt="Caniuse"></p>
+<p>所有主要的浏览器都已经支持了一段时间。和预期一样，IE在任何级别都不支持它，但是W3C提供了一个<a href="https://github.com/w3c/IntersectionObserver/tree/master/polyfill" target="_blank" rel="noopener">polyfill</a>来解决这个问题。</p>
+<p>当我使用<code>Intersection Observer</code>尝试不同的想法时，我确实遇到了两个示例在Firefox和Chrome之间的行为有所不同。我不会在生产站点上使用这些示例，但是这些行为很有趣。</p>
+<p>这是第一个示例：</p>
+<p><a href="https://cdpn.io/talmand/fullembedgrid/oNvdQOR?type=embed&animations=run" target="_blank" rel="noopener">example1</a></p>
+<p>目标元素通过CSS transform属性在根元素内移动。 该演示具有CSS动画，该动画可在水平轴上将目标元素移入和移出根元素。 当目标元素进入或离开根元素时，<code>intersectionRatio</code>会更新。</p>
+<p>如果您在Firefox中查看此演示，则应在目标元素前后滑动时正确地看到<code>intersectionRatio</code>更新。 Chrome的行为有所不同，完全不更新<code>intersectionRatio</code>。 Chrome似乎没有保留使用CSS转换过的目标元素的标签。 但是，如果我们在目标元素移入和移出根元素时在浏览器中四处移动鼠标，则<code>intersectionRatio</code>确实会更新。 我的猜测是，只有在存在某种形式的用户交互时，Chrome才会“激活”观察者。</p>
+<p>这是第二个示例：</p>
+<p><a href="https://cdpn.io/talmand/fullembedgrid/mdbLQZJ?type=embed&animations=run" target="_blank" rel="noopener">example2</a></p>
+<p>这次，我们<a href="https://css-tricks.com/animating-with-clip-path/" target="_blank" rel="noopener">对一个剪裁路径进行动画处理</a>，该剪裁路径将一个正方形变成重复循环中的一个圆形。正方形与根元素的大小相同，因此我们得到的<code>intersectionRatio</code>将始终小于1。随着剪裁路径的动画化，Firefox根本不会更新<code>intersectionRatio</code>。这次移动鼠标不起作用。Firefox只是忽略元素大小的变化。另一方面，Chrome实际上会实时更新<code>intersectionRatio</code>显示。即使没有用户交互，也会发生这种情况。</p>
+<p>之所以会发生这种情况，是因为规范的一部分指出<a href="https://www.w3.org/TR/intersection-observer/#calculate-intersection-rect-algo" target="_blank" rel="noopener">交集区域（intersectionRect）的边界</a>应包括剪裁目标元素。</p>
+<blockquote>
+<p>如果容器具有溢出剪裁或css<a href="https://www.w3.org/TR/css-masking-1/#propdef-clip-path" target="_blank" rel="noopener">剪裁路径</a>属性，请通过应用容器的剪裁来更新intersectionRect。</p>
+</blockquote>
+<p>因此，当剪裁目标时，将重新计算相交区域的边界。 Firefox显然尚未实现。</p>
+<h1 id="Intersection-Observer-version-2"><a href="#Intersection-Observer-version-2" class="headerlink" title="Intersection Observer, version 2"></a>Intersection Observer, version 2</h1><p>那么，该API的未来前景如何？</p>
+<p><a href="https://developers.google.com/web/updates/2019/02/intersectionobserver-v2" target="_blank" rel="noopener">Google提供了一些建议</a>，这些建议会为观察者添加一个有趣的功能。 即使Intersection Observer告诉我们目标元素何时跨越根元素的边界，也不一定意味着该元素实际上对用户是可见的。 它可能具有零不透明度，或者可能被页面上的另一个元素覆盖。 观察者能不能被用来确定这些事情？</p>
+<p>请记住，我们仍在早期阶段才使用此功能，因此不应在生产代码中使用它。 这是<a href="https://szager-chromium.github.io/IntersectionObserver/" target="_blank" rel="noopener">更新后的提案</a>，其中突出显示了与规范第一个版本的差异。</p>
+<p>如果您一直在使用Chrome浏览本文中的演示，则可能已经注意到控制台中的几件事-例如Firefox中未出现的<code>entries</code>对象属性。 这是Firefox在控制台中打印内容的示例：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">IntersectionObserver</span><br><span class="line">  root: <span class="hljs-literal">null</span></span><br><span class="line">  rootMargin: <span class="hljs-string">"0px 0px 0px 0px"</span></span><br><span class="line">  thresholds: <span class="hljs-built_in">Array</span> [ <span class="hljs-number">0</span> ]</span><br><span class="line">  &lt;prototype&gt;: IntersectionObserverPrototype &#123; &#125;</span><br><span class="line"></span><br><span class="line">IntersectionObserverEntry</span><br><span class="line">  boundingClientRect: DOMRect &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">9</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">779</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">707</span>, ... &#125;</span><br><span class="line">  intersectionRatio: <span class="hljs-number">0</span></span><br><span class="line">  intersectionRect: DOMRect &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">0</span>, ... &#125;</span><br><span class="line">  isIntersecting: <span class="hljs-literal">false</span></span><br><span class="line">  rootBounds: <span class="hljs-literal">null</span></span><br><span class="line">  target: <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item"</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">  time: 261</span></span><br><span class="line">  &lt;prototype&gt;: IntersectionObserverEntryPrototype &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>  现在，这是来自Chrome中相同控制台代码的输出：</p>
+  <figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  IntersectionObserver</span><br><span class="line">  delay: <span class="hljs-number">500</span></span><br><span class="line">  root: <span class="hljs-literal">null</span></span><br><span class="line">  rootMargin: <span class="hljs-string">"0px 0px 0px 0px"</span></span><br><span class="line">  thresholds: [<span class="hljs-number">0</span>]</span><br><span class="line">  trackVisibility: <span class="hljs-literal">true</span></span><br><span class="line">  __proto__: IntersectionObserver</span><br><span class="line"></span><br><span class="line">IntersectionObserverEntry</span><br><span class="line">  boundingClientRect: DOMRectReadOnly &#123;<span class="hljs-attr">x</span>: <span class="hljs-number">9</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">740</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">914</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">146</span>, <span class="hljs-attr">top</span>: <span class="hljs-number">740</span>, ...&#125;</span><br><span class="line">  intersectionRatio: <span class="hljs-number">0</span></span><br><span class="line">  intersectionRect: DOMRectReadOnly &#123;<span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>, ...&#125;</span><br><span class="line">  isIntersecting: <span class="hljs-literal">false</span></span><br><span class="line">  isVisible: <span class="hljs-literal">false</span></span><br><span class="line">  rootBounds: <span class="hljs-literal">null</span></span><br><span class="line">  target: div.item</span><br><span class="line">  time: <span class="hljs-number">355.6550000066636</span></span><br><span class="line">  __proto__: IntersectionObserverEntry</span><br></pre></td></tr></table></figure>
+
+<p>在一些属性（例如<code>target</code>和<code>prototype</code>）的显示方式上存在一些差异，但是它们在两种浏览器中的操作相同。区别在于Chrome具有Firefox中不会显示的一些其他属性。<code>observer</code>对象具有一个称为<code>trackVisibility</code>的布尔值，一个称为<code>delay</code>的数字，并且<code>entry</code>对象具有一个称为<code>isVisible</code>的布尔值。这些是新提议的属性，这些属性试图确定目标元素是否实际上对用户可见。</p>
+<p>我将对这些属性进行简要说明，但如果您需要更多详细信息，请阅读<a href="https://developers.google.com/web/updates/2019/02/intersectionobserver-v2" target="_blank" rel="noopener">此文章</a>。</p>
+<p><code>trackVisibility</code>属性是在<code>options</code>对象中提供给观察者的布尔值。此属性可以使浏览器承担确定目标元素的真实可见性的任务。</p>
+<p><code>delay</code>属性用途的猜测：它将交集改变的回调方法延迟指定的时间（以毫秒为单位）。这有点类似于将回调函数的代码包装在<code>setTimeout</code>中。为了使<code>trackVisibility</code>起作用，该值是必需的，并且必须至少为100。如果未提供适当的值，则控制台将显示此错误，并且将不会创建观察者。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Uncaught DOMException: Failed to construct &apos;IntersectionObserver&apos;: To enable the </span><br><span class="line">&apos;trackVisibility&apos; option, you must also use a &apos;delay&apos; option with a value of at</span><br><span class="line">least 100. Visibility is more expensive to compute than the basic intersection;</span><br><span class="line">enabling this option may negatively affect your page&apos;s performance.</span><br><span class="line">Please make sure you really need visibility tracking before enabling the</span><br><span class="line">&apos;trackVisibility&apos; option.</span><br></pre></td></tr></table></figure>
+
+<p>目标<code>entry</code>对象中的<code>isVisible</code>属性是报告可见性跟踪输出的布尔值。可以将它用作任何代码的一部分，就像使用<code>isIntersecting</code>一样。</p>
+<p>在我使用这些功能进行的所有实验中，看到它实际上有时候有效有时候无效。 例如，当元素清晰可见时，延迟始终有效，但是isVisible并不总是报告true（至少对我而言）。 有时这是设计使然，因为规范确实允许出现<a href="https://szager-chromium.github.io/IntersectionObserver/#calculate-visibility-algo" target="_blank" rel="noopener">第二类错误</a>。这将有助于解释不一致的结果。</p>
+<p>我个人迫不及待地希望这项功能尽快完成，并在所有支持<code>Intersection Observer</code>的浏览器中都能正常工作。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>我对<code>Intersection Observer</code>的研究到此结束。 我花了很多晚上研究，试验和构建示例，以了解其工作原理。 这篇文章涉及了一些有关如何利用观察者的不同功能的新想法。除此之外，我觉得我可以清晰的解释观察者的工作原理。希望本文对你有所帮助。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Interection-Observer/">Interection Observer</a>, <a class="has-link-grey -link" href="/tags/滚动优化/">滚动优化</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/17/手把手教你写一个AST解析器/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">手把手教你写一个AST解析器</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/15/浏览器层合成与页面渲染优化/">
+                <span class="level-item">浏览器层合成与页面渲染优化</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        18
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        30
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wecteam/blog">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 15px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 10px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 15px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 15px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g812gp34euj31900u077e.jpg" alt="【译】Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T03:44:05.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g812gp34euj31900u077e.jpg" alt="【译】Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T03:44:05.000Z">2019-10-17</time></div>
+                    <a href="/2019/10/17/【译】interection-observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">【译】Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/73434/3/12238/512302/5d9af503Eb525566d/c178048dc91e8e01.png" alt="浏览器层合成与页面渲染优化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-15T01:51:26.000Z">2019-10-15</time></div>
+                    <a href="/2019/10/15/浏览器层合成与页面渲染优化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器层合成与页面渲染优化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/11/Electron-实践笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://tva1.sinaimg.cn/large/006y8mN6gy1g7u9fky1oqj30z40ia406.jpg" alt="Electron 实践笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-11T06:45:38.000Z">2019-10-11</time></div>
+                    <a href="/2019/10/11/Electron-实践笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Electron 实践笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="【译】Interection Observer如何观察变化" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -74,7 +74,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="前端资源治理（一）" height="28">
+                <img src="/images/og_image.png" alt="手把手教你写一个AST解析器" height="28">
             
             </a>
         </div>
@@ -128,7 +128,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s3000x2000_jfs/t1/78162/34/8449/187534/5d6735b7E2d6d21bb/1736ca1625d0ed3d.jpg" alt="前端资源治理（一）">
+            <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
         </span>
     </div>
     
@@ -136,18 +136,18 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-09-24T00:23:20.000Z">2019-09-24</time>-->
-                <div class="level-item has-text-grey">2019-09-24</div>
+                <!--<time class="level-item has-text-grey" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time>-->
+                <div class="level-item has-text-grey">2019-10-17</div>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    30 分钟 读完 (大约 4487 个字)
+                    21 分钟 读完 (大约 3093 个字)
                 </span>
                 
                 
@@ -162,77 +162,149 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                前端资源治理（一）
+                手把手教你写一个AST解析器
             
         </h1>
         <div class="content">
             <blockquote>
-<p>作者：李刚松</p>
+<p>作者：深山蚂蚁</p>
 </blockquote>
-<h2 id="0-也谈前端工程化"><a href="#0-也谈前端工程化" class="headerlink" title="0.也谈前端工程化"></a>0.也谈前端工程化</h2><p>随着前端技术的飞速发展，前端需要一种更加工程化的方式解决前端开发日益复杂的问题。前端工程化本质也是软件工程的一种，由于软件工程并无严格的定义(或者说缺乏统一的定义)，因此前端工程化的内涵其实相当宽泛，一般来说，前端工程化重点关注的是研发和维护效率，所有最终目的是这个的，都可以算作前端工程化的范畴。<br>前端工程化近几年也是技术热点，基本上大型前端技术交流会议都有此专题，从规范、组件、编译及构建、工作流、持续集成、监控等多个维度都有涉及，笔者尝试从前端资源治理的角度谈一下前端工程化,本文是系列文章的第一篇，主要讲问题及解决的思路，不涉及具体的实现细节。</p>
-<a id="more"></a>
-<h2 id="1-前端资源治理的含义"><a href="#1-前端资源治理的含义" class="headerlink" title="1.前端资源治理的含义"></a>1.前端资源治理的含义</h2><p>首先，这里所说的前端资源，并非是仅指js、css、图片等静态资源，页面、后端接口、配置数据、监控点等，都可以纳入前端资源的定义的范畴。</p>
-<p>在工作中，你是否会碰到以下问题：</p>
+<p>AST 解析器工作中经常用到，Vue.js中的VNode就是如此！<br>其实如果有需要将 非结构化数据转 换成 结构化对象用 来分析、处理、渲染的场景，我们都可以用此思想做转换。</p>
+<h2 id="如何解析成-AST-？"><a href="#如何解析成-AST-？" class="headerlink" title="如何解析成 AST ？"></a>如何解析成 AST ？</h2><p>我们知道 HTML 源码只是一个文本数据，尽管它里面包含复杂的含义和嵌套节点逻辑，但是对于浏览器，Babel 或者 Vue 来说，输入的就是一个长字符串，显然，纯粹的一个字符串是表示不出来啥含义，那么就需要转换成结构化的数据，能够清晰的表达每一节点是干嘛的。字符串的处理，自然而然就是强大的正则表达式了。 <a id="more"></a> </p>
+<p>本文阐述 AST 解析器的实现方法和主要细节，简单易懂<del>~</del>，总共解析器代码不过百行！</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本次目标，一步一步将如下 HTML 结构文档转换成 AST 抽象语法树</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"classAttr"</span> <span class="hljs-attr">data-type</span>=<span class="hljs-string">"dataType"</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">"dataId"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"color:red"</span>&gt;</span>我是外层div</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>我是内层span<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结构比较简单，外层一个div,内层嵌套一个span，外层有class,data，stye等属性。<br>麻雀虽小，五脏俱全，基本包含我们经常用到的了。其中转换后的 AST 结构 有哪些属性，需要怎样的形式显示，都可以根据需要自己定义即可。<br>本次转换后的结构：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="hljs-string">"node"</span>: <span class="hljs-string">"root"</span>,</span><br><span class="line">    <span class="hljs-string">"child"</span>: [&#123;</span><br><span class="line">        <span class="hljs-string">"node"</span>: <span class="hljs-string">"element"</span>,</span><br><span class="line">        <span class="hljs-string">"tag"</span>: <span class="hljs-string">"div"</span>,</span><br><span class="line">        <span class="hljs-string">"class"</span>: <span class="hljs-string">"classAttr"</span>,</span><br><span class="line">        <span class="hljs-string">"dataset"</span>: &#123;</span><br><span class="line">            <span class="hljs-string">"type"</span>: <span class="hljs-string">"dataType"</span>,</span><br><span class="line">            <span class="hljs-string">"id"</span>: <span class="hljs-string">"dataId"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="hljs-string">"attrs"</span>: [&#123;</span><br><span class="line">            <span class="hljs-string">"name"</span>: <span class="hljs-string">"style"</span>,</span><br><span class="line">            <span class="hljs-string">"value"</span>: <span class="hljs-string">"color:red"</span></span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="hljs-string">"child"</span>: [&#123;</span><br><span class="line">            <span class="hljs-string">"node"</span>: <span class="hljs-string">"text"</span>,</span><br><span class="line">            <span class="hljs-string">"text"</span>: <span class="hljs-string">"我是外层div"</span></span><br><span class="line">        &#125;, &#123;</span><br><span class="line">            <span class="hljs-string">"node"</span>: <span class="hljs-string">"element"</span>,</span><br><span class="line">            <span class="hljs-string">"tag"</span>: <span class="hljs-string">"span"</span>,</span><br><span class="line">            <span class="hljs-string">"dataset"</span>: &#123;&#125;,</span><br><span class="line">            <span class="hljs-string">"attrs"</span>: [],</span><br><span class="line">            <span class="hljs-string">"child"</span>: [&#123;</span><br><span class="line">                <span class="hljs-string">"node"</span>: <span class="hljs-string">"text"</span>,</span><br><span class="line">                <span class="hljs-string">"text"</span>: <span class="hljs-string">"我是内层span"</span></span><br><span class="line">            &#125;]</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不难发现，外层是根节点，然后内层用child一层一层标记子节点，有 attr 标记节点的属性，classStr 来标记 class 属性，data来标记 data- 属性，type 来标记节点类型，比如自定义的 data-type=”title” 等。   </p>
+<h2 id="回顾正则表达式"><a href="#回顾正则表达式" class="headerlink" title="回顾正则表达式"></a>回顾正则表达式</h2><p>先来看几组简单的正则表达式：  </p>
+<ul>
+<li>^ 匹配一个输入或一行的开头，/^a/匹配”ab”，而不匹配”ba”</li>
+<li>$ 匹配一个输入或一行的结尾，/a$/匹配”ba”，而不匹配”ab”</li>
+<li><ul>
+<li>匹配前面元字符0次或多次，/ab*/将匹配a,ab,abb,abbb  </li>
+</ul>
+</li>
+<li><ul>
+<li>匹配前面元字符1次或多次，/ab+/将匹配ab,abb,但是不匹配a</li>
+</ul>
+</li>
+<li>[ab] 字符集匹配，匹配这个集合中的任一一个字符(或元字符)，/[ab]/将匹配a,b,ab</li>
+<li>\w 组成单词匹配，匹配字母，数字，下划线，等于[a-zA-Z0-9]</li>
+</ul>
+<h2 id="匹配标签元素"><a href="#匹配标签元素" class="headerlink" title="匹配标签元素"></a>匹配标签元素</h2><p>首先我们将如下的 HTML 字符串用正则表达式表示出来：    </p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>我是一个div<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个字符串用正则描述大致如下：  </p>
+<p>以 &lt; 开头 跟着 div 字符，然后接着 &gt; ，然后是中文 “我是一个 div”，再跟着 &lt;/ ，然后继续是元素 div 最后已 &gt; 结尾。   </p>
 <ol>
-<li>同事或者领导发现某个页面有bug，需要在微信群或者内部沟通工具大群里问是谁负责？可能还要挨个艾特各个TL，需要各个TL确认。</li>
-<li>某个组件要升级，但是不知道那些页面使用了，需要在沟通群里问或者搜项目源代码，逐个找到负责人。</li>
-<li>某个大型营销活动突然要换一个新的氛围logo，但是不知道哪些页面使用了旧logo，需要安排巡检，人肉去找出来。</li>
-<li>告警发现某个重要页面的出现了内容空窗，原因是运营同学没有及时补充运营数据，但是不知道是哪个运营负责，需要在微信大群或者内部沟通工具大群里问。</li>
-<li>大促来临，某个重要页面的流量预计有10倍或者20倍的增长，要通知各个接口的同学做扩容和容灾准备，需要手工梳理页面的依赖的接口列表。</li>
-<li>某个限时的页面已经到点下线，但是仍然有流量，不知道流量入口在哪里。</li>
-<li>我要在统计系统上查看某个页面的性能数据，但是该系统是以页面名字而不是地址来查找的，查找过程找的人老眼昏花。</li>
-<li>某个后端接口要升级或者要下线，需要分析nginx的访问日志找到页面地址，然后再拉各个TL，逐个确认都是哪些同事负责。</li>
-<li>等等等</li>
+<li><div>  
+
+</div></li>
 </ol>
-<p>上面的问题一般是大型复杂业务场景（通常是多个团队合作开发，业务复杂，页面成百上千甚至上万）下才有的，如果你所在的团队也有上面的问题，那么我认为你也需要对前端的资源进行治理。</p>
-<p>那么什么是前端资源治理呢？笔者对其的定义是：</p>
-<blockquote>
-<p><em>将前端相关的页面、js/css/图片/字体、接口、配置、监控点等的依赖关系进行收集、存储和管理，并将割裂的组件系统、配置系统、监控系统、业务系统等进行重构和整合，最终形成以页面管理为基础的统一的有序的平台，所有关联信息都能够被查询和检索，最终实现整体协作效率的提升。</em></p>
-</blockquote>
-<p>此处使用“治理”而不是“管理”的原因，“治理”一词更强调合作整改的过程。在很多互联网企业，通常已经有一些独立的组件系统、配置系统、监控系统等，但是这些系统很多都是独立的碎片化的系统，彼此都是割裂的，割裂意味着缺乏协同，进而影响研发效率。因此，前端资源治理的一个关键词是“整合”，整合已有的系统。</p>
-<p>第二个关键词是“关联关系管理”，前端相关的页面、组件、js/css/图片/字体、接口、配置、监控点及负责人等，他们是存在关联关系的，比如页面是谁负责的、谁修改的、引用了哪些组件、图片、字体、接口、在什么地方配置数据、监控点都有哪些等，我们需要把这些关联关系在管理端记录下来，并提供检索和查询。</p>
-<h2 id="2-前端资源治理的实现"><a href="#2-前端资源治理的实现" class="headerlink" title="2.前端资源治理的实现"></a>2.前端资源治理的实现</h2><p>前端资源信息看似繁杂，js、css、图片、页面、后端接口、配置数据、监控点等，但是他们有一个串联的锚点，这个锚点就是页面，不管是H5、小程序，还是原生APP，不管是从研发的角度，还是从反馈问题的角度，基本上都是以页面为单位进行的，其他的如组件、CSS、图片、接口、配置等，都是被页面引用的，都可以通过页面串联起来的，下图可以清晰的表达出这些依赖关系。</p>
-<p><img src="https://img11.360buyimg.com/jdphoto/s1187x557_jfs/t1/60034/13/9411/74040/5d6f15f5E908267d0/2da1e3fdff61c788.png" alt="页面"></p>
-<p>因此，实现前端资源治理的第一个要点是做好页面管理，把页面自身的信息，如页面名称、页面地址、负责人、修改时间等信息进行提取、存储,使之能够被查询和检索。在页面管理基础之上，我们还要把js、css、图片、页面、后端接口、配置数据、监控点等各个前端资源之间的关联关系也要存储和管理起来，使之能够被查询和检索。</p>
-<p>关联关系从来源上讲，主要有以下几种来源：</p>
-<ol>
-<li>代码静态分析产生。通常包括页面信息自身、页面跟js/css/图片等的依赖关系、页面跟接口的依赖关系等。</li>
-<li>管理端配置产生。通常包括页面跟监控系统的配置、页面的运营配置数据等</li>
-<li>统计数据产生。通常包括页面来源数据等。</li>
-</ol>
-<p><img src="https://img11.360buyimg.com/jdphoto/s1065x705_jfs/t1/75735/10/9225/32429/5d6f1743E9da72389/e07d883ee6dfc51a.png" alt="关联关系管理"></p>
-<h4 id="2-1-页面信息的提取"><a href="#2-1-页面信息的提取" class="headerlink" title="2.1 页面信息的提取"></a>2.1 页面信息的提取</h4><p>前端资源治理的第一要点是页面信息管理，因此必须能够拿到页面基本信息。页面基本信息应该包括哪些呢？通常来说，至少应该包括页面URL、页面名称、页面创建人、创建时间等几个字段。</p>
-<p>当前的前端页面开发，不管是H5、小程序，还是原生APP，通常会经过编译构建的过程（通常是命令行工具或者IDE，比如基于gulp和webpack的工作流工具），在构建完成阶段可以提取出页面的基本信息。以下是编译构建提取页面信息的流程：<br><img src="https://img11.360buyimg.com/jdphoto/s762x445_jfs/t1/64924/37/9126/24880/5d6e8e53E5ca79145/6f646b4910b1dbbb.png" alt="页面信息的提取"></p>
-<p>页面的编译构建流程，一般分为两种：</p>
-<ol>
-<li>独立构建。常见于H5，此种场景一般是一个人负责一个页面，不存在多人协作的情况，也不需要git分支管理啥的，开发完成即可走构建流程，只需要在构建完成的时候分析即可，页面的URL、页面标题、创建人、创建时间等信息比较容易提取，比如页面修改人可以取自命令行工具的用户登录身份（命令行工具可以做类似于NPM的login功能，登录后记录用户身份ID）、页面标题可以解析页面html的title的内容（小程序下则解析自页面json文件的navigationBarTitleText字段）等。</li>
-<li>持续集成构建。这种一般是需要多人协作的H5、小程序、原生APP等，一般涉及到分支管理和合并的问题，同一个页面可能被多人修改，因此页面信息中的用户信息部分提取相对复杂，需要分析git log信息才能拿到，其他的信息字段提取逻辑与独立构建情况相同。<br>以下是一个典型的多人协作的页面的git log信息。<img src="https://img11.360buyimg.com/jdphoto/s1302x832_jfs/t1/73369/13/6946/175119/5d5157d1E2105714f/efcdf4cca35fa064.png" width="50%" height="50%">
+<p>div 是HTML的标签，我们知道HTML标签是已字母和下划线开头，包含字母、数字、下滑线、中划线、点号组成的，对应正则如下：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> ncname = <span class="hljs-string">'[a-zA-Z_][\w-.]*'</span></span><br></pre></td></tr></table></figure>
+
+<p>于是组合的正则表达式如下：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">`&lt;<span class="hljs-subst">$&#123;ncname&#125;</span>&gt;`</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><div></div>  
+根据上面分析，很容易得出正则表达式为下：   
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">`&lt;<span class="hljs-subst">$&#123;ncname&#125;</span>&gt;&lt;/<span class="hljs-subst">$&#123;ncname&#125;</span>&gt;`</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><div>我是一个div</div>  
 
 </li>
 </ol>
-<p>对于上面的情况，我们可以考虑定一个规则，比如取最近的5条log，并移除持续集成系统生成的log，管理端存储的时候回，以用户名+时间为key，去掉重复的部分。</p>
-<p>构建流程分析出页面基本信息后，需提交到管理端保存，所以管理端需要提供post接口。管理端以此为基础，形成”页面管理系统“。</p>
-<h4 id="2-2-代码静态分析出的关联关系"><a href="#2-2-代码静态分析出的关联关系" class="headerlink" title="2.2 代码静态分析出的关联关系"></a>2.2 代码静态分析出的关联关系</h4><p>构建流程除可以分析基本信息外，还可以分析出页面的版本信息，比如页面依赖的组件依赖表、静态资源依赖表(js/css/图片)、接口依赖表、修改人、修改时间等。<br>静态依赖分析通常有3种方式：</p>
+<p>标签内可以是任意字符，那么任意字符如何描述呢？<br>\s 匹配一个空白字符<br>\S 匹配一个非空白字符<br>\w 是字母数字数字下划线<br>\W 是非\w的<br>同理还有\d和\D等。<br>我们通常采用\s和\S来描述任何字符（1、通用，2、规则简单，利于正则匹配）：   </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">`&lt;<span class="hljs-subst">$&#123;ncname&#125;</span>&gt;[\s\S]*&lt;/<span class="hljs-subst">$&#123;ncname&#125;</span>&gt;`</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="匹配标签属性"><a href="#匹配标签属性" class="headerlink" title="匹配标签属性"></a>匹配标签属性</h2><p>HTML标签上的属性名称有哪些呢，常见的有class,id,style,data-属性，当然也可以用户随便定义。但是属性名称我们也需要遵循原则，通常是用字母、下划线、冒号开头(Vue的绑定属性用:开头，通常我们不会这么定义)的，然后包含字母数字下划线中划线冒号和点的，正则描述如下：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> attrKey = <span class="hljs-regexp">/[a-zA-Z_:][-a-zA-Z0-9_:.]*/</span></span><br></pre></td></tr></table></figure>
+
+<p>HTML的属性的写法目前有以下几种：  </p>
 <ol>
-<li>基于AST的依赖分析。<br>AST就是抽象语法树，目前前端对他的研究和使用越来越广泛，webpack内部就使用了acorn这个AST分析库。借助于webpack强大的模块解析和依赖分析能力，我们可以拿到js与npm组件、css与背景图等之间的关联关系（可以在webpack的after-resolve钩子中进行分析）。另外，除了构建前的依赖关系，我们还可以拿到构建处理后的资源依赖关系（可以在webpac的emit钩子中进行分析），前者我们称为引用依赖关系（包括静态资源依赖表、组件依赖表），后者我们称为发布依赖关系。</li>
-<li>基于DOM操作的依赖分析。<br>webpack并不是以html为入口的，但是实际上我们的开发的入口可以认为就是页面，借助于JsDom等强大的类库，我们可以用我们熟悉的前端的DOM操作来分析html页面对js、css、图片等的依赖关系。</li>
-<li>基于正则匹配的依赖分析。<br>页面对于接口的依赖分析，由于这种是非明确的代码依赖关系，所以一般通过正则匹配来解析。一般对代码有一定的约束规则，比如不用用变量拼接接口地址。这个解析不会如AST那么精确，但是只要约定规则，基本上都能满足需求。可以考虑把此类实现封装为webpack的loader。<br><img src="https://img11.360buyimg.com/jdphoto/s1001x580_jfs/t1/63972/16/9196/24515/5d6e8f13Ee5583ec2/cd6021d6c45e2f56.png" alt="关联信息的提取"><br>上面的第一种和第三种的分析，都应该是一个递归分析过程，最终生成页面的静态资源依赖表、组件依赖表、接口依赖表等。这些信息提交到管理端进行保存。</li>
+<li>class=”title”</li>
+<li>class=’title’</li>
+<li>class=title</li>
 </ol>
-<h4 id="2-3-管理系统之间的关联关系"><a href="#2-3-管理系统之间的关联关系" class="headerlink" title="2.3 管理系统之间的关联关系"></a>2.3 管理系统之间的关联关系</h4><p>在很多互联网企业，通常已经有一些独立的成熟的CMS系统（如给运营用的内容配置系统，配置活动时间、商品ID等）、监控系统（如测速系统、业务监控系统、异常监控系统）等，通常这些系统由不同的团队开发，而且经常都有一个叫做”页面管理”的东西，且要手工配置页面地址。这些系统中的监控点配置、运营配置等信息，都是以页面维度进行创建和使用的，但是这些信息很难通过对前端代码静态分析的方法进行提取（比如运营配置信息，这个可以是前端直接使用，也可能是后端使用，要分析的话两端代码都要分析，比较麻烦）。我们的思路应该是在管理端通过页面管理来进行关联，实质上是要做系统整合。</p>
-<p>整合的思路也比较简单，就是原来各个系统废弃掉原来自身的”页面管理“，而是使用前面静态分析提取到的统一的页面管理，监控系统、运营配置系统等系统都可以以此为入口进入，从而把页面相关的各个管理系统关联起来，进而把各种能力串联。<br><img src="https://img11.360buyimg.com/jdphoto/s815x487_jfs/t1/79814/31/9124/24005/5d6e8f5bEff12c5ee/3a87b35bf6595925.png" alt="管理系统的关联"></p>
-<h4 id="2-4-统计数据产生的关联关系"><a href="#2-4-统计数据产生的关联关系" class="headerlink" title="2.4 统计数据产生的关联关系"></a>2.4 统计数据产生的关联关系</h4><p>对于大型应用来说，一般都有一些业务统计数据，最典型的就是点击流数据了。这种数据既不在代码中，也不在管理端配置，而且通过统计和分析才能拿到。前面提到的“某个限时的页面已经到点下线，但是仍然有流量，不知道流量入口在哪里”这种问题的解决，其实依赖于点击流的统计分析数据了，点击流系统一般都有“来源分析”，这种数据也不是敏感数据，所以可以考虑跟页面管理做关联和整合，或者提供API给页面管理系统。另外还有一个例子就是，接口和页面的关联关系，前面提到通过静态分析得到的页面和接口的依赖表有可能不够准确，但是接口访问Web Server的时候，一般都有access.log，可以通过access.log来做分析，拿到比较完整的页面依赖的接口信息，以及接口依赖的页面信息，有些接口的调用需要有open api的那种注册调用机制，就另当别论了。<br><img src="https://img11.360buyimg.com/jdphoto/s798x545_jfs/t1/49549/18/9573/24174/5d6e8fa1E97ed2043/01f2e6fad7b0bc29.png" alt="统计系统的关联"></p>
-<h4 id="2-5-关联关系的查询和存储"><a href="#2-5-关联关系的查询和存储" class="headerlink" title="2.5 关联关系的查询和存储"></a>2.5 关联关系的查询和存储</h4><p>管理端应该提供正反两个方向的查询和检索能力：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> attr = <span class="hljs-regexp">/([a-zA-Z_:][-a-zA-Z0-9_:.]*)=("([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+)/</span></span><br></pre></td></tr></table></figure>
+
+<p>attrKey 跟着 = ，然后跟着三种情况:  </p>
 <ol>
-<li>正向查询。通过页面来查询依赖的组件、静态资源(js/css/图片)、后端接口等。此种比较简单，因为提交的时候已经有完整的依赖信息，只需要提供简单的查询。</li>
-<li>反向查询。通过组件、静态资源、接口、运营配置信息、监控配置信息等，反查有哪些页面依赖。</li>
+<li>” 开头 跟着多个不是 “ 的字符，然后跟着 ” 结尾</li>
+<li>‘ 开头 跟着多个不是 ‘ 的字符，然后跟着 ‘ 结尾</li>
+<li>不是（空格，”，’,=,&lt;,&gt;）的多个字符</li>
 </ol>
-<p>对于关联关系的存储，用关系型DB的话，一般只能使用like查询，可能要扫描全表，因而性能比较差，可以考虑存储到MongoDB中创建索引，或者存储到ElasticSearch中建立索引。</p>
-<h4 id="2-6-其他"><a href="#2-6-其他" class="headerlink" title="2.6 其他"></a>2.6 其他</h4><p>前面提到的，其实有一个假设的前提“只有一个Web应用，且接口都是前端发起的”，但是对于其他情况，思路是类似的：</p>
+<p>我们测试一下attr的正则   </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"class=abc"</span>.match(attr);</span><br><span class="line"><span class="hljs-comment">// output</span></span><br><span class="line">(<span class="hljs-number">6</span>) [<span class="hljs-string">"class=abc"</span>, <span class="hljs-string">"class"</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-attr">index</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">input</span>: <span class="hljs-string">"class=abc"</span>, <span class="hljs-attr">groups</span>: <span class="hljs-literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="hljs-string">"class='abc'"</span>.match(attr);</span><br><span class="line"><span class="hljs-comment">// output</span></span><br><span class="line">(<span class="hljs-number">6</span>) [<span class="hljs-string">"class='abc'"</span>, <span class="hljs-string">"class"</span>, <span class="hljs-string">"'abc'"</span>, <span class="hljs-literal">undefined</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-literal">undefined</span>, <span class="hljs-attr">index</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">input</span>: <span class="hljs-string">"class='abc'"</span>, <span class="hljs-attr">groups</span>: <span class="hljs-literal">undefined</span>]</span><br></pre></td></tr></table></figure>
+
+<p>我们发现，第二个带单引号的，匹配的结果是”‘abc’”，多了一个单引号‘，因此我们需要用到正则里面的非匹配获取（?:）了。<br>例子：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"abcde"</span>.match(<span class="hljs-regexp">/a(?:b)c(.*)/</span>);   输出 [<span class="hljs-string">"abcde"</span>, <span class="hljs-string">"de"</span>, <span class="hljs-attr">index</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">input</span>: <span class="hljs-string">"abcde"</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这里匹配到了b，但是在output的结果里面并没有b字符。<br>场景：正则需要匹配到存在b，但是输出结果中不需要有该匹配的字符。<br>于是我么增加空格和非匹配获取的属性匹配表达式如下：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> attr = <span class="hljs-regexp">/([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+))/</span></span><br></pre></td></tr></table></figure>
+
+<p> = 两边可以增加零或多个空格，= 号右边的匹配括号使用非匹配获取，那么类似 = 号右侧的最外层大括号的获取匹配失效，而内层的括号获取匹配的是在双引号和单引号里面。效果如下：  </p>
+<p> <img src="https://raw.githubusercontent.com/antiter/blogs/master/images/ast_1.png?raw=true" alt="正则">   </p>
+<p> 从图中我们清晰看到，匹配的结果的数组的第二位是属性名称，第三位如果有值就是双引号的，第四位如果有值就是单引号的，第五位如果有值就是没有引号的。</p>
+<h2 id="匹配节点"><a href="#匹配节点" class="headerlink" title="匹配节点"></a>匹配节点</h2><p>有了上面的标签匹配和属性匹配之后，那么将两者合起来就是如下：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&lt;[a-zA-Z_][\w\-\.]*(?:\s+([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+)))*&gt;[\s\S]*&lt;\/[a-zA-Z_][\w\-\.]*&gt;/</span><br></pre></td></tr></table></figure>
+
+<p>上述正则完整描述了一个节点，理解了签名的描述，现在看起来是不是很简答啦~</p>
+<h2 id="AST-解析实战"><a href="#AST-解析实战" class="headerlink" title="AST 解析实战"></a>AST 解析实战</h2><p>有了前面的HTML节点的正则表达式的基础，我们现在开始解析上面的节点元素。<br>显然，HTML 节点拥有复杂的多层次的嵌套，我们无法用一个正则表达式就把 HTML 的结构都一次性的表述出来，因此我们需要一段一段处理。<br>我们将字符串分段处理，总共分成三段：  </p>
 <ol>
-<li>多应用（业务）。多应用情况，通常要在页面管理的上一层加上“应用管理”，即页面属于哪一个应用(业务)。对于同一个页面投放在不同应用的场景，可能页面还得加上渠道标识。</li>
-<li>页面直出（服务端渲染）。对于页面直出逻辑的代码，做前面类似的分析即可。<br>另外，本文主要是探讨从前端视角考虑问题，所以关联核心是页面管理，但是从整体技术架构视角，可能就不是了。</li>
+<li>标签的起始   </li>
+<li>标签内的内容</li>
+<li>标签的结束  </li>
 </ol>
-<h2 id="3-结语"><a href="#3-结语" class="headerlink" title="3.结语"></a>3.结语</h2><p>本文探讨了前端资源治理的含义以及要解决的问题，并介绍了实现前端资源治理的思路，是笔者近期在前端工程化方面的思考，部分已经完成，部分正在推进。本文并不涉及实现的细节，细节在后面的系列文章中进一步讲解。<br>前端治理的两个关键点，一个是系统整合，一个是关联关系管理，整体串联的核心是页面管理。</p>
+<p>于是将上述正则拆分：  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> DOM = <span class="hljs-regexp">/&lt;[a-zA-Z_][\w\-\.]*(?:\s+([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+)))*&gt;[\s\S]*&lt;\/[a-zA-Z_][\w\-\.]*&gt;/</span>;</span><br><span class="line"><span class="hljs-comment">// 增加()分组输出</span></span><br><span class="line"><span class="hljs-keyword">const</span> startTag = <span class="hljs-regexp">/&lt;([a-zA-Z_][\w\-\.]*)((?:\s+([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+)))*)\s*(\/?)&gt;/</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> endTag = <span class="hljs-regexp">/&lt;\/([a-zA-Z_][\w\-\.]*)&gt;/</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> attr = <span class="hljs-regexp">/([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=&lt;&gt;`]+))/g</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 其他的就是标签里面的内容了</span></span><br></pre></td></tr></table></figure>
+
+<p>不难发现，标签已 &lt; 开头，为标签起始标识位置，已 &lt;/ 开头的为标签结束标识位置。<br>我们将 HTML 拼接成字符串形式，就是如下了。  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> html = <span class="hljs-string">'&lt;div class="classAttr" data-type="dataType" data-id="dataId" style="color:red"&gt;我是外层div&lt;span&gt;我是内层span&lt;/span&gt;&lt;/div&gt;'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们开始一段一段处理上面的 html 字符串吧~  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> bufArray = [];</span><br><span class="line"><span class="hljs-keyword">const</span> results = &#123;</span><br><span class="line">    node: <span class="hljs-string">'root'</span>,</span><br><span class="line">    child: [],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-keyword">let</span> chars;</span><br><span class="line"><span class="hljs-keyword">let</span> match;</span><br><span class="line"><span class="hljs-keyword">while</span> (html&amp;&amp;last!=html)&#123;</span><br><span class="line">    last = html;</span><br><span class="line">    chars = <span class="hljs-literal">true</span>;<span class="hljs-comment">// 是不是文本内容</span></span><br><span class="line">    <span class="hljs-comment">// do something parse html</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bufArray: 用了存储未匹配完成的起始标签<br>results: 定义一个开始的 AST 的节点。<br>我们再循环处理HTML的时候，如果已经处理的字符，则将其删除，这里判断 last!=html 如果处理一轮之后，html 还是等于 last，说明没有需要处理的了，结束循环。   </p>
+<p>首先判断是否是 &lt;/ 开头，如果是则说明是标签结尾标识</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(html.indexOf(<span class="hljs-string">"&lt;/"</span>)==<span class="hljs-number">0</span>)&#123;</span><br><span class="line">    match = html.match(endTag);</span><br><span class="line">    <span class="hljs-keyword">if</span>(match)&#123;</span><br><span class="line">        chars = <span class="hljs-literal">false</span>;</span><br><span class="line">        html = html.substring(match[<span class="hljs-number">0</span>].length);</span><br><span class="line">        match[<span class="hljs-number">0</span>].replace(endTag, parseEndTag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>已 &lt;/ 开头，且能匹配上实时截止标签的正则，则该 html 字符串内容要向后移动匹配到的长度，继续匹配剩下的。<br>这里使用了 replace 方法，parseEndTag 的参数就是”()”匹配的输出结果了，已经匹配到的字符再 parseEndTag 处理标签。  </p>
+<p>如果不是已 &lt;/ 开头的，则判断是否是 &lt; 开头的，如果是说明是标签起始标识，同理，需要 substring 来剔除已经处理过的字符。  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(html.indexOf(<span class="hljs-string">"&lt;"</span>)==<span class="hljs-number">0</span>)&#123;</span><br><span class="line">    match = html.match(startTag);</span><br><span class="line">    <span class="hljs-keyword">if</span>(match)&#123;</span><br><span class="line">        chars = <span class="hljs-literal">false</span>;</span><br><span class="line">        html = html.substring(match[<span class="hljs-number">0</span>].length);</span><br><span class="line">        match[<span class="hljs-number">0</span>].replace(startTag, parseStartTag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果既不是起始标签，也不是截止标签，或者是不符合起始和截止标签的正则，我们统一当文本内容处理。 </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(chars)&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> index = html.indexOf(<span class="hljs-string">'&lt;'</span>);</span><br><span class="line">    <span class="hljs-keyword">let</span> text;</span><br><span class="line">    <span class="hljs-keyword">if</span>(index &lt; <span class="hljs-number">0</span>)&#123;</span><br><span class="line">        text = html;</span><br><span class="line">        html = <span class="hljs-string">''</span>;</span><br><span class="line">    &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">        text = html.substring(<span class="hljs-number">0</span>,index);</span><br><span class="line">        html = html.substring(index);;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">const</span> node = &#123;</span><br><span class="line">        node: <span class="hljs-string">'text'</span>,</span><br><span class="line">        text,</span><br><span class="line">    &#125;;</span><br><span class="line">    pushChild(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是文本节点，我们则加入文本节点到目标 AST 上，我们着手 pushChild 方法，bufArray 是匹配起始和截止标签的临时数组，存放还没有找到截止标签的起始标签内容。  </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pushChild</span> (<span class="hljs-params">node</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (bufArray.length === <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        results.child.push(node);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> parent = bufArray[bufArray.length - <span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> parent.child == <span class="hljs-string">'undefined'</span>) &#123;</span><br><span class="line">            parent.child = [];</span><br><span class="line">        &#125;</span><br><span class="line">        parent.child.push(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有 bufArray ，说明当前Node是一个新Node，不是上一个节点的嵌套子节点，则新push一个节点；否则 取最后一个bufArray的值，也就是最近的一个未匹配标签起始节点，将当前节点当做为最近节点的子节点。  </p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>显然，第一个 &lt;/div&gt; 截止节点，匹配这里的第二个起始节点 <div> ，即最后一个未匹配的节点。   </div></p>
+<p>在每一轮循环中，如果是符合预期，HTML字符串会越来越少，直到被处理完成。   </p>
+<p>接下来我们来处理  parseStartTag 方法，也是稍微复杂一点的方法。     </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseStartTag</span> (<span class="hljs-params">tag, tagName, rest</span>) </span>&#123;</span><br><span class="line">    tagName = tagName.toLowerCase();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> ds = &#123;&#125;;</span><br><span class="line">    <span class="hljs-keyword">const</span> attrs = [];</span><br><span class="line">    <span class="hljs-keyword">let</span> unary = !!<span class="hljs-built_in">arguments</span>[<span class="hljs-number">7</span>];</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">const</span> node = &#123;</span><br><span class="line">        node: <span class="hljs-string">'element'</span>,</span><br><span class="line">        tag:tagName</span><br><span class="line">    &#125;;</span><br><span class="line">    rest.replace(attr, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">match, name</span>) </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> value = <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] :</span><br><span class="line">            <span class="hljs-built_in">arguments</span>[<span class="hljs-number">3</span>] ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">3</span>] :</span><br><span class="line">                <span class="hljs-built_in">arguments</span>[<span class="hljs-number">4</span>] ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">4</span>] :<span class="hljs-string">''</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span>(name&amp;&amp;name.indexOf(<span class="hljs-string">'data-'</span>)==<span class="hljs-number">0</span>)&#123;</span><br><span class="line">            ds[name.replace(<span class="hljs-string">'data-'</span>,<span class="hljs-string">""</span>)] = value;</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span>(name==<span class="hljs-string">'class'</span>)&#123;</span><br><span class="line">                node.class = value;</span><br><span class="line">            &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">                attrs.push(&#123;</span><br><span class="line">                    name,</span><br><span class="line">                    value</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    node.dataset = ds;</span><br><span class="line">    node.attrs = attrs;</span><br><span class="line">    <span class="hljs-keyword">if</span> (!unary)&#123;</span><br><span class="line">         bufArray.push(node);</span><br><span class="line">    &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">        pushChild(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遇到起始标签，如果该起始标签不是一个结束标签(unary为true，如：<img>,如果本身是截止标签，那么直接处理完即可)，则将起始标签入栈，等待找到下一个匹配的截止标签。<br>起始标签除了标签名称外的属性内容，我们将 dataset 内容放在dataset字段，其他属性放在attrs   </p>
+<p>我们接下来看下处理截止标签   </p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseEndTag</span> (<span class="hljs-params">tag, tagName</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> pos = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (pos = bufArray.length - <span class="hljs-number">1</span>; pos &gt;= <span class="hljs-number">0</span>; pos--)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (bufArray[pos].tag == tagName)&#123; </span><br><span class="line">            <span class="hljs-keyword">break</span>; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (pos &gt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        pushChild(bufArray.pop());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记录还未匹配到的起始标签的bufArray数组，从最后的数组位置开始查找，找到最近匹配的标签。<br>比如：  </p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"One"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Two"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>class One的标签先入栈，class Two的再入栈，然后遇到第一个&lt;/div&gt;，匹配的则是class Two的起始标签，然后再匹配的是class One的起始标签。</p>
+<p>到此，一个简单的 AST解析器已经完成了。  </p>
+<p>当然，本文是实现一个简单的 AST解析器，基本主逻辑已经包含，完整版参考如下：  </p>
+<p><a href="https://github.com/vuejs/vue/blob/dev/src/compiler/parser/html-parser.js" target="_blank" rel="noopener">完整解析参考：vue-html-parse</a></p>
+<p>本文的 AST解析器的完整代码如下：  </p>
+<p><a href="https://github.com/antiter/blogs/tree/master/code-mark/easy-ast.js" target="_blank" rel="noopener">easy-ast</a></p>
 
         </div>
         
@@ -240,7 +312,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/前端工程化/">前端工程化</a>, <a class="has-link-grey -link" href="/tags/资源治理/">资源治理</a>
+                    <a class="has-link-grey -link" href="/tags/AST/">AST</a>
                 </div>
             </div>
         </div>
@@ -276,16 +348,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/27/记一次Node-js直出服务的性能优化/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/17/写一个四则运算表达式转换成AST的方法/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">记一次Node.js直出服务的性能优化</span>
+                <span class="level-item">写一个四则运算表达式转换成AST的方法</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/20/guid-mask/">
-                <span class="level-item">你还在用图片做引导蒙层？</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/17/【译】interection-observer如何观察变化/">
+                <span class="level-item">【译】Interection Observer如何观察变化</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1282,7 +1354,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="前端资源治理（一）" height="28">
+                    <img src="/images/og_image.png" alt="手把手教你写一个AST解析器" height="28">
                 
                 </a>
                 <p class="is-size-7">
