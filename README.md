@@ -7,6 +7,12 @@
 
 # 文章列表
 
+* [写一个四则运算表达式转换成AST的方法](https://wecteam.io/2019%2F10%2F17%2F%E5%86%99%E4%B8%80%E4%B8%AA%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2%E6%88%90AST%E7%9A%84%E6%96%B9%E6%B3%95%2F)
+
+* [手把手教你写一个AST解析器](https://wecteam.io/2019%2F10%2F17%2F%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AAAST%E8%A7%A3%E6%9E%90%E5%99%A8%2F)
+
+* [【译】Interection Observer如何观察变化](https://wecteam.io/2019%2F10%2F17%2F%E3%80%90%E8%AF%91%E3%80%91interection-observer%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E5%8F%98%E5%8C%96%2F)
+
 * [浏览器层合成与页面渲染优化](https://wecteam.io/2019%2F10%2F15%2F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B1%82%E5%90%88%E6%88%90%E4%B8%8E%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%2F)
 
 * [Electron 实践笔记](https://wecteam.io/2019%2F10%2F11%2FElectron-%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0%2F)
