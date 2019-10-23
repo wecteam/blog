@@ -74,7 +74,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image.png" alt="WecTeam" height="28">
+                <img src="/images/og_image.png" alt="V8引擎和JavaScript优化建议" height="28">
             
             </a>
         </div>
@@ -125,67 +125,163 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">CSS</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-image">
-        <a href="/2019/07/12/CSS Houdini实现动态波浪纹/" class="image is-7by1">
-            <img class="thumbnail" src="http://img12.360buyimg.com/jdphoto/s800x530_jfs/t1/74847/21/5179/217476/5d35b8afEa7d7bcb6/685be624382850e6.jpg" alt="CSS Houdini实现动态波浪纹">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s873x468_jfs/t1/78957/13/13275/56500/5dad9422E1ab45cbb/0a9ecdcfb11ed007.jpg" alt="V8引擎和JavaScript优化建议">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <!--<time class="level-item has-text-grey" datetime="2019-07-12T11:00:00.000Z">2019-07-12</time>-->
-                <div class="level-item has-text-grey">2019-07-12</div>
+                <!--<time class="level-item has-text-grey" datetime="2019-10-23T09:12:03.000Z">2019-10-23</time>-->
+                <div class="level-item has-text-grey">2019-10-23</div>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Web开发/">Web开发</a>
+                <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2735 个字)
+                    13 分钟 读完 (大约 1932 个字)
                 </span>
                 
                 
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/12/CSS Houdini实现动态波浪纹/">CSS Houdini实现动态波浪纹</a>
+                V8引擎和JavaScript优化建议
             
         </h1>
         <div class="content">
             <blockquote>
-<p>作者：黄浩群 </p>
+<ul>
+<li>原文地址：<a href="https://alligator.io/js/v8-engine/" target="_blank" rel="noopener">https://alligator.io/js/v8-engine/</a></li>
+<li>翻译：马雪琴</li>
+</ul>
 </blockquote>
-<p>CSS Houdini 号称 CSS 领域最令人振奋的革新。CSS 本身长期欠缺语法特性，可拓展性几乎为零，并且新特性的支持效率太低，兼容性差。而 Houdini 直接将 CSS 的 API 暴露给开发者，以往完全黑盒的浏览器解析流开始对外开放，开发者可以自定义属于自己的 CSS 属性，从而定制和扩展浏览器的展示行为。</p>
+<blockquote>
+<p>V8 是谷歌用于编译 JavaScript 的引擎，Firefox 同样也有一个，叫 SpiderMonkey，它和 V8 有一些不同，但总体颇为相似。我们将在本篇文章中讨论 V8。</p>
+</blockquote>
+<p>V8 引擎的一些基础点：</p>
+<ul>
+<li>用 C++ 语言实现，使用在 Chrome 浏览器和 Node.js 中（以及最新版的 Microsoft Edge）</li>
+<li>遵循 ECMA-262 标准<a id="more"></a>
+<h1 id="JavaScript-旅程"><a href="#JavaScript-旅程" class="headerlink" title="JavaScript 旅程"></a>JavaScript 旅程</h1></li>
+</ul>
+<p>当我们把压缩、混淆以及做了各种处理的 JavaScript 放到 V8 引擎中解析时，到底发生了些什么？</p>
+<p>下图阐述了整个流程，接下来我们会对其中的每个步骤进行详细说明：<br><img src="https://img11.360buyimg.com/jdphoto/s873x468_jfs/t1/78957/13/13275/56500/5dad9422E1ab45cbb/0a9ecdcfb11ed007.jpg" alt></p>
+<p>在本篇文章中，我们将探讨 JavaScript 代码是如何被解析的，以及如何最大程度的优化 JavaScript 的编译效率。V8 里的优化编译器（又名 Turbofan）拿到 JavaScript 代码之后，会将其转化成高效率的机器码，因此，我们能向其输入越多的代码，我们的应用就会越快。附注一点，Chrome 里的解释器称作 Ignition。</p>
+<h1 id="JavaScript-解析"><a href="#JavaScript-解析" class="headerlink" title="JavaScript 解析"></a>JavaScript 解析</h1><p>整个过程中的第一步是解析 JavaScript。首先探讨什么是解析。</p>
+<p>解析有两个阶段：</p>
+<ul>
+<li>Eager（全解析）- 立即解析所有的代码</li>
+<li>Lazy（预解析）- 按需做最少的解析，剩下的留到后面</li>
+</ul>
+<p>哪一种方式更好则需要根据实际情况来决定。</p>
+<p>下面来看一段代码。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明会被立即解析</span><br><span class="line">const a = 1;</span><br><span class="line">const b = 2;</span><br><span class="line"></span><br><span class="line">// 目前不需要的暂时不解析</span><br><span class="line">function add(a, b) &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// add 方法被执行到了，所以需要返回解析该方法</span><br><span class="line">add(a, b);</span><br></pre></td></tr></table></figure>
+
+<p>变量声明会被立即解析，函数则会被懒解析，但上述代码里紧接着就执行了 add(a, b)，说明 add 方法是马上就需要用到的，所以这种情况下，把 add 函数进行即时解析会更高效。</p>
+<p>为了让 add 方法被立即解析，我们可以这样做：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明会被立即解析</span><br><span class="line">const a = 1;</span><br><span class="line">const b = 2;</span><br><span class="line"></span><br><span class="line">// eager parse this too</span><br><span class="line">var add = (function(a, b) &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">// add 方法已经被解析过了，所以这段代码可以立即执行</span><br><span class="line">add(a, b);</span><br></pre></td></tr></table></figure>
+
+<p>这就是大多数模块被创建的过程。那么，立即解析会是高效 JavaScript 应用的最好方式吗？</p>
+<p>我们可以用 <a href="https://nolanlawson.github.io/test-optimize-js/" target="_blank" rel="noopener">optimize-js</a> 这个工具对公共库代码进行完全的立即解析处理，比如对比较有名的 lodash 进行处理后，优化效果是很显著的：</p>
+<ul>
+<li>没有使用 optimize-js：11.86ms</li>
+<li>使用了 optimize-js：11.24ms</li>
+</ul>
+<p>必须声明的是，该结果是在 Chrome 浏览器中得到的，其它环境的结果则无法保证：</p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s780x342_jfs/t1/75143/19/13407/57666/5dad9422E39e89ead/e7e04d5c564ce44a.jpg" alt></p>
+<p>如果您需要优化应用，必须在所有的环境中进行测试。</p>
+<p>另一个解析相关的建议是不要让函数嵌套：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 糟糕的方式</span><br><span class="line">function sumOfSquares(a, b) &#123;</span><br><span class="line">  // 这里将被反复懒解析</span><br><span class="line">  function square(num) &#123;</span><br><span class="line">    return num * num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return square(a) + square(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改进后的方式如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function square(num) &#123;</span><br><span class="line">  return num * num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 好的方式</span><br><span class="line">function sumOfSquares(a, b) &#123;</span><br><span class="line">  return square(a) + square(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sumOfSquares(a, b);</span><br></pre></td></tr></table></figure>
+
+<p>上述示例中，square 方法只被懒解析了一次。</p>
+<h1 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h1><p>Chrome 有时候会重写 JavaScript 代码，内联函数即是这样一种情况。</p>
+<p>下面是一个代码示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const square = (x) =&gt; &#123; return x * x &#125;</span><br><span class="line"></span><br><span class="line">const callFunction100Times = (func) =&gt; &#123;</span><br><span class="line">  for(let i = 100; i &lt; 100; i++) &#123;</span><br><span class="line">    // func 参数会被调用100次</span><br><span class="line">    func(2)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">callFunction100Times(square)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会被 V8 引擎进行如下优化：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const square = (x) =&gt; &#123; return x * x &#125;</span><br><span class="line"></span><br><span class="line">const callFunction100Times = (func) =&gt; &#123;</span><br><span class="line">  for(let i = 100; i &lt; 100; i++) &#123;</span><br><span class="line">    // 函数被内联后就不会被持续调用了</span><br><span class="line">    return x * x</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">callFunction100Times(square)</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出，V8 实际上会把 square 函数体内联，以消除调用函数的步骤。这对提高代码的性能是很有用处的。</p>
+<h1 id="内联函数问题"><a href="#内联函数问题" class="headerlink" title="内联函数问题"></a>内联函数问题</h1><p>上述方法存在一点问题，让我们看看下面这段代码：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const square = (x) =&gt; &#123; return x * x &#125;</span><br><span class="line">const cube = (x) =&gt; &#123; return x * x * x &#125;</span><br><span class="line"></span><br><span class="line">const callFunction100Times = (func) =&gt; &#123;</span><br><span class="line">  for(let i = 100; i &lt; 100; i++) &#123;</span><br><span class="line">    // 函数被内联后就不会被持续调用了</span><br><span class="line">    func(2)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">callFunction100Times(square)</span><br><span class="line">callFunction100Times(cube)</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中先会调用 square 函数100次，紧接着又会调用 cube 函数100次。在调用 cube 之前，我们必须先对 callFunction100Times 进行反优化，因为我们已经内联了 square 函数。在这个例子中，square 函数似乎会比 cube 函数快，但实际上，因为反优化的这个步骤，使得整个执行过程变得更长了。</p>
+<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>谈到对象，V8 引擎底层有个类型系统可以区分它们：</p>
+<h2 id="单态"><a href="#单态" class="headerlink" title="单态"></a>单态</h2><p>对象具有相同的键，这些键没有区别。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 单态示例</span><br><span class="line">const person = &#123; name: &apos;John&apos; &#125;</span><br><span class="line">const person2 = &#123; name: &apos;Paul&apos; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>对象有相似的结构，并存在一些细微的差别。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 多态示例</span><br><span class="line">const person = &#123; name: &apos;John&apos; &#125;</span><br><span class="line">const person2 = &#123; name: &apos;Paul&apos;, age: 27 &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="复杂态"><a href="#复杂态" class="headerlink" title="复杂态"></a>复杂态</h2><p>这两个对象完全不同，不能比较。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 复杂态示例</span><br><span class="line">const person = &#123; name: &apos;John&apos; &#125;</span><br><span class="line">const building = &#123; rooms: [&apos;cafe&apos;, &apos;meeting room A&apos;, &apos;meeting room B&apos;], doors: 27 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们了解了 V8 里的不同对象，接下来看看 V8 引擎是如何优化对象的。</p>
+<h2 id="隐藏类"><a href="#隐藏类" class="headerlink" title="隐藏类"></a>隐藏类</h2><p>隐藏类是 V8 区分对象的方式。</p>
+<p>让我们将这个过程分解一下。</p>
+<p>首先声明一个对象：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123; name: &apos;John&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>V8 会为这个对象声明一个 classId。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const objClassId = [&apos;name&apos;, 1]</span><br></pre></td></tr></table></figure>
+
+<p>然后对象会按如下方式被创建：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;...objClassId, &apos;John&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后当我们获取对象里的 name 属性时：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.name</span><br></pre></td></tr></table></figure>
+
+<p>V8 会做如下查找：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj[getProp(obj[0], name)]</span><br></pre></td></tr></table></figure>
+
+<p>这就是 V8 创建对象的过程，接下来看看如何优化对象以及重用 classId。</p>
+<h2 id="创建对象的建议"><a href="#创建对象的建议" class="headerlink" title="创建对象的建议"></a>创建对象的建议</h2><p>应该尽量将属性放在构造器中声明，以保证对象的结构不变，从而让 V8 可以优化对象。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">  constructor(x,y) &#123;</span><br><span class="line">    this.x = x</span><br><span class="line">    this.y = y</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const p1 = new Point(11, 22) // 隐藏的 classId 被创建</span><br><span class="line">const p2 = new Point(33, 44)</span><br></pre></td></tr></table></figure>
+
+<p>应该保证属性的顺序不变，如下面这个示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123; a: 1 &#125; // 隐藏的 classId 被创建</span><br><span class="line">obj.b = 3</span><br><span class="line"></span><br><span class="line">const obj2 = &#123; b: 3 &#125; // 另一个隐藏的 classId 被创建</span><br><span class="line">obj2.a = 1</span><br><span class="line"></span><br><span class="line">// 这样会更好</span><br><span class="line">const obj = &#123; a: 1 &#125; // 隐藏的 classId 被创建</span><br><span class="line">obj.b = 3</span><br><span class="line"></span><br><span class="line">const obj2 = &#123; a: 1 &#125; // 隐藏类被复用</span><br><span class="line">obj2.b = 3</span><br></pre></td></tr></table></figure>
+
+<h1 id="其它的优化建议"><a href="#其它的优化建议" class="headerlink" title="其它的优化建议"></a>其它的优化建议</h1><p>接下来我们看一下其它的 JavaScript 代码优化建议。</p>
+<h2 id="修正函数参数类型"><a href="#修正函数参数类型" class="headerlink" title="修正函数参数类型"></a>修正函数参数类型</h2><p>当参数被传进函数中时，保证参数的类型一致是很重要的。如果参数的类型不同，Turbofan 在尝试优化4次之后就会放弃。</p>
+<p>下面是一个例子：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y) &#123;</span><br><span class="line">  return x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add(1,2) // 单态</span><br><span class="line">add(&apos;a&apos;, &apos;b&apos;) // 多态</span><br><span class="line">add(true, false)</span><br><span class="line">add(&#123;&#125;,&#123;&#125;)</span><br><span class="line">add([],[]) // 复杂态 - 在这个阶段, 已经尝试了4+次, 不会再做优化了</span><br></pre></td></tr></table></figure>
+
+<p>另一个建议是保证在全局作用域下声明类：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 不要这样做</span><br><span class="line">function createPoint(x, y) &#123;</span><br><span class="line">  class Point &#123;</span><br><span class="line">    constructor(x,y) &#123;</span><br><span class="line">      this.x = x</span><br><span class="line">      this.y = y</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 每次都会重新创建一个 point 对象</span><br><span class="line">  return new Point(x,y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function length(point) &#123;</span><br><span class="line">  //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>希望大家学到了一些 V8 底层的知识，知道如何去编写更优的 JavaScript 代码。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/12/CSS Houdini实现动态波浪纹/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/V8引擎/">V8引擎</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -213,7 +309,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/23/网页设计和开发中，关于字体的常识/">
+                <span class="level-item">网页设计和开发中，关于字体的常识</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -1232,7 +1340,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image.png" alt="WecTeam" height="28">
+                    <img src="/images/og_image.png" alt="V8引擎和JavaScript优化建议" height="28">
                 
                 </a>
                 <p class="is-size-7">
