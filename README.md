@@ -7,6 +7,8 @@
 
 # 文章列表
 
+* [你应该知道的折叠屏收集适配](https://wecteam.io/2019%2F11%2F08%2F%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%8A%98%E5%8F%A0%E5%B1%8F%E6%94%B6%E9%9B%86%E9%80%82%E9%85%8D%2F)
+
 * [V8引擎和JavaScript优化建议](https://wecteam.io/2019%2F10%2F23%2FV8-%E5%BC%95%E6%93%8E%E5%92%8CJavascript%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE%2F)
 
 * [网页设计和开发中，关于字体的常识](https://wecteam.io/2019%2F10%2F23%2F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E5%85%B3%E4%BA%8E%E5%AD%97%E4%BD%93%E7%9A%84%E5%B8%B8%E8%AF%86%2F)
