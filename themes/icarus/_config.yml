@@ -1,7 +1,7 @@
 # Version of the Icarus theme that is currently used
 version: 2.6.0
 # Path or URL to the website's icon
-favicon: /images/favicon.svg
+favicon: /images/favicon.ico
 # Additional HTML meta tags in an array.
 meta: 
 # Path or URL to RSS atom.xml
@@ -26,15 +26,15 @@ navbar:
     # Navigation bar menu links
     menu:
         主页: /
-        归档: /archives
+        # 归档: /archives
         分类: /categories
         标签: /tags
         关于我们: /about
     # Navigation bar links to be shown on the right
     links:
-        Download on GitHub:
+        WecTeam on GitHub:
             icon: fab fa-github
-            url: 'https://github.com/wecteam/blog'
+            url: 'https://github.com/wecteam'
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section
@@ -45,9 +45,9 @@ footer:
         # Attribution 4.0 International:
         #     icon: fab fa-creative-commons-by
         #     url: 'https://creativecommons.org/licenses/by/4.0/'
-        Download on GitHub:
+        WecTeam on GitHub:
             icon: fab fa-github
-            url: 'https://github.com/wecteam/blog'
+            url: 'https://github.com/wecteam'
 # Article display settings
 article:
     # Code highlight settings
@@ -137,12 +137,12 @@ widgets:
         # Whether to show avatar image rounded or square
         avatar_rounded: false
         # Path or URL for the follow button
-        follow_link: 'https://github.com/wecteam/blog'
+        follow_link: 'https://github.com/wecteam'
         # Links to be shown on the bottom of the profile widget
         social_links:
-            Github:
-                icon: fab fa-github
-                url: 'https://github.com/wecteam/blog'
+            #Github:
+            #    icon: fab fa-github
+            #    url: 'https://github.com/wecteam'
             # Facebook:
             #     icon: fab fa-facebook
             #     url: 'https://facebook.com'

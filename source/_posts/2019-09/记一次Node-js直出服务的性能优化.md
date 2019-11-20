@@ -1,8 +1,8 @@
 ---
 title: 记一次Node.js直出服务的性能优化
 date: 2019-09-27 03:06:01
-cover:  http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg
-thumbnail: http://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg
+cover:  https://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg
+thumbnail: https://img14.360buyimg.com/jdphoto/jfs/t1/50740/31/9213/54632/5d6a57bcE69b28e44/8fa1c3c5396e49af.jpg
 tags: 
   - Vue.compile
   - CPU性能优化

@@ -1,8 +1,8 @@
 ---
 title: 手把手教你写webpack loader
 date: 2019-09-17 09:32:51
-cover: http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg
-thumbnail: http://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg
+cover: https://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg
+thumbnail: https://img10.360buyimg.com/wq/jfs/t1/74297/12/5206/14769/5d359eedEb8b76619/be9c3c22fbe93ae2.jpg
 tags: 
   - webpack loader
   - 工程化

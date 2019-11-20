@@ -1,8 +1,8 @@
 ---
 title: 手把手教你写一个AST解析器
 date: 2019-10-17 12:07:18
-cover: http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png
-thumbnail: http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png
+cover: https://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png
+thumbnail: https://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png
 categories: Web前端
 tags: 
   - AST

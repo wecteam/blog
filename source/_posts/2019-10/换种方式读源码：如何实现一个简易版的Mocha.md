@@ -1,8 +1,8 @@
 ---
 title: 换种方式读源码：如何实现一个简易版的Mocha
 date: 2019-10-09 11:38:01
-cover:  http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg
-thumbnail: http://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg
+cover:  https://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg
+thumbnail: https://img12.360buyimg.com/jdphoto/s720x500_jfs/t1/55376/13/6006/26944/5d39aef7E0f8caba4/5943c06be69970c0.jpg
 tags: 
   - Mocha
   - BDD/TDD
@@ -220,7 +220,7 @@ module.exports = Test;
 
 收集测试用例环节首先需要创建一个 suite 根节点，并把 API 挂载到全局，然后再执行测试用例文件 `*.spec.js` 进行用例收集，最终将生成一棵与之结构对应的 suite-test 树。
 
-![](http://img14.360buyimg.com/jdphoto/jfs/t1/53678/4/6276/45324/5d3d8050Ec3ec53ee/f8ce3fdc0c125be1.png)
+![](https://img14.360buyimg.com/jdphoto/jfs/t1/53678/4/6276/45324/5d3d8050Ec3ec53ee/f8ce3fdc0c125be1.png)
 
 ###### 1、suite 根节点
 
@@ -421,7 +421,7 @@ class Mocha {
 
 在这个环节中，我们需要通过遍历 suite-test 树来递归执行 suite 节点和 test 节点，并同步地输出测试报告。
 
-![](http://img12.360buyimg.com/jdphoto/jfs/t1/84286/39/5724/43564/5d3d7f79E2576b082/4e91c6c081678702.png)
+![](https://img12.360buyimg.com/jdphoto/jfs/t1/84286/39/5724/43564/5d3d7f79E2576b082/4e91c6c081678702.png)
 
 ###### 1、异步执行
 
@@ -832,7 +832,7 @@ npm test
 
 测试用例执行成功。附上完整的流程图：
 
-![](http://img13.360buyimg.com/jdphoto/jfs/t1/48002/14/6249/38293/5d3d7dd6E1b985819/7ba08cfe21c04c73.png)
+![](https://img13.360buyimg.com/jdphoto/jfs/t1/48002/14/6249/38293/5d3d7dd6E1b985819/7ba08cfe21c04c73.png)
 
 ## 结尾
 

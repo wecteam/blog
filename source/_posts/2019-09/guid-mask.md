@@ -2,8 +2,8 @@
 title: 你还在用图片做引导蒙层？
 subtitle: 本文讲述引导蒙层的6种实现方式
 date: 2019-09-20 10:43:41
-cover:  http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg
-thumbnail: http://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg
+cover:  https://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg
+thumbnail: https://wq.360buyimg.com/data/ppms/picture/WechatIMG1.jpg
 tags: 
   - 引导蒙层
   - canvas
