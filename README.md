@@ -7,6 +7,14 @@
 
 # 文章列表
 
+* [老板的手机收到一个红包，为什么红包没居中？](https://wecteam.io/2019%2F11%2F24%2F%E8%80%81%E6%9D%BF%E7%9A%84%E6%89%8B%E6%9C%BA%E6%94%B6%E5%88%B0%E4%B8%80%E4%B8%AA%E7%BA%A2%E5%8C%85%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%A2%E5%8C%85%E6%B2%A1%E5%B1%85%E4%B8%AD%EF%BC%9F%2F)
+
+* [前端er须知的Nginx技巧](https://wecteam.io/2019%2F11%2F24%2F%E5%89%8D%E7%AB%AFer%E9%A1%BB%E7%9F%A5%E7%9A%84Nginx%E6%8A%80%E5%B7%A7%2F)
+
+* [Interection Observer如何观察变化](https://wecteam.io/2019%2F11%2F24%2FInterection-Observer%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E5%8F%98%E5%8C%96%2F)
+
+* [深度揭秘Promise注册微任务和执行过程](https://wecteam.io/2019%2F11%2F24%2F%E6%B7%B1%E5%BA%A6%E6%8F%AD%E7%A7%98Promise%E6%B3%A8%E5%86%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E5%92%8C%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%2F)
+
 * [你应该知道的折叠屏收集适配](https://wecteam.io/2019%2F11%2F08%2F%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%8A%98%E5%8F%A0%E5%B1%8F%E6%94%B6%E9%9B%86%E9%80%82%E9%85%8D%2F)
 
 * [V8引擎和JavaScript优化建议](https://wecteam.io/2019%2F10%2F23%2FV8-%E5%BC%95%E6%93%8E%E5%92%8CJavascript%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE%2F)
