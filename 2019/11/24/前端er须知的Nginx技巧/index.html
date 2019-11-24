@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="前端er须知的Nginx技巧" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/54499/32/14318/35612/5db6dd6cE20c98309/d9a497a04f84974f.png" alt="前端er须知的Nginx技巧">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-11-24T13:50:45.000Z">2019-11-24</time>-->
+                <div class="level-item has-text-grey">2019-11-24</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Web后端/">Web后端</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    37 分钟 读完 (大约 5503 个字)
+                </span>
+                
+                
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                前端er须知的Nginx技巧
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：沐童</p>
+</blockquote>
+<h1 id="前述"><a href="#前述" class="headerlink" title="前述"></a>前述</h1><p>Nginx 对于大多数开发者来说不算陌生，企业团队用它来搭建请求网关，我们私下用它 “科学上网”（价值观警告）。但对于前端 er 来说，平日里开发大多时候都只是专注于业务，根本不需要也没机会涉及到 Nginx 这一块的内容，也就导致我们也对它的了解少之甚少。随着 serverless 孕育普及，越来越多的人相信，不需要掌握任何运维知识，也能简单快速地实现自己的技术 idea。</p>
+<p>然而事实上并不是这样的，Node 的兴起让前端工程师开始涉足后端领域，我们可以独立维护一些 BFF 服务，即使这只是一些简单的应用，也需要你掌握一定的运维技巧。另一方面，在快速变革的软件开发体系下，不同职责之间的部分边界变得越来越模糊，DevOps 理念的深入，也让我们不得不把目光投向应用运维，开始思考在新体系下如何构建一体化工程。所以，懂得一些简单易用的 Nginx 技巧，对于前端开发者来说，是非常必要的。</p>
+<p>所谓 “技多不压身”，在你还在思考学不学的时候，有些人已经学完了。</p>
+<a id="more"></a>
+<h1 id="Nginx-是什么"><a href="#Nginx-是什么" class="headerlink" title="Nginx 是什么"></a>Nginx 是什么</h1><blockquote>
+<p>Nginx 是一个开源且高性能、可靠的 http 中间件，代理服务。Nginx（发音同 engine x）是一个 Web 服务器，也可以用作反向代理，负载平衡器和 HTTP 缓存。</p>
+</blockquote>
+<p>这是个经典的概述。Nginx 的 “高性能” 主要体现在支持海量并发的 webserver 服务，而 “可靠” 则意味着稳定性高、容错率大，同时，由于 Nginx 架构基于模块，我们大可以通过内置模块和第三方模块的自由组合，来构建适配自身业务的 Nginx 服务。正因如此，Nginx 才备受青睐，得以广泛出现在各种规模的企业团队中，成为技术体系的重要参与者。</p>
+<p>对于 Nginx，我们可以深入探索的有很多，但对前端开发者而言，能够熟悉掌握和编写 Nginx 的核心配置文件 <code>nginx.conf</code>，其实已经能解决 80% 的问题了。</p>
+<h1 id="Docker-快速搭建-Nginx-服务"><a href="#Docker-快速搭建-Nginx-服务" class="headerlink" title="Docker 快速搭建 Nginx 服务"></a>Docker 快速搭建 Nginx 服务</h1><p>纯手工安装 Nginx 经典的步骤是 “四项确认、两项安装、一次初始化”，过程繁琐而且容易踩坑，但是利用 Docker，我们完全没必要这么麻烦。Docker 是一个基于 Golang 的开源的应用容器引擎，支持开发者打包他们的应用以及依赖包到一个轻量可移植的沙箱容器中，因此我们可以使用 Docker 轻而易举地在我们本地搭建一个 Nginx 服务，完全跳过安装流程。关于 Docker 这里不做细讲，有兴趣的同学可以自行了解 <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a>。</p>
+<p>为了简便演示，我们使用更加高效的 Docker-Compose 来构建我们的 Nginx 服务。Docker-Compose 是 Docker 提供的一个命令行工具，用来定义和运行由多个容器组成的应用。使用 Docker-Compose，我们可以通过 YAML 文件声明式的定义应用程序的各个服务，并由单个命令完成应用的创建和启动。</p>
+<p>要完成接下来的操作，首先你需要安装 Docker，不同的操作系统有不同的 <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">安装</a> 方式。</p>
+<p>环境就位后，我们新建一个项目 <code>nginx-quick</code>，在根目录新建一个 <code>docker-compose.yml</code> 文件，这是 Docker-Compose 的配置文件：</p>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line"><span class="hljs-attr">  nginx:</span> <span class="hljs-comment"># 服务的名称</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span> <span class="hljs-comment"># 文件夹映射</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./nginx/nginx.conf:/etc/nginx/nginx.conf</span> <span class="hljs-comment"># nginx 配置文件</span></span><br><span class="line"><span class="hljs-attr">    ports:</span> <span class="hljs-comment"># 端口转发</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"8080:80"</span></span><br></pre></td></tr></table></figure>
+
+<p>我们定义了一组服务 nginx，用于启动一个 docker 容器。容器对应的镜像是 <code>nginx</code>，在容器内 Nginx 服务的启动端口是 80，外部访问端口是 8080，同时，我们把本地自定义的 Nginx 配置文件 <code>./nginx/nginx.conf</code> 对应同步到容器中的 <code>/etc/nginx/nginx.conf</code> 路径。</p>
+<p>新建 <code>nginx/nginx.conf</code>：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 全局配置</span><br><span class="line">user  nginx;         # 配置用户或者组</span><br><span class="line">worker_processes  1; # 允许生成的进程数</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn; # 错误日志路径，warn 代表日志级别，级别越高记录越少</span><br><span class="line">pid        /var/run/nginx.pid;            # Nginx 进程运行文件存放地址</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">  accept_mutex on;          # 设置网路连接序列化，防止惊群现象发生</span><br><span class="line">  multi_accept on;          # 设置一个进程是否同时接受多个网络连接</span><br><span class="line">  worker_connections  1024; # 每个进程的最大连接数，因此理论上每台 Nginx 服务器的最大连接数 = worker_processes * worker_connections</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># HTTP 配置</span><br><span class="line">http &#123;</span><br><span class="line">  include       /etc/nginx/mime.types;    # 文件扩展名与文件类型映射表</span><br><span class="line">  default_type  application/octet-stream; # 默认文件类型</span><br><span class="line"></span><br><span class="line">  log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                    &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                    &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;; # 日志格式</span><br><span class="line"></span><br><span class="line">  access_log  /var/log/nginx/access.log  main; # 访问日志路径</span><br><span class="line"></span><br><span class="line">  sendfile        on; # 允许 sendfile 方式传输文件</span><br><span class="line"></span><br><span class="line">  keepalive_timeout  65; # 连接超时时间</span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">    listen       80;         # 监听端口</span><br><span class="line">    server_name  localhost;  # 监听地址</span><br><span class="line"></span><br><span class="line">    location / &#123;                    # 请求的url过滤，正则匹配</span><br><span class="line">      root   /usr/share/nginx/html; # 根目录</span><br><span class="line">      index  index.html index.htm;  # 默认页</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一份最基础的 Nginx 配置，相关配置项及对应详细的释义可以看看注释，这里我们简单配置了一个 <code>localhost:80</code> 的访问监听（注意这里的 localhost 不是本地，是容器内部）。</p>
+<p>执行 <code>docker-compose up -d</code> 创建服务，访问 <code>localhost:8080</code> 可以看到 Nginx 的默认主页 <code>Welcome to nginx!</code>。</p>
+<p>执行 <code>docker exec -it nginx-quick_nginx_1 bash</code> 进入容器内部，再执行 <code>cat /etc/nginx/nginx.conf</code>，可以看到我们自定义的 Nginx 配置文件成功覆盖了默认的 Nginx 配置。</p>
+<h1 id="Nginx-的-HTTP-配置"><a href="#Nginx-的-HTTP-配置" class="headerlink" title="Nginx 的 HTTP 配置"></a>Nginx 的 HTTP 配置</h1><p>HTTP 配置是 Nginx 配置最关键，同时也是 Nginx 实用技巧中最常涉及的部分。Nginx 的 HTTP 配置主要分为三个层级的上下文：http — server — location。</p>
+<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><p>http 主要存放协议级别的配置，包括常用的诸如文件类型、连接时限、日志存储以及数据格式等网络连接配置，这些配置对于所有的服务都是有效的。</p>
+<h2 id="server"><a href="#server" class="headerlink" title="server"></a>server</h2><p>server 是虚拟主机配置，主要存放服务级别的配置，包括服务地址和端口、编码格式以及服务默认的根目录和主页等。部分特殊的配置各级上下文都可以拥有，比如 <code>charest</code> (编码格式) <code>access_log</code> （访问日志）等，因此你可以单独指定该服务的访问日志，如果没有则默认向上继承。</p>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>location 是请求级别的配置，它通过 url 正则匹配来指定对某个请求的处理方式，主要包括代理配置、缓存配置等。location 配置的语法规则主要为：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># location [修饰符] 匹配模式 &#123; ... &#125;</span></span><br><span class="line"><span class="hljs-string">location</span> <span class="hljs-string">[=|~|~*|^~]</span> <span class="hljs-string">pattern</span> <span class="hljs-string">&#123;</span> <span class="hljs-string">...</span> <span class="hljs-string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>1）没有任何修饰符时表示路径前缀匹配，下边这个例子，匹配 <code>http://www.jd.com/test</code> 和 <code>http://www.jd.com/test/may</code>。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name www.jd.com;</span><br><span class="line">  location /test &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）<code>=</code> 表示路径精确匹配，下边这个例子，只匹配 <code>http://www.jd.com/test</code>。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name www.jd.com;</span><br><span class="line">  location = /test &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3）<code>~</code> 表示正则匹配时要区分大小写，下边这个例子，匹配 <code>http://www.jd.com/test</code>，但不匹配 <code>http://www.jd.com/TEST</code>。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name www.jd.com;</span><br><span class="line">  location ~ ^/test$ &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4）<code>~*</code> 表示正则匹配时不需要区分大小写，下边这个例子，既匹配 <code>http://www.jd.com/test</code>，也匹配 <code>http://www.jd.com/TEST</code>。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name www.jd.com;</span><br><span class="line">  location ~* ^/test$ &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5）<code>^~</code> 表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找。</p>
+<p>Nginx location 有自己的一套匹配优先级：</p>
+<ul>
+<li>先精确匹配 <code>=</code></li>
+<li>再前缀匹配 <code>^~</code></li>
+<li>再按文件中顺序的正则匹配 <code>~</code> 或 <code>~*</code></li>
+<li>最后匹配不带任何修饰的前缀匹配</li>
+</ul>
+<p>下边这个例子，<code>http://www.jd.com/test/may</code> 虽然命中了两个 location 规则，但是由于 <code>^~</code> 匹配优先级高于 <code>~*</code> 匹配，所以将优先使用第二个 location。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name www.jd.com;</span><br><span class="line">  location ~* ^/test/may$ &#123; &#125;</span><br><span class="line">  location ^~ /test &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nginx-实用技巧"><a href="#Nginx-实用技巧" class="headerlink" title="Nginx 实用技巧"></a>Nginx 实用技巧</h1><p>了解完一些 Nginx 的基础语法，我们再来看看在前端人手里，Nginx 可以有哪些实用的场景及技巧。</p>
+<h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>代理转发是 Nginx 最为普遍的使用场景，正向代理就是其中一种。</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/96243/11/1355/36810/5dbe33e4E2f671c25/93a95ebdb52f2597.png" alt></p>
+<p>客户端通过访问一个代理服务，由它将请求转发到目标服务，再接受目标服务的请求响应并最终返回给客户端，这就是一个代理的过程。“科学上网” 就是一种典型的正向代理，在这个过程中，Nginx 就充当了代理中介的角色。</p>
+<p>我们在根目录下新建 <code>web/</code> 目录，添加一个 <code>index1.html</code>，作为目标服务的访问主页：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Web服务主页<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span></span><br><span class="line">  p &#123;</span><br><span class="line">    margin: 80px 0;</span><br><span class="line">    text-align: center;</span><br><span class="line">    font-size: 28px;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是 Web1 服务的首页<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>docker-compose.yml</code>，新增一个 Nginx 服务 <code>web1</code> 作为目标服务，用自定义的 html 去覆盖默认的主页 html，同时，我们用 <code>link: - web1:web1</code> 建立起代理服务 <code>nginx</code> 和目标服务 <code>web1</code> 之间的容器连接：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line"><span class="hljs-attr">  nginx:</span> <span class="hljs-comment"># 服务的名称</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    links:</span></span><br><span class="line"><span class="hljs-attr">      - web1:</span><span class="hljs-string">web1</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span> <span class="hljs-comment"># 文件夹映射</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./nginx/nginx.conf:/etc/nginx/nginx.conf</span> <span class="hljs-comment"># nginx 配置文件</span></span><br><span class="line"><span class="hljs-attr">    ports:</span> <span class="hljs-comment"># 端口转发</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"8080:80"</span></span><br><span class="line"><span class="hljs-attr">  web1:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./web/index1.html:/usr/share/nginx/html/index.html</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"80"</span></span><br></pre></td></tr></table></figure>
+
+<p>修改 Nginx 的 location 配置，利用 <code>proxy_pass</code> 属性让主路径访问请求转发到目标服务 <code>web1</code>：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line">location / &#123;</span><br><span class="line">  proxy_redirect off;</span><br><span class="line">  proxy_pass http://web1; ## 转发到web1</span><br><span class="line">&#125;</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<p>重启容器，访问 <code>localhost:8080</code>，可以发现代理服务成功将我们的请求转发到目标 Web 服务：</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/97309/38/1341/115137/5dbdaf1bEc543e175/e4584a7d18996f8f.png" alt></p>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p>代理还包括反向代理，我们业务中最常提到的负载均衡，就是一种典型的反向代理。当网站的访问量达到一定程度后，单台服务器不能满足用户的请求时，就需要用多台服务器构建集群服务了，此时多台服务器将以合理的方式分担负载，避免出现某台服务器负载高宕机而某台服务器闲置的情况。</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/71670/9/14524/41921/5dbe33bfEe3438ed2/1972475a33bd27fe.png" alt></p>
+<p>利用 Nginx 的 <code>upstream</code> 配置，我们可以简单地实现负载均衡。负载均衡需要多个目标服务，因此我们在 <code>web</code> 目录下新建 <code>index2.html</code> 和 <code>index3.html</code>，作为新增服务的访问主页。</p>
+<p>修改 <code>docker-compose.yml</code>，新增两个服务 <code>web2</code> 和 <code>web3</code>，并建立容器连接：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line"><span class="hljs-attr">  nginx:</span> <span class="hljs-comment"># 服务的名称</span></span><br><span class="line">    <span class="hljs-comment"># ...</span></span><br><span class="line"><span class="hljs-attr">    links:</span></span><br><span class="line">      <span class="hljs-comment"># ...</span></span><br><span class="line"><span class="hljs-attr">      - web2:</span><span class="hljs-string">web2</span></span><br><span class="line"><span class="hljs-attr">      - web3:</span><span class="hljs-string">web3</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">  web2:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./web/index2.html:/usr/share/nginx/html/index.html</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"80"</span></span><br><span class="line"><span class="hljs-attr">  web3:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./web/index3.html:/usr/share/nginx/html/index.html</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"80"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>nginx.conf</code> 中，我们创建了一个 upstream 配置 <code>web-app</code>，<code>web-app</code> 配置了三个目标服务，因此我们的请求将经由 <code>web-app</code> 代理到目标服务。Nginx 自带的负载均衡策略有多种，包括默认的轮询方式、权重方式、依据 IP 分配的 ip_hash 方式以及最少连接的 least_conn 方式等，采取哪种策略需要根据不同的业务和并发场景而定，这里我们使用 <code>least_conn</code> 策略来处理请求的分发。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line">upstream web-app &#123;</span><br><span class="line">  least_conn;   # 最少连接，选取活跃连接数与权重weight的比值最小者，为下一个处理请求的server</span><br><span class="line">  server web1 weight=10 max_fails=3 fail_timeout=30s;</span><br><span class="line">  server web2 weight=10 max_fails=3 fail_timeout=30s;</span><br><span class="line">  server web3 weight=10 max_fails=3 fail_timeout=30s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">  listen       80;         # 监听端口</span><br><span class="line">  server_name  localhost;  # 监听地址</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://web-app; ## 转发到web-app</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<p>重新启动容器，可以发现多次请求时，代理服务都转发到了不同的目标 Web 服务：</p>
+<p><img src="//img12.360buyimg.com/jdphoto/jfs/t1/103799/7/1407/298411/5dbe65f0E17ac1cca/5ab9ca099d2d2c5d.gif" alt></p>
+<h2 id="Server-side-Include"><a href="#Server-side-Include" class="headerlink" title="Server-side Include"></a>Server-side Include</h2><p>Server-side Include（简称 SSI）是一种简单的解释型服务端脚本语言，是指在页面被获取时，服务器端能够进行 SSI 指令解析，对现有 HTML 页面增加动态生成的内容。SSI 是早期 Web 实现模块化的一个重要手段，适用于多种运行环境，且解析效率比 JSP 高，目前仍然在一些大型网站中广泛应用。</p>
+<p>在 HTML 中使用 SSI 的格式就像这样：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--#include virtual="/global/foot.html"--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一行注释，通过服务端的 SSI 解析，会被置换成 <code>/global/foot.html</code> 的内容，virtual 可以是绝对路径，也可以是相对路径。</p>
+<p>Nginx 可以简单快速地支持 SSI，让你的页面实现动态引入其他 HTML 内容。我们在 <code>web</code> 目录下新建一个 HTML 页面片 <code>sinclude.html</code>：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span></span><br><span class="line">* &#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>web/index1.html</code>，加上 SSI 指令，引入页面片 <code>./sinclude.html</code>：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="hljs-comment">&lt;!--#include virtual="./sinclude.html"--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>docker-compose.yml</code>，把 <code>sinclude.html</code> 也放到 web 服务的访问根目录下：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">version:</span> <span class="hljs-string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line"><span class="hljs-attr">  nginx:</span> <span class="hljs-comment"># 服务的名称</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    links:</span></span><br><span class="line"><span class="hljs-attr">      - web1:</span><span class="hljs-string">web1</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span> <span class="hljs-comment"># 文件夹映射</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./nginx/nginx.conf:/etc/nginx/nginx.conf</span> <span class="hljs-comment"># nginx 配置文件</span></span><br><span class="line"><span class="hljs-attr">    ports:</span> <span class="hljs-comment"># 端口转发</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"8080:80"</span></span><br><span class="line"><span class="hljs-attr">  web1:</span></span><br><span class="line"><span class="hljs-attr">    image:</span> <span class="hljs-string">nginx</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./web/index1.html:/usr/share/nginx/html/index.html</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./web/sinclude.html:/usr/share/nginx/html/sinclude.html</span></span><br><span class="line"><span class="hljs-attr">    ports:</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"80"</span></span><br></pre></td></tr></table></figure>
+
+<p>最后在 <code>nginx.conf</code> 中简单配置以下两个属性，开启 Nginx 的 SSI 支持，其中 <code>ssi_silent_errors</code> 表示处理 SSI 文件出错时需要输出错误提示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  ssi on;</span><br><span class="line">  ssi_silent_errors on; # 处理 SSI 文件出错时输出错误提示，默认 off</span><br><span class="line">  </span><br><span class="line">  proxy_redirect off;</span><br><span class="line">  proxy_pass http://web1; ## 转发到web1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下，Nginx 成功解析 SSI 指令，并将页面片插入到 HTML 页面中：</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/104329/12/1338/342854/5dbe6747E3e7bc702/90d88f4ccd3afc06.png" alt></p>
+<p>需要注意的是，如果这里使用了反向代理，存在多个 web 服务，那么请保证每一个 web 服务都存在 <code>sinclude.html</code> 文件并且路径相同，因为获取 <code>index.html</code> 和获取 <code>sinclude.html</code> 是两趟分发，除非使用了 ip_hash 策略，否则就有可能转发到两个不同的服务上，导致获取不到页面片文件。</p>
+<h2 id="GZIP-压缩"><a href="#GZIP-压缩" class="headerlink" title="GZIP 压缩"></a>GZIP 压缩</h2><p>HTTP 传输主要以文本为主，其中大量是一些静态资源文件，包括 JS / CSS / HTML / IMAGE 等。GZIP 压缩可以在传输的过程中对内容进行压缩，减少带宽压力的同时提高用户访问速度，是一个有效的 Web 页面性能优化手段。</p>
+<p>Nginx 利用 <code>gzip</code> 属性配置来开启响应内容的 GZIP 压缩：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  # ...</span><br><span class="line">  gzip on;</span><br><span class="line">  gzip_min_length 1k; # 大于1K的文件才会压缩</span><br><span class="line">  </span><br><span class="line">  # ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>gzip_min_length</code> 指定接受压缩的最小数据大小，以上是小于 1K 的不予压缩，压缩后的请求响应头中多了 <code>Content-Encoding: gzip</code>。我们可以给 HTML 文件中多放点内容，这样才能让压缩效果更加明显，下边是 GZIP 开启前和开启后的效果对比：</p>
+<p>1）压缩前，HTML 大小 3.3 KB</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/92335/3/1357/114829/5dbe6e29E41072b55/2535e62e298f936b.png" alt></p>
+<p>2）开启 GZIP 压缩后，HTML 大小 555 B</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/58486/32/14956/115547/5dbe6e70E2e4a0192/e603c20a243b8b1c.png" alt></p>
+<h2 id="防盗链"><a href="#防盗链" class="headerlink" title="防盗链"></a>防盗链</h2><p>某些情况下我们不希望自己的资源文件被外部网站使用，比如有时候我会把 JD 图片服务上的图片链接直接复制到 GitHub 上使用，这个时候假如 JD 要禁用来自 GitHub 的图片访问，可以怎么做呢？很简单：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ~* \.(gif|jpg|png|webp)$ &#123;</span><br><span class="line">   valid_referers none blocked server_names jd.com *.jd.com;</span><br><span class="line">   if ($invalid_referer) &#123;</span><br><span class="line">    return 403;</span><br><span class="line">   &#125;</span><br><span class="line">   return 200 &quot;get image success\n&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们利用 Nginx 自带的 <code>valid_referers</code> 指令，对所有图片请求做了一个 referer 校验，只有 <code>jd.com</code> 及其子域下的图片请求才能成功，其他的都走 403 禁止，变量 <code>$invalid_referer</code> 的值正是校验结果。我们测试一下访问结果，可以发现，非法 referer 的请求都被拦截禁止了：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ECCMAC-48ed2e556:nginx-quick hankle$ curl -H &apos;referer: http://jd.com&apos; http://localhost:8080/test.jpg</span><br><span class="line">get image success</span><br><span class="line">ECCMAC-48ed2e556:nginx-quick hankle$ curl -H &apos;referer: http://wq.jd.com&apos; http://localhost:8080/test.jpg</span><br><span class="line">get image success</span><br><span class="line">ECCMAC-48ed2e556:nginx-quick hankle$ curl -H &apos;referer: http://baidu.com&apos; http://localhost:8080/test.jpg</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;403 Forbidden&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.17.5&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS 大家都比较熟悉了，它是在 HTTP 基础上引入 SSL 层来建立安全通道，通过对传输内容进行加密以及身份验证，避免数据在传输过程中被中间人劫持、篡改或盗用的一种技术。 Chrome 从 62 版本开始将带有输入数据的 HTTP 站点和以隐身模式查看的所有 HTTP 站点自动标记为 “不安全” 站点，可见在网络安全规范普及下，HTTPS 化是未来 Web 网站的一大趋势。</p>
+<p>Nginx 可以简单快速地搭建起 HTTPS 服务，需要依赖于 http_ssl_module 模块。<code>nginx -V</code> 能够列出 Nginx 的编译参数，查看是否已安装 http_ssl_module 模块。</p>
+<p>搭建 HTTPS 服务需要生成密钥和自签 SSL 证书（测试用，正式的需要签署第三方可信任的 SSL 证书），我们需要利用到 openssl 库。新建 <code>nginx/ssl_cert</code> 目录：</p>
+<p>1）生成密钥 <code>.key</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out nginx_quick.key 1024</span><br></pre></td></tr></table></figure>
+
+<p>2）生成证书签名请求文件 <code>.csr</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key nginx_quick.key -out nginx_quick.csr</span><br></pre></td></tr></table></figure>
+
+<p>3）生成证书签名文件 <code>.crt</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -days 3650 -in nginx_quick.csr -signkey nginx_quick.key -out nginx_quick.crt</span><br></pre></td></tr></table></figure>
+
+<p>完成这三步后，我们也就生成了 HTTPS 所需的密钥和 SSL 证书，直接配置到 <code>nginx.conf</code> 中：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># ...</span><br><span class="line">server &#123;</span><br><span class="line">  listen       443 ssl;    # 监听端口</span><br><span class="line">  server_name  localhost;  # 监听地址</span><br><span class="line"></span><br><span class="line">  ssl_certificate /etc/nginx/ssl_cert/nginx_quick.crt;</span><br><span class="line">  ssl_certificate_key /etc/nginx/ssl_cert/nginx_quick.key;</span><br><span class="line"></span><br><span class="line">  # ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>docker-compose.yml</code>，把自定义证书文件传到 Nginx 的对应路径下：</p>
+<figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">services:</span></span><br><span class="line"><span class="hljs-attr">  nginx:</span> <span class="hljs-comment"># 服务的名称</span></span><br><span class="line">    <span class="hljs-comment"># ...</span></span><br><span class="line"><span class="hljs-attr">    volumes:</span> <span class="hljs-comment"># 文件夹映射</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./nginx/nginx.conf:/etc/nginx/nginx.conf</span> <span class="hljs-comment"># nginx 配置文件</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">./nginx/ssl_cert:/etc/nginx/ssl_cert</span> <span class="hljs-comment"># 证书文件</span></span><br><span class="line"><span class="hljs-attr">    ports:</span> <span class="hljs-comment"># 端口转发</span></span><br><span class="line"><span class="hljs-bullet">      -</span> <span class="hljs-string">"443:443"</span></span><br></pre></td></tr></table></figure>
+
+<p>重启后访问 <code>https://localhost</code>，发现页面被 Chrome 标记为不安全访问，这是因为自签证书是无效证书导致的，点击「继续前往」可正常访问到页面：</p>
+<p><img src="//img10.360buyimg.com/wq/jfs/t1/105761/29/1412/230363/5dbe9369Ead6e1a5d/79a14865c54784ed.png" alt></p>
+<h2 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a>页面缓存</h2><p>我们常说的页面缓存主要分为三类：客户端缓存、代理缓存、服务端缓存，这里重点讨论的是代理缓存。</p>
+<p>当 Nginx 做代理时，假如接收的大多是一些响应数据不怎么变化的请求，比如静态资源请求，使用 Nginx 缓存将大幅度提升请求速度。Nginx 中的缓存是以文件系统上的分层数据存储的形式实现的，缓存键可配置，并且可以使用不同的特定于请求的参数来控制进入缓存的内容。</p>
+<p>Nginx 利用 <code>proxy_cache_path</code> 和 <code>proxy_cache</code> 来开启内容缓存，前者用来设置缓存的路径和配置，后者用来启用缓存：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">  # ...</span><br><span class="line">  proxy_cache_path /data/nginx/cache levels=1:2 keys_zone=mycache:10m max_size=10g inactive=60m;</span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">    # ...</span><br><span class="line"></span><br><span class="line">    proxy_cache mycache;</span><br><span class="line"></span><br><span class="line">    # ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上边我们设置了一个缓存 <code>mycache</code>，并在 server 中启用：</p>
+<p>1）<code>/data/nginx/cache</code> 指定了本地缓存的根目录；</p>
+<p>2）<code>level</code> 代表缓存目录结构是两层的，最多设置3层，数字代表命名长度，比如 <code>1:2</code> 就会生成诸如 <code>/data/nginx/cache/w/0d</code> 的目录，对于大量缓存场景，合理的分层缓存是必要的；</p>
+<p>3）<code>keys_zone</code> 设置了一个共享内存区，<code>10m</code> 代表内存区的大小，该内存区用于存储缓存键和元数据，保证 Nginx 在不检索磁盘的情况下能够快速判断出缓存是否命中；</p>
+<p>4）<code>max_size</code> 设置了缓存的上限，默认是不限制；</p>
+<p>5）<code>inactive</code> 设置了缓存在未被访问时能够持续保留的最长时间，也就是失活时间。</p>
+<h1 id="尾言"><a href="#尾言" class="headerlink" title="尾言"></a>尾言</h1><p>以上是一些简单实用的 Nginx 应用场景和使用技巧，对于前端开发来说，Nginx 依然还是很有必要深入了解的。但是面对繁琐复杂的 Nginx 配置和不堪入目的官方文档，不少人都要叫苦了，并且就算语法熟练编写无障碍，也会因为调试困难等各种问题浪费大量时间来排查错误。这里推荐一个 <a href="https://nginxconfig.io/" target="_blank" rel="noopener">Nginx 配置在线生成工具</a>，可以简单快速地生成你需要的 <code>nginx.conf</code> 配置，妈妈再也不用担心我学不好 Nginx 了！</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Nginx/">Nginx</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">老板的手机收到一个红包，为什么红包没居中？</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/24/Interection-Observer如何观察变化/">
+                <span class="level-item">Interection Observer如何观察变化</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        25
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        37
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">13</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web后端/">
+            <span class="level-start">
+                <span class="level-item">Web后端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 15px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 15px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 15px;">Mocha</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/V8引擎/" style="font-size: 10px;">V8引擎</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/居中对齐/" style="font-size: 10px;">居中对齐</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/折叠屏适配/" style="font-size: 10px;">折叠屏适配</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 15px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/设计原则/" style="font-size: 10px;">设计原则</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s897x383_jfs/t1/84368/7/16128/51325/5dda8cbfE6c4bf4c8/e3400cdec44faf86.jpg" alt="老板的手机收到一个红包，为什么红包没居中？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:57:14.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="title has-link-black-ter is-size-6 has-text-weight-normal">老板的手机收到一个红包，为什么红包没居中？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/前端er须知的Nginx技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/54499/32/14318/35612/5db6dd6cE20c98309/d9a497a04f84974f.png" alt="前端er须知的Nginx技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:50:45.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/前端er须知的Nginx技巧/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端er须知的Nginx技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web后端/">Web后端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/Interection-Observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/79241/26/15985/79010/5dda8bffEe806263e/adf0d39a44140eaa.png" alt="Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:45:02.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/Interection-Observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img30.360buyimg.com/jdphoto/jfs/t1/52689/36/15168/153858/5dc0f5afEd1531125/e7b4bc9e2d4baea9.png" alt="深度揭秘Promise注册微任务和执行过程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:39:11.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">深度揭秘Promise注册微任务和执行过程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T01:47:23.000Z">2019-11-08</time></div>
+                    <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你应该知道的折叠屏收集适配</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/V8引擎/">
+                        <span class="tag">V8引擎</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字体/">
+                        <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/折叠屏适配/">
+                        <span class="tag">折叠屏适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计原则/">
+                        <span class="tag">设计原则</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s897x383_jfs/t1/84368/7/16128/51325/5dda8cbfE6c4bf4c8/e3400cdec44faf86.jpg" alt="老板的手机收到一个红包，为什么红包没居中？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:57:14.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="title has-link-black-ter is-size-6 has-text-weight-normal">老板的手机收到一个红包，为什么红包没居中？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/前端er须知的Nginx技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/54499/32/14318/35612/5db6dd6cE20c98309/d9a497a04f84974f.png" alt="前端er须知的Nginx技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:50:45.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/前端er须知的Nginx技巧/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端er须知的Nginx技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web后端/">Web后端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/Interection-Observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/79241/26/15985/79010/5dda8bffEe806263e/adf0d39a44140eaa.png" alt="Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:45:02.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/Interection-Observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img30.360buyimg.com/jdphoto/jfs/t1/52689/36/15168/153858/5dc0f5afEd1531125/e7b4bc9e2d4baea9.png" alt="深度揭秘Promise注册微任务和执行过程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:39:11.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">深度揭秘Promise注册微任务和执行过程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T01:47:23.000Z">2019-11-08</time></div>
+                    <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你应该知道的折叠屏收集适配</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/V8引擎/">
+                        <span class="tag">V8引擎</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字体/">
+                        <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/折叠屏适配/">
+                        <span class="tag">折叠屏适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计原则/">
+                        <span class="tag">设计原则</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="前端er须知的Nginx技巧" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

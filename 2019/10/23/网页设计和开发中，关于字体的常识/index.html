@@ -10,7 +10,7 @@
 <title>WecTeam</title>
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/favicon.ico">
 
 <link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
 <script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
@@ -86,9 +86,6 @@
                 href="/">主页</a>
                 
                 <a class="navbar-item"
-                href="/archives">归档</a>
-                
-                <a class="navbar-item"
                 href="/categories">分类</a>
                 
                 <a class="navbar-item"
@@ -103,7 +100,7 @@
                 
                     
                     
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                    <a class="navbar-item" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
                         
                         <i class="fab fa-github"></i>
                         
@@ -128,7 +125,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="http://img.smyhvae.com/20191016_2030.png" alt="网页设计和开发中，关于字体的常识">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1350x900_jfs/t1/81997/29/15799/246860/5dd4d546E2b28da38/f0ca03a5267ad29a.jpg" alt="网页设计和开发中，关于字体的常识">
         </span>
     </div>
     
@@ -147,7 +144,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    22 分钟 读完 (大约 3253 个字)
+                    22 分钟 读完 (大约 3359 个字)
                 </span>
                 
                 
@@ -174,7 +171,7 @@
 <p>字体真的只是“<strong>系统默认，无从解释</strong>”这么简单吗？是产品被忽悠？还是开发在敷衍？二者之间的博弈究竟谁能胜出？学会本文，你就能胜出。</p>
 <a id="more"></a>
 <h2 id="字体分类"><a href="#字体分类" class="headerlink" title="字体分类"></a>字体分类</h2><p>常见的字体可以分为两类：<strong>衬线体、无衬线体</strong>。</p>
-<p><img src="http://img.smyhvae.com/20191004_1101.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s648x447_jfs/t1/101486/24/2701/43076/5dd4d565Ebcf65cfc/3a6528147de54dd5.png" alt></p>
 <p><strong>1、serif（衬线体）</strong>：在字的笔画开始、结束的地方有额外的装饰，而且笔画的粗细会有所不同。</p>
 <p>常见的衬线体有：</p>
 <ul>
@@ -206,7 +203,7 @@
 <li>fantasy：梦幻字体。比如一些艺术字。</li>
 </ul>
 <p>这五类字体族不代表某一个具体的字体，而是当你在 CSS 中指定字体族的时候，系统就有可能在字体族中找出一种字体来显示。</p>
-<p><img src="http://img.smyhvae.com/20191004_1130.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s700x347_jfs/t1/104030/38/2696/47023/5dd4d583E284b0c40/14b7caa047328d0d.png" alt></p>
 <p>参考链接：<a href="http://www.ayqy.net/blog/serif%EF%BC%8Csans-serif%EF%BC%8Cmonospace%EF%BC%8Ccursive%E5%92%8Cfantasy/" target="_blank" rel="noopener">serif，sans-serif，monospace，cursive和fantasy</a></p>
 <h2 id="多字体-fallback-机制"><a href="#多字体-fallback-机制" class="headerlink" title="多字体 fallback 机制"></a>多字体 fallback 机制</h2><p>多字体 fallback 机制：当指定的字体找不到（或者某些文字不支持这个字体）时，那就接着往后找。比如：</p>
 <figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.div1</span>&#123;</span><br><span class="line">    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">"PingFang SC"</span>, <span class="hljs-string">"Microsoft Yahei"</span>, monospace;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -233,17 +230,17 @@
 <p><strong>实际上，所有这些数值关键字浏览器都是支持的，之所以没有看到任何粗细的变化，是因为你所使用的字体不支持</strong>。</p>
 <p>就拿“微软雅黑”来举例，它只支持 400 和 700 这两种粗细，所以当你在代码里写成500的时候，也会被认为是400。但是 Mac 上的“苹方”字体，就支持从100到900之间的各种粗细。</p>
 <p>再比如，前段时间，阿里巴巴开源的普惠字体，也是支持多种粗细的：</p>
-<p><img src="http://img.smyhvae.com/20191013_1100.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s452x951_jfs/t1/97920/16/2690/59129/5dd4d5a5Eb1d7e575/b21af6116d3ade98.png" alt></p>
 <h2 id="各大平台的默认字体加粗效果"><a href="#各大平台的默认字体加粗效果" class="headerlink" title="各大平台的默认字体加粗效果"></a>各大平台的默认字体加粗效果</h2><p>一张图，胜过千言万语。解释了这么多，我们来看看各大平台的字体加粗效果是什么样的。</p>
 <p>以下截图，都是我亲测的结果，如果你打算让别人看效果，直接把下面的图丢给他即可。像我这样贴心的前端，不多见了。</p>
 <p><strong>1、Mac 平台的默认字体加粗效果</strong>：（苹方字体）</p>
-<p><img src="http://img.smyhvae.com/20191016_1205_mac.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s800x1400_jfs/t1/62531/22/15843/239428/5dd4d5c4E617d45ed/140c09edfb83c5f8.png" alt></p>
 <p><strong>2、Windows 平台的默认字体加粗效果</strong>：（微软雅黑字体）</p>
-<p><img src="http://img.smyhvae.com/20191016_1205_windows2.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s400x700_jfs/t1/75293/23/15761/71801/5dd4d5e3E2203871a/8fde38e8a5d98eac.png" alt></p>
 <p><strong>3、iOS 平台的默认字体加粗效果</strong>：（苹方字体）</p>
-<p><img src="http://img.smyhvae.com/20191016_1205_ios.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s750x1334_jfs/t1/82478/37/15899/262563/5dd4d5f5Efe47e6fd/a05e45c6f787b2a4.png" alt></p>
 <p><strong>4、Android 平台（华为 P30 Pro）的默认字体加粗效果</strong>：（Droid Sans 字体）</p>
-<p><img src="http://img.smyhvae.com/20191016_1205_huawei_p30_pro.jpeg" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s1080x2340_jfs/t1/73453/36/15835/566449/5dd4d60eEa8b84139/ccde81db8e947358.jpg" alt></p>
 <p><strong>总结</strong>：（各大平台的默认字体加粗效果）</p>
 <ul>
 <li><p>Mac &amp; iOS 平台的“苹方”字体：500 和600，加粗效果是不同的；<code>&gt;=600</code>的加粗效果是相同的。</p>
@@ -257,7 +254,7 @@
 <p>免费字体当然有，比如<a href="https://baike.baidu.com/item/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93/14919098" target="_blank" rel="noopener">思源黑体</a>（Adobe 和 Google 在2014年7月联合推出的一款开源字体）、阿里巴巴普惠体等。但这些免费字体，我们平时基本用不到。</p>
 <p>这也就是为什么，很多公司会专门购买一套商用字体库、甚至是自己开发一套字体出来，避免未来潜在的纠纷和麻烦。</p>
 <p>给大家列举一个常见的场景。很多时候，前端同学拿到的视觉稿是 psd 稿，需要用 PS 软件打开源文件，才能看到里面的文字是什么字体。在 PS 软件里，当我们用光标选中字体的时候，出现了下面这种场景：</p>
-<p><img src="http://img.smyhvae.com/20191010_1121.png" alt></p>
+<p><img src="https://img11.360buyimg.com/jdphoto/s755x272_jfs/t1/102723/34/2725/112681/5dd4d626E57509fc5/9812233e0adc7afb.png" alt></p>
 <p>看到上面的<code>FZLTZCHK</code>，不要慌，马上去 Google 查一下，发现这个字体的全称是<code>方正兰亭</code>字体系列。恩，基本可以肯定， 这个字体也是要收费的。</p>
 <p>这个时候，前端同学要马上告诉产品或者设计师，不要用这个字体，因为它是商用字体，是要收费的，小心吃官司。那我们该用什么字体呢？接着往下看。</p>
 <h2 id="网页一般用什么字体"><a href="#网页一般用什么字体" class="headerlink" title="网页一般用什么字体"></a>网页一般用什么字体</h2><p>大多数情况下，网页使用系统默认的字体就足够了。如果要使用特殊字体，顶多只是让<strong>阿拉伯数字</strong>使用特殊字体。中文和英文，使用默认字体，完全足够。</p>
@@ -412,7 +409,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        21
+                        25
                     </p>
                 </div>
             </div>
@@ -422,7 +419,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        4
                     </p>
                 </div>
             </div>
@@ -432,27 +429,16 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        34
+                        37
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam/blog" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam" target="_blank">
                 关注我</a>
         </div>
         
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/wecteam/blog">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-        </div>
         
     </div>
 </div>
@@ -531,7 +517,15 @@
                 <span class="level-item">Web前端</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">13</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web后端/">
+            <span class="level-start">
+                <span class="level-item">Web后端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Web开发/">
@@ -553,7 +547,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 15px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 10px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 15px;">Mocha</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/V8引擎/" style="font-size: 10px;">V8引擎</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/折叠屏适配/" style="font-size: 10px;">折叠屏适配</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 15px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/设计原则/" style="font-size: 10px;">设计原则</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 15px;">BDD/TDD</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 15px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 15px;">Mocha</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/V8引擎/" style="font-size: 10px;">V8引擎</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/居中对齐/" style="font-size: 10px;">居中对齐</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/折叠屏适配/" style="font-size: 10px;">折叠屏适配</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 15px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/设计原则/" style="font-size: 10px;">设计原则</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
     </div>
 </div>
 
@@ -570,9 +564,85 @@
         
         <article class="media">
             
+            <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s897x383_jfs/t1/84368/7/16128/51325/5dda8cbfE6c4bf4c8/e3400cdec44faf86.jpg" alt="老板的手机收到一个红包，为什么红包没居中？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:57:14.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="title has-link-black-ter is-size-6 has-text-weight-normal">老板的手机收到一个红包，为什么红包没居中？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/前端er须知的Nginx技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/54499/32/14318/35612/5db6dd6cE20c98309/d9a497a04f84974f.png" alt="前端er须知的Nginx技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:50:45.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/前端er须知的Nginx技巧/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端er须知的Nginx技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web后端/">Web后端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/Interection-Observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/79241/26/15985/79010/5dda8bffEe806263e/adf0d39a44140eaa.png" alt="Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:45:02.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/Interection-Observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img30.360buyimg.com/jdphoto/jfs/t1/52689/36/15168/153858/5dc0f5afEd1531125/e7b4bc9e2d4baea9.png" alt="深度揭秘Promise注册微任务和执行过程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:39:11.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">深度揭秘Promise注册微任务和执行过程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
+                    <img class="thumbnail" src="https://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
                 </p>
             </a>
             
@@ -580,82 +650,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T01:47:23.000Z">2019-11-08</time></div>
                     <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你应该知道的折叠屏收集适配</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/23/V8-引擎和Javascript优化建议/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s873x468_jfs/t1/78957/13/13275/56500/5dad9422E1ab45cbb/0a9ecdcfb11ed007.jpg" alt="V8引擎和JavaScript优化建议">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T09:12:03.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/V8-引擎和Javascript优化建议/" class="title has-link-black-ter is-size-6 has-text-weight-normal">V8引擎和JavaScript优化建议</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/23/网页设计和开发中，关于字体的常识/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.smyhvae.com/20191016_2030.png" alt="网页设计和开发中，关于字体的常识">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T09:07:46.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/网页设计和开发中，关于字体的常识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">网页设计和开发中，关于字体的常识</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
-                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
-                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
                     </p>
@@ -681,7 +675,7 @@
                     <span class="level-item">November 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -788,7 +782,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Interection-Observer/">
                         <span class="tag">Interection Observer</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -796,6 +790,20 @@
                     <a class="tags has-addons" href="/tags/Mocha/">
                         <span class="tag">Mocha</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -893,6 +901,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/字体/">
                         <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1006,9 +1021,85 @@
         
         <article class="media">
             
+            <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s897x383_jfs/t1/84368/7/16128/51325/5dda8cbfE6c4bf4c8/e3400cdec44faf86.jpg" alt="老板的手机收到一个红包，为什么红包没居中？">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:57:14.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/" class="title has-link-black-ter is-size-6 has-text-weight-normal">老板的手机收到一个红包，为什么红包没居中？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/前端er须知的Nginx技巧/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img10.360buyimg.com/wq/jfs/t1/54499/32/14318/35612/5db6dd6cE20c98309/d9a497a04f84974f.png" alt="前端er须知的Nginx技巧">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:50:45.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/前端er须知的Nginx技巧/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端er须知的Nginx技巧</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web后端/">Web后端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/Interection-Observer如何观察变化/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/79241/26/15985/79010/5dda8bffEe806263e/adf0d39a44140eaa.png" alt="Interection Observer如何观察变化">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:45:02.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/Interection-Observer如何观察变化/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Interection Observer如何观察变化</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img30.360buyimg.com/jdphoto/jfs/t1/52689/36/15168/153858/5dc0f5afEd1531125/e7b4bc9e2d4baea9.png" alt="深度揭秘Promise注册微任务和执行过程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T13:39:11.000Z">2019-11-24</time></div>
+                    <a href="/2019/11/24/深度揭秘Promise注册微任务和执行过程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">深度揭秘Promise注册微任务和执行过程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
+                    <img class="thumbnail" src="https://img13.360buyimg.com/jdphoto/jfs/t1/67236/16/13910/50040/5db6935aE52080499/58fcd00de646750c.jpg" alt="你应该知道的折叠屏收集适配">
                 </p>
             </a>
             
@@ -1016,82 +1107,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T01:47:23.000Z">2019-11-08</time></div>
                     <a href="/2019/11/08/你应该知道的折叠屏收集适配/" class="title has-link-black-ter is-size-6 has-text-weight-normal">你应该知道的折叠屏收集适配</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/23/V8-引擎和Javascript优化建议/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s873x468_jfs/t1/78957/13/13275/56500/5dad9422E1ab45cbb/0a9ecdcfb11ed007.jpg" alt="V8引擎和JavaScript优化建议">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T09:12:03.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/V8-引擎和Javascript优化建议/" class="title has-link-black-ter is-size-6 has-text-weight-normal">V8引擎和JavaScript优化建议</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/23/网页设计和开发中，关于字体的常识/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img.smyhvae.com/20191016_2030.png" alt="网页设计和开发中，关于字体的常识">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T09:07:46.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/网页设计和开发中，关于字体的常识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">网页设计和开发中，关于字体的常识</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s1756x1080_jfs/t1/53134/34/13167/130483/5da0222eE73e627a9/c480617a5061fa9b.jpg" alt="写一个四则运算表达式转换成AST的方法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:15:11.000Z">2019-10-17</time></div>
-                    <a href="/2019/10/17/写一个四则运算表达式转换成AST的方法/" class="title has-link-black-ter is-size-6 has-text-weight-normal">写一个四则运算表达式转换成AST的方法</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/17/手把手教你写一个AST解析器/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="http://img10.360buyimg.com/jdphoto/jfs/t1/60663/11/12316/608013/5d9c0c97E87cc646c/283a78ebaa056e47.png" alt="手把手教你写一个AST解析器">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-17T04:07:18.000Z">2019-10-17</time></div>
-                    <a href="/2019/10/17/手把手教你写一个AST解析器/" class="title has-link-black-ter is-size-6 has-text-weight-normal">手把手教你写一个AST解析器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
                     </p>
@@ -1117,7 +1132,7 @@
                     <span class="level-item">November 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1224,7 +1239,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Interection-Observer/">
                         <span class="tag">Interection Observer</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1232,6 +1247,20 @@
                     <a class="tags has-addons" href="/tags/Mocha/">
                         <span class="tag">Mocha</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1329,6 +1358,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/字体/">
                         <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1450,7 +1486,7 @@
                 
                 
                 <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wecteam/blog">
+                    <a class="button is-white is-large" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
                         
                         <i class="fab fa-github"></i>
                         
