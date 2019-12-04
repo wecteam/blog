@@ -199,22 +199,29 @@ Facebook, Inc.
 ```
 互联网上充斥着大量的内容，「知识付费」成为下一个风口。我每天使用「得到」App，阅读一小时。
 ```
+
 ## 图床工具
-写文章免不了要做图片传图片，推荐使用iPic工具，不论屏幕截图、还是复制图片，都可以自动上传、保存 Markdown 格式的链接，直接粘贴插入。[神器地址]（https://toolinbox.net/iPic/）
+
+写文章免不了要做图片传图片，推荐使用 [PicGo](https://molunerfinn.com/PicGo/) 工具，不论屏幕截图、还是复制图片，都可以自动上传、保存 Markdown 格式的链接，直接粘贴插入。
+
+对了，在使用 PicGo 之前，先要保证你要有一个保存图片的图床服务器，配置到 PicGo 上，然后再让 PicGo 帮你生成图片的url链接。
 
 ## 公众号 Markdown 编辑器推荐
 
-- markdown在线转换工具：<http://blog.didispace.com/tools/online-markdown/>
+- markdown在线转换工具1：<https://www.mdnice.com/>
+
+可以针对外链，自动生成脚注。用的人很多，推荐里面的「橙心主题」。
 
 - markdown在线转换工具2：<http://prod.zkqiang.cn/wxeditor/index.html>
 
 可以针对外链，自动生成脚注。
 
-- markdown在线转换工具3：<https://www.mdnice.com/>
-
-可以针对外链，自动生成脚注。推荐里面的「橙心主题」。
+- markdown在线转换工具3：<https://lab.lyric.im/wxformat>
 
 - markdown在线转换工具4：<http://md.aclickall.com/>
+
+- markdown在线转换工具5：<http://blog.didispace.com/tools/online-markdown/>
+
 
 **备注**：生成的脚注，效果如下：
 
