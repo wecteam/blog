@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WecTeam</title>
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+<script src="https://unpkg.com/blueimp-md5@2.12.0/js/md5.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.min.css">
+<!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/og_image.png" alt="Node.js项目TypeScript改造指南" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于我们</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s640x295_jfs/t1/92732/2/2241/14632/5dcd00f7E4deea209/f9ed9663a079e504.jpg" alt="Node.js项目TypeScript改造指南">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!--<time class="level-item has-text-grey" datetime="2019-11-26T14:00:00.000Z">2019-11-26</time>-->
+                <div class="level-item has-text-grey">2019-11-26</div>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    34 分钟 读完 (大约 5129 个字)
+                </span>
+                
+                
+                
+                    <!-- 不蒜子统计 -->
+                    <span class="level-item has-text-grey" id="busuanzi_container_page_pv" style='display:none' >
+                           阅读数：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Node.js项目TypeScript改造指南
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>作者：陈晓强<br>声明：原创文章，转载请注明来源</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你有一个 Node.js 项目，并想使用 TypeScript 进行改造，那本文对你或许会有帮助。TypeScript 越来越火，本文不讲为什么要使用 TypeScript，也不讲基本概念。本文讲的是如何将一个旧的 Node.js 项目使用 TypeScript 进行改造，包括目录结构调整、TypeScript-ESLint 配置、tsconfig 配置、调试、常见错误处理等。由于篇幅有限，Node.js 项目能集成的技术也是五花八门，未覆盖到的场景还请见谅。</p>
+<a id="more"></a>
+<h2 id="步骤一、调整目录结构"><a href="#步骤一、调整目录结构" class="headerlink" title="步骤一、调整目录结构"></a>步骤一、调整目录结构</h2><p>Node.js 程序，由于对新语法的支持比较快(如async/await从v7.6.0开始支持)，大部分场景是不需要用到 babel、webapck 等编译工具的，因此也很少有编译文件的dist目录，而 TypeScript 是需要编译的，所以重点是要独立出一个<code>源码目录</code>和<code>编译目标目录</code>，推荐的目录结构如下，另外，根据不同技术栈还有一堆其他的配置文件如 prettier、travis 等等这里就省略了。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">|-- assets            # 存放项目的图片、视频等资源文件</span><br><span class="line">|-- bin               # CLI命令入口，require(&apos;../dist/cli&apos;)，注意文件头加上#!/usr/bin/env node</span><br><span class="line">|-- dist              # 项目使用ts开发，dist为编译后文件目录，注意package.json中main字段要指向dist目录</span><br><span class="line">|-- docs              # 存放项目相关文档</span><br><span class="line">|-- scripts           # 对应package.json中scripts字段需要执行的脚本文件</span><br><span class="line">|-- src               # 源码目录，注意此目录只放ts文件，其他文件如json、模板等文件放templates目录</span><br><span class="line">    |-- sub           # 子目录</span><br><span class="line">    |-- cli.ts        # cli入口文件</span><br><span class="line">    |-- index.ts      # api入口文件</span><br><span class="line">|-- templates         # 存放json、模板等文件</span><br><span class="line">|-- tests             # 测试文件目录</span><br><span class="line">|-- typings           # 存放ts声明文件，主要用于补充第三方包没有ts声明的情况</span><br><span class="line">|-- .eslintignore     # eslint忽略规则配置</span><br><span class="line">|-- .eslintrc.js      # eslint规则配置</span><br><span class="line">|-- .gitignore        # git忽略规则</span><br><span class="line">|-- package.json      # </span><br><span class="line">|-- README.md         # 项目说明</span><br><span class="line">|-- tsconfig.json     # typescript配置，请勿修改</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤二、TypeScript安装与配置"><a href="#步骤二、TypeScript安装与配置" class="headerlink" title="步骤二、TypeScript安装与配置"></a>步骤二、TypeScript安装与配置</h2><p>目录结构调整后，在你的项目根目录执行</p>
+<ol>
+<li><code>npm i typescript -D</code>，安装 typescript，保存到 dev 依赖</li>
+<li><code>node ./node_modules/.bin/tsc --init</code>，初始化 TypeScript 项目，生成一个 tsconfig.json 配置文件<blockquote>
+<p>如果第1步选择全局安装，那第2步中可以直接使用<code>tsc --init</code></p>
+</blockquote>
+</li>
+</ol>
+<p>执行初始化命令后会生成一份默认配置文件，更详细的配置及说明可以自行查阅官方文档，这里根据前面的项目结构贴出一份基本的<code>推荐配置</code>，部分配置下文会解释。</p>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    // "incremental": true,                   /* 增量编译 提高编译速度*/</span><br><span class="line">    "target": "ES2019",                       /* 编译目标ES版本*/</span><br><span class="line">    "module": "commonjs",                     /* 编译目标模块系统*/</span><br><span class="line">    // "lib": [],                             /* 编译过程中需要引入的库文件列表*/</span><br><span class="line">    "declaration": true,                      /* 编译时创建声明文件 */</span><br><span class="line">    "outDir": "dist",                         /* ts编译输出目录 */</span><br><span class="line">    "rootDir": "src",                         /* ts编译根目录. */</span><br><span class="line">    // "importHelpers": true,                 /* 从tslib导入辅助工具函数(如__importDefault)*/</span><br><span class="line">    "strict": true,                           /* 严格模式开关 等价于noImplicitAny、strictNullChecks、strictFunctionTypes、strictBindCallApply等设置true */</span><br><span class="line">    "noUnusedLocals": true,                   /* 未使用局部变量报错*/</span><br><span class="line">    "noUnusedParameters": true,               /* 未使用参数报错*/</span><br><span class="line">    "noImplicitReturns": true,                /* 有代码路径没有返回值时报错*/</span><br><span class="line">    "noFallthroughCasesInSwitch": true,       /* 不允许switch的case语句贯穿*/</span><br><span class="line">    "moduleResolution": "node",               /* 模块解析策略 */</span><br><span class="line">    "typeRoots": [                            /* 要包含的类型声明文件路径列表*/</span><br><span class="line">      "./typings",</span><br><span class="line">      <span class="hljs-string">"./node_modules/@types"</span></span><br><span class="line">      ],                      </span><br><span class="line">    "allowSyntheticDefaultImports": false,    /* 允许从没有设置默认导出的模块中默认导入，仅用于提示，不影响编译结果*/</span><br><span class="line">    "esModuleInterop": false                  /* 允许编译生成文件时，在代码中注入工具类(__importDefault、__importStar)对ESM与commonjs混用情况做兼容处理*/</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  "include": [                                /* 需要编译的文件 */</span><br><span class="line">    "src/**/*.ts",</span><br><span class="line">    <span class="hljs-string">"typings/**/*.ts"</span></span><br><span class="line">  ],</span><br><span class="line">  "exclude": [                                /* 编译需要排除的文件 */</span><br><span class="line">    <span class="hljs-string">"node_modules/**"</span></span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤三、源码文件调整"><a href="#步骤三、源码文件调整" class="headerlink" title="步骤三、源码文件调整"></a>步骤三、源码文件调整</h2><h3 id="将所有-js文件改为-ts文件"><a href="#将所有-js文件改为-ts文件" class="headerlink" title="将所有.js文件改为.ts文件"></a>将所有.js文件改为.ts文件</h3><p>这一步比较简单，可以根据自身项目情况，借助 gulp 等工具将所有文件后缀改成ts并提取到src目录。</p>
+<h3 id="模板文件提取"><a href="#模板文件提取" class="headerlink" title="模板文件提取"></a>模板文件提取</h3><p>由于 TypeScript 在编译时只能处理 ts、tsx、js、jsx 这几类文件，因此项目中如果用到了一些模板如 json、html 等文件，这些是不需要编译的，可以提取到 templates 目录。</p>
+<h3 id="package-json中添加scripts"><a href="#package-json中添加scripts" class="headerlink" title="package.json中添加scripts"></a>package.json中添加scripts</h3><p>前面我们将 typescript 包安装到项目依赖后，避免每次执行编译时都需要输入<code>node ./node_modules/.bin/tsc</code>(全局安装忽略，不建议这么做，其他同学可能已经全局安装了，但可能会与你项目所依赖的 typescript 版本不一致)，在 package.json 中添加以下脚本。后续就可以直接通过<code>npm run build</code>或者<code>npm run watch</code>来编译了。</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"scripts"</span>:&#123;</span><br><span class="line">    <span class="hljs-attr">"build"</span>:<span class="hljs-string">"tsc"</span>,</span><br><span class="line">    <span class="hljs-attr">"watch"</span>:<span class="hljs-string">"tsc --watch"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤四、TypeScript代码规范"><a href="#步骤四、TypeScript代码规范" class="headerlink" title="步骤四、TypeScript代码规范"></a>步骤四、TypeScript代码规范</h2><p>假设你用的 IDE 是 VSCode，<del>TypeScript 与 VSCode 都是微软亲儿子，用 TypeScript 你就老老实实用 VSCode 吧</del>，上述步骤以后，ts 文件中会出现大量飘红警告。类似这样：<br><img src="https://img11.360buyimg.com/jdphoto/s1916x312_jfs/t1/102862/38/2279/69486/5dcd437bE46651252/2a8a6fb8aab33071.jpg" alt="报错"><br>先不要着急去解决错误，因为还需要对 TypeScript 添加 ESLint 配置，避免改多遍，先把 ESLint 配置好，当然，你如果喜欢 Prettier，可以把它加上，本文就不介绍如何集成 Prettier 了。</p>
+<h3 id="TypeScript-ESLint"><a href="#TypeScript-ESLint" class="headerlink" title="TypeScript-ESLint"></a>TypeScript-ESLint</h3><p>早期的 TypeScript 项目一般使用 TSLint ，但2019年初 TypeScript 官方决定全面采用 ESLint，因此 TypeScript 的规范，直接使用 ESLint 就好，首先安装依赖：<br><code>npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D</code><br>接着在根目录下新建<code>.eslintrc.js</code>文件，最简单的配置如下</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="hljs-string">'parser'</span>:<span class="hljs-string">'@typescript-eslint/parser'</span>,  <span class="hljs-comment">//ESLint的解析器换成 @typescript-eslint/parser 用于解析ts文件</span></span><br><span class="line">  <span class="hljs-string">'extends'</span>: [<span class="hljs-string">'plugin:@typescript-eslint/recommended'</span>], <span class="hljs-comment">// 让ESLint继承 @typescript-eslint/recommended 定义的规则</span></span><br><span class="line">  <span class="hljs-string">'env'</span>: &#123;<span class="hljs-string">'node'</span>: <span class="hljs-literal">true</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于 @typescript-eslint/recommended 的规则并不完善，因此还需要补充ESLint的规则，如禁止使用多个空格(no-multi-spaces)等。可以使用<a href="https://standardjs.com/readme-zhcn.html" target="_blank" rel="noopener">standard</a>，安装依赖。</p>
+<blockquote>
+<p>如果你项目已经在使用 ESLint，并有自己的规范，则不用再安装依赖，直接调整 .eslintrc.js 配置即可</p>
+</blockquote>
+<p><code>npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D</code><br>以上几个包，eslint-config-standard 是规则集，后面几个都是它的依赖。接来下调整. eslintrc.js 配置：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="hljs-string">'parser'</span>:<span class="hljs-string">'@typescript-eslint/parser'</span>, </span><br><span class="line">  <span class="hljs-string">'extends'</span>: [<span class="hljs-string">'standard'</span>,<span class="hljs-string">'plugin:@typescript-eslint/recommended'</span>], <span class="hljs-comment">//extends这里加上standard规范</span></span><br><span class="line">  <span class="hljs-string">'env'</span>: &#123;<span class="hljs-string">'node'</span>: <span class="hljs-literal">true</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="VSCode中集成ESLint配置"><a href="#VSCode中集成ESLint配置" class="headerlink" title="VSCode中集成ESLint配置"></a>VSCode中集成ESLint配置</h3><p>为了开发方便我们可以在 VSCode 中集成 ESLint 的配置，一是用于实时提示，二是可以在保存时自动 fix。<br><img src="https://img11.360buyimg.com/jdphoto/jfs/t1/51130/39/15972/304254/5dcd4f2fEa59731e0/52822d14af424f7d.gif" alt="vscode-demo"></p>
+<ol>
+<li><p>安装 VSCode 的 ESLint 插件</p>
+</li>
+<li><p>修改 ESLint 插件配置：设置 =&gt; 扩展 =&gt; ESLint =&gt; 打钩(Auto Fix On Save) =&gt; 在 settings.json 中编辑，如图：<br><img src="https://img11.360buyimg.com/jdphoto/s1310x826_jfs/t1/100657/23/2287/119039/5dcd4fbdE834d740a/326fc124e9814499.jpg" alt="VSCode配置ESLint">  </p>
+</li>
+<li><p>由于 ESLint 默认只校验 .js 文件，因此需要在 settings.json 中添加 ESLint 相关配置：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="hljs-string">"eslint.enable"</span>: <span class="hljs-literal">true</span>,  <span class="hljs-comment">//是否开启vscode的eslint</span></span><br><span class="line">    <span class="hljs-string">"eslint.autoFixOnSave"</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">//是否在保存的时候自动fix </span></span><br><span class="line">    <span class="hljs-string">"eslint.options"</span>: &#123;    <span class="hljs-comment">//指定vscode的eslint所处理的文件的后缀</span></span><br><span class="line">        <span class="hljs-string">"extensions"</span>: [</span><br><span class="line">            <span class="hljs-string">".js"</span>,</span><br><span class="line">            <span class="hljs-comment">// ".vue",</span></span><br><span class="line">            <span class="hljs-string">".ts"</span>,</span><br><span class="line">            <span class="hljs-string">".tsx"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="hljs-string">"eslint.validate"</span>: [     <span class="hljs-comment">//确定校验准则</span></span><br><span class="line">        <span class="hljs-string">"javascript"</span>,</span><br><span class="line">        <span class="hljs-string">"javascriptreact"</span>,</span><br><span class="line">        <span class="hljs-comment">// &#123;</span></span><br><span class="line">        <span class="hljs-comment">//     "language": "html",</span></span><br><span class="line">        <span class="hljs-comment">//     "autoFix": true</span></span><br><span class="line">        <span class="hljs-comment">// &#125;,</span></span><br><span class="line">        <span class="hljs-comment">// &#123;</span></span><br><span class="line">        <span class="hljs-comment">//     "language": "vue",</span></span><br><span class="line">        <span class="hljs-comment">//     "autoFix": true</span></span><br><span class="line">        <span class="hljs-comment">// &#125;,</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-string">"language"</span>: <span class="hljs-string">"typescript"</span>,</span><br><span class="line">            <span class="hljs-string">"autoFix"</span>: <span class="hljs-literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-string">"language"</span>: <span class="hljs-string">"typescriptreact"</span>,</span><br><span class="line">            <span class="hljs-string">"autoFix"</span>: <span class="hljs-literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若遇到 VSCode 无法提示，可尝试重启下 ESLint 插件、将项目移出工作区再重新加回来。</p>
+</li>
+</ol>
+<h2 id="步骤五、解决报错"><a href="#步骤五、解决报错" class="headerlink" title="步骤五、解决报错"></a>步骤五、解决报错</h2><p>这个步骤内容有点多，可以细品一下。注意，下述解决报错有些地方用了“any大法”(<code>不推荐</code>)，这是为了能让项目尽快 run 起来，毕竟是旧项目改造，不可能一步到位。</p>
+<h3 id="找不到模块"><a href="#找不到模块" class="headerlink" title="找不到模块"></a>找不到模块</h3><p>Node.js 项目是 commonjs 规范，使用 require 导出一个模块：<code>const path = require(&#39;path&#39;)</code>;首先看到的是 require 处的错误:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot find name &apos;require&apos;. Do you need to install type definitions for node? Try `npm i @types/node`.ts(2580)</span><br></pre></td></tr></table></figure>
+
+<p>此时你可能会想到改成 TypeScript 的 import 写法：<code>import * as path from &#39;path&#39;</code>，接着你会看到在 path 处的错误:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">找不到模块“path”。ts(2307)</span><br></pre></td></tr></table></figure>
+
+<p>这两个是同一个问题，path 模块和 require 都是 Node.js 的东西，需要安装 Node.js 的声明文件，<code>npm i @types/node -D</code>。</p>
+<h3 id="TypeScript的import问题"><a href="#TypeScript的import问题" class="headerlink" title="TypeScript的import问题"></a>TypeScript的import问题</h3><p>安装完 Node 的声明文件后，之前的写法：<code>const path = require(&#39;path&#39;)</code>在 require 处仍然会报错，不过这次不是 TypeScript 报错，而是 ESLint 报错：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Require statement not part of import statement .eslint(@typescript-eslint/no-var-requires)</span><br></pre></td></tr></table></figure>
+
+<p>意思是不推荐这种导入写法，因为这种 commonjs 写法导出来的对象是 any，没有类型支持。这也是为啥前面说不用着急改，先做好 ESLint 配置。  </p>
+<p>接着我们将模块导入改成 TypeScript 的 import，这里共有4种写法，分别讲一下需要注意的问题。</p>
+<h4 id="import-as-mod-from-‘mod’"><a href="#import-as-mod-from-‘mod’" class="headerlink" title="import * as mod from ‘mod’"></a>import * as mod from ‘mod’</h4><p>针对 commonjs 模块，使用此写法，我们来看看编译前后的区别，注意我们改造的是 Node.js 项目，因此我们 tsconfig 中配置<code>&quot;module&quot;: &quot;commonjs&quot;</code>。<br>test.ts 文件：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(path);</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 test.js 文件：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">"use strict"</span>;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperty(exports, <span class="hljs-string">"__esModule"</span>, &#123; <span class="hljs-attr">value</span>: <span class="hljs-literal">true</span> &#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);</span><br><span class="line"><span class="hljs-built_in">console</span>.log(path);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，TypeScript 对编译后给模块加上了<code>__esModule:true,</code>标识这是一个 ES6 模块，如果你在 tsconfig 中配置<code>&quot;esModuleInterop&quot;:true</code>，编译后的 test.js 文件如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">"use strict"</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> __importStar = (<span class="hljs-keyword">this</span> &amp;&amp; <span class="hljs-keyword">this</span>.__importStar) || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">mod</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (mod &amp;&amp; mod.__esModule) <span class="hljs-keyword">return</span> mod;</span><br><span class="line">    <span class="hljs-keyword">var</span> result = &#123;&#125;;</span><br><span class="line">    <span class="hljs-keyword">if</span> (mod != <span class="hljs-literal">null</span>) <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> mod) <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.hasOwnProperty.call(mod, k)) result[k] = mod[k];</span><br><span class="line">    result[<span class="hljs-string">"default"</span>] = mod;</span><br><span class="line">    <span class="hljs-keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperty(exports, <span class="hljs-string">"__esModule"</span>, &#123; <span class="hljs-attr">value</span>: <span class="hljs-literal">true</span> &#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> path = __importStar(<span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>));</span><br><span class="line"><span class="hljs-built_in">console</span>.log(path);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到针对 import * 写法，在编译成 commonjs 后包裹了一个<code>__importStar</code>工具函数，其作用是：如果导入模块 __esModule 属性为 true，则直接返回 module.exports。否则返回module.exports.defalut = module.exports(消除了循环引用)。<br>如果你不想在编译后的每个文件中都注入这么一段工具函数，可以配置<code>&quot;importHelpers&quot;:true</code>，编译后的 test.js 文件如下：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">"use strict"</span>;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperty(exports, <span class="hljs-string">"__esModule"</span>, &#123; <span class="hljs-attr">value</span>: <span class="hljs-literal">true</span> &#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> tslib_1 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"tslib"</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> path = tslib_1.__importStar(<span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>));</span><br><span class="line"><span class="hljs-built_in">console</span>.log(path);</span><br></pre></td></tr></table></figure>
+
+<p>细心的同学可能会发现，<code>&quot;esModuleInterop&quot;:true</code>这个配置添加的<code>__importStar</code>在以上场景除了增加 require 复杂度，没什么其他作用。那是否可以去掉这个配置呢，我们接着往下看。</p>
+<blockquote>
+<p>如果你用 import 导入的项目内的其他源文件，由于原先 commonjs 写法，会提示你<code>文件“/path/to/project/src/mod.ts”不是模块。ts(2306)</code>,此时，需要将被导入的模块修改为 ES6 的 export 写法</p>
+</blockquote>
+<h4 id="import-fun-from-‘mod’"><a href="#import-fun-from-‘mod’" class="headerlink" title="import { fun } from ‘mod’"></a>import { fun } from ‘mod’</h4><p>修改 test.ts 文件，依然是配置了：<code>&quot;esModuleInterop&quot;:true</code></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; resolve &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(resolve)</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 test.js 文件</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">"use strict"</span>;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperty(exports, <span class="hljs-string">"__esModule"</span>, &#123; <span class="hljs-attr">value</span>: <span class="hljs-literal">true</span> &#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> path_1 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);</span><br><span class="line"><span class="hljs-built_in">console</span>.log(path_1.resolve);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出导出单个属性时，并不会添加工具类，但会将单个属性导出修改为整个模块导出，并将原来的函数调用表达式修改为成员函数调用表达式。</p>
+<h4 id="import-mod-from-‘mod’"><a href="#import-mod-from-‘mod’" class="headerlink" title="import mod from ‘mod’"></a>import mod from ‘mod’</h4><p>这个语法是导出默认值，要特别注意。  </p>
+<p>照例修改 test.ts 文件，配置<code>&quot;esModuleInterop&quot;:true</code>，为了方便展示，配置<code>&quot;importHelpers&quot;:false</code>：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(path)</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 test.js 文件：</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">"use strict"</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> __importDefault = (<span class="hljs-keyword">this</span> &amp;&amp; <span class="hljs-keyword">this</span>.__importDefault) || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">mod</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (mod &amp;&amp; mod.__esModule) ? mod : &#123; <span class="hljs-string">"default"</span>: mod &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperty(exports, <span class="hljs-string">"__esModule"</span>, &#123; <span class="hljs-attr">value</span>: <span class="hljs-literal">true</span> &#125;);</span><br><span class="line"><span class="hljs-keyword">const</span> path_1 = __importDefault(<span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>));</span><br><span class="line"><span class="hljs-built_in">console</span>.log(path_1.default);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到针对 import mod 这种写法，在编译成 commonjs 后包裹了一个<code>__importDefault</code>工具函数，其作用是：如果导入模块<code>__esModule</code>为 true，则直接返回<code>module.exports</code>。 否则返回<code>{default:module.exports}</code>。这个是针对没有默认导出的模块的一种兼容，fs 模块是 commonjs，并没有<code>__esModule</code>属性，使用<code>modules.exports</code>导出。上述代码中的<code>path_1</code>实际是<code>{default:module.exports}</code>，因此<code>path_1.default</code>指向的是原 path 模块，可以看出转换是正常的。  </p>
+<p>但这种方式是有个<code>陷阱</code>，举个例子，如果有第三方模块，其文件是用 babel 或者也是 ts 转换过的，那其模块代码很有可能包含了 __esModule 属性，但同时没有<code>exports.default</code>导出，此时就会出现 mod.default 指向的是<code>undefined</code>。<code>更要命的是，IDE和编译器没有任何报错</code>。如果这个最基本的类型检查都解决不了，那我要 TypeScript 何用？  </p>
+<p>所幸，tsconfig 提供了一个配置<code>allowSyntheticDefaultImports</code>，意思是允许从没有设置默认导出的模块中默认导入，需要注意的是，这个属性并不会对代码的生成有任何影响，仅仅是给出提示。另外，在配置<code>&quot;module&quot;: &quot;commonjs&quot;</code>时，其值是和<code>esModuleInterop</code>同步的，也就是说我们前面设置了<code>&quot;esModuleInterop&quot;:true</code>，相当于同时设置了<code>&quot;allowSyntheticDefaultImports&quot;:true</code>。这个允许也就是不会提示。</p>
+<p>手动修改<code>&quot;allowSyntheticDefaultImports&quot;:false</code>后，会发现 ts 文件中<code>import path from &#39;path&#39;</code>处出现提示<code>模块“&quot;path&quot;”没有默认导出。ts(1192)</code>，通过这个提示，我们将其修改为<code>import * as path from path</code>，可以有效避免上述<code>陷阱</code>。</p>
+<h4 id="import-mod-require-‘mod’"><a href="#import-mod-require-‘mod’" class="headerlink" title="import mod = require(‘mod’);"></a>import mod = require(‘mod’);</h4><p>这种写法有点奇怪，乍一看，一半的 ES6 模块写法和一半的 commonjs 写法。其实这是针对早期的声明文件，使用了<code>export = mod</code>语法进行导出。因此如果碰上这种声明文件，就使用此种写法。拿第三方包 moment 举例：<br>你原来的写法是<code>const moment = require(&#39;moment&#39;); moment();</code><br>当你改成<code>import * as moment from &#39;moment&#39;</code>时，<code>moment();</code>语句处会提示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This expression is not callable.</span><br><span class="line">  Type &apos;typeof moment&apos; has no call signatures.ts(2349)</span><br><span class="line">gulp-task.ts(15, 1): Type originates at this import. A namespace-style import cannot be called or constructed, and will cause a failure at runtime. Consider using a default import or import require here instead.</span><br></pre></td></tr></table></figure>
+
+<p>提示你使用default导入或import require写法，当你改成default导入时：<code>import moment from&#39;moment&#39;; moment();</code> ，则在导入语句处会提示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Module &apos;&quot;/path/to/project/src/moment&quot;&apos; can only be default-imported using the &apos;esModuleInterop&apos; flagts(1259)</span><br><span class="line">moment.d.ts(736, 1): This module is declared with using &apos;export =&apos;, and can only be used with a default import when using the &apos;esModuleInterop&apos; flag.</span><br></pre></td></tr></table></figure>
+
+<p>改成<code>import moment = require(&#39;moment&#39;)</code>，则没有任何报错，对应的类型检测也都正常。</p>
+<blockquote>
+<p>新的 ts 声明文件写法(declare module ‘mod’)，如前面所说的path模块，也支持此种 Import assignment 写法，但建议还是不要这样写了。</p>
+</blockquote>
+<h4 id="import小结"><a href="#import小结" class="headerlink" title="import小结"></a>import小结</h4><p>看完后再来回顾前面的问题：是否可以去掉这个配置<code>&quot;esModuleInterop&quot;:true</code><br>个人认为在 Node.js 场景是可以去掉的<del>我并不想看到那两个多余的工具函数</del>。<br>但考虑到一些导入 ES6 模块的场景，可能需要保留，这里就不再讨论了，需要注意的是手动配置<code>&quot;allowSyntheticDefaultImports&quot;:false</code>避免<code>陷阱</code>。<br>解决了 import 问题，其实问题就解决一大半了，确保了你编译后的文件引入的模块不会出现 undefined。  </p>
+<h3 id="找不到声明文件"><a href="#找不到声明文件" class="headerlink" title="找不到声明文件"></a>找不到声明文件</h3><p>部分第三方包，其包内没有 ts 声明文件，此时报错如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">无法找到模块“mod”的声明文件。“/path/to/project/src/index.js”隐式拥有 &quot;any&quot; 类型。</span><br><span class="line">  Try `npm install @types/mod` if it exists or add a new declaration (.d.ts) file containing `declare module &apos;mod&apos;;`ts(7016)</span><br></pre></td></tr></table></figure>
+
+<p>根据提示安装对应包即可，注意添加 -D 保存到 dev 依赖，注意安装对应版本。比如你安装了 gulp@3 的版本，就不要安装 gulp@4 的 @types/gulp  </p>
+<p>极少情况，第三方包内既没有声明文件，对应的@types/mod包也没有，此时为了解决报错，只能自己给第三方包添加声明文件了。我们将声明文件补充到<code>typings</code>文件夹中，以包名作为子目录名，最简单的写法如下，这样 IDE 和 TypeScript 编译便不会报错了。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declare <span class="hljs-built_in">module</span> <span class="hljs-string">'mod'</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>至于为什么需要放在 typings 目录，并且以包名作为子包目录，因为不这样写，ts-node(下文会提到)识别不了，暂且按照 ts-node 的规范来吧。</p>
+</blockquote>
+<h3 id="Class构造函数this-xx初始化报错"><a href="#Class构造函数this-xx初始化报错" class="headerlink" title="Class构造函数this.xx初始化报错"></a>Class构造函数this.xx初始化报错</h3><p>在 Class 的构造函数中对 this 属性进行初始化是常见做法，但在 ts 中，你得先定义。所有 this 属性，都要先声明，类似这样:</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;</span><br><span class="line">  name: string;</span><br><span class="line">  <span class="hljs-keyword">constructor</span> (name:string) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果你代码比较多，改造太耗时间，那就用’any大法’吧，每一个属性直接用 any 就完事了。</p>
+<h3 id="对象属性赋值报错"><a href="#对象属性赋值报错" class="headerlink" title="对象属性赋值报错"></a>对象属性赋值报错</h3><p>动态对象是 js 的特色，我先定义个对象，不管啥时候我都可以直接往里面加属性，这种报错，最快的改造办法就是给对象声明 any 类型。再次声明，正确的姿势是声明 Interface 或者 Type，而不是 any，此处用 any 只是为了快速改造旧项目让其能先 run 起来。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> obj:any = &#123;&#125;;</span><br><span class="line">obj.name = <span class="hljs-string">'string'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数“arg”隐式具有“any”类型"><a href="#参数“arg”隐式具有“any”类型" class="headerlink" title="参数“arg”隐式具有“any”类型"></a>参数“arg”隐式具有“any”类型</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> init = <span class="hljs-function">(<span class="hljs-params">opt: any</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(opt)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了参数隐式 any 外，此处还会有警告<code>Missing return type on function.eslint(@typescript-eslint/explicit-function-return-type)</code>，意思是方法需要有返回值，只是警告，不影响项目运行，先忽略，后续再完善。</p>
+<h3 id="未使用的函数参数"><a href="#未使用的函数参数" class="headerlink" title="未使用的函数参数"></a>未使用的函数参数</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> result = code.replace(<span class="hljs-regexp">/version=(1)/g</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_a: string, b: number</span>): <span class="hljs-title">string</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-string">`version=<span class="hljs-subst">$&#123;++b&#125;</span>`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>有些回调函数参数可能是用不上的，将参数名字改成<code>_</code>或者<code>_开头</code>。</p>
+<h3 id="函数中使用this"><a href="#函数中使用this" class="headerlink" title="函数中使用this"></a>函数中使用this</h3><p>根据写法不同，大概会有以下4种报错：</p>
+<ol>
+<li><code>类型“NodeModule”上不存在属性“name”。ts(2339)</code></li>
+<li><code>类型“typeof globalThis”上不存在属性“name”。ts(2339)</code></li>
+<li><code>&quot;this&quot; 隐式具有类型 &quot;any&quot;，因为它没有类型注释。ts(2683)</code></li>
+<li><code>The containing arrow function captures the global value of &#39;this&#39;.ts(7041)</code>  </li>
+</ol>
+<p>处理方式是将 this 作为函数参数，并作为第一个参数，编译后会自动去掉第一个 this 参数。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">this:any,one:<span class="hljs-string">'string'</span></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'haha'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤六、调试配置"><a href="#步骤六、调试配置" class="headerlink" title="步骤六、调试配置"></a>步骤六、调试配置</h2><p>经过以上步骤，你的项目就能 run 起来了，虽然有很多警告和 any，但好歹已经算是走过来了，接下来就是解决调试问题。</p>
+<h3 id="方法一、调试生成后的dist文件"><a href="#方法一、调试生成后的dist文件" class="headerlink" title="方法一、调试生成后的dist文件"></a>方法一、调试生成后的dist文件</h3><p>VSCode 参考配置(/path/to/project/.vscode/launch.json)如下</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"configurations"</span>: [&#123;</span><br><span class="line">    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"node"</span>,</span><br><span class="line">    <span class="hljs-attr">"request"</span>: <span class="hljs-string">"launch"</span>,</span><br><span class="line">    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"debug"</span>,</span><br><span class="line">    <span class="hljs-attr">"program"</span>: <span class="hljs-string">"/path/to/wxa-cli/dist/cli.js"</span>,</span><br><span class="line">    <span class="hljs-attr">"args"</span>: [</span><br><span class="line">        <span class="hljs-string">"xx"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img11.360buyimg.com/jdphoto/s1316x828_jfs/t1/63238/24/15509/196547/5dcd53a5E88bf1041/54a3fc35410bc072.jpg" alt="VSCode调试js">  </p>
+<h3 id="方法二、直接调试ts文件"><a href="#方法二、直接调试ts文件" class="headerlink" title="方法二、直接调试ts文件"></a>方法二、直接调试ts文件</h3><p>使用 ts-node进 行调试，VSCode 参考配置如下，详见<a href="https://github.com/TypeStrong/ts-node#visual-studio-code" target="_blank" rel="noopener">ts-node</a></p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"configurations"</span>: [&#123;</span><br><span class="line">    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"node"</span>,</span><br><span class="line">    <span class="hljs-attr">"request"</span>: <span class="hljs-string">"launch"</span>,</span><br><span class="line">    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"debug"</span>,</span><br><span class="line">    <span class="hljs-attr">"runtimeArgs"</span>: [</span><br><span class="line">      <span class="hljs-string">"-r"</span>,</span><br><span class="line">      <span class="hljs-string">"ts-node/register"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="hljs-attr">"args"</span>: [</span><br><span class="line">      <span class="hljs-string">"$&#123;workspaceFolder&#125;/src/cli.ts"</span>,</span><br><span class="line">      <span class="hljs-string">"xx"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img11.360buyimg.com/jdphoto/s1302x936_jfs/t1/92568/4/2181/170988/5dcd53a5E09da2717/d6ce8f89fccc10cd.jpg" alt="VSCode调试ts"></p>
+<h2 id="步骤七、类型加强、消除any"><a href="#步骤七、类型加强、消除any" class="headerlink" title="步骤七、类型加强、消除any"></a>步骤七、类型加强、消除any</h2><p>接下来要做的就是补充 Interface、Type，逐步将代码中的被业界喷得体无完肤的 any 干掉，但不要妄想去掉所有 any ，js 语言说到底还是动态语言，TypeScript 虽然是其超集往静态语言靠，但要做到 Java 这种纯静态语言程度还是有一段距离的。  </p>
+<p>到这就算结束了，文中只涉及到了工具类的 Node.js 项目改造，场景有限，并不能代表所有 Node.js 项目，希望能对大家有所帮助。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/CLI/">CLI</a>, <a class="has-link-grey -link" href="/tags/TypeScript/">TypeScript</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+        <div id="gitalk-container" style="margin: 30px;padding-bottom: 30px;"></div>
+        <script>
+            var gitalk = new Gitalk({
+                clientID: '2bea76e30455b7301744', // GitHub Application Client ID
+                clientSecret: '36efc910fcaff27be701dbcbc1925f7ca61ad0ea', // GitHub Application Client Secret
+                repo: 'blog',      // 存放评论的仓库
+                owner: 'wecteam',          // 仓库的创建者，
+                admin: ['qianguyihao','antiter','steelli','mk33mk333'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+                id: md5(location.pathname),      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+                title: document.title,
+                body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+            })
+    
+    
+            if(location.pathname != '/')gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
+        </script>
+        
+    
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/13/负责任地编写JavaScript代码：第一部分/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">负责任地编写JavaScript代码：第一部分</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/24/老板的手机收到一个红包，为什么红包没居中？/">
+                <span class="level-item">老板的手机收到一个红包，为什么红包没居中？</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt=" ">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                         
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国 深圳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        30
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        40
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wecteam" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://aotu.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">凹凸实验室</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">aotu.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://75team.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">奇舞团</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">75team.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="http://www.alloyteam.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">alloyteam</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.alloyteam.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web前端/">
+            <span class="level-start">
+                <span class="level-item">Web前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">17</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web后端/">
+            <span class="level-start">
+                <span class="level-item">Web后端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Web开发/">
+            <span class="level-start">
+                <span class="level-item">Web开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AST/" style="font-size: 20px;">AST</a> <a href="/tags/BDD-TDD/" style="font-size: 13.33px;">BDD/TDD</a> <a href="/tags/Badjs/" style="font-size: 10px;">Badjs</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/CPU性能优化/" style="font-size: 10px;">CPU性能优化</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-Houdini/" style="font-size: 10px;">CSS Houdini</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Interection-Observer/" style="font-size: 13.33px;">Interection Observer</a> <a href="/tags/Mocha/" style="font-size: 13.33px;">Mocha</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/TypeScript/" style="font-size: 13.33px;">TypeScript</a> <a href="/tags/V8引擎/" style="font-size: 10px;">V8引擎</a> <a href="/tags/Vue-compile/" style="font-size: 10px;">Vue.compile</a> <a href="/tags/Web性能优化/" style="font-size: 16.67px;">Web性能优化</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/composite/" style="font-size: 10px;">composite</a> <a href="/tags/modulepreload/" style="font-size: 10px;">modulepreload</a> <a href="/tags/rollup打包/" style="font-size: 10px;">rollup打包</a> <a href="/tags/type-module/" style="font-size: 10px;">type="module"</a> <a href="/tags/webpack-loader/" style="font-size: 10px;">webpack loader</a> <a href="/tags/web内容/" style="font-size: 10px;">web内容</a> <a href="/tags/代码拆分/" style="font-size: 10px;">代码拆分</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a> <a href="/tags/向量/" style="font-size: 10px;">向量</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/居中对齐/" style="font-size: 10px;">居中对齐</a> <a href="/tags/工程化/" style="font-size: 10px;">工程化</a> <a href="/tags/引导蒙层/" style="font-size: 10px;">引导蒙层</a> <a href="/tags/性能优化/" style="font-size: 13.33px;">性能优化</a> <a href="/tags/折叠屏适配/" style="font-size: 10px;">折叠屏适配</a> <a href="/tags/桌面开发/" style="font-size: 10px;">桌面开发</a> <a href="/tags/测试框架/" style="font-size: 13.33px;">测试框架</a> <a href="/tags/滚动优化/" style="font-size: 10px;">滚动优化</a> <a href="/tags/火焰图/" style="font-size: 10px;">火焰图</a> <a href="/tags/电池电量/" style="font-size: 10px;">电池电量</a> <a href="/tags/碰撞检测/" style="font-size: 10px;">碰撞检测</a> <a href="/tags/设计原则/" style="font-size: 10px;">设计原则</a> <a href="/tags/资源治理/" style="font-size: 10px;">资源治理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/前端-JavaScript-错误分析实践/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/89527/23/6466/57930/5df34d33E173747f7/b2ff3068c0cb14cf.png" alt="前端 JavaScript 错误分析实践">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:43:33.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/前端-JavaScript-错误分析实践/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端 JavaScript 错误分析实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第三部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/102622/29/6464/106030/5df34e11E65297b14/7a2d4157d0519ac6.png" alt="负责任地编写JavaScript代码：第三部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:53.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第三部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第三部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第二部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/104367/28/6359/106875/5df34e12E53c7d823/b00b5eaed1b76510.png" alt="负责任地编写JavaScript代码：第二部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:46.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第二部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第二部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第一部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/87996/40/6326/106389/5df34e12E2e3b2856/9018f5e7fbf8fc03.png" alt="负责任地编写JavaScript代码：第一部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:29.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第一部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第一部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/26/Node-js项目TypeScript改造指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s640x295_jfs/t1/92732/2/2241/14632/5dcd00f7E4deea209/f9ed9663a079e504.jpg" alt="Node.js项目TypeScript改造指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T14:00:00.000Z">2019-11-26</time></div>
+                    <a href="/2019/11/26/Node-js项目TypeScript改造指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Node.js项目TypeScript改造指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Badjs/">
+                        <span class="tag">Badjs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CLI/">
+                        <span class="tag">CLI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/V8引擎/">
+                        <span class="tag">V8引擎</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web性能优化/">
+                        <span class="tag">Web性能优化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字体/">
+                        <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/折叠屏适配/">
+                        <span class="tag">折叠屏适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计原则/">
+                        <span class="tag">设计原则</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/前端-JavaScript-错误分析实践/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/89527/23/6466/57930/5df34d33E173747f7/b2ff3068c0cb14cf.png" alt="前端 JavaScript 错误分析实践">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:43:33.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/前端-JavaScript-错误分析实践/" class="title has-link-black-ter is-size-6 has-text-weight-normal">前端 JavaScript 错误分析实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第三部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/102622/29/6464/106030/5df34e11E65297b14/7a2d4157d0519ac6.png" alt="负责任地编写JavaScript代码：第三部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:53.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第三部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第三部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第二部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/104367/28/6359/106875/5df34e12E53c7d823/b00b5eaed1b76510.png" alt="负责任地编写JavaScript代码：第二部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:46.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第二部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第二部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/13/负责任地编写JavaScript代码：第一部分/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s900x383_jfs/t1/87996/40/6326/106389/5df34e12E2e3b2856/9018f5e7fbf8fc03.png" alt="负责任地编写JavaScript代码：第一部分">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-13T08:25:29.000Z">2019-12-13</time></div>
+                    <a href="/2019/12/13/负责任地编写JavaScript代码：第一部分/" class="title has-link-black-ter is-size-6 has-text-weight-normal">负责任地编写JavaScript代码：第一部分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Web前端/">Web前端</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/26/Node-js项目TypeScript改造指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img11.360buyimg.com/jdphoto/s640x295_jfs/t1/92732/2/2241/14632/5dcd00f7E4deea209/f9ed9663a079e504.jpg" alt="Node.js项目TypeScript改造指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T14:00:00.000Z">2019-11-26</time></div>
+                    <a href="/2019/11/26/Node-js项目TypeScript改造指南/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Node.js项目TypeScript改造指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BDD-TDD/">
+                        <span class="tag">BDD/TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Badjs/">
+                        <span class="tag">Badjs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CLI/">
+                        <span class="tag">CLI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CPU性能优化/">
+                        <span class="tag">CPU性能优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS/">
+                        <span class="tag">CSS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSS-Houdini/">
+                        <span class="tag">CSS Houdini</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Electron/">
+                        <span class="tag">Electron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Interection-Observer/">
+                        <span class="tag">Interection Observer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mocha/">
+                        <span class="tag">Mocha</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TypeScript/">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/V8引擎/">
+                        <span class="tag">V8引擎</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue-compile/">
+                        <span class="tag">Vue.compile</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web性能优化/">
+                        <span class="tag">Web性能优化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/canvas/">
+                        <span class="tag">canvas</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/composite/">
+                        <span class="tag">composite</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/modulepreload/">
+                        <span class="tag">modulepreload</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rollup打包/">
+                        <span class="tag">rollup打包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/type-module/">
+                        <span class="tag">type=&#34;module&#34;</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack-loader/">
+                        <span class="tag">webpack loader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/web内容/">
+                        <span class="tag">web内容</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/代码拆分/">
+                        <span class="tag">代码拆分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端工程化/">
+                        <span class="tag">前端工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/向量/">
+                        <span class="tag">向量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字体/">
+                        <span class="tag">字体</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/居中对齐/">
+                        <span class="tag">居中对齐</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工程化/">
+                        <span class="tag">工程化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/引导蒙层/">
+                        <span class="tag">引导蒙层</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/性能优化/">
+                        <span class="tag">性能优化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/折叠屏适配/">
+                        <span class="tag">折叠屏适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/桌面开发/">
+                        <span class="tag">桌面开发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/测试框架/">
+                        <span class="tag">测试框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滚动优化/">
+                        <span class="tag">滚动优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/火焰图/">
+                        <span class="tag">火焰图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电池电量/">
+                        <span class="tag">电池电量</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/碰撞检测/">
+                        <span class="tag">碰撞检测</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计原则/">
+                        <span class="tag">设计原则</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源治理/">
+                        <span class="tag">资源治理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level" style="justify-content: center">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/og_image.png" alt="Node.js项目TypeScript改造指南" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 wecteam&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="WecTeam on GitHub" href="https://github.com/wecteam">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div style="margin:30px auto 0;text-align: center;">
+            
+                <!-- 不蒜子统计 -->
+                <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                </span>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+
+    </div>
+
+    
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
